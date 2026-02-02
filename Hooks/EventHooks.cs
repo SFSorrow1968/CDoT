@@ -181,7 +181,7 @@ namespace BDOT.Hooks
                 }
 
                 // Apply bleed effect (chance is checked inside ApplyBleed)
-                bool applied = BleedManager.Instance.ApplyBleed(creature, zone, damageType);
+                bool applied = BleedManager.Instance.ApplyBleed(creature, zone, damageType, hitPart);
                 if (BDOTModOptions.DebugLogging)
                 {
                     if (applied)

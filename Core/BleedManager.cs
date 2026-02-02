@@ -18,11 +18,18 @@ namespace BDOT.Core
         private float _lastStatusLogTime = 0f;
         private const float STATUS_LOG_INTERVAL = 5f; // Log status every 5 seconds when effects are active
 
+        // Blood effect data - loaded once from catalog
+        private EffectData _bleedEffectData;
+        private bool _bleedEffectLoaded = false;
+        private const string BLEED_EFFECT_ID = "PenetrationDeepBleeding";
+
         public void Initialize()
         {
             try
             {
                 _activeEffects.Clear();
+                _bleedEffectLoaded = false;
+                _bleedEffectData = null;
                 Debug.Log("[BDOT] BleedManager initialized");
             }
             catch (Exception ex)
@@ -155,7 +162,7 @@ namespace BDOT.Core
             Debug.Log("[BDOT] --------------------------------");
         }
 
-        public bool ApplyBleed(Creature target, BodyZone zone, DamageType damageType)
+        public bool ApplyBleed(Creature target, BodyZone zone, DamageType damageType, RagdollPart hitPart = null)
         {
             if (target == null || target.isKilled || target.isPlayer)
                 return false;
@@ -204,7 +211,7 @@ namespace BDOT.Core
                 // Stack the effect
                 int oldStacks = existingEffect.StackCount;
                 float oldDuration = existingEffect.RemainingDuration;
-                existingEffect.AddStack(config.Damage, config.Duration, config.StackLimit);
+                existingEffect.AddStack(config.Damage, config.Duration, config.StackLimit, hitPart);
                 if (BDOTModOptions.DebugLogging)
                 {
                     Debug.Log("[BDOT] STACK: " + zone.GetDisplayName() + " on " + target.name);
@@ -220,6 +227,7 @@ namespace BDOT.Core
                     target,
                     zone,
                     damageType,
+                    hitPart,
                     config.Damage,
                     config.Duration,
                     config.Frequency
@@ -231,6 +239,7 @@ namespace BDOT.Core
                     Debug.Log("[BDOT] NEW BLEED: " + zone.GetDisplayName() + " on " + target.name);
                     Debug.Log("[BDOT]   BaseDmg=" + config.Damage.ToString("F2") + " | DamageType=" + damageType + " (" + damageTypeMult.ToString("F1") + "x) | Duration=" + config.Duration.ToString("F1") + "s | TickInterval=" + config.Frequency.ToString("F2") + "s");
                     Debug.Log("[BDOT]   Tick damage: " + newEffect.GetTickDamage().ToString("F2"));
+                    Debug.Log("[BDOT]   HitPart: " + (hitPart != null ? hitPart.type.ToString() : "null"));
                 }
             }
 
@@ -268,6 +277,12 @@ namespace BDOT.Core
             if (effect.DamageType == DamageType.Fire || effect.DamageType == DamageType.Lightning)
             {
                 ApplyStatusEffectForDamage(target, effect.DamageType, damage);
+            }
+
+            // Spawn blood VFX for physical damage types
+            if (effect.DamageType == DamageType.Pierce || effect.DamageType == DamageType.Slash)
+            {
+                SpawnBleedEffect(effect, damage);
             }
 
             // Apply damage by directly modifying currentHealth
@@ -321,6 +336,60 @@ namespace BDOT.Core
                 Debug.Log("[BDOT] TICK: " + effect.Zone.GetDisplayName() + " x" + effect.StackCount + " on " + (target?.name ?? "destroyed"));
                 Debug.Log("[BDOT]   Damage: " + damage.ToString("F2") + " (base=" + effect.DamagePerTick.ToString("F2") + " * stacks=" + effect.StackCount + " * " + effect.DamageType + "=" + damageTypeMult.ToString("F1") + "x)");
                 Debug.Log("[BDOT]   Health: " + healthInfo + " | Remaining: " + effect.RemainingDuration.ToString("F1") + "s");
+            }
+        }
+
+        /// <summary>
+        /// Spawns blood spurt VFX at the wound location.
+        /// Intensity scales with damage dealt.
+        /// </summary>
+        private void SpawnBleedEffect(BleedEffect effect, float damage)
+        {
+            if (!effect.HasValidHitPart)
+                return;
+
+            try
+            {
+                // Load effect data if not already loaded
+                if (!_bleedEffectLoaded)
+                {
+                    _bleedEffectData = Catalog.GetData<EffectData>(BLEED_EFFECT_ID, true);
+                    _bleedEffectLoaded = true;
+                    if (_bleedEffectData == null)
+                    {
+                        Debug.LogWarning("[BDOT] Could not load bleed effect: " + BLEED_EFFECT_ID);
+                    }
+                }
+
+                if (_bleedEffectData == null)
+                    return;
+
+                var hitPart = effect.HitPart;
+                
+                // Calculate intensity based on damage (typical damage 1-5, scale to 0.2-1.0)
+                float intensity = Mathf.Clamp(damage * 0.2f, 0.2f, 1.0f);
+                
+                // Scale intensity by stack count (more stacks = more bleeding)
+                intensity = Mathf.Clamp(intensity * (1f + (effect.StackCount - 1) * 0.3f), 0.2f, 1.5f);
+
+                // Spawn blood effect at the hit part location
+                Vector3 position = hitPart.transform.position;
+                Quaternion rotation = Quaternion.LookRotation(hitPart.transform.up); // Blood spurts outward
+                
+                var effectInstance = _bleedEffectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f);
+                if (effectInstance != null)
+                {
+                    effectInstance.SetIntensity(intensity);
+                    effectInstance.Play();
+                    
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] Blood VFX: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (BDOTModOptions.DebugLogging)
+                    Debug.Log("[BDOT] Blood VFX spawn failed: " + ex.Message);
             }
         }
 
