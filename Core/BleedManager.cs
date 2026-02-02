@@ -374,6 +374,13 @@ namespace BDOT.Core
                 
                 // Scale intensity by stack count (more stacks = more bleeding)
                 intensity = Mathf.Clamp(intensity * (1f + (effect.StackCount - 1) * 0.3f), 0.2f, 1.5f);
+                
+                // Apply blood amount preset multiplier
+                float bloodMultiplier = BDOTModOptions.GetBloodAmountMultiplier();
+                intensity *= bloodMultiplier;
+                
+                // Clamp final intensity to reasonable bounds
+                intensity = Mathf.Clamp(intensity, 0.1f, 3.0f);
 
                 // If we already have an active effect, just update its intensity
                 if (effect.BloodEffectInstance != null)

@@ -30,6 +30,7 @@ namespace BDOT.Configuration
         public const string OptionDurationPreset = "Duration Preset";
         public const string OptionFrequencyPreset = "Frequency Preset";
         public const string OptionChancePreset = "Chance Preset";
+        public const string OptionBloodAmountPreset = "Blood Amount";
 
         // Damage type multipliers - Physical
         public const string OptionPierceMultiplier = "Pierce Mult";
@@ -142,6 +143,15 @@ namespace BDOT.Configuration
             Always = 4
         }
 
+        public enum BloodAmountPreset
+        {
+            VeryLow = 0,    // 0.25x intensity
+            Low = 1,        // 0.5x intensity (old default)
+            Default = 2,    // 1.0x intensity
+            High = 3,       // 1.5x intensity
+            Extreme = 4     // 2.0x intensity
+        }
+
         public enum ProfilePreset
         {
             Default = 0,     // Both physical and elemental damage types
@@ -198,6 +208,18 @@ namespace BDOT.Configuration
                 new ModOptionString("Default", "Default"),
                 new ModOptionString("Frequent", "Frequent"),
                 new ModOptionString("Always", "Always")
+            };
+        }
+
+        public static ModOptionString[] BloodAmountPresetProvider()
+        {
+            return new ModOptionString[]
+            {
+                new ModOptionString("Very Low", "Very Low"),
+                new ModOptionString("Low", "Low"),
+                new ModOptionString("Default", "Default"),
+                new ModOptionString("High", "High"),
+                new ModOptionString("Extreme", "Extreme")
             };
         }
 
@@ -323,12 +345,15 @@ namespace BDOT.Configuration
         [ModOption(name = OptionChancePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 40, defaultValueIndex = 2, valueSourceName = nameof(ChancePresetProvider), tooltip = "Bleed chance preset. Default is the balanced middle value.")]
         public static string ChancePresetSetting = "Default";
 
+        [ModOption(name = OptionBloodAmountPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 50, defaultValueIndex = 2, valueSourceName = nameof(BloodAmountPresetProvider), tooltip = "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood.")]
+        public static string BloodAmountPresetSetting = "Default";
+
         #endregion
 
         #region Damage Type Multipliers
 
-        [ModOption(name = OptionPierceMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 10, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely.")]
-        public static float PierceMultiplier = 1.0f;
+        [ModOption(name = OptionPierceMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 10, defaultValueIndex = 12, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely.")]
+        public static float PierceMultiplier = 1.2f;
 
         [ModOption(name = OptionSlashMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 20, defaultValueIndex = 8, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely.")]
         public static float SlashMultiplier = 0.8f;
@@ -336,11 +361,11 @@ namespace BDOT.Configuration
         [ModOption(name = OptionBluntMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 30, defaultValueIndex = 5, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for blunt attacks. 0.0x disables DOT from blunt entirely.")]
         public static float BluntMultiplier = 0.5f;
 
-        [ModOption(name = OptionFireMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 40, defaultValueIndex = 12, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely.")]
-        public static float FireMultiplier = 1.2f;
+        [ModOption(name = OptionFireMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 40, defaultValueIndex = 6, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely.")]
+        public static float FireMultiplier = 0.6f;
 
-        [ModOption(name = OptionLightningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 50, defaultValueIndex = 12, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely.")]
-        public static float LightningMultiplier = 1.2f;
+        [ModOption(name = OptionLightningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 50, defaultValueIndex = 15, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely.")]
+        public static float LightningMultiplier = 1.5f;
 
         #endregion
 
@@ -705,6 +730,36 @@ namespace BDOT.Configuration
                 case DamageType.Fire: return FireMultiplier;
                 case DamageType.Lightning: return LightningMultiplier;
                 default: return 0f;
+            }
+        }
+
+        public static BloodAmountPreset GetBloodAmountPreset()
+        {
+            switch (BloodAmountPresetSetting)
+            {
+                case "Very Low": return BloodAmountPreset.VeryLow;
+                case "Low": return BloodAmountPreset.Low;
+                case "Default": return BloodAmountPreset.Default;
+                case "High": return BloodAmountPreset.High;
+                case "Extreme": return BloodAmountPreset.Extreme;
+                default: return BloodAmountPreset.Default;
+            }
+        }
+
+        /// <summary>
+        /// Gets the blood VFX intensity multiplier based on the current preset.
+        /// VeryLow=0.25x, Low=0.5x, Default=1.0x, High=1.5x, Extreme=2.0x
+        /// </summary>
+        public static float GetBloodAmountMultiplier()
+        {
+            switch (GetBloodAmountPreset())
+            {
+                case BloodAmountPreset.VeryLow: return 0.25f;
+                case BloodAmountPreset.Low: return 0.5f;
+                case BloodAmountPreset.Default: return 1.0f;
+                case BloodAmountPreset.High: return 1.5f;
+                case BloodAmountPreset.Extreme: return 2.0f;
+                default: return 1.0f;
             }
         }
 
