@@ -226,6 +226,10 @@ namespace BDOT.Core
             if (effect == null || !effect.IsValid)
                 return;
 
+            var target = effect.Target;
+            if (target == null || (UnityEngine.Object)target == null)
+                return;
+
             try
             {
                 float damage = effect.GetTickDamage();
@@ -234,18 +238,18 @@ namespace BDOT.Core
                     return;
 
                 // Get creature health before damage for logging
-                float healthBefore = effect.Target.currentHealth;
+                float healthBefore = target.currentHealth;
 
                 // Apply damage to creature using the simple Damage(float, DamageType) overload
                 // Using DamageType.Pierce for bleed damage (Energy causes fire effects!)
-                effect.Target.Damage(damage, DamageType.Pierce);
+                target.Damage(damage, DamageType.Pierce);
                 BDOTModOptions.AddBleedDamage(damage);
 
-                float healthAfter = effect.Target.currentHealth;
+                float healthAfter = target.currentHealth;
 
                 if (BDOTModOptions.DebugLogging)
                 {
-                    Debug.Log("[BDOT] TICK: " + effect.Zone.GetDisplayName() + " x" + effect.StackCount + " on " + effect.Target.name);
+                    Debug.Log("[BDOT] TICK: " + effect.Zone.GetDisplayName() + " x" + effect.StackCount + " on " + target.name);
                     Debug.Log("[BDOT]   Damage: " + damage.ToString("F2") + " (base=" + effect.DamagePerTick.ToString("F2") + " * mult=" + effect.Multiplier.ToString("F1") + " * stacks=" + effect.StackCount + " * global=" + BDOTModOptions.GlobalDamageMultiplier.ToString("F2") + ")");
                     Debug.Log("[BDOT]   Health: " + healthBefore.ToString("F1") + " -> " + healthAfter.ToString("F1") + " | Remaining: " + effect.RemainingDuration.ToString("F1") + "s");
                 }

@@ -15,7 +15,23 @@ namespace BDOT.Core
         public float TimeSinceLastTick { get; set; }
 
         public bool IsExpired => RemainingDuration <= 0f;
-        public bool IsValid => Target != null && !Target.isKilled;
+        public bool IsValid
+        {
+            get
+            {
+                try
+                {
+                    // Unity objects can be "fake null" after destruction
+                    if (Target == null) return false;
+                    if ((UnityEngine.Object)Target == null) return false;
+                    return !Target.isKilled;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
 
         public BleedEffect(Creature target, BodyZone zone, float damagePerTick, float multiplier, float duration)
         {
