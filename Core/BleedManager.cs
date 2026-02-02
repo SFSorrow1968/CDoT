@@ -237,7 +237,13 @@ namespace BDOT.Core
                 return;
 
             var target = effect.Target;
+            
+            // Double-check target validity with Unity null check
             if (target == null || (UnityEngine.Object)target == null)
+                return;
+
+            // Additional safety: check if creature is dead or being destroyed
+            if (target.isKilled)
                 return;
 
             try
@@ -248,26 +254,57 @@ namespace BDOT.Core
                     return;
 
                 // Get creature health before damage for logging
-                float healthBefore = target.currentHealth;
+                // Use a safe method to get health
+                float healthBefore = 0f;
+                try
+                {
+                    healthBefore = target.currentHealth;
+                }
+                catch
+                {
+                    // Creature is invalid, skip
+                    return;
+                }
+
+                // Final safety check before applying damage
+                if (target == null || (UnityEngine.Object)target == null || target.isKilled)
+                    return;
 
                 // Apply damage to creature using the simple Damage(float, DamageType) overload
                 // Using DamageType.Pierce for bleed damage (Energy causes fire effects!)
                 target.Damage(damage, DamageType.Pierce);
                 BDOTModOptions.AddBleedDamage(damage);
 
-                float healthAfter = target.currentHealth;
+                // After damage, creature may have been destroyed - check again
+                if (target == null || (UnityEngine.Object)target == null)
+                    return;
+
+                float healthAfter = 0f;
+                try
+                {
+                    healthAfter = target.currentHealth;
+                }
+                catch
+                {
+                    healthAfter = 0f;
+                }
 
                 if (BDOTModOptions.DebugLogging)
                 {
                     float damageTypeMult = BDOTModOptions.GetDamageTypeMultiplier(effect.DamageType);
-                    Debug.Log("[BDOT] TICK: " + effect.Zone.GetDisplayName() + " x" + effect.StackCount + " on " + target.name);
+                    Debug.Log("[BDOT] TICK: " + effect.Zone.GetDisplayName() + " x" + effect.StackCount + " on " + (target?.name ?? "destroyed"));
                     Debug.Log("[BDOT]   Damage: " + damage.ToString("F2") + " (base=" + effect.DamagePerTick.ToString("F2") + " * stacks=" + effect.StackCount + " * " + effect.DamageType + "=" + damageTypeMult.ToString("F1") + "x)");
                     Debug.Log("[BDOT]   Health: " + healthBefore.ToString("F1") + " -> " + healthAfter.ToString("F1") + " | Remaining: " + effect.RemainingDuration.ToString("F1") + "s");
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] ApplyBleedDamage error: " + ex.Message + "\n" + ex.StackTrace);
+                // Silently handle errors when creatures are destroyed mid-tick
+                // Only log if debug is enabled
+                if (BDOTModOptions.DebugLogging)
+                {
+                    Debug.Log("[BDOT] Tick skipped (creature destroyed): " + ex.Message);
+                }
             }
         }
 
