@@ -256,151 +256,190 @@ namespace BDOT.Core
 
         #region Preset Value Tables
 
-        // Damage preset values - explicit values per zone, not multipliers
-        // Low: Minimal bleed damage, very survivable
-        // Default: Balanced bleed damage
-        // High: Serious bleed damage, dangerous wounds
-        // Extreme: Deadly bleed damage, quickly fatal
+        // ========== DAMAGE PRESET VALUES ==========
+        // 5 presets: Minimal (0), Low (1), Default (2), High (3), Extreme (4)
+        // Each zone has specific values per preset
 
         public static float GetPresetDamageValue(BodyZone zone, BDOTModOptions.DamagePreset preset)
         {
-            switch (preset)
+            switch (zone)
             {
-                case BDOTModOptions.DamagePreset.Low:
-                    switch (zone)
+                case BodyZone.Throat:
+                    switch (preset)
                     {
-                        case BodyZone.Throat: return 1.5f;
-                        case BodyZone.Head: return 1.0f;
-                        case BodyZone.Neck: return 1.25f;
-                        case BodyZone.Torso: return 0.75f;
-                        case BodyZone.Arm: return 0.5f;
-                        case BodyZone.Leg: return 0.5f;
-                        case BodyZone.Dismemberment: return 2.0f;
-                        default: return 0.75f;
+                        case BDOTModOptions.DamagePreset.Minimal: return 0.5f;
+                        case BDOTModOptions.DamagePreset.Low: return 1.25f;
+                        case BDOTModOptions.DamagePreset.Default: return 2.5f;
+                        case BDOTModOptions.DamagePreset.High: return 5.0f;
+                        case BDOTModOptions.DamagePreset.Extreme: return 10.0f;
+                        default: return 2.5f;
                     }
-                case BDOTModOptions.DamagePreset.High:
-                    switch (zone)
+                case BodyZone.Head:
+                    switch (preset)
                     {
-                        case BodyZone.Throat: return 8.0f;
-                        case BodyZone.Head: return 5.0f;
-                        case BodyZone.Neck: return 6.5f;
-                        case BodyZone.Torso: return 3.5f;
-                        case BodyZone.Arm: return 2.0f;
-                        case BodyZone.Leg: return 2.5f;
-                        case BodyZone.Dismemberment: return 10.0f;
-                        default: return 3.5f;
+                        case BDOTModOptions.DamagePreset.Minimal: return 0.25f;
+                        case BDOTModOptions.DamagePreset.Low: return 0.75f;
+                        case BDOTModOptions.DamagePreset.Default: return 1.5f;
+                        case BDOTModOptions.DamagePreset.High: return 3.0f;
+                        case BDOTModOptions.DamagePreset.Extreme: return 6.0f;
+                        default: return 1.5f;
                     }
-                case BDOTModOptions.DamagePreset.Extreme:
-                    switch (zone)
+                case BodyZone.Neck:
+                    switch (preset)
                     {
-                        case BodyZone.Throat: return 15.0f;
-                        case BodyZone.Head: return 10.0f;
-                        case BodyZone.Neck: return 12.0f;
-                        case BodyZone.Torso: return 6.0f;
-                        case BodyZone.Arm: return 4.0f;
-                        case BodyZone.Leg: return 5.0f;
-                        case BodyZone.Dismemberment: return 18.0f;
-                        default: return 6.0f;
-                    }
-                default: // Default
-                    switch (zone)
-                    {
-                        case BodyZone.Throat: return 5.0f;
-                        case BodyZone.Head: return 3.0f;
-                        case BodyZone.Neck: return 4.0f;
-                        case BodyZone.Torso: return 2.0f;
-                        case BodyZone.Arm: return 1.0f;
-                        case BodyZone.Leg: return 1.5f;
-                        case BodyZone.Dismemberment: return 6.0f;
+                        case BDOTModOptions.DamagePreset.Minimal: return 0.5f;
+                        case BDOTModOptions.DamagePreset.Low: return 1.0f;
+                        case BDOTModOptions.DamagePreset.Default: return 2.0f;
+                        case BDOTModOptions.DamagePreset.High: return 4.0f;
+                        case BDOTModOptions.DamagePreset.Extreme: return 8.0f;
                         default: return 2.0f;
                     }
+                case BodyZone.Torso:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.DamagePreset.Minimal: return 0.25f;
+                        case BDOTModOptions.DamagePreset.Low: return 0.5f;
+                        case BDOTModOptions.DamagePreset.Default: return 1.0f;
+                        case BDOTModOptions.DamagePreset.High: return 2.0f;
+                        case BDOTModOptions.DamagePreset.Extreme: return 4.0f;
+                        default: return 1.0f;
+                    }
+                case BodyZone.Arm:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.DamagePreset.Minimal: return 0.25f;
+                        case BDOTModOptions.DamagePreset.Low: return 0.25f;
+                        case BDOTModOptions.DamagePreset.Default: return 0.5f;
+                        case BDOTModOptions.DamagePreset.High: return 1.0f;
+                        case BDOTModOptions.DamagePreset.Extreme: return 2.0f;
+                        default: return 0.5f;
+                    }
+                case BodyZone.Leg:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.DamagePreset.Minimal: return 0.25f;
+                        case BDOTModOptions.DamagePreset.Low: return 0.5f;
+                        case BDOTModOptions.DamagePreset.Default: return 0.75f;
+                        case BDOTModOptions.DamagePreset.High: return 1.5f;
+                        case BDOTModOptions.DamagePreset.Extreme: return 3.0f;
+                        default: return 0.75f;
+                    }
+                case BodyZone.Dismemberment:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.DamagePreset.Minimal: return 1.0f;
+                        case BDOTModOptions.DamagePreset.Low: return 2.0f;
+                        case BDOTModOptions.DamagePreset.Default: return 3.0f;
+                        case BDOTModOptions.DamagePreset.High: return 6.0f;
+                        case BDOTModOptions.DamagePreset.Extreme: return 12.0f;
+                        default: return 3.0f;
+                    }
+                default:
+                    return 1.0f;
             }
         }
 
-        // Duration preset values - explicit values per zone, not multipliers
-        // Short: Quick bleeds, recover fast
-        // Default: Balanced bleed duration
-        // Long: Extended bleeds, serious wounds
-        // Extended: Very long bleeds, critical wounds
+        // ========== DURATION PRESET VALUES ==========
+        // 5 presets: VeryShort (0), Short (1), Default (2), Long (3), Extended (4)
 
         public static float GetPresetDurationValue(BodyZone zone, BDOTModOptions.DurationPreset preset)
         {
-            switch (preset)
+            switch (zone)
             {
-                case BDOTModOptions.DurationPreset.Short:
-                    switch (zone)
+                case BodyZone.Throat:
+                    switch (preset)
                     {
-                        case BodyZone.Throat: return 4.0f;
-                        case BodyZone.Head: return 3.0f;
-                        case BodyZone.Neck: return 3.5f;
-                        case BodyZone.Torso: return 2.5f;
-                        case BodyZone.Arm: return 2.0f;
-                        case BodyZone.Leg: return 2.5f;
-                        case BodyZone.Dismemberment: return 5.0f;
-                        default: return 2.5f;
+                        case BDOTModOptions.DurationPreset.VeryShort: return 2.0f;
+                        case BDOTModOptions.DurationPreset.Short: return 4.0f;
+                        case BDOTModOptions.DurationPreset.Default: return 6.0f;
+                        case BDOTModOptions.DurationPreset.Long: return 10.0f;
+                        case BDOTModOptions.DurationPreset.Extended: return 15.0f;
+                        default: return 6.0f;
                     }
-                case BDOTModOptions.DurationPreset.Long:
-                    switch (zone)
+                case BodyZone.Head:
+                    switch (preset)
                     {
-                        case BodyZone.Throat: return 14.0f;
-                        case BodyZone.Head: return 10.0f;
-                        case BodyZone.Neck: return 12.0f;
-                        case BodyZone.Torso: return 9.0f;
-                        case BodyZone.Arm: return 7.0f;
-                        case BodyZone.Leg: return 8.0f;
-                        case BodyZone.Dismemberment: return 18.0f;
-                        default: return 9.0f;
-                    }
-                case BDOTModOptions.DurationPreset.Extended:
-                    switch (zone)
-                    {
-                        case BodyZone.Throat: return 20.0f;
-                        case BodyZone.Head: return 15.0f;
-                        case BodyZone.Neck: return 18.0f;
-                        case BodyZone.Torso: return 12.0f;
-                        case BodyZone.Arm: return 10.0f;
-                        case BodyZone.Leg: return 11.0f;
-                        case BodyZone.Dismemberment: return 25.0f;
-                        default: return 12.0f;
-                    }
-                default: // Default
-                    switch (zone)
-                    {
-                        case BodyZone.Throat: return 8.0f;
-                        case BodyZone.Head: return 6.0f;
-                        case BodyZone.Neck: return 7.0f;
-                        case BodyZone.Torso: return 5.0f;
-                        case BodyZone.Arm: return 4.0f;
-                        case BodyZone.Leg: return 5.0f;
-                        case BodyZone.Dismemberment: return 10.0f;
+                        case BDOTModOptions.DurationPreset.VeryShort: return 1.5f;
+                        case BDOTModOptions.DurationPreset.Short: return 3.0f;
+                        case BDOTModOptions.DurationPreset.Default: return 5.0f;
+                        case BDOTModOptions.DurationPreset.Long: return 8.0f;
+                        case BDOTModOptions.DurationPreset.Extended: return 12.0f;
                         default: return 5.0f;
                     }
+                case BodyZone.Neck:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.DurationPreset.VeryShort: return 2.0f;
+                        case BDOTModOptions.DurationPreset.Short: return 3.5f;
+                        case BDOTModOptions.DurationPreset.Default: return 5.5f;
+                        case BDOTModOptions.DurationPreset.Long: return 9.0f;
+                        case BDOTModOptions.DurationPreset.Extended: return 14.0f;
+                        default: return 5.5f;
+                    }
+                case BodyZone.Torso:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.DurationPreset.VeryShort: return 1.5f;
+                        case BDOTModOptions.DurationPreset.Short: return 2.5f;
+                        case BDOTModOptions.DurationPreset.Default: return 4.0f;
+                        case BDOTModOptions.DurationPreset.Long: return 7.0f;
+                        case BDOTModOptions.DurationPreset.Extended: return 10.0f;
+                        default: return 4.0f;
+                    }
+                case BodyZone.Arm:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.DurationPreset.VeryShort: return 1.0f;
+                        case BDOTModOptions.DurationPreset.Short: return 2.0f;
+                        case BDOTModOptions.DurationPreset.Default: return 3.0f;
+                        case BDOTModOptions.DurationPreset.Long: return 5.0f;
+                        case BDOTModOptions.DurationPreset.Extended: return 8.0f;
+                        default: return 3.0f;
+                    }
+                case BodyZone.Leg:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.DurationPreset.VeryShort: return 1.0f;
+                        case BDOTModOptions.DurationPreset.Short: return 2.5f;
+                        case BDOTModOptions.DurationPreset.Default: return 3.5f;
+                        case BDOTModOptions.DurationPreset.Long: return 6.0f;
+                        case BDOTModOptions.DurationPreset.Extended: return 9.0f;
+                        default: return 3.5f;
+                    }
+                case BodyZone.Dismemberment:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.DurationPreset.VeryShort: return 3.0f;
+                        case BDOTModOptions.DurationPreset.Short: return 5.0f;
+                        case BDOTModOptions.DurationPreset.Default: return 8.0f;
+                        case BDOTModOptions.DurationPreset.Long: return 12.0f;
+                        case BDOTModOptions.DurationPreset.Extended: return 20.0f;
+                        default: return 8.0f;
+                    }
+                default:
+                    return 4.0f;
             }
         }
 
-        // Frequency preset values - explicit tick intervals
-        // Slow: Damage ticks every 1 second
-        // Normal: Damage ticks every 0.5 seconds
-        // Fast: Damage ticks every 0.25 seconds
-        // Rapid: Damage ticks every 0.1 seconds
+        // ========== FREQUENCY PRESET VALUES ==========
+        // 5 presets: VerySlow (0), Slow (1), Default (2), Fast (3), Rapid (4)
+        // Returns tick interval in seconds
 
         public static float GetPresetFrequencyValue(BDOTModOptions.FrequencyPreset preset)
         {
             switch (preset)
             {
+                case BDOTModOptions.FrequencyPreset.VerySlow: return 2.0f;
                 case BDOTModOptions.FrequencyPreset.Slow: return 1.0f;
+                case BDOTModOptions.FrequencyPreset.Default: return 0.5f;
                 case BDOTModOptions.FrequencyPreset.Fast: return 0.25f;
                 case BDOTModOptions.FrequencyPreset.Rapid: return 0.1f;
-                default: return 0.5f; // Normal
+                default: return 0.5f;
             }
         }
 
-        // Chance preset values - explicit values per zone, not multipliers
-        // Off: No bleeds trigger
-        // Rare: Low chance, only severe wounds bleed
-        // Default: Balanced chance
-        // Frequent: High chance, most wounds bleed
-        // Always: 100% chance, every hit bleeds
+        // ========== CHANCE PRESET VALUES ==========
+        // 5 presets: Off (0), Rare (1), Default (2), Frequent (3), Always (4)
 
         public static float GetPresetChanceValue(BodyZone zone, BDOTModOptions.ChancePreset preset)
         {
@@ -408,44 +447,51 @@ namespace BDOT.Core
             {
                 case BDOTModOptions.ChancePreset.Off:
                     return 0f;
+
                 case BDOTModOptions.ChancePreset.Rare:
                     switch (zone)
                     {
-                        case BodyZone.Throat: return 40f;
-                        case BodyZone.Head: return 25f;
-                        case BodyZone.Neck: return 35f;
-                        case BodyZone.Torso: return 20f;
-                        case BodyZone.Arm: return 15f;
+                        case BodyZone.Throat: return 30f;
+                        case BodyZone.Head: return 20f;
+                        case BodyZone.Neck: return 25f;
+                        case BodyZone.Torso: return 15f;
+                        case BodyZone.Arm: return 10f;
                         case BodyZone.Leg: return 15f;
-                        case BodyZone.Dismemberment: return 50f;
-                        default: return 20f;
+                        case BodyZone.Dismemberment: return 40f;
+                        default: return 15f;
                     }
+
+                case BDOTModOptions.ChancePreset.Default:
+                    switch (zone)
+                    {
+                        case BodyZone.Throat: return 60f;
+                        case BodyZone.Head: return 40f;
+                        case BodyZone.Neck: return 55f;
+                        case BodyZone.Torso: return 35f;
+                        case BodyZone.Arm: return 25f;
+                        case BodyZone.Leg: return 30f;
+                        case BodyZone.Dismemberment: return 80f;
+                        default: return 35f;
+                    }
+
                 case BDOTModOptions.ChancePreset.Frequent:
                     switch (zone)
                     {
-                        case BodyZone.Throat: return 90f;
-                        case BodyZone.Head: return 75f;
-                        case BodyZone.Neck: return 85f;
-                        case BodyZone.Torso: return 65f;
-                        case BodyZone.Arm: return 50f;
-                        case BodyZone.Leg: return 55f;
-                        case BodyZone.Dismemberment: return 100f;
-                        default: return 65f;
+                        case BodyZone.Throat: return 85f;
+                        case BodyZone.Head: return 65f;
+                        case BodyZone.Neck: return 80f;
+                        case BodyZone.Torso: return 55f;
+                        case BodyZone.Arm: return 45f;
+                        case BodyZone.Leg: return 50f;
+                        case BodyZone.Dismemberment: return 95f;
+                        default: return 60f;
                     }
+
                 case BDOTModOptions.ChancePreset.Always:
                     return 100f;
-                default: // Default
-                    switch (zone)
-                    {
-                        case BodyZone.Throat: return 75f;
-                        case BodyZone.Head: return 50f;
-                        case BodyZone.Neck: return 65f;
-                        case BodyZone.Torso: return 40f;
-                        case BodyZone.Arm: return 30f;
-                        case BodyZone.Leg: return 35f;
-                        case BodyZone.Dismemberment: return 100f;
-                        default: return 50f;
-                    }
+
+                default:
+                    return 35f;
             }
         }
 
