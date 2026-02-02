@@ -67,6 +67,18 @@ namespace BDOT.Core
             { BodyZone.Dismemberment, MakeKey(BDOTModOptions.CategoryZoneDismemberment, BDOTModOptions.OptionDismembermentDuration) }
         };
 
+        // Option key mappings for Frequency
+        private static readonly Dictionary<BodyZone, string> FrequencyKeys = new Dictionary<BodyZone, string>
+        {
+            { BodyZone.Throat, MakeKey(BDOTModOptions.CategoryZoneThroat, BDOTModOptions.OptionThroatFrequency) },
+            { BodyZone.Head, MakeKey(BDOTModOptions.CategoryZoneHead, BDOTModOptions.OptionHeadFrequency) },
+            { BodyZone.Neck, MakeKey(BDOTModOptions.CategoryZoneNeck, BDOTModOptions.OptionNeckFrequency) },
+            { BodyZone.Torso, MakeKey(BDOTModOptions.CategoryZoneTorso, BDOTModOptions.OptionTorsoFrequency) },
+            { BodyZone.Arm, MakeKey(BDOTModOptions.CategoryZoneArm, BDOTModOptions.OptionArmFrequency) },
+            { BodyZone.Leg, MakeKey(BDOTModOptions.CategoryZoneLeg, BDOTModOptions.OptionLegFrequency) },
+            { BodyZone.Dismemberment, MakeKey(BDOTModOptions.CategoryZoneDismemberment, BDOTModOptions.OptionDismembermentFrequency) }
+        };
+
         public void Initialize()
         {
             _initialized = false;
@@ -177,9 +189,13 @@ namespace BDOT.Core
 
             Debug.Log("[BDOT] Applying Frequency Preset: " + preset);
 
-            // Frequency applies globally to TickInterval
-            float tickInterval = GetPresetFrequencyValue(preset);
-            BDOTModOptions.TickInterval = tickInterval;
+            // Frequency is now per-zone
+            foreach (var zone in AllZones)
+            {
+                float value = GetPresetFrequencyValue(zone, preset);
+                BDOTModOptions.SetZoneFrequency(zone, value);
+                SyncOption(FrequencyKeys[zone], value);
+            }
 
             _lastFrequencyPreset = preset;
         }
@@ -423,18 +439,84 @@ namespace BDOT.Core
 
         // ========== FREQUENCY PRESET VALUES ==========
         // 5 presets: VerySlow (0), Slow (1), Default (2), Fast (3), Rapid (4)
-        // Returns tick interval in seconds
+        // Returns tick interval in seconds per zone
 
-        public static float GetPresetFrequencyValue(BDOTModOptions.FrequencyPreset preset)
+        public static float GetPresetFrequencyValue(BodyZone zone, BDOTModOptions.FrequencyPreset preset)
         {
-            switch (preset)
+            switch (zone)
             {
-                case BDOTModOptions.FrequencyPreset.VerySlow: return 2.0f;
-                case BDOTModOptions.FrequencyPreset.Slow: return 1.0f;
-                case BDOTModOptions.FrequencyPreset.Default: return 0.5f;
-                case BDOTModOptions.FrequencyPreset.Fast: return 0.25f;
-                case BDOTModOptions.FrequencyPreset.Rapid: return 0.1f;
-                default: return 0.5f;
+                case BodyZone.Throat:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.FrequencyPreset.VerySlow: return 2.0f;
+                        case BDOTModOptions.FrequencyPreset.Slow: return 1.0f;
+                        case BDOTModOptions.FrequencyPreset.Default: return 0.5f;
+                        case BDOTModOptions.FrequencyPreset.Fast: return 0.3f;
+                        case BDOTModOptions.FrequencyPreset.Rapid: return 0.1f;
+                        default: return 0.5f;
+                    }
+                case BodyZone.Head:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.FrequencyPreset.VerySlow: return 2.5f;
+                        case BDOTModOptions.FrequencyPreset.Slow: return 1.2f;
+                        case BDOTModOptions.FrequencyPreset.Default: return 0.6f;
+                        case BDOTModOptions.FrequencyPreset.Fast: return 0.3f;
+                        case BDOTModOptions.FrequencyPreset.Rapid: return 0.1f;
+                        default: return 0.6f;
+                    }
+                case BodyZone.Neck:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.FrequencyPreset.VerySlow: return 2.0f;
+                        case BDOTModOptions.FrequencyPreset.Slow: return 1.0f;
+                        case BDOTModOptions.FrequencyPreset.Default: return 0.5f;
+                        case BDOTModOptions.FrequencyPreset.Fast: return 0.25f;
+                        case BDOTModOptions.FrequencyPreset.Rapid: return 0.1f;
+                        default: return 0.5f;
+                    }
+                case BodyZone.Torso:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.FrequencyPreset.VerySlow: return 3.0f;
+                        case BDOTModOptions.FrequencyPreset.Slow: return 1.5f;
+                        case BDOTModOptions.FrequencyPreset.Default: return 0.8f;
+                        case BDOTModOptions.FrequencyPreset.Fast: return 0.4f;
+                        case BDOTModOptions.FrequencyPreset.Rapid: return 0.2f;
+                        default: return 0.8f;
+                    }
+                case BodyZone.Arm:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.FrequencyPreset.VerySlow: return 3.5f;
+                        case BDOTModOptions.FrequencyPreset.Slow: return 1.8f;
+                        case BDOTModOptions.FrequencyPreset.Default: return 1.0f;
+                        case BDOTModOptions.FrequencyPreset.Fast: return 0.5f;
+                        case BDOTModOptions.FrequencyPreset.Rapid: return 0.2f;
+                        default: return 1.0f;
+                    }
+                case BodyZone.Leg:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.FrequencyPreset.VerySlow: return 3.0f;
+                        case BDOTModOptions.FrequencyPreset.Slow: return 1.5f;
+                        case BDOTModOptions.FrequencyPreset.Default: return 0.8f;
+                        case BDOTModOptions.FrequencyPreset.Fast: return 0.4f;
+                        case BDOTModOptions.FrequencyPreset.Rapid: return 0.2f;
+                        default: return 0.8f;
+                    }
+                case BodyZone.Dismemberment:
+                    switch (preset)
+                    {
+                        case BDOTModOptions.FrequencyPreset.VerySlow: return 1.5f;
+                        case BDOTModOptions.FrequencyPreset.Slow: return 0.8f;
+                        case BDOTModOptions.FrequencyPreset.Default: return 0.4f;
+                        case BDOTModOptions.FrequencyPreset.Fast: return 0.2f;
+                        case BDOTModOptions.FrequencyPreset.Rapid: return 0.1f;
+                        default: return 0.4f;
+                    }
+                default:
+                    return 0.5f;
             }
         }
 

@@ -39,7 +39,6 @@ namespace BDOT.Core
             try
             {
                 float deltaTime = Time.unscaledDeltaTime;
-                float tickInterval = BDOTModOptions.TickInterval;
 
                 _creaturesToRemove.Clear();
 
@@ -74,8 +73,8 @@ namespace BDOT.Core
                             continue;
                         }
 
-                        // Apply damage tick
-                        if (effect.TimeSinceLastTick >= tickInterval)
+                        // Apply damage tick using per-effect tick interval
+                        if (effect.TimeSinceLastTick >= effect.TickInterval)
                         {
                             ApplyBleedDamage(effect);
                             effect.TimeSinceLastTick = 0f;
@@ -209,20 +208,21 @@ namespace BDOT.Core
             }
             else
             {
-                // Create new effect
+                // Create new effect with zone-specific tick interval
                 var newEffect = new BleedEffect(
                     target,
                     zone,
                     damageType,
                     config.Damage,
-                    config.Duration
+                    config.Duration,
+                    config.Frequency
                 );
                 effects.Add(newEffect);
                 if (BDOTModOptions.DebugLogging)
                 {
                     float damageTypeMult = BDOTModOptions.GetDamageTypeMultiplier(damageType);
                     Debug.Log("[BDOT] NEW BLEED: " + zone.GetDisplayName() + " on " + target.name);
-                    Debug.Log("[BDOT]   BaseDmg=" + config.Damage.ToString("F2") + " | DamageType=" + damageType + " (" + damageTypeMult.ToString("F1") + "x) | Duration=" + config.Duration.ToString("F1") + "s");
+                    Debug.Log("[BDOT]   BaseDmg=" + config.Damage.ToString("F2") + " | DamageType=" + damageType + " (" + damageTypeMult.ToString("F1") + "x) | Duration=" + config.Duration.ToString("F1") + "s | TickInterval=" + config.Frequency.ToString("F2") + "s");
                     Debug.Log("[BDOT]   Tick damage: " + newEffect.GetTickDamage().ToString("F2"));
                 }
             }

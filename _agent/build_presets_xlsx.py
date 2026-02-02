@@ -47,10 +47,19 @@ DURATION_VALUES = {
     'Dismemberment': [3.0,  5.0,  8.0,  12.0, 20.0],
 }
 
-# ========== FREQUENCY PRESET VALUES ==========
+# ========== FREQUENCY PRESET VALUES (per-zone) ==========
 # 5 presets: VerySlow (0), Slow (1), Default (2), Fast (3), Rapid (4)
+# Values are tick intervals in seconds (lower = faster ticks)
 FREQUENCY_PRESETS = ['Very Slow', 'Slow', 'Default', 'Fast', 'Rapid']
-FREQUENCY_VALUES = [2.0, 1.0, 0.5, 0.25, 0.1]  # Tick interval in seconds
+FREQUENCY_VALUES = {
+    'Throat':        [2.0,  1.0,  0.5,  0.3,  0.1],
+    'Head':          [2.5,  1.2,  0.6,  0.3,  0.1],
+    'Neck':          [2.0,  1.0,  0.5,  0.25, 0.1],
+    'Torso':         [3.0,  1.5,  0.8,  0.4,  0.2],
+    'Arm':           [3.5,  1.8,  1.0,  0.5,  0.2],
+    'Leg':           [3.0,  1.5,  0.8,  0.4,  0.2],
+    'Dismemberment': [1.5,  0.8,  0.4,  0.2,  0.1],
+}
 
 # ========== CHANCE PRESET VALUES ==========
 # 5 presets: Off (0), Rare (1), Default (2), Frequent (3), Always (4)
@@ -78,8 +87,8 @@ THIN_BORDER = Border(
 )
 
 
-def create_sheet(wb, sheet_name, presets, values_dict, is_global=False, unit='', format_func=None):
-    """Create a sheet for a preset category."""
+def create_sheet(wb, sheet_name, presets, values_dict, unit='', format_func=None):
+    """Create a sheet for a preset category with per-zone values."""
     ws = wb.create_sheet(title=sheet_name)
     
     # Header row
@@ -94,33 +103,22 @@ def create_sheet(wb, sheet_name, presets, values_dict, is_global=False, unit='',
         cell.alignment = Alignment(horizontal='center')
         cell.border = THIN_BORDER
     
-    if is_global:
-        # Single row for global values
-        ws.cell(row=2, column=1, value="Tick Interval").font = ZONE_FONT
-        ws.cell(row=2, column=1).border = THIN_BORDER
-        for col, val in enumerate(values_dict, start=2):
-            cell = ws.cell(row=2, column=col, value=f"{val}{unit}")
+    # Per-zone values
+    for row, zone in enumerate(ZONES, start=2):
+        ws.cell(row=row, column=1, value=zone).font = ZONE_FONT
+        ws.cell(row=row, column=1).border = THIN_BORDER
+        
+        values = values_dict[zone]
+        for col, val in enumerate(values, start=2):
+            if format_func:
+                display = format_func(val)
+            else:
+                display = f"{val}{unit}"
+            cell = ws.cell(row=row, column=col, value=display)
             cell.alignment = Alignment(horizontal='center')
             cell.border = THIN_BORDER
             if col == 4:  # Default is index 2, column 4
                 cell.fill = DEFAULT_FILL
-    else:
-        # Per-zone values
-        for row, zone in enumerate(ZONES, start=2):
-            ws.cell(row=row, column=1, value=zone).font = ZONE_FONT
-            ws.cell(row=row, column=1).border = THIN_BORDER
-            
-            values = values_dict[zone]
-            for col, val in enumerate(values, start=2):
-                if format_func:
-                    display = format_func(val)
-                else:
-                    display = f"{val}{unit}"
-                cell = ws.cell(row=row, column=col, value=display)
-                cell.alignment = Alignment(horizontal='center')
-                cell.border = THIN_BORDER
-                if col == 4:  # Default is index 2, column 4
-                    cell.fill = DEFAULT_FILL
     
     # Auto-width columns
     for col in range(1, len(presets) + 2):
@@ -137,30 +135,31 @@ def create_xlsx(output_path):
     # Create sheets for each preset category
     create_sheet(wb, "Damage", DAMAGE_PRESETS, DAMAGE_VALUES, unit='')
     create_sheet(wb, "Duration", DURATION_PRESETS, DURATION_VALUES, unit='s')
-    create_sheet(wb, "Frequency", FREQUENCY_PRESETS, FREQUENCY_VALUES, is_global=True, unit='s')
+    create_sheet(wb, "Frequency", FREQUENCY_PRESETS, FREQUENCY_VALUES, unit='s')
     create_sheet(wb, "Chance", CHANCE_PRESETS, CHANCE_VALUES, unit='%')
     
     # Create summary sheet
     ws = wb.create_sheet(title="Summary", index=0)
     ws.cell(row=1, column=1, value="BDOT Preset System").font = Font(bold=True, size=14)
-    ws.cell(row=3, column=1, value="Each preset category has 5 levels:")
+    ws.cell(row=3, column=1, value="Each preset category has 5 levels with per-zone values:")
     ws.cell(row=4, column=1, value="  • Default (middle) is always index 2")
-    ws.cell(row=5, column=1, value="  • 2 presets to the left (lower values)")
-    ws.cell(row=6, column=1, value="  • 2 presets to the right (higher values)")
+    ws.cell(row=5, column=1, value="  • 2 presets to the left (lower/slower values)")
+    ws.cell(row=6, column=1, value="  • 2 presets to the right (higher/faster values)")
     ws.cell(row=8, column=1, value="Damage Presets:").font = Font(bold=True)
     ws.cell(row=9, column=1, value="  Minimal → Low → Default → High → Extreme")
     ws.cell(row=11, column=1, value="Duration Presets:").font = Font(bold=True)
     ws.cell(row=12, column=1, value="  Very Short → Short → Default → Long → Extended")
-    ws.cell(row=14, column=1, value="Frequency Presets:").font = Font(bold=True)
+    ws.cell(row=14, column=1, value="Frequency Presets (per-zone tick intervals):").font = Font(bold=True)
     ws.cell(row=15, column=1, value="  Very Slow → Slow → Default → Fast → Rapid")
-    ws.cell(row=16, column=1, value="  (Tick interval: 2.0s → 1.0s → 0.5s → 0.25s → 0.1s)")
-    ws.cell(row=18, column=1, value="Chance Presets:").font = Font(bold=True)
-    ws.cell(row=19, column=1, value="  Off → Rare → Default → Frequent → Always")
-    ws.cell(row=21, column=1, value="Damage Type Multipliers:").font = Font(bold=True)
-    ws.cell(row=22, column=1, value="  Pierce: 1.0x (default)")
-    ws.cell(row=23, column=1, value="  Slash: 1.0x (default)")
-    ws.cell(row=24, column=1, value="  Blunt: 0.5x (default - blunt causes less bleeding)")
-    ws.cell(row=25, column=1, value="  Set to 0.0x to disable bleed from that damage type")
+    ws.cell(row=16, column=1, value="  (Each zone has unique tick intervals, e.g., Throat: 2.0s → 0.1s)")
+    ws.cell(row=17, column=1, value="  Slider range: 0.1s to 5.0s in 0.1s increments")
+    ws.cell(row=19, column=1, value="Chance Presets:").font = Font(bold=True)
+    ws.cell(row=20, column=1, value="  Off → Rare → Default → Frequent → Always")
+    ws.cell(row=22, column=1, value="Damage Type Multipliers:").font = Font(bold=True)
+    ws.cell(row=23, column=1, value="  Pierce: 1.0x (default)")
+    ws.cell(row=24, column=1, value="  Slash: 1.0x (default)")
+    ws.cell(row=25, column=1, value="  Blunt: 0.5x (default - blunt causes less bleeding)")
+    ws.cell(row=26, column=1, value="  Set to 0.0x to disable bleed from that damage type")
     
     ws.column_dimensions['A'].width = 60
     

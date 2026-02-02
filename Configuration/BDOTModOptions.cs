@@ -48,42 +48,49 @@ namespace BDOT.Configuration
         public const string OptionThroatChance = "Throat Chance";
         public const string OptionThroatDamage = "Throat Damage";
         public const string OptionThroatDuration = "Throat Duration";
+        public const string OptionThroatFrequency = "Throat Frequency";
         public const string OptionThroatStackLimit = "Throat Stack Limit";
 
         // Head zone - unique names
         public const string OptionHeadChance = "Head Chance";
         public const string OptionHeadDamage = "Head Damage";
         public const string OptionHeadDuration = "Head Duration";
+        public const string OptionHeadFrequency = "Head Frequency";
         public const string OptionHeadStackLimit = "Head Stack Limit";
 
         // Neck zone - unique names
         public const string OptionNeckChance = "Neck Chance";
         public const string OptionNeckDamage = "Neck Damage";
         public const string OptionNeckDuration = "Neck Duration";
+        public const string OptionNeckFrequency = "Neck Frequency";
         public const string OptionNeckStackLimit = "Neck Stack Limit";
 
         // Torso zone - unique names
         public const string OptionTorsoChance = "Torso Chance";
         public const string OptionTorsoDamage = "Torso Damage";
         public const string OptionTorsoDuration = "Torso Duration";
+        public const string OptionTorsoFrequency = "Torso Frequency";
         public const string OptionTorsoStackLimit = "Torso Stack Limit";
 
         // Arm zone - unique names
         public const string OptionArmChance = "Arm Chance";
         public const string OptionArmDamage = "Arm Damage";
         public const string OptionArmDuration = "Arm Duration";
+        public const string OptionArmFrequency = "Arm Frequency";
         public const string OptionArmStackLimit = "Arm Stack Limit";
 
         // Leg zone - unique names
         public const string OptionLegChance = "Leg Chance";
         public const string OptionLegDamage = "Leg Damage";
         public const string OptionLegDuration = "Leg Duration";
+        public const string OptionLegFrequency = "Leg Frequency";
         public const string OptionLegStackLimit = "Leg Stack Limit";
 
         // Dismemberment zone - unique names
         public const string OptionDismembermentChance = "Dismemberment Chance";
         public const string OptionDismembermentDamage = "Dismemberment Damage";
         public const string OptionDismembermentDuration = "Dismemberment Duration";
+        public const string OptionDismembermentFrequency = "Dismemberment Frequency";
         public const string OptionDismembermentStackLimit = "Dismemberment Stack Limit";
 
         // Advanced
@@ -219,6 +226,18 @@ namespace BDOT.Configuration
             return list.ToArray();
         }
 
+        public static ModOptionFloat[] FrequencyProvider()
+        {
+            var list = new System.Collections.Generic.List<ModOptionFloat>();
+            // Tick interval: 0.1s to 5.0s in 0.1s increments (50 options)
+            for (int i = 1; i <= 50; i++)
+            {
+                float val = i / 10f;
+                list.Add(new ModOptionFloat(val.ToString("0.0") + "s", val));
+            }
+            return list.ToArray();
+        }
+
         public static ModOptionFloat[] DamageProvider()
         {
             var list = new System.Collections.Generic.List<ModOptionFloat>();
@@ -280,9 +299,6 @@ namespace BDOT.Configuration
         [ModOption(name = OptionChancePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 40, defaultValueIndex = 2, valueSourceName = nameof(ChancePresetProvider), tooltip = "Bleed chance preset. Default is the balanced middle value.")]
         public static string ChancePresetSetting = "Default";
 
-        // Tick interval is derived from FrequencyPreset
-        public static float TickInterval = 0.5f;
-
         #endregion
 
         #region Damage Type Multipliers
@@ -324,7 +340,7 @@ namespace BDOT.Configuration
         #endregion
 
         #region Throat Zone
-        // Default values (preset index 2): Chance=60%, Damage=2.5, Duration=6.0s
+        // Default values (preset index 2): Chance=60%, Damage=2.5, Duration=6.0s, Frequency=0.5s
 
         [ModOption(name = OptionThroatChance, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 10, defaultValueIndex = 12, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for throat wounds to cause bleeding")]
         public static float ThroatChance = 60f;
@@ -335,13 +351,16 @@ namespace BDOT.Configuration
         [ModOption(name = OptionThroatDuration, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 30, defaultValueIndex = 11, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long throat bleeds last")]
         public static float ThroatDuration = 6.0f;
 
+        [ModOption(name = OptionThroatFrequency, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for throat wounds")]
+        public static float ThroatFrequency = 0.5f;
+
         [ModOption(name = OptionThroatStackLimit, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for throat wounds")]
         public static int ThroatStackLimit = 3;
 
         #endregion
 
         #region Head Zone
-        // Default values (preset index 2): Chance=40%, Damage=1.5, Duration=5.0s
+        // Default values (preset index 2): Chance=40%, Damage=1.5, Duration=5.0s, Frequency=0.5s
 
         [ModOption(name = OptionHeadChance, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 10, defaultValueIndex = 8, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for head wounds to cause bleeding")]
         public static float HeadChance = 40f;
@@ -352,13 +371,16 @@ namespace BDOT.Configuration
         [ModOption(name = OptionHeadDuration, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 30, defaultValueIndex = 9, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long head bleeds last")]
         public static float HeadDuration = 5.0f;
 
+        [ModOption(name = OptionHeadFrequency, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for head wounds")]
+        public static float HeadFrequency = 0.5f;
+
         [ModOption(name = OptionHeadStackLimit, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for head wounds")]
         public static int HeadStackLimit = 3;
 
         #endregion
 
         #region Neck Zone
-        // Default values (preset index 2): Chance=55%, Damage=2.0, Duration=5.5s
+        // Default values (preset index 2): Chance=55%, Damage=2.0, Duration=5.5s, Frequency=0.5s
 
         [ModOption(name = OptionNeckChance, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 10, defaultValueIndex = 11, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for neck wounds to cause bleeding")]
         public static float NeckChance = 55f;
@@ -369,13 +391,16 @@ namespace BDOT.Configuration
         [ModOption(name = OptionNeckDuration, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 30, defaultValueIndex = 10, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long neck bleeds last")]
         public static float NeckDuration = 5.5f;
 
+        [ModOption(name = OptionNeckFrequency, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for neck wounds")]
+        public static float NeckFrequency = 0.5f;
+
         [ModOption(name = OptionNeckStackLimit, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for neck wounds")]
         public static int NeckStackLimit = 3;
 
         #endregion
 
         #region Torso Zone
-        // Default values (preset index 2): Chance=35%, Damage=1.0, Duration=4.0s
+        // Default values (preset index 2): Chance=35%, Damage=1.0, Duration=4.0s, Frequency=0.5s
 
         [ModOption(name = OptionTorsoChance, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 10, defaultValueIndex = 7, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for torso wounds to cause bleeding")]
         public static float TorsoChance = 35f;
@@ -386,13 +411,16 @@ namespace BDOT.Configuration
         [ModOption(name = OptionTorsoDuration, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 30, defaultValueIndex = 7, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long torso bleeds last")]
         public static float TorsoDuration = 4.0f;
 
+        [ModOption(name = OptionTorsoFrequency, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for torso wounds")]
+        public static float TorsoFrequency = 0.5f;
+
         [ModOption(name = OptionTorsoStackLimit, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 40, defaultValueIndex = 4, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for torso wounds")]
         public static int TorsoStackLimit = 5;
 
         #endregion
 
         #region Arm Zone
-        // Default values (preset index 2): Chance=25%, Damage=0.5, Duration=3.0s
+        // Default values (preset index 2): Chance=25%, Damage=0.5, Duration=3.0s, Frequency=0.5s
 
         [ModOption(name = OptionArmChance, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 10, defaultValueIndex = 5, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for arm wounds to cause bleeding")]
         public static float ArmChance = 25f;
@@ -403,13 +431,16 @@ namespace BDOT.Configuration
         [ModOption(name = OptionArmDuration, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 30, defaultValueIndex = 5, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long arm bleeds last")]
         public static float ArmDuration = 3.0f;
 
+        [ModOption(name = OptionArmFrequency, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for arm wounds")]
+        public static float ArmFrequency = 0.5f;
+
         [ModOption(name = OptionArmStackLimit, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 40, defaultValueIndex = 3, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for arm wounds")]
         public static int ArmStackLimit = 4;
 
         #endregion
 
         #region Leg Zone
-        // Default values (preset index 2): Chance=30%, Damage=0.75, Duration=3.5s
+        // Default values (preset index 2): Chance=30%, Damage=0.75, Duration=3.5s, Frequency=0.5s
 
         [ModOption(name = OptionLegChance, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 10, defaultValueIndex = 6, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for leg wounds to cause bleeding")]
         public static float LegChance = 30f;
@@ -420,13 +451,16 @@ namespace BDOT.Configuration
         [ModOption(name = OptionLegDuration, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 30, defaultValueIndex = 6, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long leg bleeds last")]
         public static float LegDuration = 3.5f;
 
+        [ModOption(name = OptionLegFrequency, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for leg wounds")]
+        public static float LegFrequency = 0.5f;
+
         [ModOption(name = OptionLegStackLimit, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 40, defaultValueIndex = 3, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for leg wounds")]
         public static int LegStackLimit = 4;
 
         #endregion
 
         #region Dismemberment Zone
-        // Default values (preset index 2): Chance=80%, Damage=3.0, Duration=8.0s
+        // Default values (preset index 2): Chance=80%, Damage=3.0, Duration=8.0s, Frequency=0.5s
 
         [ModOption(name = OptionDismembermentChance, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 10, defaultValueIndex = 16, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for dismemberment to cause bleeding")]
         public static float DismembermentChance = 80f;
@@ -436,6 +470,9 @@ namespace BDOT.Configuration
 
         [ModOption(name = OptionDismembermentDuration, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 30, defaultValueIndex = 15, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long dismemberment bleeds last")]
         public static float DismembermentDuration = 8.0f;
+
+        [ModOption(name = OptionDismembermentFrequency, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for dismemberment")]
+        public static float DismembermentFrequency = 0.5f;
 
         [ModOption(name = OptionDismembermentStackLimit, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 40, defaultValueIndex = 0, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for dismemberment (per limb)")]
         public static int DismembermentStackLimit = 1;
@@ -464,6 +501,7 @@ namespace BDOT.Configuration
             public float Chance;
             public float Damage;
             public float Duration;
+            public float Frequency;
             public int StackLimit;
         }
 
@@ -492,6 +530,7 @@ namespace BDOT.Configuration
                     config.Chance = ThroatChance;
                     config.Damage = ThroatDamage;
                     config.Duration = ThroatDuration;
+                    config.Frequency = ThroatFrequency;
                     config.StackLimit = ThroatStackLimit;
                     break;
                 case BodyZone.Head:
@@ -499,6 +538,7 @@ namespace BDOT.Configuration
                     config.Chance = HeadChance;
                     config.Damage = HeadDamage;
                     config.Duration = HeadDuration;
+                    config.Frequency = HeadFrequency;
                     config.StackLimit = HeadStackLimit;
                     break;
                 case BodyZone.Neck:
@@ -506,6 +546,7 @@ namespace BDOT.Configuration
                     config.Chance = NeckChance;
                     config.Damage = NeckDamage;
                     config.Duration = NeckDuration;
+                    config.Frequency = NeckFrequency;
                     config.StackLimit = NeckStackLimit;
                     break;
                 case BodyZone.Torso:
@@ -513,6 +554,7 @@ namespace BDOT.Configuration
                     config.Chance = TorsoChance;
                     config.Damage = TorsoDamage;
                     config.Duration = TorsoDuration;
+                    config.Frequency = TorsoFrequency;
                     config.StackLimit = TorsoStackLimit;
                     break;
                 case BodyZone.Arm:
@@ -520,6 +562,7 @@ namespace BDOT.Configuration
                     config.Chance = ArmChance;
                     config.Damage = ArmDamage;
                     config.Duration = ArmDuration;
+                    config.Frequency = ArmFrequency;
                     config.StackLimit = ArmStackLimit;
                     break;
                 case BodyZone.Leg:
@@ -527,6 +570,7 @@ namespace BDOT.Configuration
                     config.Chance = LegChance;
                     config.Damage = LegDamage;
                     config.Duration = LegDuration;
+                    config.Frequency = LegFrequency;
                     config.StackLimit = LegStackLimit;
                     break;
                 case BodyZone.Dismemberment:
@@ -534,6 +578,7 @@ namespace BDOT.Configuration
                     config.Chance = DismembermentChance;
                     config.Damage = DismembermentDamage;
                     config.Duration = DismembermentDuration;
+                    config.Frequency = DismembermentFrequency;
                     config.StackLimit = DismembermentStackLimit;
                     break;
                 default:
@@ -541,6 +586,7 @@ namespace BDOT.Configuration
                     config.Chance = 0f;
                     config.Damage = 1.0f;
                     config.Duration = 4.0f;
+                    config.Frequency = 0.5f;
                     config.StackLimit = 3;
                     break;
             }
@@ -646,6 +692,35 @@ namespace BDOT.Configuration
                 case BodyZone.Arm: ArmDuration = value; break;
                 case BodyZone.Leg: LegDuration = value; break;
                 case BodyZone.Dismemberment: DismembermentDuration = value; break;
+            }
+        }
+
+        public static void SetZoneFrequency(BodyZone zone, float value)
+        {
+            switch (zone)
+            {
+                case BodyZone.Throat: ThroatFrequency = value; break;
+                case BodyZone.Head: HeadFrequency = value; break;
+                case BodyZone.Neck: NeckFrequency = value; break;
+                case BodyZone.Torso: TorsoFrequency = value; break;
+                case BodyZone.Arm: ArmFrequency = value; break;
+                case BodyZone.Leg: LegFrequency = value; break;
+                case BodyZone.Dismemberment: DismembermentFrequency = value; break;
+            }
+        }
+
+        public static float GetZoneFrequency(BodyZone zone)
+        {
+            switch (zone)
+            {
+                case BodyZone.Throat: return ThroatFrequency;
+                case BodyZone.Head: return HeadFrequency;
+                case BodyZone.Neck: return NeckFrequency;
+                case BodyZone.Torso: return TorsoFrequency;
+                case BodyZone.Arm: return ArmFrequency;
+                case BodyZone.Leg: return LegFrequency;
+                case BodyZone.Dismemberment: return DismembermentFrequency;
+                default: return 0.5f;
             }
         }
 

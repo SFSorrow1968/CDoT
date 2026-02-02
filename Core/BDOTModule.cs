@@ -55,7 +55,6 @@ namespace BDOT.Core
             Debug.Log("[BDOT] --- Configuration Summary ---");
             Debug.Log("[BDOT] Enabled: " + BDOTModOptions.EnableMod);
             Debug.Log("[BDOT] Debug Logging: " + BDOTModOptions.DebugLogging);
-            Debug.Log("[BDOT] Tick Interval: " + BDOTModOptions.TickInterval.ToString("F2") + "s");
             Debug.Log("[BDOT] Presets: Damage=" + BDOTModOptions.DamagePresetSetting + ", Duration=" + BDOTModOptions.DurationPresetSetting + ", Frequency=" + BDOTModOptions.FrequencyPresetSetting + ", Chance=" + BDOTModOptions.ChancePresetSetting);
             Debug.Log("[BDOT] DamageType Multipliers: Pierce=" + BDOTModOptions.PierceMultiplier.ToString("F1") + "x, Slash=" + BDOTModOptions.SlashMultiplier.ToString("F1") + "x, Blunt=" + BDOTModOptions.BluntMultiplier.ToString("F1") + "x");
             Debug.Log("[BDOT] --- Zone Settings ---");
@@ -65,7 +64,7 @@ namespace BDOT.Core
             {
                 var cfg = BDOTModOptions.GetZoneConfig(zone);
                 string status = cfg.Enabled ? "ON " : "OFF";
-                Debug.Log("[BDOT] " + zone.GetDisplayName().PadRight(13) + " [" + status + "] Chance=" + cfg.Chance.ToString("F0").PadLeft(3) + "% | Dur=" + cfg.Duration.ToString("F1").PadLeft(5) + "s | Dmg=" + cfg.Damage.ToString("F2").PadLeft(5) + " | Stacks=" + cfg.StackLimit);
+                Debug.Log("[BDOT] " + zone.GetDisplayName().PadRight(13) + " [" + status + "] Chance=" + cfg.Chance.ToString("F0").PadLeft(3) + "% | Dur=" + cfg.Duration.ToString("F1").PadLeft(5) + "s | Freq=" + cfg.Frequency.ToString("F2").PadLeft(4) + "s | Dmg=" + cfg.Damage.ToString("F2").PadLeft(5) + " | Stacks=" + cfg.StackLimit);
             }
         }
 

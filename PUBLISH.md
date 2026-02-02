@@ -2,6 +2,12 @@
 
 Use this when the user says "publish".
 
+## AI Disclaimer
+
+This mod was developed with AI assistance (GitHub Copilot / Claude). All code is original work - no code was stolen or used without consent. Only official, open-source references and publicly available ThunderRoad documentation were used during development.
+
+## Steps
+
 1) Confirm version
 - Update `Configuration/BDOTModOptions.cs` VERSION (and any other version fields if present).
 - Ensure the Git tag/release name matches the version.

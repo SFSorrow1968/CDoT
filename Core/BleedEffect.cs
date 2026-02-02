@@ -11,6 +11,7 @@ namespace BDOT.Core
         public float DamagePerTick { get; private set; }
         public float RemainingDuration { get; private set; }
         public float TotalDuration { get; private set; }
+        public float TickInterval { get; private set; }
         public int StackCount { get; private set; }
         public float TimeSinceLastTick { get; set; }
 
@@ -33,7 +34,7 @@ namespace BDOT.Core
             }
         }
 
-        public BleedEffect(Creature target, BodyZone zone, DamageType damageType, float damagePerTick, float duration)
+        public BleedEffect(Creature target, BodyZone zone, DamageType damageType, float damagePerTick, float duration, float tickInterval)
         {
             Target = target;
             Zone = zone;
@@ -41,6 +42,7 @@ namespace BDOT.Core
             DamagePerTick = damagePerTick;
             RemainingDuration = duration;
             TotalDuration = duration;
+            TickInterval = tickInterval;
             StackCount = 1;
             TimeSinceLastTick = 0f;
         }
