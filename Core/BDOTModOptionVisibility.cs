@@ -22,11 +22,26 @@ namespace BDOT.Core
         private readonly Dictionary<string, ModOption> _modOptionsByKey =
             new Dictionary<string, ModOption>(StringComparer.Ordinal);
 
+        // State tracking for custom overrides and preset lock
+        private readonly Dictionary<BodyZone, ZoneCustomValues> _lastCustomValues =
+            new Dictionary<BodyZone, ZoneCustomValues>();
+        private readonly Dictionary<BodyZone, ZoneCustomValues> _expectedPresetValues =
+            new Dictionary<BodyZone, ZoneCustomValues>();
+        private float _presetAppliedTime;
+        private const float PresetLockDuration = 30f; // Protect preset values from UI corruption for 30s
+
         // Throttle: only run full check periodically
         private float _lastFullCheckTime;
         private const float IdleCheckInterval = 0.5f;
 
         private const string OptionKeySeparator = "||";
+
+        public struct ZoneCustomValues
+        {
+            public float Multiplier;
+            public float Duration;
+            public float DamagePerTick;
+        }
 
         // Zone ordering for preset values
         private static readonly BodyZone[] AllZones =
@@ -77,6 +92,8 @@ namespace BDOT.Core
             _lastDurationPreset = null;
             _lastDamagePreset = null;
             _lastResetStatsToggle = false;
+            _lastCustomValues.Clear();
+            _expectedPresetValues.Clear();
             _modOptionsByKey.Clear();
 
             TryInitialize();
@@ -104,7 +121,8 @@ namespace BDOT.Core
                 if (!_initialized)
                     return;
 
-                ApplyAllPresets(true);
+                if (ApplyAllPresets(true))
+                    ModManager.RefreshModOptionsUI();
                 return;
             }
 
@@ -114,7 +132,8 @@ namespace BDOT.Core
                 return;
             _lastFullCheckTime = now;
 
-            ApplyAllPresets(false);
+            if (ApplyAllPresets(false))
+                ModManager.RefreshModOptionsUI();
         }
 
         private void TryInitialize()
@@ -148,11 +167,26 @@ namespace BDOT.Core
         private bool ApplyAllPresets(bool force)
         {
             bool changed = false;
+            bool presetChanged = false;
+            bool local;
 
-            changed |= ApplyIntensityPreset(force);
-            changed |= ApplyDurationPreset(force);
-            changed |= ApplyDamagePreset(force);
+            local = ApplyIntensityPreset(force);
+            changed |= local;
+            presetChanged |= local;
+            local = ApplyDurationPreset(force);
+            changed |= local;
+            presetChanged |= local;
+            local = ApplyDamagePreset(force);
+            changed |= local;
+            presetChanged |= local;
             changed |= ApplyStatisticsReset();
+
+            // Capture current values after preset changes
+            if (force || presetChanged)
+                CaptureCustomValues();
+
+            // Check for custom overrides (user changed values manually)
+            changed |= ApplyCustomOverrides();
 
             return changed;
         }
@@ -197,8 +231,24 @@ namespace BDOT.Core
             }
 
             _lastIntensityPreset = preset;
+            _presetAppliedTime = Time.unscaledTime;
+            StoreExpectedPresetValues();
             Debug.Log("[BDOT] ================================================");
             return true;
+        }
+
+        private void StoreExpectedPresetValues()
+        {
+            foreach (var zone in AllZones)
+            {
+                var config = BDOTModOptions.GetZoneConfig(zone);
+                _expectedPresetValues[zone] = new ZoneCustomValues
+                {
+                    Multiplier = config.Multiplier,
+                    Duration = config.Duration,
+                    DamagePerTick = config.DamagePerTick
+                };
+            }
         }
 
         private bool ApplyDurationPreset(bool force)
@@ -221,6 +271,8 @@ namespace BDOT.Core
             }
 
             _lastDurationPreset = preset;
+            _presetAppliedTime = Time.unscaledTime;
+            StoreExpectedPresetValues();
             Debug.Log("[BDOT] ===============================================");
             return true;
         }
@@ -245,6 +297,8 @@ namespace BDOT.Core
             }
 
             _lastDamagePreset = preset;
+            _presetAppliedTime = Time.unscaledTime;
+            StoreExpectedPresetValues();
             Debug.Log("[BDOT] =============================================");
             return true;
         }
@@ -533,6 +587,7 @@ namespace BDOT.Core
                 return false;
 
             option.Apply(index);
+            option.RefreshUI();
             if (BDOTModOptions.DebugLogging)
                 Debug.Log("[BDOT] Menu sync updated: " + DescribeOption(option) + " -> " + value);
             return true;
@@ -563,6 +618,124 @@ namespace BDOT.Core
             }
 
             return -1;
+        }
+
+        #endregion
+
+        #region Custom Override Detection (CSM-style state tracking)
+
+        private void CaptureCustomValues()
+        {
+            foreach (var zone in AllZones)
+            {
+                _lastCustomValues[zone] = ReadCustomValues(zone);
+            }
+        }
+
+        private ZoneCustomValues ReadCustomValues(BodyZone zone)
+        {
+            var config = BDOTModOptions.GetZoneConfig(zone);
+            return new ZoneCustomValues
+            {
+                Multiplier = config.Multiplier,
+                Duration = config.Duration,
+                DamagePerTick = config.DamagePerTick
+            };
+        }
+
+        private bool ApplyCustomOverrides()
+        {
+            bool changed = false;
+            float timeSincePreset = Time.unscaledTime - _presetAppliedTime;
+            bool withinLockWindow = timeSincePreset < PresetLockDuration;
+
+            foreach (var zone in AllZones)
+            {
+                ZoneCustomValues current = ReadCustomValues(zone);
+                if (!_lastCustomValues.TryGetValue(zone, out ZoneCustomValues last))
+                {
+                    _lastCustomValues[zone] = current;
+                    continue;
+                }
+
+                if (!CustomValuesChanged(last, current))
+                    continue;
+
+                // Check if values were corrupted by UI (don't match expected preset values)
+                // Only revert within the lock window after preset was applied
+                if (withinLockWindow && _expectedPresetValues.TryGetValue(zone, out ZoneCustomValues expected))
+                {
+                    bool reverted = false;
+
+                    // Check and revert Multiplier
+                    if (Mathf.Abs(current.Multiplier - expected.Multiplier) > 0.01f &&
+                        Mathf.Abs(last.Multiplier - expected.Multiplier) < 0.01f)
+                    {
+                        if (BDOTModOptions.DebugLogging)
+                            Debug.Log("[BDOT] Multiplier corruption detected for " + zone.GetDisplayName() +
+                                      " (expected " + expected.Multiplier.ToString("F1") +
+                                      ", got " + current.Multiplier.ToString("F1") + ") - reverting");
+                        BDOTModOptions.SetZoneMultiplier(zone, expected.Multiplier);
+                        SyncOptionValue(MultiplierOptionKeys, zone, expected.Multiplier);
+                        current.Multiplier = expected.Multiplier;
+                        reverted = true;
+                    }
+
+                    // Check and revert Duration
+                    if (Mathf.Abs(current.Duration - expected.Duration) > 0.1f &&
+                        Mathf.Abs(last.Duration - expected.Duration) < 0.1f)
+                    {
+                        if (BDOTModOptions.DebugLogging)
+                            Debug.Log("[BDOT] Duration corruption detected for " + zone.GetDisplayName() +
+                                      " (expected " + expected.Duration.ToString("F1") +
+                                      "s, got " + current.Duration.ToString("F1") + "s) - reverting");
+                        BDOTModOptions.SetZoneDuration(zone, expected.Duration);
+                        SyncOptionValue(DurationOptionKeys, zone, expected.Duration);
+                        current.Duration = expected.Duration;
+                        reverted = true;
+                    }
+
+                    // Check and revert DamagePerTick
+                    if (Mathf.Abs(current.DamagePerTick - expected.DamagePerTick) > 0.01f &&
+                        Mathf.Abs(last.DamagePerTick - expected.DamagePerTick) < 0.01f)
+                    {
+                        if (BDOTModOptions.DebugLogging)
+                            Debug.Log("[BDOT] Damage corruption detected for " + zone.GetDisplayName() +
+                                      " (expected " + expected.DamagePerTick.ToString("F2") +
+                                      ", got " + current.DamagePerTick.ToString("F2") + ") - reverting");
+                        BDOTModOptions.SetZoneDamagePerTick(zone, expected.DamagePerTick);
+                        SyncOptionValue(DamageOptionKeys, zone, expected.DamagePerTick);
+                        current.DamagePerTick = expected.DamagePerTick;
+                        reverted = true;
+                    }
+
+                    if (reverted)
+                    {
+                        _lastCustomValues[zone] = current;
+                        changed = true;
+                        continue;
+                    }
+                }
+
+                // User intentionally changed values - accept the override
+                _lastCustomValues[zone] = current;
+                if (BDOTModOptions.DebugLogging)
+                {
+                    Debug.Log("[BDOT] Custom override detected for " + zone.GetDisplayName() +
+                              ": Mult=" + current.Multiplier.ToString("F1") +
+                              "x Dur=" + current.Duration.ToString("F1") +
+                              "s Dmg=" + current.DamagePerTick.ToString("F2"));
+                }
+            }
+
+            return changed;
+        }
+
+        private bool CustomValuesChanged(ZoneCustomValues last, ZoneCustomValues current)
+        {
+            return Mathf.Abs(last.Multiplier - current.Multiplier) > 0.01f ||
+                   Mathf.Abs(last.Duration - current.Duration) > 0.1f ||
+                   Mathf.Abs(last.DamagePerTick - current.DamagePerTick) > 0.01f;
         }
 
         #endregion
