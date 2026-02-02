@@ -250,27 +250,36 @@ namespace BDOT.Core
             if (damage <= 0f)
                 return;
 
-            // Get health before damage for logging (optional, don't skip damage if this fails)
+            // Apply damage by directly modifying currentHealth
+            // This avoids triggering EventManager.InvokeCreatureHit which was causing null reference errors
+            // when the game's internal damage processing tried to access null collider groups
             float healthBefore = -1f;
-            try
-            {
-                healthBefore = target.currentHealth;
-            }
-            catch
-            {
-                // Health read failed, but creature may still be valid - continue with damage
-            }
-
-            // Apply damage - this is the critical part, wrapped in its own try-catch
+            float healthAfter = -1f;
+            bool killedByBleed = false;
+            
             try
             {
                 // Final safety check before applying damage
                 if (target == null || (UnityEngine.Object)target == null || target.isKilled)
                     return;
 
-                // Apply damage to creature using the simple Damage(float, DamageType) overload
-                // Using DamageType.Pierce for bleed damage (Energy causes fire effects!)
-                target.Damage(damage, DamageType.Pierce);
+                healthBefore = target.currentHealth;
+                float newHealth = healthBefore - damage;
+                
+                // Check if this will kill the creature
+                if (newHealth <= 0f)
+                {
+                    // Use Kill() to properly trigger death events and animations
+                    target.Kill();
+                    killedByBleed = true;
+                    BDOTModOptions.AddBleedDamage(damage);
+                    Debug.Log("[BDOT] *** BLEED KILL! " + effect.Zone.GetDisplayName() + " bleed killed " + target.name + "! ***");
+                    return;
+                }
+                
+                // Apply damage directly to health (bypasses InvokeCreatureHit)
+                target.currentHealth = newHealth;
+                healthAfter = newHealth;
                 BDOTModOptions.AddBleedDamage(damage);
             }
             catch (Exception ex)
@@ -283,35 +292,7 @@ namespace BDOT.Core
                 return;
             }
 
-            // Check if creature was killed by this bleed tick
-            bool killedByBleed = false;
-            try
-            {
-                killedByBleed = target == null || (UnityEngine.Object)target == null || target.isKilled;
-            }
-            catch
-            {
-                killedByBleed = true;
-            }
-
-            if (killedByBleed)
-            {
-                Debug.Log("[BDOT] *** BLEED KILL! " + effect.Zone.GetDisplayName() + " bleed killed creature! ***");
-                return; // Don't try to access target anymore
-            }
-
-            // Get health after damage for logging (optional)
-            float healthAfter = -1f;
-            try
-            {
-                healthAfter = target.currentHealth;
-            }
-            catch
-            {
-                // Health read failed, use placeholder
-            }
-
-            if (BDOTModOptions.DebugLogging)
+            if (BDOTModOptions.DebugLogging && !killedByBleed)
             {
                 float damageTypeMult = BDOTModOptions.GetDamageTypeMultiplier(effect.DamageType);
                 string healthInfo = (healthBefore >= 0f && healthAfter >= 0f) 
