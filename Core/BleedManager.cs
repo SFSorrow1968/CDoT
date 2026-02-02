@@ -382,24 +382,7 @@ namespace BDOT.Core
                 // Clamp final intensity to reasonable bounds
                 intensity = Mathf.Clamp(intensity, 0.1f, 3.0f);
 
-                // If we already have an active effect, just update its intensity
-                if (effect.BloodEffectInstance != null)
-                {
-                    try
-                    {
-                        effect.BloodEffectInstance.SetIntensity(intensity);
-                        if (BDOTModOptions.DebugLogging)
-                            Debug.Log("[BDOT] Blood VFX update: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
-                        return;
-                    }
-                    catch
-                    {
-                        // Effect was destroyed, will spawn a new one
-                        effect.BloodEffectInstance = null;
-                    }
-                }
-
-                // Spawn blood effect at the hit part location
+                // Spawn blood spurt effect at the hit part location (spawns on each tick for more blood)
                 Vector3 position = hitPart.transform.position;
                 Quaternion rotation = Quaternion.LookRotation(hitPart.transform.up); // Blood spurts outward
                 
@@ -409,11 +392,12 @@ namespace BDOT.Core
                     effectInstance.SetIntensity(intensity);
                     effectInstance.Play();
                     
-                    // Store reference so we can end it when bleed expires
+                    // Store reference to the most recent effect so we can end it when bleed expires
+                    // (older spurts will naturally despawn on their own)
                     effect.BloodEffectInstance = effectInstance;
                     
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Blood VFX spawned: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
+                        Debug.Log("[BDOT] Blood VFX spurt: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
                 }
             }
             catch (Exception ex)
