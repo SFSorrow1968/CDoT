@@ -13,45 +13,25 @@ namespace BDOT.Core
         public static BDOTModOptionVisibility Instance => _instance ??= new BDOTModOptionVisibility();
 
         private ModManager.ModData _modData;
-        private bool _initialized = false;
-        private bool _lastResetStatsToggle = false;
+        private bool _initialized;
         private BDOTModOptions.IntensityPreset? _lastIntensityPreset;
         private BDOTModOptions.DurationPreset? _lastDurationPreset;
         private BDOTModOptions.DamagePreset? _lastDamagePreset;
+        private bool _lastResetStatsToggle;
 
         private readonly Dictionary<string, ModOption> _modOptionsByKey =
             new Dictionary<string, ModOption>(StringComparer.Ordinal);
 
-        // State tracking for custom overrides and preset lock
-        private readonly Dictionary<BodyZone, ZoneCustomValues> _lastCustomValues =
-            new Dictionary<BodyZone, ZoneCustomValues>();
-        private readonly Dictionary<BodyZone, ZoneCustomValues> _expectedPresetValues =
-            new Dictionary<BodyZone, ZoneCustomValues>();
-        private float _presetAppliedTime;
-        private const float PresetLockDuration = 30f; // Protect preset values from UI corruption for 30s
-
-        // Throttle: only run full check periodically
-        private float _lastFullCheckTime;
-        private const float IdleCheckInterval = 0.5f;
-
         private const string OptionKeySeparator = "||";
 
-        public struct ZoneCustomValues
-        {
-            public float Multiplier;
-            public float Duration;
-            public float DamagePerTick;
-        }
-
-        // Zone ordering for preset values
         private static readonly BodyZone[] AllZones =
         {
             BodyZone.Throat, BodyZone.Head, BodyZone.Neck, BodyZone.Torso,
             BodyZone.Arm, BodyZone.Leg, BodyZone.Dismemberment
         };
 
-        // Option key mappings for each zone's settings
-        private static readonly Dictionary<BodyZone, string> MultiplierOptionKeys = new Dictionary<BodyZone, string>
+        // Option key mappings
+        private static readonly Dictionary<BodyZone, string> MultiplierKeys = new Dictionary<BodyZone, string>
         {
             { BodyZone.Throat, MakeKey(BDOTModOptions.CategoryZoneThroat, BDOTModOptions.OptionThroatMultiplier) },
             { BodyZone.Head, MakeKey(BDOTModOptions.CategoryZoneHead, BDOTModOptions.OptionHeadMultiplier) },
@@ -62,7 +42,7 @@ namespace BDOT.Core
             { BodyZone.Dismemberment, MakeKey(BDOTModOptions.CategoryZoneDismemberment, BDOTModOptions.OptionDismembermentMultiplier) }
         };
 
-        private static readonly Dictionary<BodyZone, string> DurationOptionKeys = new Dictionary<BodyZone, string>
+        private static readonly Dictionary<BodyZone, string> DurationKeys = new Dictionary<BodyZone, string>
         {
             { BodyZone.Throat, MakeKey(BDOTModOptions.CategoryZoneThroat, BDOTModOptions.OptionThroatDuration) },
             { BodyZone.Head, MakeKey(BDOTModOptions.CategoryZoneHead, BDOTModOptions.OptionHeadDuration) },
@@ -73,7 +53,7 @@ namespace BDOT.Core
             { BodyZone.Dismemberment, MakeKey(BDOTModOptions.CategoryZoneDismemberment, BDOTModOptions.OptionDismembermentDuration) }
         };
 
-        private static readonly Dictionary<BodyZone, string> DamageOptionKeys = new Dictionary<BodyZone, string>
+        private static readonly Dictionary<BodyZone, string> DamageKeys = new Dictionary<BodyZone, string>
         {
             { BodyZone.Throat, MakeKey(BDOTModOptions.CategoryZoneThroat, BDOTModOptions.OptionThroatDamagePerTick) },
             { BodyZone.Head, MakeKey(BDOTModOptions.CategoryZoneHead, BDOTModOptions.OptionHeadDamagePerTick) },
@@ -91,18 +71,12 @@ namespace BDOT.Core
             _lastIntensityPreset = null;
             _lastDurationPreset = null;
             _lastDamagePreset = null;
-            _lastResetStatsToggle = false;
-            _lastCustomValues.Clear();
-            _expectedPresetValues.Clear();
             _modOptionsByKey.Clear();
 
             TryInitialize();
             if (_initialized)
-            {
-                // Apply all presets on first load
-                if (ApplyAllPresets(true))
-                    ModManager.RefreshModOptionsUI();
-            }
+                ApplyAllPresets(true);
+
             Debug.Log("[BDOT] ModOptionVisibility initialized");
         }
 
@@ -118,22 +92,12 @@ namespace BDOT.Core
             if (!_initialized)
             {
                 TryInitialize();
-                if (!_initialized)
-                    return;
-
-                if (ApplyAllPresets(true))
-                    ModManager.RefreshModOptionsUI();
+                if (_initialized)
+                    ApplyAllPresets(true);
                 return;
             }
 
-            // Throttle: only run full check at intervals when idle
-            float now = Time.unscaledTime;
-            if (now - _lastFullCheckTime < IdleCheckInterval)
-                return;
-            _lastFullCheckTime = now;
-
-            if (ApplyAllPresets(false))
-                ModManager.RefreshModOptionsUI();
+            ApplyAllPresets(false);
         }
 
         private void TryInitialize()
@@ -146,596 +110,243 @@ namespace BDOT.Core
             if (_modData?.modOptions == null || _modData.modOptions.Count == 0)
                 return;
 
-            CacheModOptions();
-            _initialized = true;
-            Debug.Log("[BDOT] ModOption cache built with " + _modOptionsByKey.Count + " options");
-        }
-
-        private void CacheModOptions()
-        {
-            _modOptionsByKey.Clear();
-            if (_modData?.modOptions == null) return;
-
+            // Cache all mod options by key
             foreach (var option in _modData.modOptions)
             {
                 if (option == null || string.IsNullOrEmpty(option.name)) continue;
-                string key = MakeKey(option.category, option.name);
-                _modOptionsByKey[key] = option;
-            }
-        }
-
-        private bool ApplyAllPresets(bool force)
-        {
-            bool changed = false;
-            bool presetChanged = false;
-            bool local;
-
-            local = ApplyIntensityPreset(force);
-            changed |= local;
-            presetChanged |= local;
-            local = ApplyDurationPreset(force);
-            changed |= local;
-            presetChanged |= local;
-            local = ApplyDamagePreset(force);
-            changed |= local;
-            presetChanged |= local;
-            changed |= ApplyStatisticsReset();
-
-            // Capture current values after preset changes
-            if (force || presetChanged)
-                CaptureCustomValues();
-
-            // Check for custom overrides (user changed values manually)
-            changed |= ApplyCustomOverrides();
-
-            return changed;
-        }
-
-        private bool ApplyStatisticsReset()
-        {
-            if (!BDOTModOptions.ResetStatsToggle || _lastResetStatsToggle)
-            {
-                _lastResetStatsToggle = BDOTModOptions.ResetStatsToggle;
-                return false;
+                _modOptionsByKey[MakeKey(option.category, option.name)] = option;
             }
 
-            float oldDamage = BDOTModOptions.GetTotalBleedDamage();
-            int oldCount = BDOTModOptions.GetTotalBleedCount();
-            BDOTModOptions.ResetStatistics();
-            BDOTModOptions.ResetStatsToggle = false;
-            _lastResetStatsToggle = false;
-
-            Debug.Log("[BDOT] ========== STATISTICS RESET ==========");
-            Debug.Log("[BDOT] Cleared: " + oldDamage.ToString("F1") + " total damage, " + oldCount + " bleed effects");
-            Debug.Log("[BDOT] =======================================");
-            return true;
+            _initialized = true;
         }
 
-        private bool ApplyIntensityPreset(bool force)
+        private void ApplyAllPresets(bool force)
+        {
+            ApplyIntensityPreset(force);
+            ApplyDurationPreset(force);
+            ApplyDamagePreset(force);
+            ApplyStatisticsReset();
+        }
+
+        private void ApplyIntensityPreset(bool force)
         {
             var preset = BDOTModOptions.GetIntensityPreset();
-            if (!force && _lastIntensityPreset.HasValue && _lastIntensityPreset.Value == preset)
-                return false;
+            if (!force && _lastIntensityPreset == preset)
+                return;
 
-            Debug.Log("[BDOT] ========== PRESET CHANGE: Intensity ==========");
-            Debug.Log("[BDOT] Preset: " + preset);
+            Debug.Log("[BDOT] Applying Intensity Preset: " + preset);
 
             foreach (var zone in AllZones)
             {
                 float value = GetPresetMultiplierValue(zone, preset);
-                float oldValue = BDOTModOptions.GetZoneConfig(zone).Multiplier;
                 BDOTModOptions.SetZoneMultiplier(zone, value);
-                SyncOptionValue(MultiplierOptionKeys, zone, value);
-
-                Debug.Log("[BDOT]   " + zone.GetDisplayName().PadRight(13) + ": " + oldValue.ToString("F1") + "x -> " + value.ToString("F1") + "x");
+                SyncOption(MultiplierKeys[zone], value);
             }
 
             _lastIntensityPreset = preset;
-            _presetAppliedTime = Time.unscaledTime;
-            StoreExpectedPresetValues();
-            Debug.Log("[BDOT] ================================================");
-            return true;
         }
 
-        private void StoreExpectedPresetValues()
-        {
-            foreach (var zone in AllZones)
-            {
-                var config = BDOTModOptions.GetZoneConfig(zone);
-                _expectedPresetValues[zone] = new ZoneCustomValues
-                {
-                    Multiplier = config.Multiplier,
-                    Duration = config.Duration,
-                    DamagePerTick = config.DamagePerTick
-                };
-            }
-        }
-
-        private bool ApplyDurationPreset(bool force)
+        private void ApplyDurationPreset(bool force)
         {
             var preset = BDOTModOptions.GetDurationPreset();
-            if (!force && _lastDurationPreset.HasValue && _lastDurationPreset.Value == preset)
-                return false;
+            if (!force && _lastDurationPreset == preset)
+                return;
 
-            Debug.Log("[BDOT] ========== PRESET CHANGE: Duration ==========");
-            Debug.Log("[BDOT] Preset: " + preset);
+            Debug.Log("[BDOT] Applying Duration Preset: " + preset);
 
             foreach (var zone in AllZones)
             {
                 float value = GetPresetDurationValue(zone, preset);
-                float oldValue = BDOTModOptions.GetZoneConfig(zone).Duration;
                 BDOTModOptions.SetZoneDuration(zone, value);
-                SyncOptionValue(DurationOptionKeys, zone, value);
-
-                Debug.Log("[BDOT]   " + zone.GetDisplayName().PadRight(13) + ": " + oldValue.ToString("F1") + "s -> " + value.ToString("F1") + "s");
+                SyncOption(DurationKeys[zone], value);
             }
 
             _lastDurationPreset = preset;
-            _presetAppliedTime = Time.unscaledTime;
-            StoreExpectedPresetValues();
-            Debug.Log("[BDOT] ===============================================");
-            return true;
         }
 
-        private bool ApplyDamagePreset(bool force)
+        private void ApplyDamagePreset(bool force)
         {
             var preset = BDOTModOptions.GetDamagePreset();
-            if (!force && _lastDamagePreset.HasValue && _lastDamagePreset.Value == preset)
-                return false;
+            if (!force && _lastDamagePreset == preset)
+                return;
 
-            Debug.Log("[BDOT] ========== PRESET CHANGE: Damage ==========");
-            Debug.Log("[BDOT] Preset: " + preset);
+            Debug.Log("[BDOT] Applying Damage Preset: " + preset);
 
             foreach (var zone in AllZones)
             {
                 float value = GetPresetDamageValue(zone, preset);
-                float oldValue = BDOTModOptions.GetZoneConfig(zone).DamagePerTick;
                 BDOTModOptions.SetZoneDamagePerTick(zone, value);
-                SyncOptionValue(DamageOptionKeys, zone, value);
-
-                Debug.Log("[BDOT]   " + zone.GetDisplayName().PadRight(13) + ": " + oldValue.ToString("F2") + " -> " + value.ToString("F2"));
+                SyncOption(DamageKeys[zone], value);
             }
 
             _lastDamagePreset = preset;
-            _presetAppliedTime = Time.unscaledTime;
-            StoreExpectedPresetValues();
-            Debug.Log("[BDOT] =============================================");
-            return true;
         }
 
-        #region Preset Value Tables
-
-        /// <summary>
-        /// Get multiplier value for a zone based on the intensity preset.
-        /// Values are final (no runtime calculation).
-        /// </summary>
-        public static float GetPresetMultiplierValue(BodyZone zone, BDOTModOptions.IntensityPreset preset)
+        private void ApplyStatisticsReset()
         {
-            // Light=0.5x base, Default=1x base, Heavy=1.5x base, Brutal=2.5x base
-            switch (zone)
+            if (BDOTModOptions.ResetStatsToggle && !_lastResetStatsToggle)
             {
-                case BodyZone.Throat: // Base: 3.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.IntensityPreset.Light: return 1.5f;
-                        case BDOTModOptions.IntensityPreset.Default: return 3.0f;
-                        case BDOTModOptions.IntensityPreset.Heavy: return 4.5f;
-                        case BDOTModOptions.IntensityPreset.Brutal: return 7.5f;
-                    }
-                    break;
-                case BodyZone.Head: // Base: 2.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.IntensityPreset.Light: return 1.0f;
-                        case BDOTModOptions.IntensityPreset.Default: return 2.0f;
-                        case BDOTModOptions.IntensityPreset.Heavy: return 3.0f;
-                        case BDOTModOptions.IntensityPreset.Brutal: return 5.0f;
-                    }
-                    break;
-                case BodyZone.Neck: // Base: 2.5
-                    switch (preset)
-                    {
-                        case BDOTModOptions.IntensityPreset.Light: return 1.3f;
-                        case BDOTModOptions.IntensityPreset.Default: return 2.5f;
-                        case BDOTModOptions.IntensityPreset.Heavy: return 3.8f;
-                        case BDOTModOptions.IntensityPreset.Brutal: return 6.3f;
-                    }
-                    break;
-                case BodyZone.Torso: // Base: 1.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.IntensityPreset.Light: return 0.5f;
-                        case BDOTModOptions.IntensityPreset.Default: return 1.0f;
-                        case BDOTModOptions.IntensityPreset.Heavy: return 1.5f;
-                        case BDOTModOptions.IntensityPreset.Brutal: return 2.5f;
-                    }
-                    break;
-                case BodyZone.Arm: // Base: 0.5
-                    switch (preset)
-                    {
-                        case BDOTModOptions.IntensityPreset.Light: return 0.3f;
-                        case BDOTModOptions.IntensityPreset.Default: return 0.5f;
-                        case BDOTModOptions.IntensityPreset.Heavy: return 0.8f;
-                        case BDOTModOptions.IntensityPreset.Brutal: return 1.3f;
-                    }
-                    break;
-                case BodyZone.Leg: // Base: 0.6
-                    switch (preset)
-                    {
-                        case BDOTModOptions.IntensityPreset.Light: return 0.3f;
-                        case BDOTModOptions.IntensityPreset.Default: return 0.6f;
-                        case BDOTModOptions.IntensityPreset.Heavy: return 0.9f;
-                        case BDOTModOptions.IntensityPreset.Brutal: return 1.5f;
-                    }
-                    break;
-                case BodyZone.Dismemberment: // Base: 2.5
-                    switch (preset)
-                    {
-                        case BDOTModOptions.IntensityPreset.Light: return 1.3f;
-                        case BDOTModOptions.IntensityPreset.Default: return 2.5f;
-                        case BDOTModOptions.IntensityPreset.Heavy: return 3.8f;
-                        case BDOTModOptions.IntensityPreset.Brutal: return 6.3f;
-                    }
-                    break;
+                BDOTModOptions.ResetStatistics();
+                BDOTModOptions.ResetStatsToggle = false;
+                Debug.Log("[BDOT] Statistics reset");
             }
-            return 1.0f;
+            _lastResetStatsToggle = BDOTModOptions.ResetStatsToggle;
         }
 
-        /// <summary>
-        /// Get duration value for a zone based on the duration preset.
-        /// Values are final (no runtime calculation).
-        /// </summary>
-        public static float GetPresetDurationValue(BodyZone zone, BDOTModOptions.DurationPreset preset)
-        {
-            // Short=0.6x base, Default=1x base, Long=1.5x base, Extended=2x base
-            switch (zone)
-            {
-                case BodyZone.Throat: // Base: 8.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DurationPreset.Short: return 5.0f;
-                        case BDOTModOptions.DurationPreset.Default: return 8.0f;
-                        case BDOTModOptions.DurationPreset.Long: return 12.0f;
-                        case BDOTModOptions.DurationPreset.Extended: return 16.0f;
-                    }
-                    break;
-                case BodyZone.Head: // Base: 6.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DurationPreset.Short: return 3.5f;
-                        case BDOTModOptions.DurationPreset.Default: return 6.0f;
-                        case BDOTModOptions.DurationPreset.Long: return 9.0f;
-                        case BDOTModOptions.DurationPreset.Extended: return 12.0f;
-                    }
-                    break;
-                case BodyZone.Neck: // Base: 7.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DurationPreset.Short: return 4.0f;
-                        case BDOTModOptions.DurationPreset.Default: return 7.0f;
-                        case BDOTModOptions.DurationPreset.Long: return 10.5f;
-                        case BDOTModOptions.DurationPreset.Extended: return 14.0f;
-                    }
-                    break;
-                case BodyZone.Torso: // Base: 5.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DurationPreset.Short: return 3.0f;
-                        case BDOTModOptions.DurationPreset.Default: return 5.0f;
-                        case BDOTModOptions.DurationPreset.Long: return 7.5f;
-                        case BDOTModOptions.DurationPreset.Extended: return 10.0f;
-                    }
-                    break;
-                case BodyZone.Arm: // Base: 4.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DurationPreset.Short: return 2.5f;
-                        case BDOTModOptions.DurationPreset.Default: return 4.0f;
-                        case BDOTModOptions.DurationPreset.Long: return 6.0f;
-                        case BDOTModOptions.DurationPreset.Extended: return 8.0f;
-                    }
-                    break;
-                case BodyZone.Leg: // Base: 5.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DurationPreset.Short: return 3.0f;
-                        case BDOTModOptions.DurationPreset.Default: return 5.0f;
-                        case BDOTModOptions.DurationPreset.Long: return 7.5f;
-                        case BDOTModOptions.DurationPreset.Extended: return 10.0f;
-                    }
-                    break;
-                case BodyZone.Dismemberment: // Base: 10.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DurationPreset.Short: return 6.0f;
-                        case BDOTModOptions.DurationPreset.Default: return 10.0f;
-                        case BDOTModOptions.DurationPreset.Long: return 15.0f;
-                        case BDOTModOptions.DurationPreset.Extended: return 20.0f;
-                    }
-                    break;
-            }
-            return 5.0f;
-        }
-
-        /// <summary>
-        /// Get damage per tick value for a zone based on the damage preset.
-        /// Values are final (no runtime calculation).
-        /// </summary>
-        public static float GetPresetDamageValue(BodyZone zone, BDOTModOptions.DamagePreset preset)
-        {
-            // Low=0.5x base, Default=1x base, High=1.5x base, Extreme=2.5x base
-            switch (zone)
-            {
-                case BodyZone.Throat: // Base: 5.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DamagePreset.Low: return 2.5f;
-                        case BDOTModOptions.DamagePreset.Default: return 5.0f;
-                        case BDOTModOptions.DamagePreset.High: return 7.5f;
-                        case BDOTModOptions.DamagePreset.Extreme: return 12.5f;
-                    }
-                    break;
-                case BodyZone.Head: // Base: 3.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DamagePreset.Low: return 1.5f;
-                        case BDOTModOptions.DamagePreset.Default: return 3.0f;
-                        case BDOTModOptions.DamagePreset.High: return 4.5f;
-                        case BDOTModOptions.DamagePreset.Extreme: return 7.5f;
-                    }
-                    break;
-                case BodyZone.Neck: // Base: 4.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DamagePreset.Low: return 2.0f;
-                        case BDOTModOptions.DamagePreset.Default: return 4.0f;
-                        case BDOTModOptions.DamagePreset.High: return 6.0f;
-                        case BDOTModOptions.DamagePreset.Extreme: return 10.0f;
-                    }
-                    break;
-                case BodyZone.Torso: // Base: 2.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DamagePreset.Low: return 1.0f;
-                        case BDOTModOptions.DamagePreset.Default: return 2.0f;
-                        case BDOTModOptions.DamagePreset.High: return 3.0f;
-                        case BDOTModOptions.DamagePreset.Extreme: return 5.0f;
-                    }
-                    break;
-                case BodyZone.Arm: // Base: 1.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DamagePreset.Low: return 0.5f;
-                        case BDOTModOptions.DamagePreset.Default: return 1.0f;
-                        case BDOTModOptions.DamagePreset.High: return 1.5f;
-                        case BDOTModOptions.DamagePreset.Extreme: return 2.5f;
-                    }
-                    break;
-                case BodyZone.Leg: // Base: 1.5
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DamagePreset.Low: return 0.75f;
-                        case BDOTModOptions.DamagePreset.Default: return 1.5f;
-                        case BDOTModOptions.DamagePreset.High: return 2.25f;
-                        case BDOTModOptions.DamagePreset.Extreme: return 3.75f;
-                    }
-                    break;
-                case BodyZone.Dismemberment: // Base: 6.0
-                    switch (preset)
-                    {
-                        case BDOTModOptions.DamagePreset.Low: return 3.0f;
-                        case BDOTModOptions.DamagePreset.Default: return 6.0f;
-                        case BDOTModOptions.DamagePreset.High: return 9.0f;
-                        case BDOTModOptions.DamagePreset.Extreme: return 15.0f;
-                    }
-                    break;
-            }
-            return 2.0f;
-        }
-
-        #endregion
-
-        #region UI Sync Helpers
+        #region UI Sync
 
         private static string MakeKey(string category, string name)
         {
-            return (category ?? string.Empty) + OptionKeySeparator + (name ?? string.Empty);
+            return (category ?? "") + OptionKeySeparator + (name ?? "");
         }
 
-        private static string DescribeOption(ModOption option)
+        private void SyncOption(string key, float value)
         {
-            if (option == null) return string.Empty;
-            if (string.IsNullOrEmpty(option.category)) return option.name;
-            return option.category + " / " + option.name;
-        }
-
-        private bool SyncOptionValue(Dictionary<BodyZone, string> map, BodyZone zone, float value)
-        {
-            if (!map.TryGetValue(zone, out string optionKey))
-                return false;
-            return SyncOptionValue(optionKey, value);
-        }
-
-        private bool SyncOptionValue(string optionKey, float value)
-        {
-            if (!_modOptionsByKey.TryGetValue(optionKey, out ModOption option))
-            {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.LogWarning("[BDOT] Menu sync missing option: " + optionKey);
-                return false;
-            }
+            if (!_modOptionsByKey.TryGetValue(key, out ModOption option))
+                return;
 
             if (option.parameterValues == null || option.parameterValues.Length == 0)
                 option.LoadModOptionParameters();
 
-            if (option.parameterValues == null || option.parameterValues.Length == 0)
+            if (option.parameterValues == null)
+                return;
+
+            // Find matching parameter index
+            int index = -1;
+            for (int i = 0; i < option.parameterValues.Length; i++)
             {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.LogWarning("[BDOT] Menu sync missing parameters: " + DescribeOption(option));
-                return false;
-            }
-
-            int index = FindParameterIndex(option.parameterValues, value);
-            if (index < 0)
-            {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.LogWarning("[BDOT] Menu sync no parameter match: " + DescribeOption(option) + " value=" + value);
-                return false;
-            }
-
-            if (option.currentValueIndex == index)
-                return false;
-
-            option.Apply(index);
-            option.RefreshUI();
-            if (BDOTModOptions.DebugLogging)
-                Debug.Log("[BDOT] Menu sync updated: " + DescribeOption(option) + " -> " + value);
-            return true;
-        }
-
-        private static int FindParameterIndex(ModOptionParameter[] parameters, float value)
-        {
-            if (parameters == null) return -1;
-
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                var paramValue = parameters[i]?.value;
-                if (paramValue is float fValue)
+                var pv = option.parameterValues[i]?.value;
+                float f = pv is float fv ? fv : (pv is double dv ? (float)dv : (pv is int iv ? iv : float.NaN));
+                if (!float.IsNaN(f) && Mathf.Abs(f - value) < 0.001f)
                 {
-                    if (Mathf.Abs(fValue - value) < 0.001f)
-                        return i;
-                }
-                else if (paramValue is double dValue)
-                {
-                    if (Mathf.Abs((float)dValue - value) < 0.001f)
-                        return i;
-                }
-                else if (paramValue is int iValue)
-                {
-                    if (Mathf.Abs(iValue - value) < 0.001f)
-                        return i;
+                    index = i;
+                    break;
                 }
             }
 
-            return -1;
+            if (index >= 0 && option.currentValueIndex != index)
+            {
+                option.Apply(index);
+                option.RefreshUI();
+            }
         }
 
         #endregion
 
-        #region Custom Override Detection (CSM-style state tracking)
+        #region Preset Value Tables
 
-        private void CaptureCustomValues()
+        public static float GetPresetMultiplierValue(BodyZone zone, BDOTModOptions.IntensityPreset preset)
         {
-            foreach (var zone in AllZones)
+            // Light=0.5x, Default=1x, Heavy=1.5x, Brutal=2.5x of base values
+            switch (zone)
             {
-                _lastCustomValues[zone] = ReadCustomValues(zone);
+                case BodyZone.Throat: // Base: 3.0
+                    return preset == BDOTModOptions.IntensityPreset.Light ? 1.5f :
+                           preset == BDOTModOptions.IntensityPreset.Heavy ? 4.5f :
+                           preset == BDOTModOptions.IntensityPreset.Brutal ? 7.5f : 3.0f;
+                case BodyZone.Head: // Base: 2.0
+                    return preset == BDOTModOptions.IntensityPreset.Light ? 1.0f :
+                           preset == BDOTModOptions.IntensityPreset.Heavy ? 3.0f :
+                           preset == BDOTModOptions.IntensityPreset.Brutal ? 5.0f : 2.0f;
+                case BodyZone.Neck: // Base: 2.5
+                    return preset == BDOTModOptions.IntensityPreset.Light ? 1.3f :
+                           preset == BDOTModOptions.IntensityPreset.Heavy ? 3.8f :
+                           preset == BDOTModOptions.IntensityPreset.Brutal ? 6.3f : 2.5f;
+                case BodyZone.Torso: // Base: 1.0
+                    return preset == BDOTModOptions.IntensityPreset.Light ? 0.5f :
+                           preset == BDOTModOptions.IntensityPreset.Heavy ? 1.5f :
+                           preset == BDOTModOptions.IntensityPreset.Brutal ? 2.5f : 1.0f;
+                case BodyZone.Arm: // Base: 0.5
+                    return preset == BDOTModOptions.IntensityPreset.Light ? 0.3f :
+                           preset == BDOTModOptions.IntensityPreset.Heavy ? 0.8f :
+                           preset == BDOTModOptions.IntensityPreset.Brutal ? 1.3f : 0.5f;
+                case BodyZone.Leg: // Base: 0.6
+                    return preset == BDOTModOptions.IntensityPreset.Light ? 0.3f :
+                           preset == BDOTModOptions.IntensityPreset.Heavy ? 0.9f :
+                           preset == BDOTModOptions.IntensityPreset.Brutal ? 1.5f : 0.6f;
+                case BodyZone.Dismemberment: // Base: 2.5
+                    return preset == BDOTModOptions.IntensityPreset.Light ? 1.3f :
+                           preset == BDOTModOptions.IntensityPreset.Heavy ? 3.8f :
+                           preset == BDOTModOptions.IntensityPreset.Brutal ? 6.3f : 2.5f;
+                default:
+                    return 1.0f;
             }
         }
 
-        private ZoneCustomValues ReadCustomValues(BodyZone zone)
+        public static float GetPresetDurationValue(BodyZone zone, BDOTModOptions.DurationPreset preset)
         {
-            var config = BDOTModOptions.GetZoneConfig(zone);
-            return new ZoneCustomValues
+            // Short=0.6x, Default=1x, Long=1.5x, Extended=2x of base values
+            switch (zone)
             {
-                Multiplier = config.Multiplier,
-                Duration = config.Duration,
-                DamagePerTick = config.DamagePerTick
-            };
-        }
-
-        private bool ApplyCustomOverrides()
-        {
-            bool changed = false;
-            float timeSincePreset = Time.unscaledTime - _presetAppliedTime;
-            bool withinLockWindow = timeSincePreset < PresetLockDuration;
-
-            foreach (var zone in AllZones)
-            {
-                ZoneCustomValues current = ReadCustomValues(zone);
-                if (!_lastCustomValues.TryGetValue(zone, out ZoneCustomValues last))
-                {
-                    _lastCustomValues[zone] = current;
-                    continue;
-                }
-
-                if (!CustomValuesChanged(last, current))
-                    continue;
-
-                // Check if values were corrupted by UI (don't match expected preset values)
-                // Only revert within the lock window after preset was applied
-                if (withinLockWindow && _expectedPresetValues.TryGetValue(zone, out ZoneCustomValues expected))
-                {
-                    bool reverted = false;
-
-                    // Check and revert Multiplier
-                    if (Mathf.Abs(current.Multiplier - expected.Multiplier) > 0.01f &&
-                        Mathf.Abs(last.Multiplier - expected.Multiplier) < 0.01f)
-                    {
-                        if (BDOTModOptions.DebugLogging)
-                            Debug.Log("[BDOT] Multiplier corruption detected for " + zone.GetDisplayName() +
-                                      " (expected " + expected.Multiplier.ToString("F1") +
-                                      ", got " + current.Multiplier.ToString("F1") + ") - reverting");
-                        BDOTModOptions.SetZoneMultiplier(zone, expected.Multiplier);
-                        SyncOptionValue(MultiplierOptionKeys, zone, expected.Multiplier);
-                        current.Multiplier = expected.Multiplier;
-                        reverted = true;
-                    }
-
-                    // Check and revert Duration
-                    if (Mathf.Abs(current.Duration - expected.Duration) > 0.1f &&
-                        Mathf.Abs(last.Duration - expected.Duration) < 0.1f)
-                    {
-                        if (BDOTModOptions.DebugLogging)
-                            Debug.Log("[BDOT] Duration corruption detected for " + zone.GetDisplayName() +
-                                      " (expected " + expected.Duration.ToString("F1") +
-                                      "s, got " + current.Duration.ToString("F1") + "s) - reverting");
-                        BDOTModOptions.SetZoneDuration(zone, expected.Duration);
-                        SyncOptionValue(DurationOptionKeys, zone, expected.Duration);
-                        current.Duration = expected.Duration;
-                        reverted = true;
-                    }
-
-                    // Check and revert DamagePerTick
-                    if (Mathf.Abs(current.DamagePerTick - expected.DamagePerTick) > 0.01f &&
-                        Mathf.Abs(last.DamagePerTick - expected.DamagePerTick) < 0.01f)
-                    {
-                        if (BDOTModOptions.DebugLogging)
-                            Debug.Log("[BDOT] Damage corruption detected for " + zone.GetDisplayName() +
-                                      " (expected " + expected.DamagePerTick.ToString("F2") +
-                                      ", got " + current.DamagePerTick.ToString("F2") + ") - reverting");
-                        BDOTModOptions.SetZoneDamagePerTick(zone, expected.DamagePerTick);
-                        SyncOptionValue(DamageOptionKeys, zone, expected.DamagePerTick);
-                        current.DamagePerTick = expected.DamagePerTick;
-                        reverted = true;
-                    }
-
-                    if (reverted)
-                    {
-                        _lastCustomValues[zone] = current;
-                        changed = true;
-                        continue;
-                    }
-                }
-
-                // User intentionally changed values - accept the override
-                _lastCustomValues[zone] = current;
-                if (BDOTModOptions.DebugLogging)
-                {
-                    Debug.Log("[BDOT] Custom override detected for " + zone.GetDisplayName() +
-                              ": Mult=" + current.Multiplier.ToString("F1") +
-                              "x Dur=" + current.Duration.ToString("F1") +
-                              "s Dmg=" + current.DamagePerTick.ToString("F2"));
-                }
+                case BodyZone.Throat: // Base: 8.0
+                    return preset == BDOTModOptions.DurationPreset.Short ? 5.0f :
+                           preset == BDOTModOptions.DurationPreset.Long ? 12.0f :
+                           preset == BDOTModOptions.DurationPreset.Extended ? 16.0f : 8.0f;
+                case BodyZone.Head: // Base: 6.0
+                    return preset == BDOTModOptions.DurationPreset.Short ? 3.5f :
+                           preset == BDOTModOptions.DurationPreset.Long ? 9.0f :
+                           preset == BDOTModOptions.DurationPreset.Extended ? 12.0f : 6.0f;
+                case BodyZone.Neck: // Base: 7.0
+                    return preset == BDOTModOptions.DurationPreset.Short ? 4.0f :
+                           preset == BDOTModOptions.DurationPreset.Long ? 10.5f :
+                           preset == BDOTModOptions.DurationPreset.Extended ? 14.0f : 7.0f;
+                case BodyZone.Torso: // Base: 5.0
+                    return preset == BDOTModOptions.DurationPreset.Short ? 3.0f :
+                           preset == BDOTModOptions.DurationPreset.Long ? 7.5f :
+                           preset == BDOTModOptions.DurationPreset.Extended ? 10.0f : 5.0f;
+                case BodyZone.Arm: // Base: 4.0
+                    return preset == BDOTModOptions.DurationPreset.Short ? 2.5f :
+                           preset == BDOTModOptions.DurationPreset.Long ? 6.0f :
+                           preset == BDOTModOptions.DurationPreset.Extended ? 8.0f : 4.0f;
+                case BodyZone.Leg: // Base: 5.0
+                    return preset == BDOTModOptions.DurationPreset.Short ? 3.0f :
+                           preset == BDOTModOptions.DurationPreset.Long ? 7.5f :
+                           preset == BDOTModOptions.DurationPreset.Extended ? 10.0f : 5.0f;
+                case BodyZone.Dismemberment: // Base: 10.0
+                    return preset == BDOTModOptions.DurationPreset.Short ? 6.0f :
+                           preset == BDOTModOptions.DurationPreset.Long ? 15.0f :
+                           preset == BDOTModOptions.DurationPreset.Extended ? 20.0f : 10.0f;
+                default:
+                    return 5.0f;
             }
-
-            return changed;
         }
 
-        private bool CustomValuesChanged(ZoneCustomValues last, ZoneCustomValues current)
+        public static float GetPresetDamageValue(BodyZone zone, BDOTModOptions.DamagePreset preset)
         {
-            return Mathf.Abs(last.Multiplier - current.Multiplier) > 0.01f ||
-                   Mathf.Abs(last.Duration - current.Duration) > 0.1f ||
-                   Mathf.Abs(last.DamagePerTick - current.DamagePerTick) > 0.01f;
+            // Low=0.5x, Default=1x, High=1.5x, Extreme=2.5x of base values
+            switch (zone)
+            {
+                case BodyZone.Throat: // Base: 5.0
+                    return preset == BDOTModOptions.DamagePreset.Low ? 2.5f :
+                           preset == BDOTModOptions.DamagePreset.High ? 7.5f :
+                           preset == BDOTModOptions.DamagePreset.Extreme ? 12.5f : 5.0f;
+                case BodyZone.Head: // Base: 3.0
+                    return preset == BDOTModOptions.DamagePreset.Low ? 1.5f :
+                           preset == BDOTModOptions.DamagePreset.High ? 4.5f :
+                           preset == BDOTModOptions.DamagePreset.Extreme ? 7.5f : 3.0f;
+                case BodyZone.Neck: // Base: 4.0
+                    return preset == BDOTModOptions.DamagePreset.Low ? 2.0f :
+                           preset == BDOTModOptions.DamagePreset.High ? 6.0f :
+                           preset == BDOTModOptions.DamagePreset.Extreme ? 10.0f : 4.0f;
+                case BodyZone.Torso: // Base: 2.0
+                    return preset == BDOTModOptions.DamagePreset.Low ? 1.0f :
+                           preset == BDOTModOptions.DamagePreset.High ? 3.0f :
+                           preset == BDOTModOptions.DamagePreset.Extreme ? 5.0f : 2.0f;
+                case BodyZone.Arm: // Base: 1.0
+                    return preset == BDOTModOptions.DamagePreset.Low ? 0.5f :
+                           preset == BDOTModOptions.DamagePreset.High ? 1.5f :
+                           preset == BDOTModOptions.DamagePreset.Extreme ? 2.5f : 1.0f;
+                case BodyZone.Leg: // Base: 1.5
+                    return preset == BDOTModOptions.DamagePreset.Low ? 0.75f :
+                           preset == BDOTModOptions.DamagePreset.High ? 2.25f :
+                           preset == BDOTModOptions.DamagePreset.Extreme ? 3.75f : 1.5f;
+                case BodyZone.Dismemberment: // Base: 6.0
+                    return preset == BDOTModOptions.DamagePreset.Low ? 3.0f :
+                           preset == BDOTModOptions.DamagePreset.High ? 9.0f :
+                           preset == BDOTModOptions.DamagePreset.Extreme ? 15.0f : 6.0f;
+                default:
+                    return 2.0f;
+            }
         }
 
         #endregion
