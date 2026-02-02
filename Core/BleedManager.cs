@@ -382,23 +382,48 @@ namespace BDOT.Core
                 // Clamp final intensity to reasonable bounds
                 intensity = Mathf.Clamp(intensity, 0.1f, 3.0f);
 
-                // Spawn blood spurt effect at the hit part location (spawns on each tick for more blood)
-                Vector3 position = hitPart.transform.position;
-                Quaternion rotation = Quaternion.LookRotation(hitPart.transform.up); // Blood spurts outward
-                
-                var effectInstance = _bleedEffectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f);
-                if (effectInstance != null)
+                // Determine how many blood spurts to spawn based on blood amount preset
+                // VeryLow=1, Low=1, Default=2, High=3, Extreme=4
+                int spurtCount = 1;
+                var bloodPreset = BDOTModOptions.GetBloodAmountPreset();
+                switch (bloodPreset)
                 {
-                    effectInstance.SetIntensity(intensity);
-                    effectInstance.Play();
-                    
-                    // Store reference to the most recent effect so we can end it when bleed expires
-                    // (older spurts will naturally despawn on their own)
-                    effect.BloodEffectInstance = effectInstance;
-                    
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Blood VFX spurt: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
+                    case BDOTModOptions.BloodAmountPreset.VeryLow:
+                    case BDOTModOptions.BloodAmountPreset.Low:
+                        spurtCount = 1;
+                        break;
+                    case BDOTModOptions.BloodAmountPreset.Default:
+                        spurtCount = 2;
+                        break;
+                    case BDOTModOptions.BloodAmountPreset.High:
+                        spurtCount = 3;
+                        break;
+                    case BDOTModOptions.BloodAmountPreset.Extreme:
+                        spurtCount = 4;
+                        break;
                 }
+
+                // Spawn blood spurt effect(s) at the exact hit part location
+                // Use hitPart transform directly to ensure all spurts spawn at the exact same position
+                Vector3 position = hitPart.transform.position;
+                Quaternion rotation = hitPart.transform.rotation;
+                
+                for (int i = 0; i < spurtCount; i++)
+                {
+                    var effectInstance = _bleedEffectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f);
+                    if (effectInstance != null)
+                    {
+                        effectInstance.SetIntensity(intensity);
+                        effectInstance.Play();
+                        
+                        // Store reference to the most recent effect so we can end it when bleed expires
+                        // (older spurts will naturally despawn on their own)
+                        effect.BloodEffectInstance = effectInstance;
+                    }
+                }
+                
+                if (BDOTModOptions.DebugLogging)
+                    Debug.Log("[BDOT] Blood VFX: " + spurtCount + " spurt(s) | " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
             }
             catch (Exception ex)
             {
