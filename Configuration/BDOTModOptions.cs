@@ -25,15 +25,20 @@ namespace BDOT.Configuration
 
         // Global options
         public const string OptionEnableMod = "Enable Mod";
+        public const string OptionProfilePreset = "Profile";
         public const string OptionDamagePreset = "Damage Preset";
         public const string OptionDurationPreset = "Duration Preset";
         public const string OptionFrequencyPreset = "Frequency Preset";
         public const string OptionChancePreset = "Chance Preset";
 
-        // Damage type multipliers
-        public const string OptionPierceMultiplier = "Pierce Bleed Mult";
-        public const string OptionSlashMultiplier = "Slash Bleed Mult";
-        public const string OptionBluntMultiplier = "Blunt Bleed Mult";
+        // Damage type multipliers - Physical
+        public const string OptionPierceMultiplier = "Pierce Mult";
+        public const string OptionSlashMultiplier = "Slash Mult";
+        public const string OptionBluntMultiplier = "Blunt Mult";
+        // Damage type multipliers - Elemental
+        public const string OptionFireMultiplier = "Fire Mult";
+        public const string OptionLightningMultiplier = "Lightning Mult";
+        public const string OptionEnergyMultiplier = "Energy Mult";
 
         // Zone toggles
         public const string OptionThroatEnabled = "Throat Enabled";
@@ -138,6 +143,13 @@ namespace BDOT.Configuration
             Always = 4
         }
 
+        public enum ProfilePreset
+        {
+            Default = 0,     // Physical damage only (Pierce/Slash/Blunt)
+            BleedOnly = 1,   // Same as Default - physical damage causes bleed DOT
+            ElementalOnly = 2 // Elemental damage only (Fire/Lightning/Energy)
+        }
+
         #endregion
 
         #region Value Providers
@@ -187,6 +199,16 @@ namespace BDOT.Configuration
                 new ModOptionString("Default", "Default"),
                 new ModOptionString("Frequent", "Frequent"),
                 new ModOptionString("Always", "Always")
+            };
+        }
+
+        public static ModOptionString[] ProfilePresetProvider()
+        {
+            return new ModOptionString[]
+            {
+                new ModOptionString("Default", "Default"),
+                new ModOptionString("Bleed Only", "Bleed Only"),
+                new ModOptionString("Elemental Only", "Elemental Only")
             };
         }
 
@@ -287,6 +309,9 @@ namespace BDOT.Configuration
         [ModOption(name = OptionEnableMod, order = 0, defaultValueIndex = 1, tooltip = "Master switch for the entire mod")]
         public static bool EnableMod = true;
 
+        [ModOption(name = OptionProfilePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 5, defaultValueIndex = 0, valueSourceName = nameof(ProfilePresetProvider), tooltip = "Profile determines which damage types trigger DOT effects. Default/BleedOnly = physical attacks, ElementalOnly = fire/lightning/energy attacks.")]
+        public static string ProfilePresetSetting = "Default";
+
         [ModOption(name = OptionDamagePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 10, defaultValueIndex = 2, valueSourceName = nameof(DamagePresetProvider), tooltip = "Damage per tick preset. Default is the balanced middle value.")]
         public static string DamagePresetSetting = "Default";
 
@@ -303,14 +328,23 @@ namespace BDOT.Configuration
 
         #region Damage Type Multipliers
 
-        [ModOption(name = OptionPierceMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 10, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Bleed damage multiplier for pierce attacks. 0.0x disables bleed from pierce entirely.")]
+        [ModOption(name = OptionPierceMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 10, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely.")]
         public static float PierceMultiplier = 1.0f;
 
-        [ModOption(name = OptionSlashMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 20, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Bleed damage multiplier for slash attacks. 0.0x disables bleed from slash entirely.")]
+        [ModOption(name = OptionSlashMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 20, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely.")]
         public static float SlashMultiplier = 1.0f;
 
-        [ModOption(name = OptionBluntMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 30, defaultValueIndex = 5, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Bleed damage multiplier for blunt attacks. 0.0x disables bleed from blunt entirely.")]
+        [ModOption(name = OptionBluntMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 30, defaultValueIndex = 5, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for blunt attacks. 0.0x disables DOT from blunt entirely.")]
         public static float BluntMultiplier = 0.5f;
+
+        [ModOption(name = OptionFireMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 40, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for fire attacks. 0.0x disables DOT from fire entirely.")]
+        public static float FireMultiplier = 1.0f;
+
+        [ModOption(name = OptionLightningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 50, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for lightning attacks. 0.0x disables DOT from lightning entirely.")]
+        public static float LightningMultiplier = 1.0f;
+
+        [ModOption(name = OptionEnergyMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 60, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for energy attacks. 0.0x disables DOT from energy entirely.")]
+        public static float EnergyMultiplier = 1.0f;
 
         #endregion
 
@@ -641,6 +675,45 @@ namespace BDOT.Configuration
             }
         }
 
+        public static ProfilePreset GetProfilePreset()
+        {
+            switch (ProfilePresetSetting)
+            {
+                case "Bleed Only": return ProfilePreset.BleedOnly;
+                case "Elemental Only": return ProfilePreset.ElementalOnly;
+                default: return ProfilePreset.Default;
+            }
+        }
+
+        /// <summary>
+        /// Checks if a damage type is allowed by the current profile.
+        /// Default/BleedOnly = Pierce/Slash/Blunt only
+        /// ElementalOnly = Fire/Lightning/Energy only
+        /// </summary>
+        public static bool IsDamageTypeAllowed(DamageType damageType)
+        {
+            var profile = GetProfilePreset();
+            
+            switch (profile)
+            {
+                case ProfilePreset.Default:
+                case ProfilePreset.BleedOnly:
+                    // Physical damage types only
+                    return damageType == DamageType.Pierce || 
+                           damageType == DamageType.Slash || 
+                           damageType == DamageType.Blunt;
+                
+                case ProfilePreset.ElementalOnly:
+                    // Elemental damage types only
+                    return damageType == DamageType.Fire || 
+                           damageType == DamageType.Lightning || 
+                           damageType == DamageType.Energy;
+                
+                default:
+                    return false;
+            }
+        }
+
         public static float GetDamageTypeMultiplier(DamageType damageType)
         {
             switch (damageType)
@@ -648,6 +721,9 @@ namespace BDOT.Configuration
                 case DamageType.Pierce: return PierceMultiplier;
                 case DamageType.Slash: return SlashMultiplier;
                 case DamageType.Blunt: return BluntMultiplier;
+                case DamageType.Fire: return FireMultiplier;
+                case DamageType.Lightning: return LightningMultiplier;
+                case DamageType.Energy: return EnergyMultiplier;
                 default: return 1.0f;
             }
         }

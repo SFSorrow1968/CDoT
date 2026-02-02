@@ -142,11 +142,11 @@ namespace BDOT.Hooks
                 if (BDOTModOptions.DebugLogging)
                     Debug.Log("[BDOT] Player caused: YES");
 
-                // Check damage type - only slash/pierce/blunt can cause bleeding
-                if (damageType != DamageType.Slash && damageType != DamageType.Pierce && damageType != DamageType.Blunt)
+                // Check if damage type is allowed by current profile
+                if (!BDOTModOptions.IsDamageTypeAllowed(damageType))
                 {
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] SKIP: DamageType " + damageType + " cannot cause bleed");
+                        Debug.Log("[BDOT] SKIP: DamageType " + damageType + " not allowed by profile " + BDOTModOptions.ProfilePresetSetting);
                     return;
                 }
 
