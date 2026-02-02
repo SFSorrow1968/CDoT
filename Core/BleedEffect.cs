@@ -16,6 +16,11 @@ namespace BDOT.Core
         public float TickInterval { get; private set; }
         public int StackCount { get; private set; }
         public float TimeSinceLastTick { get; set; }
+        
+        /// <summary>
+        /// The active blood VFX effect instance. Tracked so we can end it when the bleed expires.
+        /// </summary>
+        public EffectInstance BloodEffectInstance { get; set; }
 
         public bool IsExpired => RemainingDuration <= 0f;
         public bool IsValid
@@ -109,6 +114,27 @@ namespace BDOT.Core
             float baseDamage = DamagePerTick * StackCount;
             float damageTypeMult = BDOTModOptions.GetDamageTypeMultiplier(DamageType);
             return baseDamage * damageTypeMult;
+        }
+
+        /// <summary>
+        /// Ends and cleans up the blood VFX effect instance.
+        /// Should be called when the bleed expires or is cleared.
+        /// </summary>
+        public void EndBloodEffect()
+        {
+            try
+            {
+                if (BloodEffectInstance != null)
+                {
+                    BloodEffectInstance.End(false, -1f);
+                    BloodEffectInstance = null;
+                }
+            }
+            catch
+            {
+                // Effect may already be destroyed
+                BloodEffectInstance = null;
+            }
         }
 
         public override string ToString()

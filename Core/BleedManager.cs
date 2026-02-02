@@ -93,6 +93,9 @@ namespace BDOT.Core
                     {
                         effects.Remove(effect);
                         
+                        // End the blood VFX effect
+                        effect.EndBloodEffect();
+                        
                         // Remove visual status effect if no more fire/lightning DOT
                         if (effect.DamageType == DamageType.Fire || effect.DamageType == DamageType.Lightning)
                         {
@@ -372,6 +375,23 @@ namespace BDOT.Core
                 // Scale intensity by stack count (more stacks = more bleeding)
                 intensity = Mathf.Clamp(intensity * (1f + (effect.StackCount - 1) * 0.3f), 0.2f, 1.5f);
 
+                // If we already have an active effect, just update its intensity
+                if (effect.BloodEffectInstance != null)
+                {
+                    try
+                    {
+                        effect.BloodEffectInstance.SetIntensity(intensity);
+                        if (BDOTModOptions.DebugLogging)
+                            Debug.Log("[BDOT] Blood VFX update: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
+                        return;
+                    }
+                    catch
+                    {
+                        // Effect was destroyed, will spawn a new one
+                        effect.BloodEffectInstance = null;
+                    }
+                }
+
                 // Spawn blood effect at the hit part location
                 Vector3 position = hitPart.transform.position;
                 Quaternion rotation = Quaternion.LookRotation(hitPart.transform.up); // Blood spurts outward
@@ -382,8 +402,11 @@ namespace BDOT.Core
                     effectInstance.SetIntensity(intensity);
                     effectInstance.Play();
                     
+                    // Store reference so we can end it when bleed expires
+                    effect.BloodEffectInstance = effectInstance;
+                    
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Blood VFX: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
+                        Debug.Log("[BDOT] Blood VFX spawned: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
                 }
             }
             catch (Exception ex)
@@ -399,8 +422,13 @@ namespace BDOT.Core
                 return;
 
             int creatureId = creature.GetInstanceID();
-            if (_activeEffects.ContainsKey(creatureId))
+            if (_activeEffects.TryGetValue(creatureId, out var effects))
             {
+                // End all blood VFX effects for this creature
+                foreach (var effect in effects)
+                {
+                    effect.EndBloodEffect();
+                }
                 _activeEffects.Remove(creatureId);
                 if (BDOTModOptions.DebugLogging)
                     Debug.Log("[BDOT] Cleared effects for: " + creature.name);
@@ -409,6 +437,14 @@ namespace BDOT.Core
 
         public void ClearAll()
         {
+            // End all blood VFX effects
+            foreach (var effects in _activeEffects.Values)
+            {
+                foreach (var effect in effects)
+                {
+                    effect.EndBloodEffect();
+                }
+            }
             _activeEffects.Clear();
             if (BDOTModOptions.DebugLogging)
                 Debug.Log("[BDOT] All effects cleared");
