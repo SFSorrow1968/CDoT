@@ -403,10 +403,11 @@ namespace BDOT.Core
         /// <summary>
         /// Applies heat or electrocute status based on fire/lightning DOT damage.
         /// Heat accumulates with each tick - more damage = faster ignition and charring.
+        /// Electrocute power scales with damage for more intense shocking effect.
         /// </summary>
         /// <param name="creature">Target creature</param>
         /// <param name="damageType">Fire or Lightning</param>
-        /// <param name="damage">DOT damage dealt this tick - used to scale heat</param>
+        /// <param name="damage">DOT damage dealt this tick - used to scale heat/power</param>
         public void ApplyStatusEffectForDamage(Creature creature, DamageType damageType, float damage)
         {
             if (creature == null || creature.isKilled) return;
@@ -432,12 +433,20 @@ namespace BDOT.Core
                 }
                 else if (damageType == DamageType.Lightning)
                 {
-                    // Apply/refresh Electrocute visual status
-                    // Duration matches typical DOT tick interval so it stays active
-                    creature.Inflict("Electrocute", this, 2f, null, true);
+                    // Use TryElectrocute with power scaled by damage
+                    // Power accumulates: existing power = (power + newPower) * 0.5
+                    // Higher power = more intense convulsions and visual effects
+                    // Typical damage 1-5 HP, scale to power 0.2-1.0 range
+                    float power = Mathf.Clamp(damage * 0.3f, 0.1f, 1.0f);
+                    float duration = 2f; // Duration refreshed each tick
+                    
+                    creature.TryElectrocute(power, duration, true, false, null);
                     
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Lightning tick on " + creature.name + " | Electrocute refreshed");
+                    {
+                        bool isElectrocuted = creature.brain != null && creature.brain.isElectrocuted;
+                        Debug.Log("[BDOT] Lightning tick on " + creature.name + " | Damage: " + damage.ToString("F2") + " | Power: " + power.ToString("F2") + " | Electrocuted: " + isElectrocuted);
+                    }
                 }
             }
             catch (Exception ex)
@@ -465,10 +474,10 @@ namespace BDOT.Core
                 }
                 else if (damageType == DamageType.Lightning)
                 {
-                    // Apply Electrocute visual status
-                    creature.Inflict("Electrocute", this, 2f, null, true);
+                    // Initial electrocute with low power - will intensify with each tick
+                    creature.TryElectrocute(0.2f, 2f, true, false, null);
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Started lightning DOT on " + creature.name);
+                        Debug.Log("[BDOT] Started lightning DOT on " + creature.name + " | Initial power: 0.2");
                 }
             }
             catch (Exception ex)
