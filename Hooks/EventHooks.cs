@@ -257,16 +257,44 @@ namespace BDOT.Hooks
             {
                 if (collision == null) return false;
 
+                var sourceItem = collision.sourceColliderGroup?.collisionHandler?.item;
+
                 // Check if the source is a player-held item
-                if (collision.sourceColliderGroup?.collisionHandler?.item?.mainHandler?.creature?.isPlayer == true)
+                if (sourceItem?.mainHandler?.creature?.isPlayer == true)
                     return true;
 
-                if (collision.sourceColliderGroup?.collisionHandler?.item?.lastHandler?.creature?.isPlayer == true)
+                // Check if the source is a previously-held player item (thrown, released)
+                if (sourceItem?.lastHandler?.creature?.isPlayer == true)
                     return true;
 
                 // Check if the source is the player's body
                 if (collision.sourceColliderGroup?.collisionHandler?.ragdollPart?.ragdoll?.creature?.isPlayer == true)
                     return true;
+
+                // Check for spell projectiles/imbued items - check the imbue's caster
+                var imbue = collision.sourceColliderGroup?.imbue;
+                if (imbue?.imbueCreature?.isPlayer == true)
+                    return true;
+
+                // Check any imbues on the source item
+                if (sourceItem != null)
+                {
+                    foreach (var itemImbue in sourceItem.imbues)
+                    {
+                        if (itemImbue?.imbueCreature?.isPlayer == true)
+                            return true;
+                    }
+                }
+
+                // Check if player is actively holding item via telekinesis
+                if (sourceItem != null)
+                {
+                    foreach (var tkHandler in sourceItem.tkHandlers)
+                    {
+                        if (tkHandler?.ragdollHand?.creature?.isPlayer == true)
+                            return true;
+                    }
+                }
 
                 return false;
             }
