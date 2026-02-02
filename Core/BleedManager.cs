@@ -275,9 +275,22 @@ namespace BDOT.Core
                 target.Damage(damage, DamageType.Pierce);
                 BDOTModOptions.AddBleedDamage(damage);
 
-                // After damage, creature may have been destroyed - check again
-                if (target == null || (UnityEngine.Object)target == null)
-                    return;
+                // Check if creature was killed by this bleed tick
+                bool killedByBleed = false;
+                try
+                {
+                    killedByBleed = target == null || (UnityEngine.Object)target == null || target.isKilled;
+                }
+                catch
+                {
+                    killedByBleed = true;
+                }
+
+                if (killedByBleed)
+                {
+                    Debug.Log("[BDOT] *** BLEED KILL! " + effect.Zone.GetDisplayName() + " bleed killed creature! ***");
+                    return; // Don't try to access target anymore
+                }
 
                 float healthAfter = 0f;
                 try
