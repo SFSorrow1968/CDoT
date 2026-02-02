@@ -1,0 +1,27 @@
+# Publish Checklist
+
+Use this when the user says "publish".
+
+1) Confirm version
+- Update `Configuration/BDOTModOptions.cs` VERSION (and any other version fields if present).
+- Ensure the Git tag/release name matches the version.
+
+2) Build + artifacts
+- `dotnet build BDOT.csproj -c Release`
+- `dotnet build BDOT.csproj -c Nomad`
+- Copy artifacts:
+  - `bin/Release/PCVR/BDOT/BDOT.dll` -> `builds/BDOT-PCVR/BDOT/BDOT.dll`
+  - `bin/Release/Nomad/BDOT/BDOT.dll` -> `builds/BDOT-Nomad/BDOT/BDOT.dll`
+- Log results in `_agent/verification_results.md`.
+
+3) Documentation updates
+- If UI/options changed, regenerate `MENU_MOCK.xlsx` using `_agent/build_menu_mock_xlsx.py`.
+- Update `Description.md` overview/detailed text if needed.
+
+4) Commit + push
+- Commit all changes and push to `main`.
+
+5) GitHub release
+- Create a GitHub release with the version tag.
+- Attach build artifacts (zip `builds/BDOT-PCVR` and `builds/BDOT-Nomad`).
+- Release notes: concise summary of changes + any known issues.

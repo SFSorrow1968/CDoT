@@ -1,0 +1,57 @@
+{
+  "Enabled": true,
+  "VerboseLogging": false,
+  "GlobalDamageMultiplier": 1.0,
+  "TickInterval": 0.5,
+  "Zones": {
+    "Throat": {
+      "Enabled": true,
+      "DamageMultiplier": 3.0,
+      "Duration": 8.0,
+      "DamagePerTick": 5.0,
+      "StackLimit": 3
+    },
+    "Head": {
+      "Enabled": true,
+      "DamageMultiplier": 2.0,
+      "Duration": 6.0,
+      "DamagePerTick": 3.0,
+      "StackLimit": 3
+    },
+    "Neck": {
+      "Enabled": true,
+      "DamageMultiplier": 2.5,
+      "Duration": 7.0,
+      "DamagePerTick": 4.0,
+      "StackLimit": 3
+    },
+    "Torso": {
+      "Enabled": true,
+      "DamageMultiplier": 1.0,
+      "Duration": 5.0,
+      "DamagePerTick": 2.0,
+      "StackLimit": 5
+    },
+    "Arm": {
+      "Enabled": true,
+      "DamageMultiplier": 0.5,
+      "Duration": 4.0,
+      "DamagePerTick": 1.0,
+      "StackLimit": 4
+    },
+    "Leg": {
+      "Enabled": true,
+      "DamageMultiplier": 0.6,
+      "Duration": 4.5,
+      "DamagePerTick": 1.5,
+      "StackLimit": 4
+    },
+    "Dismemberment": {
+      "Enabled": true,
+      "DamageMultiplier": 2.5,
+      "Duration": 10.0,
+      "DamagePerTick": 6.0,
+      "StackLimit": 1
+    }
+  }
+}

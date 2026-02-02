@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>BDOT</AssemblyName>
+    <RootNamespace>BDOT</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Configurations>Debug;Release;Nomad</Configurations>
+  </PropertyGroup>
+
+  <!-- Only include BDOT source files, exclude SDK and reference projects -->
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="BasSDK\**;References\**;obj\**;bin\**;builds\**" />
+  </ItemGroup>
+
+  <!-- Exclude Harmony patches from all builds (using EventManager events instead) -->
+  <ItemGroup>
+    <Compile Remove="Patches\**\*.cs" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\Release\PCVR\BDOT\</OutputPath>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <!-- Nomad configuration: IL2CPP compatible, no Harmony -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Nomad|AnyCPU'">
+    <OutputPath>bin\Release\Nomad\BDOT\</OutputPath>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <DefineConstants>NOMAD</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Blade & Sorcery DLLs - copied to libs folder -->
+    <Reference Include="ThunderRoad">
+      <HintPath>libs\ThunderRoad.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>libs\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>libs\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>libs\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>libs\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Post-build messages -->
+  <Target Name="PostBuildMessage" AfterTargets="Build">
+    <Message Importance="high" Text="Build complete: $(OutputPath)$(AssemblyName).dll ($(Configuration))" />
+  </Target>
+
+</Project>
