@@ -296,6 +296,15 @@ namespace BDOT.Hooks
                     }
                 }
 
+                // Check for spell projectiles (fireballs, lightning bolts, etc.)
+                // These are ItemMagicProjectile objects with a spellCaster reference
+                if (sourceItem != null)
+                {
+                    var magicProjectile = sourceItem.GetComponent<ItemMagicProjectile>();
+                    if (magicProjectile?.imbueSpellCastCharge?.spellCaster?.ragdollHand?.creature?.isPlayer == true)
+                        return true;
+                }
+
                 return false;
             }
             catch
