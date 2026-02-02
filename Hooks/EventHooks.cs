@@ -259,22 +259,39 @@ namespace BDOT.Hooks
 
                 var sourceItem = collision.sourceColliderGroup?.collisionHandler?.item;
 
+                if (BDOTModOptions.DebugLogging && sourceItem != null)
+                {
+                    Debug.Log("[BDOT] Checking player source - Item: " + sourceItem.name);
+                }
+
                 // Check if the source is a player-held item
                 if (sourceItem?.mainHandler?.creature?.isPlayer == true)
+                {
+                    if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: mainHandler");
                     return true;
+                }
 
                 // Check if the source is a previously-held player item (thrown, released)
                 if (sourceItem?.lastHandler?.creature?.isPlayer == true)
+                {
+                    if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: lastHandler");
                     return true;
+                }
 
                 // Check if the source is the player's body
                 if (collision.sourceColliderGroup?.collisionHandler?.ragdollPart?.ragdoll?.creature?.isPlayer == true)
+                {
+                    if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: ragdollPart");
                     return true;
+                }
 
                 // Check for spell projectiles/imbued items - check the imbue's caster
                 var imbue = collision.sourceColliderGroup?.imbue;
                 if (imbue?.imbueCreature?.isPlayer == true)
+                {
+                    if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: sourceColliderGroup.imbue");
                     return true;
+                }
 
                 // Check any imbues on the source item
                 if (sourceItem != null)
@@ -282,7 +299,10 @@ namespace BDOT.Hooks
                     foreach (var itemImbue in sourceItem.imbues)
                     {
                         if (itemImbue?.imbueCreature?.isPlayer == true)
+                        {
+                            if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: item.imbues");
                             return true;
+                        }
                     }
                 }
 
@@ -292,7 +312,10 @@ namespace BDOT.Hooks
                     foreach (var tkHandler in sourceItem.tkHandlers)
                     {
                         if (tkHandler?.ragdollHand?.creature?.isPlayer == true)
+                        {
+                            if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: tkHandlers");
                             return true;
+                        }
                     }
                 }
 
@@ -301,14 +324,39 @@ namespace BDOT.Hooks
                 if (sourceItem != null)
                 {
                     var magicProjectile = sourceItem.GetComponent<ItemMagicProjectile>();
+                    if (magicProjectile != null && BDOTModOptions.DebugLogging)
+                    {
+                        Debug.Log("[BDOT] Found ItemMagicProjectile - imbueSpellCastCharge: " + (magicProjectile.imbueSpellCastCharge != null ? "exists" : "null"));
+                        if (magicProjectile.imbueSpellCastCharge != null)
+                        {
+                            Debug.Log("[BDOT] spellCaster: " + (magicProjectile.imbueSpellCastCharge.spellCaster != null ? "exists" : "null"));
+                            if (magicProjectile.imbueSpellCastCharge.spellCaster != null)
+                            {
+                                var hand = magicProjectile.imbueSpellCastCharge.spellCaster.ragdollHand;
+                                Debug.Log("[BDOT] ragdollHand: " + (hand != null ? "exists" : "null"));
+                                if (hand != null)
+                                {
+                                    Debug.Log("[BDOT] creature: " + (hand.creature != null ? hand.creature.name : "null") + " isPlayer: " + hand.creature?.isPlayer);
+                                }
+                            }
+                        }
+                    }
                     if (magicProjectile?.imbueSpellCastCharge?.spellCaster?.ragdollHand?.creature?.isPlayer == true)
+                    {
+                        if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: ItemMagicProjectile");
                         return true;
+                    }
                 }
+
+                if (BDOTModOptions.DebugLogging)
+                    Debug.Log("[BDOT] Player NOT detected - all checks failed");
 
                 return false;
             }
-            catch
+            catch (Exception ex)
             {
+                if (BDOTModOptions.DebugLogging)
+                    Debug.LogError("[BDOT] Error in WasCausedByPlayer: " + ex.Message);
                 return false;
             }
         }

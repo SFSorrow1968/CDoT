@@ -75,6 +75,9 @@ namespace BDOT.Core
                 base.ScriptUpdate();
                 BleedManager.Instance?.Update();
                 BDOTModOptionVisibility.Instance?.Update();
+                
+                // Check for profile changes and sync multipliers
+                BDOTModOptions.CheckAndSyncProfileMultipliers();
             }
             catch (Exception ex)
             {

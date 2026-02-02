@@ -331,17 +331,17 @@ namespace BDOT.Configuration
         [ModOption(name = OptionPierceMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 10, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely.")]
         public static float PierceMultiplier = 1.0f;
 
-        [ModOption(name = OptionSlashMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 20, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely.")]
-        public static float SlashMultiplier = 1.0f;
+        [ModOption(name = OptionSlashMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 20, defaultValueIndex = 8, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely.")]
+        public static float SlashMultiplier = 0.8f;
 
         [ModOption(name = OptionBluntMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 30, defaultValueIndex = 5, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for blunt attacks. 0.0x disables DOT from blunt entirely.")]
         public static float BluntMultiplier = 0.5f;
 
-        [ModOption(name = OptionFireMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 40, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for fire attacks. 0.0x disables DOT from fire entirely.")]
-        public static float FireMultiplier = 1.0f;
+        [ModOption(name = OptionFireMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 40, defaultValueIndex = 12, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for fire attacks. 0.0x disables DOT from fire entirely.")]
+        public static float FireMultiplier = 1.2f;
 
-        [ModOption(name = OptionLightningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 50, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for lightning attacks. 0.0x disables DOT from lightning entirely.")]
-        public static float LightningMultiplier = 1.0f;
+        [ModOption(name = OptionLightningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 50, defaultValueIndex = 12, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for lightning attacks. 0.0x disables DOT from lightning entirely.")]
+        public static float LightningMultiplier = 1.2f;
 
         [ModOption(name = OptionEnergyMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 60, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for energy attacks. 0.0x disables DOT from energy entirely.")]
         public static float EnergyMultiplier = 1.0f;
@@ -733,6 +733,50 @@ namespace BDOT.Configuration
                 case DamageType.Lightning: return LightningMultiplier;
                 case DamageType.Energy: return EnergyMultiplier;
                 default: return 1.0f;
+            }
+        }
+
+        private static ProfilePreset _lastKnownProfile = ProfilePreset.Default;
+
+        public static void CheckAndSyncProfileMultipliers()
+        {
+            try
+            {
+                ProfilePreset currentProfile = GetProfilePreset();
+                
+                // Only sync if profile changed
+                if (currentProfile != _lastKnownProfile)
+                {
+                    _lastKnownProfile = currentProfile;
+                    
+                    if (DebugLogging)
+                        Debug.Log("[BDOT] Profile changed to: " + currentProfile);
+
+                    // Auto-adjust multipliers based on profile
+                    if (currentProfile == ProfilePreset.BleedOnly)
+                    {
+                        // Bleed Only: disable elemental multipliers
+                        if (DebugLogging)
+                            Debug.Log("[BDOT] Setting elemental multipliers to 0x for Bleed Only profile");
+                        FireMultiplier = 0f;
+                        LightningMultiplier = 0f;
+                        EnergyMultiplier = 0f;
+                    }
+                    else if (currentProfile == ProfilePreset.ElementalOnly)
+                    {
+                        // Elemental Only: disable physical multipliers
+                        if (DebugLogging)
+                            Debug.Log("[BDOT] Setting physical multipliers to 0x for Elemental Only profile");
+                        PierceMultiplier = 0f;
+                        SlashMultiplier = 0f;
+                        BluntMultiplier = 0f;
+                    }
+                    // For Default profile, leave multipliers as user-configured
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("[BDOT] Error in CheckAndSyncProfileMultipliers: " + ex.Message);
             }
         }
 
