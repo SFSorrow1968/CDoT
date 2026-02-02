@@ -131,17 +131,6 @@ namespace BDOT.Hooks
                     Debug.Log("[BDOT] Target: " + creature.name + " | Part: " + partTypeName + " | DamageType: " + damageType + " | Damage: " + hitDamage.ToString("F1"));
                 }
 
-                // Check if this was player-caused damage
-                if (!WasCausedByPlayer(collisionInstance))
-                {
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] SKIP: Not player caused");
-                    return;
-                }
-
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Player caused: YES");
-
                 // Detect effective damage type (may differ from reported type due to imbue/spell)
                 DamageType effectiveDamageType = GetEffectiveDamageType(collisionInstance, damageType);
                 if (effectiveDamageType != damageType && BDOTModOptions.DebugLogging)
