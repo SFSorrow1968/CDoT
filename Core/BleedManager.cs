@@ -377,56 +377,45 @@ namespace BDOT.Core
                 if (effectData == null)
                     return;
                 
-                // Calculate intensity based on damage (typical damage 1-5, scale to 0.2-1.0)
-                float intensity = Mathf.Clamp(damage * 0.2f, 0.2f, 1.0f);
-                
-                // Scale intensity by stack count (more stacks = more bleeding)
-                intensity = Mathf.Clamp(intensity * (1f + (effect.StackCount - 1) * 0.3f), 0.2f, 1.5f);
-                
-                // Apply blood amount preset multiplier
-                float bloodMultiplier = BDOTModOptions.GetBloodAmountMultiplier();
-                intensity *= bloodMultiplier;
-                
-                // Clamp final intensity to reasonable bounds
-                intensity = Mathf.Clamp(intensity, 0.1f, 3.0f);
-
-                // Determine how many blood spurts to spawn based on blood amount preset
-                // VeryLow=1, Low=1, Default=2, High=3, Extreme=4
-                int spurtCount = 1;
+                // Get blood preset once and derive both multiplier and spurt count
                 var bloodPreset = BDOTModOptions.GetBloodAmountPreset();
+                
+                // Lookup tables for preset values (VeryLow=0, Low=1, Default=2, High=3, Extreme=4)
+                // Multipliers: 0.25, 0.5, 1.0, 1.5, 2.0
+                // Spurt counts: 1, 1, 2, 3, 4
+                float bloodMultiplier;
+                int spurtCount;
                 switch (bloodPreset)
                 {
                     case BDOTModOptions.BloodAmountPreset.VeryLow:
+                        bloodMultiplier = 0.25f; spurtCount = 1; break;
                     case BDOTModOptions.BloodAmountPreset.Low:
-                        spurtCount = 1;
-                        break;
-                    case BDOTModOptions.BloodAmountPreset.Default:
-                        spurtCount = 2;
-                        break;
+                        bloodMultiplier = 0.5f; spurtCount = 1; break;
                     case BDOTModOptions.BloodAmountPreset.High:
-                        spurtCount = 3;
-                        break;
+                        bloodMultiplier = 1.5f; spurtCount = 3; break;
                     case BDOTModOptions.BloodAmountPreset.Extreme:
-                        spurtCount = 4;
-                        break;
+                        bloodMultiplier = 2.0f; spurtCount = 4; break;
+                    default: // Default
+                        bloodMultiplier = 1.0f; spurtCount = 2; break;
                 }
-
-                // Spawn blood spurt effect(s) at the hit part location
-                // Use position directly and rotation facing outward (like ThunderRoad does)
-                Vector3 position = hitPart.transform.position;
-                // Blood spurts outward from the body - use transform.up as the outward direction
-                Quaternion rotation = Quaternion.LookRotation(hitPart.transform.up, hitPart.transform.forward);
                 
+                // Calculate intensity: base from damage, scaled by stacks and blood preset
+                float intensity = Mathf.Clamp(damage * 0.2f, 0.2f, 1.0f);
+                intensity *= (1f + (effect.StackCount - 1) * 0.3f);
+                intensity = Mathf.Clamp(intensity * bloodMultiplier, 0.1f, 3.0f);
+
+                // Cache transform values to avoid repeated property access
+                Transform hitTransform = hitPart.transform;
+                Vector3 position = hitTransform.position;
+                Quaternion rotation = Quaternion.LookRotation(hitTransform.up, hitTransform.forward);
+                
+                // Spawn blood spurt effect(s)
                 for (int i = 0; i < spurtCount; i++)
                 {
-                    var effectInstance = effectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f);
+                    var effectInstance = effectData.Spawn(position, rotation, hitTransform, null, true, null, false, intensity, 1f);
                     if (effectInstance != null)
                     {
-                        effectInstance.SetIntensity(intensity);
                         effectInstance.Play(0, false, false);
-                        
-                        // Store reference to the most recent effect so we can end it when bleed expires
-                        // (older spurts will naturally despawn on their own)
                         effect.BloodEffectInstance = effectInstance;
                     }
                 }
