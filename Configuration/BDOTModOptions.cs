@@ -145,8 +145,8 @@ namespace BDOT.Configuration
 
         public enum ProfilePreset
         {
-            Default = 0,     // Physical damage only (Pierce/Slash/Blunt)
-            BleedOnly = 1,   // Same as Default - physical damage causes bleed DOT
+            Default = 0,     // Both physical and elemental damage types
+            BleedOnly = 1,   // Physical damage only (Pierce/Slash/Blunt)
             ElementalOnly = 2 // Elemental damage only (Fire/Lightning/Energy)
         }
 
@@ -309,7 +309,7 @@ namespace BDOT.Configuration
         [ModOption(name = OptionEnableMod, order = 0, defaultValueIndex = 1, tooltip = "Master switch for the entire mod")]
         public static bool EnableMod = true;
 
-        [ModOption(name = OptionProfilePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 5, defaultValueIndex = 0, valueSourceName = nameof(ProfilePresetProvider), tooltip = "Profile determines which damage types trigger DOT effects. Default/BleedOnly = physical attacks, ElementalOnly = fire/lightning/energy attacks.")]
+        [ModOption(name = OptionProfilePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 5, defaultValueIndex = 0, valueSourceName = nameof(ProfilePresetProvider), tooltip = "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only.")]
         public static string ProfilePresetSetting = "Default";
 
         [ModOption(name = OptionDamagePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 10, defaultValueIndex = 2, valueSourceName = nameof(DamagePresetProvider), tooltip = "Damage per tick preset. Default is the balanced middle value.")]
@@ -687,27 +687,35 @@ namespace BDOT.Configuration
 
         /// <summary>
         /// Checks if a damage type is allowed by the current profile.
-        /// Default/BleedOnly = Pierce/Slash/Blunt only
+        /// Default = All damage types (physical + elemental)
+        /// BleedOnly = Pierce/Slash/Blunt only
         /// ElementalOnly = Fire/Lightning/Energy only
         /// </summary>
         public static bool IsDamageTypeAllowed(DamageType damageType)
         {
             var profile = GetProfilePreset();
             
+            bool isPhysical = damageType == DamageType.Pierce || 
+                              damageType == DamageType.Slash || 
+                              damageType == DamageType.Blunt;
+            
+            bool isElemental = damageType == DamageType.Fire || 
+                               damageType == DamageType.Lightning || 
+                               damageType == DamageType.Energy;
+            
             switch (profile)
             {
                 case ProfilePreset.Default:
+                    // Both physical and elemental
+                    return isPhysical || isElemental;
+                
                 case ProfilePreset.BleedOnly:
                     // Physical damage types only
-                    return damageType == DamageType.Pierce || 
-                           damageType == DamageType.Slash || 
-                           damageType == DamageType.Blunt;
+                    return isPhysical;
                 
                 case ProfilePreset.ElementalOnly:
                     // Elemental damage types only
-                    return damageType == DamageType.Fire || 
-                           damageType == DamageType.Lightning || 
-                           damageType == DamageType.Energy;
+                    return isElemental;
                 
                 default:
                     return false;
