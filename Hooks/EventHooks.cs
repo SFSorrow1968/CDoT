@@ -142,13 +142,21 @@ namespace BDOT.Hooks
                 if (BDOTModOptions.DebugLogging)
                     Debug.Log("[BDOT] Player caused: YES");
 
+                // Detect effective damage type (may differ from reported type due to imbue/spell)
+                DamageType effectiveDamageType = GetEffectiveDamageType(collisionInstance, damageType);
+                if (effectiveDamageType != damageType && BDOTModOptions.DebugLogging)
+                    Debug.Log("[BDOT] Effective damage type: " + effectiveDamageType + " (from imbue/spell)");
+
                 // Check if damage type is allowed by current profile
-                if (!BDOTModOptions.IsDamageTypeAllowed(damageType))
+                if (!BDOTModOptions.IsDamageTypeAllowed(effectiveDamageType))
                 {
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] SKIP: DamageType " + damageType + " not allowed by profile " + BDOTModOptions.ProfilePresetSetting);
+                        Debug.Log("[BDOT] SKIP: DamageType " + effectiveDamageType + " not allowed by profile " + BDOTModOptions.ProfilePresetSetting);
                     return;
                 }
+                
+                // Use effective damage type for DOT
+                damageType = effectiveDamageType;
 
                 // Determine body zone from hit part
                 BodyZone zone = ZoneDetector.GetZoneFromCollision(collisionInstance);
@@ -249,6 +257,70 @@ namespace BDOT.Hooks
             if (expired == null) return;
             foreach (var key in expired)
                 _recentSlicedParts.Remove(key);
+        }
+
+        /// <summary>
+        /// Determines the effective damage type for DOT purposes by checking imbue and spell types.
+        /// Imbued weapons may report Pierce/Slash/Blunt but have Fire/Lightning effects.
+        /// Magic projectiles use Energy but may be fire/lightning spells.
+        /// </summary>
+        private DamageType GetEffectiveDamageType(CollisionInstance collision, DamageType reportedType)
+        {
+            try
+            {
+                // Already an elemental type - use as-is
+                if (reportedType == DamageType.Fire || reportedType == DamageType.Lightning)
+                    return reportedType;
+
+                // Check for imbue on the source collider group
+                var imbue = collision?.sourceColliderGroup?.imbue;
+                if (imbue != null && imbue.spellCastBase != null)
+                {
+                    string spellId = imbue.spellCastBase.id?.ToLower() ?? "";
+                    if (spellId.Contains("fire"))
+                        return DamageType.Fire;
+                    if (spellId.Contains("lightning") || spellId.Contains("electric"))
+                        return DamageType.Lightning;
+                }
+
+                // Check for imbue on the source item
+                var sourceItem = collision?.sourceColliderGroup?.collisionHandler?.item;
+                if (sourceItem != null)
+                {
+                    foreach (var itemImbue in sourceItem.imbues)
+                    {
+                        if (itemImbue?.spellCastBase != null)
+                        {
+                            string spellId = itemImbue.spellCastBase.id?.ToLower() ?? "";
+                            if (spellId.Contains("fire"))
+                                return DamageType.Fire;
+                            if (spellId.Contains("lightning") || spellId.Contains("electric"))
+                                return DamageType.Lightning;
+                        }
+                    }
+
+                    // Check for magic projectiles (fireballs, lightning bolts)
+                    var magicProjectile = sourceItem.GetComponent<ItemMagicProjectile>();
+                    if (magicProjectile?.imbueSpellCastCharge != null)
+                    {
+                        string spellId = magicProjectile.imbueSpellCastCharge.id?.ToLower() ?? "";
+                        if (spellId.Contains("fire"))
+                            return DamageType.Fire;
+                        if (spellId.Contains("lightning") || spellId.Contains("electric"))
+                            return DamageType.Lightning;
+                        // Gravity/other spells stay as their reported type
+                    }
+                }
+
+                // For Energy damage that doesn't match fire/lightning, treat as physical (won't apply DOT)
+                return reportedType;
+            }
+            catch (Exception ex)
+            {
+                if (BDOTModOptions.DebugLogging)
+                    Debug.LogError("[BDOT] Error in GetEffectiveDamageType: " + ex.Message);
+                return reportedType;
+            }
         }
 
         private bool WasCausedByPlayer(CollisionInstance collision)
