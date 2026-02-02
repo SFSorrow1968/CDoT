@@ -6,11 +6,12 @@ namespace BDOT.Configuration
 {
     public static class BDOTModOptions
     {
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "1.1.0";
 
         #region Labels and Categories
 
         public const string CategoryPresetSelection = "Preset Selection";
+        public const string CategoryDamageTypeMultipliers = "Damage Type Multipliers";
         public const string CategoryZoneToggles = "Zone Toggles";
         public const string CategoryZoneThroat = "Throat";
         public const string CategoryZoneHead = "Head";
@@ -24,11 +25,15 @@ namespace BDOT.Configuration
 
         // Global options
         public const string OptionEnableMod = "Enable Mod";
-        public const string OptionIntensityPreset = "Intensity Preset";
-        public const string OptionDurationPreset = "Duration Preset";
         public const string OptionDamagePreset = "Damage Preset";
-        public const string OptionGlobalMultiplier = "Global Damage Multiplier";
-        public const string OptionTickInterval = "Tick Interval";
+        public const string OptionDurationPreset = "Duration Preset";
+        public const string OptionFrequencyPreset = "Frequency Preset";
+        public const string OptionChancePreset = "Chance Preset";
+
+        // Damage type multipliers
+        public const string OptionPierceMultiplier = "Pierce Multiplier";
+        public const string OptionSlashMultiplier = "Slash Multiplier";
+        public const string OptionBluntMultiplier = "Blunt Multiplier";
 
         // Zone toggles
         public const string OptionThroatEnabled = "Throat Enabled";
@@ -40,45 +45,45 @@ namespace BDOT.Configuration
         public const string OptionDismembermentEnabled = "Dismemberment Enabled";
 
         // Throat zone - unique names
-        public const string OptionThroatMultiplier = "Throat Multiplier";
+        public const string OptionThroatChance = "Throat Chance";
+        public const string OptionThroatDamage = "Throat Damage";
         public const string OptionThroatDuration = "Throat Duration";
-        public const string OptionThroatDamagePerTick = "Throat Damage Per Tick";
         public const string OptionThroatStackLimit = "Throat Stack Limit";
 
         // Head zone - unique names
-        public const string OptionHeadMultiplier = "Head Multiplier";
+        public const string OptionHeadChance = "Head Chance";
+        public const string OptionHeadDamage = "Head Damage";
         public const string OptionHeadDuration = "Head Duration";
-        public const string OptionHeadDamagePerTick = "Head Damage Per Tick";
         public const string OptionHeadStackLimit = "Head Stack Limit";
 
         // Neck zone - unique names
-        public const string OptionNeckMultiplier = "Neck Multiplier";
+        public const string OptionNeckChance = "Neck Chance";
+        public const string OptionNeckDamage = "Neck Damage";
         public const string OptionNeckDuration = "Neck Duration";
-        public const string OptionNeckDamagePerTick = "Neck Damage Per Tick";
         public const string OptionNeckStackLimit = "Neck Stack Limit";
 
         // Torso zone - unique names
-        public const string OptionTorsoMultiplier = "Torso Multiplier";
+        public const string OptionTorsoChance = "Torso Chance";
+        public const string OptionTorsoDamage = "Torso Damage";
         public const string OptionTorsoDuration = "Torso Duration";
-        public const string OptionTorsoDamagePerTick = "Torso Damage Per Tick";
         public const string OptionTorsoStackLimit = "Torso Stack Limit";
 
         // Arm zone - unique names
-        public const string OptionArmMultiplier = "Arm Multiplier";
+        public const string OptionArmChance = "Arm Chance";
+        public const string OptionArmDamage = "Arm Damage";
         public const string OptionArmDuration = "Arm Duration";
-        public const string OptionArmDamagePerTick = "Arm Damage Per Tick";
         public const string OptionArmStackLimit = "Arm Stack Limit";
 
         // Leg zone - unique names
-        public const string OptionLegMultiplier = "Leg Multiplier";
+        public const string OptionLegChance = "Leg Chance";
+        public const string OptionLegDamage = "Leg Damage";
         public const string OptionLegDuration = "Leg Duration";
-        public const string OptionLegDamagePerTick = "Leg Damage Per Tick";
         public const string OptionLegStackLimit = "Leg Stack Limit";
 
         // Dismemberment zone - unique names
-        public const string OptionDismembermentMultiplier = "Dismemberment Multiplier";
+        public const string OptionDismembermentChance = "Dismemberment Chance";
+        public const string OptionDismembermentDamage = "Dismemberment Damage";
         public const string OptionDismembermentDuration = "Dismemberment Duration";
-        public const string OptionDismembermentDamagePerTick = "Dismemberment Damage Per Tick";
         public const string OptionDismembermentStackLimit = "Dismemberment Stack Limit";
 
         // Advanced
@@ -89,12 +94,12 @@ namespace BDOT.Configuration
 
         #region Enums
 
-        public enum IntensityPreset
+        public enum DamagePreset
         {
-            Light = 0,
+            Low = 0,
             Default = 1,
-            Heavy = 2,
-            Brutal = 3
+            High = 2,
+            Extreme = 3
         }
 
         public enum DurationPreset
@@ -105,26 +110,35 @@ namespace BDOT.Configuration
             Extended = 3
         }
 
-        public enum DamagePreset
+        public enum FrequencyPreset
         {
-            Low = 0,
-            Default = 1,
-            High = 2,
-            Extreme = 3
+            Slow = 0,
+            Normal = 1,
+            Fast = 2,
+            Rapid = 3
+        }
+
+        public enum ChancePreset
+        {
+            Off = 0,
+            Rare = 1,
+            Default = 2,
+            Frequent = 3,
+            Always = 4
         }
 
         #endregion
 
         #region Value Providers
 
-        public static ModOptionString[] IntensityPresetProvider()
+        public static ModOptionString[] DamagePresetProvider()
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Light", "Light"),
+                new ModOptionString("Low", "Low"),
                 new ModOptionString("Default", "Default"),
-                new ModOptionString("Heavy", "Heavy"),
-                new ModOptionString("Brutal", "Brutal")
+                new ModOptionString("High", "High"),
+                new ModOptionString("Extreme", "Extreme")
             };
         }
 
@@ -139,53 +153,49 @@ namespace BDOT.Configuration
             };
         }
 
-        public static ModOptionString[] DamagePresetProvider()
+        public static ModOptionString[] FrequencyPresetProvider()
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Low", "Low"),
+                new ModOptionString("Slow", "Slow"),
+                new ModOptionString("Normal", "Normal"),
+                new ModOptionString("Fast", "Fast"),
+                new ModOptionString("Rapid", "Rapid")
+            };
+        }
+
+        public static ModOptionString[] ChancePresetProvider()
+        {
+            return new ModOptionString[]
+            {
+                new ModOptionString("Off", "Off"),
+                new ModOptionString("Rare", "Rare"),
                 new ModOptionString("Default", "Default"),
-                new ModOptionString("High", "High"),
-                new ModOptionString("Extreme", "Extreme")
+                new ModOptionString("Frequent", "Frequent"),
+                new ModOptionString("Always", "Always")
             };
         }
 
-        public static ModOptionFloat[] GlobalMultiplierProvider()
-        {
-            return new ModOptionFloat[]
-            {
-                new ModOptionFloat("0.25x", 0.25f),
-                new ModOptionFloat("0.5x", 0.5f),
-                new ModOptionFloat("0.75x", 0.75f),
-                new ModOptionFloat("1.0x", 1.0f),
-                new ModOptionFloat("1.25x", 1.25f),
-                new ModOptionFloat("1.5x", 1.5f),
-                new ModOptionFloat("2.0x", 2.0f),
-                new ModOptionFloat("3.0x", 3.0f)
-            };
-        }
-
-        public static ModOptionFloat[] TickIntervalProvider()
-        {
-            return new ModOptionFloat[]
-            {
-                new ModOptionFloat("0.25s", 0.25f),
-                new ModOptionFloat("0.5s", 0.5f),
-                new ModOptionFloat("0.75s", 0.75f),
-                new ModOptionFloat("1.0s", 1.0f),
-                new ModOptionFloat("1.5s", 1.5f),
-                new ModOptionFloat("2.0s", 2.0f)
-            };
-        }
-
-        public static ModOptionFloat[] MultiplierProvider()
+        public static ModOptionFloat[] DamageTypeMultiplierProvider()
         {
             var list = new System.Collections.Generic.List<ModOptionFloat>();
-            // 0.1x to 10.0x in 0.1 increments (100 options)
-            for (int i = 1; i <= 100; i++)
+            // 0.1x to 3.0x in 0.1 increments (30 options)
+            for (int i = 1; i <= 30; i++)
             {
                 float val = i / 10f;
                 list.Add(new ModOptionFloat(val.ToString("0.0") + "x", val));
+            }
+            return list.ToArray();
+        }
+
+        public static ModOptionFloat[] ChanceProvider()
+        {
+            var list = new System.Collections.Generic.List<ModOptionFloat>();
+            // 0% to 100% in 5% increments (21 options)
+            for (int i = 0; i <= 20; i++)
+            {
+                float val = i * 5f;
+                list.Add(new ModOptionFloat(val.ToString("0") + "%", val));
             }
             return list.ToArray();
         }
@@ -202,7 +212,7 @@ namespace BDOT.Configuration
             return list.ToArray();
         }
 
-        public static ModOptionFloat[] DamagePerTickProvider()
+        public static ModOptionFloat[] DamageProvider()
         {
             var list = new System.Collections.Generic.List<ModOptionFloat>();
             // 0.25 to 20 in 0.25 increments (80 options)
@@ -229,7 +239,10 @@ namespace BDOT.Configuration
 
         #endregion
 
+        #region Category Orders
+
         private const int CategoryOrderPreset = 10;
+        private const int CategoryOrderDamageTypeMult = 15;
         private const int CategoryOrderToggles = 20;
         private const int CategoryOrderThroat = 30;
         private const int CategoryOrderHead = 31;
@@ -241,25 +254,40 @@ namespace BDOT.Configuration
         private const int CategoryOrderAdvanced = 90;
         private const int CategoryOrderStatistics = 95;
 
+        #endregion
+
         #region Global Settings (Preset Selection)
 
         [ModOption(name = OptionEnableMod, order = 0, defaultValueIndex = 1, tooltip = "Master switch for the entire mod")]
         public static bool EnableMod = true;
 
-        [ModOption(name = OptionIntensityPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 10, defaultValueIndex = 1, valueSourceName = "IntensityPresetProvider", tooltip = "Overall bleed intensity. Applies multiplier values to all zones.")]
-        public static string IntensityPresetSetting = "Default";
-
-        [ModOption(name = OptionDurationPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 20, defaultValueIndex = 1, valueSourceName = "DurationPresetProvider", tooltip = "Bleed duration preset. Applies duration values to all zones.")]
-        public static string DurationPresetSetting = "Default";
-
-        [ModOption(name = OptionDamagePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 30, defaultValueIndex = 1, valueSourceName = "DamagePresetProvider", tooltip = "Damage per tick preset. Applies damage values to all zones.")]
+        [ModOption(name = OptionDamagePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 10, defaultValueIndex = 1, valueSourceName = nameof(DamagePresetProvider), tooltip = "Damage per tick preset. Applies damage values to all zones.")]
         public static string DamagePresetSetting = "Default";
 
-        [ModOption(name = OptionGlobalMultiplier, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 40, defaultValueIndex = 3, valueSourceName = "GlobalMultiplierProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Final multiplier applied to all bleed damage")]
-        public static float GlobalDamageMultiplier = 1.0f;
+        [ModOption(name = OptionDurationPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 20, defaultValueIndex = 1, valueSourceName = nameof(DurationPresetProvider), tooltip = "Bleed duration preset. Applies duration values to all zones.")]
+        public static string DurationPresetSetting = "Default";
 
-        [ModOption(name = OptionTickInterval, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 50, defaultValueIndex = 1, valueSourceName = "TickIntervalProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Time between damage ticks (all zones)")]
+        [ModOption(name = OptionFrequencyPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 30, defaultValueIndex = 1, valueSourceName = nameof(FrequencyPresetProvider), tooltip = "Tick frequency preset. Controls how often damage ticks occur.")]
+        public static string FrequencyPresetSetting = "Normal";
+
+        [ModOption(name = OptionChancePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 40, defaultValueIndex = 2, valueSourceName = nameof(ChancePresetProvider), tooltip = "Bleed chance preset. Applies chance values to all zones.")]
+        public static string ChancePresetSetting = "Default";
+
+        // Tick interval is now derived from FrequencyPreset, not a direct option
         public static float TickInterval = 0.5f;
+
+        #endregion
+
+        #region Damage Type Multipliers
+
+        [ModOption(name = OptionPierceMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 10, defaultValueIndex = 9, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Damage multiplier for piercing attacks (stabs). Default 1.0x.")]
+        public static float PierceMultiplier = 1.0f;
+
+        [ModOption(name = OptionSlashMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 20, defaultValueIndex = 9, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Damage multiplier for slashing attacks (cuts). Default 1.0x.")]
+        public static float SlashMultiplier = 1.0f;
+
+        [ModOption(name = OptionBluntMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 30, defaultValueIndex = 9, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Damage multiplier for blunt attacks (impacts). Default 1.0x.")]
+        public static float BluntMultiplier = 1.0f;
 
         #endregion
 
@@ -289,114 +317,114 @@ namespace BDOT.Configuration
         #endregion
 
         #region Throat Zone
-        // Multiplier: index = (value * 10) - 1, Duration: index = (value * 2) - 1, Damage: index = (value * 4) - 1
+        // Chance: index = value / 5, Duration: index = (value * 2) - 1, Damage: index = (value * 4) - 1
 
-        [ModOption(name = OptionThroatMultiplier, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 10, defaultValueIndex = 29, valueSourceName = "MultiplierProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Damage multiplier for throat wounds")]
-        public static float ThroatMultiplier = 3.0f;
+        [ModOption(name = OptionThroatChance, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 10, defaultValueIndex = 15, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for throat wounds to cause bleeding")]
+        public static float ThroatChance = 75f;
 
-        [ModOption(name = OptionThroatDuration, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 20, defaultValueIndex = 15, valueSourceName = "DurationProvider", interactionType = (ModOption.InteractionType)2, tooltip = "How long throat bleeds last")]
+        [ModOption(name = OptionThroatDamage, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 20, defaultValueIndex = 19, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for throat wounds")]
+        public static float ThroatDamage = 5.0f;
+
+        [ModOption(name = OptionThroatDuration, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 30, defaultValueIndex = 15, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long throat bleeds last")]
         public static float ThroatDuration = 8.0f;
 
-        [ModOption(name = OptionThroatDamagePerTick, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 30, defaultValueIndex = 19, valueSourceName = "DamagePerTickProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for throat wounds")]
-        public static float ThroatDamagePerTick = 5.0f;
-
-        [ModOption(name = OptionThroatStackLimit, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 40, defaultValueIndex = 2, valueSourceName = "StackLimitProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for throat wounds")]
+        [ModOption(name = OptionThroatStackLimit, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for throat wounds")]
         public static int ThroatStackLimit = 3;
 
         #endregion
 
         #region Head Zone
 
-        [ModOption(name = OptionHeadMultiplier, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 10, defaultValueIndex = 19, valueSourceName = "MultiplierProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Damage multiplier for head wounds")]
-        public static float HeadMultiplier = 2.0f;
+        [ModOption(name = OptionHeadChance, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 10, defaultValueIndex = 10, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for head wounds to cause bleeding")]
+        public static float HeadChance = 50f;
 
-        [ModOption(name = OptionHeadDuration, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 20, defaultValueIndex = 11, valueSourceName = "DurationProvider", interactionType = (ModOption.InteractionType)2, tooltip = "How long head bleeds last")]
+        [ModOption(name = OptionHeadDamage, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 20, defaultValueIndex = 11, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for head wounds")]
+        public static float HeadDamage = 3.0f;
+
+        [ModOption(name = OptionHeadDuration, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 30, defaultValueIndex = 11, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long head bleeds last")]
         public static float HeadDuration = 6.0f;
 
-        [ModOption(name = OptionHeadDamagePerTick, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 30, defaultValueIndex = 11, valueSourceName = "DamagePerTickProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for head wounds")]
-        public static float HeadDamagePerTick = 3.0f;
-
-        [ModOption(name = OptionHeadStackLimit, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 40, defaultValueIndex = 2, valueSourceName = "StackLimitProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for head wounds")]
+        [ModOption(name = OptionHeadStackLimit, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for head wounds")]
         public static int HeadStackLimit = 3;
 
         #endregion
 
         #region Neck Zone
 
-        [ModOption(name = OptionNeckMultiplier, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 10, defaultValueIndex = 24, valueSourceName = "MultiplierProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Damage multiplier for neck wounds")]
-        public static float NeckMultiplier = 2.5f;
+        [ModOption(name = OptionNeckChance, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 10, defaultValueIndex = 13, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for neck wounds to cause bleeding")]
+        public static float NeckChance = 65f;
 
-        [ModOption(name = OptionNeckDuration, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 20, defaultValueIndex = 13, valueSourceName = "DurationProvider", interactionType = (ModOption.InteractionType)2, tooltip = "How long neck bleeds last")]
+        [ModOption(name = OptionNeckDamage, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 20, defaultValueIndex = 15, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for neck wounds")]
+        public static float NeckDamage = 4.0f;
+
+        [ModOption(name = OptionNeckDuration, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 30, defaultValueIndex = 13, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long neck bleeds last")]
         public static float NeckDuration = 7.0f;
 
-        [ModOption(name = OptionNeckDamagePerTick, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 30, defaultValueIndex = 15, valueSourceName = "DamagePerTickProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for neck wounds")]
-        public static float NeckDamagePerTick = 4.0f;
-
-        [ModOption(name = OptionNeckStackLimit, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 40, defaultValueIndex = 2, valueSourceName = "StackLimitProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for neck wounds")]
+        [ModOption(name = OptionNeckStackLimit, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for neck wounds")]
         public static int NeckStackLimit = 3;
 
         #endregion
 
         #region Torso Zone
 
-        [ModOption(name = OptionTorsoMultiplier, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 10, defaultValueIndex = 9, valueSourceName = "MultiplierProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Damage multiplier for torso wounds")]
-        public static float TorsoMultiplier = 1.0f;
+        [ModOption(name = OptionTorsoChance, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 10, defaultValueIndex = 8, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for torso wounds to cause bleeding")]
+        public static float TorsoChance = 40f;
 
-        [ModOption(name = OptionTorsoDuration, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 20, defaultValueIndex = 9, valueSourceName = "DurationProvider", interactionType = (ModOption.InteractionType)2, tooltip = "How long torso bleeds last")]
+        [ModOption(name = OptionTorsoDamage, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 20, defaultValueIndex = 7, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for torso wounds")]
+        public static float TorsoDamage = 2.0f;
+
+        [ModOption(name = OptionTorsoDuration, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 30, defaultValueIndex = 9, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long torso bleeds last")]
         public static float TorsoDuration = 5.0f;
 
-        [ModOption(name = OptionTorsoDamagePerTick, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 30, defaultValueIndex = 7, valueSourceName = "DamagePerTickProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for torso wounds")]
-        public static float TorsoDamagePerTick = 2.0f;
-
-        [ModOption(name = OptionTorsoStackLimit, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 40, defaultValueIndex = 4, valueSourceName = "StackLimitProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for torso wounds")]
+        [ModOption(name = OptionTorsoStackLimit, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 40, defaultValueIndex = 4, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for torso wounds")]
         public static int TorsoStackLimit = 5;
 
         #endregion
 
         #region Arm Zone
 
-        [ModOption(name = OptionArmMultiplier, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 10, defaultValueIndex = 4, valueSourceName = "MultiplierProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Damage multiplier for arm wounds")]
-        public static float ArmMultiplier = 0.5f;
+        [ModOption(name = OptionArmChance, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 10, defaultValueIndex = 6, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for arm wounds to cause bleeding")]
+        public static float ArmChance = 30f;
 
-        [ModOption(name = OptionArmDuration, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 20, defaultValueIndex = 7, valueSourceName = "DurationProvider", interactionType = (ModOption.InteractionType)2, tooltip = "How long arm bleeds last")]
+        [ModOption(name = OptionArmDamage, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 20, defaultValueIndex = 3, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for arm wounds")]
+        public static float ArmDamage = 1.0f;
+
+        [ModOption(name = OptionArmDuration, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 30, defaultValueIndex = 7, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long arm bleeds last")]
         public static float ArmDuration = 4.0f;
 
-        [ModOption(name = OptionArmDamagePerTick, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 30, defaultValueIndex = 3, valueSourceName = "DamagePerTickProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for arm wounds")]
-        public static float ArmDamagePerTick = 1.0f;
-
-        [ModOption(name = OptionArmStackLimit, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 40, defaultValueIndex = 3, valueSourceName = "StackLimitProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for arm wounds")]
+        [ModOption(name = OptionArmStackLimit, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 40, defaultValueIndex = 3, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for arm wounds")]
         public static int ArmStackLimit = 4;
 
         #endregion
 
         #region Leg Zone
 
-        [ModOption(name = OptionLegMultiplier, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 10, defaultValueIndex = 5, valueSourceName = "MultiplierProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Damage multiplier for leg wounds")]
-        public static float LegMultiplier = 0.6f;
+        [ModOption(name = OptionLegChance, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 10, defaultValueIndex = 7, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for leg wounds to cause bleeding")]
+        public static float LegChance = 35f;
 
-        [ModOption(name = OptionLegDuration, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 20, defaultValueIndex = 9, valueSourceName = "DurationProvider", interactionType = (ModOption.InteractionType)2, tooltip = "How long leg bleeds last")]
+        [ModOption(name = OptionLegDamage, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 20, defaultValueIndex = 5, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for leg wounds")]
+        public static float LegDamage = 1.5f;
+
+        [ModOption(name = OptionLegDuration, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 30, defaultValueIndex = 9, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long leg bleeds last")]
         public static float LegDuration = 5.0f;
 
-        [ModOption(name = OptionLegDamagePerTick, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 30, defaultValueIndex = 5, valueSourceName = "DamagePerTickProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for leg wounds")]
-        public static float LegDamagePerTick = 1.5f;
-
-        [ModOption(name = OptionLegStackLimit, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 40, defaultValueIndex = 3, valueSourceName = "StackLimitProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for leg wounds")]
+        [ModOption(name = OptionLegStackLimit, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 40, defaultValueIndex = 3, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for leg wounds")]
         public static int LegStackLimit = 4;
 
         #endregion
 
         #region Dismemberment Zone
 
-        [ModOption(name = OptionDismembermentMultiplier, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 10, defaultValueIndex = 24, valueSourceName = "MultiplierProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Damage multiplier for dismemberment")]
-        public static float DismembermentMultiplier = 2.5f;
+        [ModOption(name = OptionDismembermentChance, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 10, defaultValueIndex = 20, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for dismemberment to cause bleeding")]
+        public static float DismembermentChance = 100f;
 
-        [ModOption(name = OptionDismembermentDuration, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 20, defaultValueIndex = 19, valueSourceName = "DurationProvider", interactionType = (ModOption.InteractionType)2, tooltip = "How long dismemberment bleeds last")]
+        [ModOption(name = OptionDismembermentDamage, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 20, defaultValueIndex = 23, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for dismemberment")]
+        public static float DismembermentDamage = 6.0f;
+
+        [ModOption(name = OptionDismembermentDuration, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 30, defaultValueIndex = 19, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long dismemberment bleeds last")]
         public static float DismembermentDuration = 10.0f;
 
-        [ModOption(name = OptionDismembermentDamagePerTick, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 30, defaultValueIndex = 23, valueSourceName = "DamagePerTickProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for dismemberment")]
-        public static float DismembermentDamagePerTick = 6.0f;
-
-        [ModOption(name = OptionDismembermentStackLimit, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 40, defaultValueIndex = 0, valueSourceName = "StackLimitProvider", interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for dismemberment (per limb)")]
+        [ModOption(name = OptionDismembermentStackLimit, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 40, defaultValueIndex = 0, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for dismemberment (per limb)")]
         public static int DismembermentStackLimit = 1;
 
         #endregion
@@ -420,9 +448,9 @@ namespace BDOT.Configuration
         public struct ZoneConfig
         {
             public bool Enabled;
-            public float Multiplier;
+            public float Chance;
+            public float Damage;
             public float Duration;
-            public float DamagePerTick;
             public int StackLimit;
         }
 
@@ -448,72 +476,72 @@ namespace BDOT.Configuration
             {
                 case BodyZone.Throat:
                     config.Enabled = ThroatEnabled;
-                    config.Multiplier = ThroatMultiplier;
+                    config.Chance = ThroatChance;
+                    config.Damage = ThroatDamage;
                     config.Duration = ThroatDuration;
-                    config.DamagePerTick = ThroatDamagePerTick;
                     config.StackLimit = ThroatStackLimit;
                     break;
                 case BodyZone.Head:
                     config.Enabled = HeadEnabled;
-                    config.Multiplier = HeadMultiplier;
+                    config.Chance = HeadChance;
+                    config.Damage = HeadDamage;
                     config.Duration = HeadDuration;
-                    config.DamagePerTick = HeadDamagePerTick;
                     config.StackLimit = HeadStackLimit;
                     break;
                 case BodyZone.Neck:
                     config.Enabled = NeckEnabled;
-                    config.Multiplier = NeckMultiplier;
+                    config.Chance = NeckChance;
+                    config.Damage = NeckDamage;
                     config.Duration = NeckDuration;
-                    config.DamagePerTick = NeckDamagePerTick;
                     config.StackLimit = NeckStackLimit;
                     break;
                 case BodyZone.Torso:
                     config.Enabled = TorsoEnabled;
-                    config.Multiplier = TorsoMultiplier;
+                    config.Chance = TorsoChance;
+                    config.Damage = TorsoDamage;
                     config.Duration = TorsoDuration;
-                    config.DamagePerTick = TorsoDamagePerTick;
                     config.StackLimit = TorsoStackLimit;
                     break;
                 case BodyZone.Arm:
                     config.Enabled = ArmEnabled;
-                    config.Multiplier = ArmMultiplier;
+                    config.Chance = ArmChance;
+                    config.Damage = ArmDamage;
                     config.Duration = ArmDuration;
-                    config.DamagePerTick = ArmDamagePerTick;
                     config.StackLimit = ArmStackLimit;
                     break;
                 case BodyZone.Leg:
                     config.Enabled = LegEnabled;
-                    config.Multiplier = LegMultiplier;
+                    config.Chance = LegChance;
+                    config.Damage = LegDamage;
                     config.Duration = LegDuration;
-                    config.DamagePerTick = LegDamagePerTick;
                     config.StackLimit = LegStackLimit;
                     break;
                 case BodyZone.Dismemberment:
                     config.Enabled = DismembermentEnabled;
-                    config.Multiplier = DismembermentMultiplier;
+                    config.Chance = DismembermentChance;
+                    config.Damage = DismembermentDamage;
                     config.Duration = DismembermentDuration;
-                    config.DamagePerTick = DismembermentDamagePerTick;
                     config.StackLimit = DismembermentStackLimit;
                     break;
                 default:
                     config.Enabled = false;
-                    config.Multiplier = 1.0f;
+                    config.Chance = 0f;
+                    config.Damage = 2.0f;
                     config.Duration = 5.0f;
-                    config.DamagePerTick = 2.0f;
                     config.StackLimit = 3;
                     break;
             }
             return config;
         }
 
-        public static IntensityPreset GetIntensityPreset()
+        public static DamagePreset GetDamagePreset()
         {
-            switch (IntensityPresetSetting)
+            switch (DamagePresetSetting)
             {
-                case "Light": return IntensityPreset.Light;
-                case "Heavy": return IntensityPreset.Heavy;
-                case "Brutal": return IntensityPreset.Brutal;
-                default: return IntensityPreset.Default;
+                case "Low": return DamagePreset.Low;
+                case "High": return DamagePreset.High;
+                case "Extreme": return DamagePreset.Extreme;
+                default: return DamagePreset.Default;
             }
         }
 
@@ -528,63 +556,66 @@ namespace BDOT.Configuration
             }
         }
 
-        public static DamagePreset GetDamagePreset()
+        public static FrequencyPreset GetFrequencyPreset()
         {
-            switch (DamagePresetSetting)
+            switch (FrequencyPresetSetting)
             {
-                case "Low": return DamagePreset.Low;
-                case "High": return DamagePreset.High;
-                case "Extreme": return DamagePreset.Extreme;
-                default: return DamagePreset.Default;
+                case "Slow": return FrequencyPreset.Slow;
+                case "Fast": return FrequencyPreset.Fast;
+                case "Rapid": return FrequencyPreset.Rapid;
+                default: return FrequencyPreset.Normal;
             }
         }
 
-        // Preset value application - these return the multipliers for each preset
-        public static float GetIntensityMultiplier(IntensityPreset preset)
+        public static ChancePreset GetChancePreset()
         {
-            switch (preset)
+            switch (ChancePresetSetting)
             {
-                case IntensityPreset.Light: return 0.5f;
-                case IntensityPreset.Heavy: return 1.5f;
-                case IntensityPreset.Brutal: return 2.5f;
-                default: return 1.0f;
+                case "Off": return ChancePreset.Off;
+                case "Rare": return ChancePreset.Rare;
+                case "Frequent": return ChancePreset.Frequent;
+                case "Always": return ChancePreset.Always;
+                default: return ChancePreset.Default;
             }
         }
 
-        public static float GetDurationMultiplier(DurationPreset preset)
+        public static float GetDamageTypeMultiplier(DamageType damageType)
         {
-            switch (preset)
+            switch (damageType)
             {
-                case DurationPreset.Short: return 0.6f;
-                case DurationPreset.Long: return 1.5f;
-                case DurationPreset.Extended: return 2.0f;
-                default: return 1.0f;
-            }
-        }
-
-        public static float GetDamageMultiplier(DamagePreset preset)
-        {
-            switch (preset)
-            {
-                case DamagePreset.Low: return 0.5f;
-                case DamagePreset.High: return 1.5f;
-                case DamagePreset.Extreme: return 2.5f;
+                case DamageType.Pierce: return PierceMultiplier;
+                case DamageType.Slash: return SlashMultiplier;
+                case DamageType.Blunt: return BluntMultiplier;
                 default: return 1.0f;
             }
         }
 
         // Zone value setters for preset application
-        public static void SetZoneMultiplier(BodyZone zone, float value)
+        public static void SetZoneChance(BodyZone zone, float value)
         {
             switch (zone)
             {
-                case BodyZone.Throat: ThroatMultiplier = value; break;
-                case BodyZone.Head: HeadMultiplier = value; break;
-                case BodyZone.Neck: NeckMultiplier = value; break;
-                case BodyZone.Torso: TorsoMultiplier = value; break;
-                case BodyZone.Arm: ArmMultiplier = value; break;
-                case BodyZone.Leg: LegMultiplier = value; break;
-                case BodyZone.Dismemberment: DismembermentMultiplier = value; break;
+                case BodyZone.Throat: ThroatChance = value; break;
+                case BodyZone.Head: HeadChance = value; break;
+                case BodyZone.Neck: NeckChance = value; break;
+                case BodyZone.Torso: TorsoChance = value; break;
+                case BodyZone.Arm: ArmChance = value; break;
+                case BodyZone.Leg: LegChance = value; break;
+                case BodyZone.Dismemberment: DismembermentChance = value; break;
+            }
+        }
+
+        public static void SetZoneDamage(BodyZone zone, float value)
+        {
+            switch (zone)
+            {
+                case BodyZone.Throat: ThroatDamage = value; break;
+                case BodyZone.Head: HeadDamage = value; break;
+                case BodyZone.Neck: NeckDamage = value; break;
+                case BodyZone.Torso: TorsoDamage = value; break;
+                case BodyZone.Arm: ArmDamage = value; break;
+                case BodyZone.Leg: LegDamage = value; break;
+                case BodyZone.Dismemberment: DismembermentDamage = value; break;
             }
         }
 
@@ -599,20 +630,6 @@ namespace BDOT.Configuration
                 case BodyZone.Arm: ArmDuration = value; break;
                 case BodyZone.Leg: LegDuration = value; break;
                 case BodyZone.Dismemberment: DismembermentDuration = value; break;
-            }
-        }
-
-        public static void SetZoneDamagePerTick(BodyZone zone, float value)
-        {
-            switch (zone)
-            {
-                case BodyZone.Throat: ThroatDamagePerTick = value; break;
-                case BodyZone.Head: HeadDamagePerTick = value; break;
-                case BodyZone.Neck: NeckDamagePerTick = value; break;
-                case BodyZone.Torso: TorsoDamagePerTick = value; break;
-                case BodyZone.Arm: ArmDamagePerTick = value; break;
-                case BodyZone.Leg: LegDamagePerTick = value; break;
-                case BodyZone.Dismemberment: DismembermentDamagePerTick = value; break;
             }
         }
 

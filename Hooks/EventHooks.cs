@@ -142,11 +142,11 @@ namespace BDOT.Hooks
                 if (BDOTModOptions.DebugLogging)
                     Debug.Log("[BDOT] Player caused: YES");
 
-                // Check damage type - only slash/pierce causes consistent bleeding
-                if (!ZoneDetector.ShouldCauseBleed(damageType))
+                // Check damage type - only slash/pierce/blunt can cause bleeding
+                if (damageType != DamageType.Slash && damageType != DamageType.Pierce && damageType != DamageType.Blunt)
                 {
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] SKIP: DamageType " + damageType + " doesn't cause bleed");
+                        Debug.Log("[BDOT] SKIP: DamageType " + damageType + " cannot cause bleed");
                     return;
                 }
 
@@ -177,11 +177,11 @@ namespace BDOT.Hooks
                 if (BDOTModOptions.DebugLogging)
                 {
                     Debug.Log("[BDOT] Zone: " + zone.GetDisplayName() + " | Enabled: " + config.Enabled);
-                    Debug.Log("[BDOT] Config: Mult=" + config.Multiplier.ToString("F1") + "x, Duration=" + config.Duration.ToString("F1") + "s, DmgPerTick=" + config.DamagePerTick.ToString("F2") + ", MaxStacks=" + config.StackLimit);
+                    Debug.Log("[BDOT] Config: Chance=" + config.Chance.ToString("F0") + "%, Duration=" + config.Duration.ToString("F1") + "s, DmgPerTick=" + config.Damage.ToString("F2") + ", MaxStacks=" + config.StackLimit);
                 }
 
-                // Apply bleed effect
-                bool applied = BleedManager.Instance.ApplyBleed(creature, zone);
+                // Apply bleed effect (chance is checked inside ApplyBleed)
+                bool applied = BleedManager.Instance.ApplyBleed(creature, zone, damageType);
                 if (BDOTModOptions.DebugLogging)
                 {
                     if (applied)

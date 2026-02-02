@@ -163,34 +163,5 @@ namespace BDOT.Core
 
             return BodyZone.Unknown;
         }
-
-        /// <summary>
-        /// Determines if a damage type should cause bleeding.
-        /// </summary>
-        public static bool ShouldCauseBleed(DamageType damageType)
-        {
-            switch (damageType)
-            {
-                case DamageType.Slash:
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] ZoneDetector: DamageType=Slash -> causes bleed (100%)");
-                    return true;
-                case DamageType.Pierce:
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] ZoneDetector: DamageType=Pierce -> causes bleed (100%)");
-                    return true;
-                case DamageType.Blunt:
-                    // Blunt damage has a lower chance to cause bleeding
-                    float bluntRoll = Random.value;
-                    bool bluntBleeds = bluntRoll < 0.25f;
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] ZoneDetector: DamageType=Blunt, roll=" + bluntRoll.ToString("F2") + " -> " + (bluntBleeds ? "BLEEDS (25% chance)" : "no bleed"));
-                    return bluntBleeds;
-                default:
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] ZoneDetector: DamageType=" + damageType + " -> no bleed (not slash/pierce/blunt)");
-                    return false;
-            }
-        }
     }
 }

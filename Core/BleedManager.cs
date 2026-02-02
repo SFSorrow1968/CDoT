@@ -149,7 +149,7 @@ namespace BDOT.Core
             Debug.Log("[BDOT] --------------------------------");
         }
 
-        public bool ApplyBleed(Creature target, BodyZone zone)
+        public bool ApplyBleed(Creature target, BodyZone zone, DamageType damageType)
         {
             if (target == null || target.isKilled || target.isPlayer)
                 return false;
@@ -162,6 +162,15 @@ namespace BDOT.Core
             {
                 if (BDOTModOptions.DebugLogging)
                     Debug.Log("[BDOT] Zone disabled: " + zone.GetDisplayName());
+                return false;
+            }
+
+            // Check chance roll
+            float roll = UnityEngine.Random.value * 100f;
+            if (roll > config.Chance)
+            {
+                if (BDOTModOptions.DebugLogging)
+                    Debug.Log("[BDOT] Chance roll failed: " + roll.ToString("F1") + " > " + config.Chance.ToString("F0") + "%");
                 return false;
             }
 
@@ -189,7 +198,7 @@ namespace BDOT.Core
                 // Stack the effect
                 int oldStacks = existingEffect.StackCount;
                 float oldDuration = existingEffect.RemainingDuration;
-                existingEffect.AddStack(config.DamagePerTick, config.Duration, config.StackLimit);
+                existingEffect.AddStack(config.Damage, config.Duration, config.StackLimit);
                 if (BDOTModOptions.DebugLogging)
                 {
                     Debug.Log("[BDOT] STACK: " + zone.GetDisplayName() + " on " + target.name);
@@ -204,16 +213,17 @@ namespace BDOT.Core
                 var newEffect = new BleedEffect(
                     target,
                     zone,
-                    config.DamagePerTick,
-                    config.Multiplier,
+                    damageType,
+                    config.Damage,
                     config.Duration
                 );
                 effects.Add(newEffect);
                 if (BDOTModOptions.DebugLogging)
                 {
+                    float damageTypeMult = BDOTModOptions.GetDamageTypeMultiplier(damageType);
                     Debug.Log("[BDOT] NEW BLEED: " + zone.GetDisplayName() + " on " + target.name);
-                    Debug.Log("[BDOT]   BaseDmg=" + config.DamagePerTick.ToString("F2") + " | Mult=" + config.Multiplier.ToString("F1") + "x | Duration=" + config.Duration.ToString("F1") + "s");
-                    Debug.Log("[BDOT]   Tick damage: " + newEffect.GetTickDamage().ToString("F2") + " (with global mult " + BDOTModOptions.GlobalDamageMultiplier.ToString("F2") + "x)");
+                    Debug.Log("[BDOT]   BaseDmg=" + config.Damage.ToString("F2") + " | DamageType=" + damageType + " (" + damageTypeMult.ToString("F1") + "x) | Duration=" + config.Duration.ToString("F1") + "s");
+                    Debug.Log("[BDOT]   Tick damage: " + newEffect.GetTickDamage().ToString("F2"));
                 }
             }
 
@@ -249,8 +259,9 @@ namespace BDOT.Core
 
                 if (BDOTModOptions.DebugLogging)
                 {
+                    float damageTypeMult = BDOTModOptions.GetDamageTypeMultiplier(effect.DamageType);
                     Debug.Log("[BDOT] TICK: " + effect.Zone.GetDisplayName() + " x" + effect.StackCount + " on " + target.name);
-                    Debug.Log("[BDOT]   Damage: " + damage.ToString("F2") + " (base=" + effect.DamagePerTick.ToString("F2") + " * mult=" + effect.Multiplier.ToString("F1") + " * stacks=" + effect.StackCount + " * global=" + BDOTModOptions.GlobalDamageMultiplier.ToString("F2") + ")");
+                    Debug.Log("[BDOT]   Damage: " + damage.ToString("F2") + " (base=" + effect.DamagePerTick.ToString("F2") + " * stacks=" + effect.StackCount + " * " + effect.DamageType + "=" + damageTypeMult.ToString("F1") + "x)");
                     Debug.Log("[BDOT]   Health: " + healthBefore.ToString("F1") + " -> " + healthAfter.ToString("F1") + " | Remaining: " + effect.RemainingDuration.ToString("F1") + "s");
                 }
             }

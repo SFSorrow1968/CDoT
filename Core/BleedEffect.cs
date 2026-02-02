@@ -7,8 +7,8 @@ namespace BDOT.Core
     {
         public Creature Target { get; private set; }
         public BodyZone Zone { get; private set; }
+        public DamageType DamageType { get; private set; }
         public float DamagePerTick { get; private set; }
-        public float Multiplier { get; private set; }
         public float RemainingDuration { get; private set; }
         public float TotalDuration { get; private set; }
         public int StackCount { get; private set; }
@@ -33,12 +33,12 @@ namespace BDOT.Core
             }
         }
 
-        public BleedEffect(Creature target, BodyZone zone, float damagePerTick, float multiplier, float duration)
+        public BleedEffect(Creature target, BodyZone zone, DamageType damageType, float damagePerTick, float duration)
         {
             Target = target;
             Zone = zone;
+            DamageType = damageType;
             DamagePerTick = damagePerTick;
-            Multiplier = multiplier;
             RemainingDuration = duration;
             TotalDuration = duration;
             StackCount = 1;
@@ -73,16 +73,15 @@ namespace BDOT.Core
 
         public float GetTickDamage()
         {
-            // Total damage = base damage * multiplier * stack count * global multiplier
-            // Note: Presets batch-write to zone values, so zone multiplier already reflects preset
-            float baseDamage = DamagePerTick * Multiplier * StackCount;
-            float globalMult = BDOTModOptions.GlobalDamageMultiplier;
-            return baseDamage * globalMult;
+            // Total damage = base damage * stack count * damage type multiplier
+            float baseDamage = DamagePerTick * StackCount;
+            float damageTypeMult = BDOTModOptions.GetDamageTypeMultiplier(DamageType);
+            return baseDamage * damageTypeMult;
         }
 
         public override string ToString()
         {
-            return $"BleedEffect[{Zone.GetDisplayName()} x{StackCount} | {RemainingDuration:F1}s | {GetTickDamage():F1} dmg/tick]";
+            return $"BleedEffect[{Zone.GetDisplayName()} x{StackCount} | {RemainingDuration:F1}s | {GetTickDamage():F1} dmg/tick | {DamageType}]";
         }
     }
 }
