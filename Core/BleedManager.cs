@@ -263,10 +263,11 @@ namespace BDOT.Core
             if (damage <= 0f)
                 return;
 
-            // Maintain visual status effect for fire/lightning DOT
+            // Apply heat/electrocute status effect scaled by damage for fire/lightning DOT
+            // This causes heat to accumulate → ignition → charring → combustion
             if (effect.DamageType == DamageType.Fire || effect.DamageType == DamageType.Lightning)
             {
-                ApplyStatusEffectVisual(target, effect.DamageType);
+                ApplyStatusEffectForDamage(target, effect.DamageType, damage);
             }
 
             // Apply damage by directly modifying currentHealth
@@ -400,8 +401,54 @@ namespace BDOT.Core
         }
 
         /// <summary>
-        /// Applies visual status effect (Burning/Electrocute) to creature if they have active elemental DOT.
-        /// Call this when applying new fire/lightning DOT.
+        /// Applies heat or electrocute status based on fire/lightning DOT damage.
+        /// Heat accumulates with each tick - more damage = faster ignition and charring.
+        /// </summary>
+        /// <param name="creature">Target creature</param>
+        /// <param name="damageType">Fire or Lightning</param>
+        /// <param name="damage">DOT damage dealt this tick - used to scale heat</param>
+        public void ApplyStatusEffectForDamage(Creature creature, DamageType damageType, float damage)
+        {
+            if (creature == null || creature.isKilled) return;
+
+            try
+            {
+                if (damageType == DamageType.Fire)
+                {
+                    // Add heat proportional to damage dealt
+                    // Higher damage = more heat = faster ignition/charring
+                    // Typical DOT damage is 1-5 HP, so heat multiplier scales this to meaningful heat values
+                    // Heat threshold for ignition is typically around 100, so we use damage * 10-20 range
+                    float heatToAdd = damage * 15f; // Scales DOT damage to heat buildup
+                    
+                    creature.Inflict("Burning", this, float.PositiveInfinity, heatToAdd, true);
+                    
+                    if (BDOTModOptions.DebugLogging)
+                    {
+                        var burning = creature.GetStatusOfType<Burning>();
+                        string heatInfo = burning != null ? " | Heat: " + burning.Heat.ToString("F1") + " | Ignited: " + burning.isIgnited : "";
+                        Debug.Log("[BDOT] Fire tick on " + creature.name + " | Damage: " + damage.ToString("F2") + " | Heat added: " + heatToAdd.ToString("F1") + heatInfo);
+                    }
+                }
+                else if (damageType == DamageType.Lightning)
+                {
+                    // Apply/refresh Electrocute visual status
+                    // Duration matches typical DOT tick interval so it stays active
+                    creature.Inflict("Electrocute", this, 2f, null, true);
+                    
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] Lightning tick on " + creature.name + " | Electrocute refreshed");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("[BDOT] Error applying status effect: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Initial status effect application when DOT first starts.
+        /// Applies a small amount of heat/electrocute to begin the effect.
         /// </summary>
         public void ApplyStatusEffectVisual(Creature creature, DamageType damageType)
         {
@@ -411,23 +458,22 @@ namespace BDOT.Core
             {
                 if (damageType == DamageType.Fire)
                 {
-                    // Apply Burning visual via Inflict with heat
-                    // Heat of 100f triggers immediate ignite for visual effect
-                    creature.Inflict("Burning", this, float.PositiveInfinity, 100f, true);
+                    // Initial heat application - small amount to start smoking
+                    creature.Inflict("Burning", this, float.PositiveInfinity, 20f, true);
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Applied Burning visual to " + creature.name);
+                        Debug.Log("[BDOT] Started fire DOT on " + creature.name + " | Initial heat: 20");
                 }
                 else if (damageType == DamageType.Lightning)
                 {
                     // Apply Electrocute visual status
                     creature.Inflict("Electrocute", this, 2f, null, true);
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Applied Electrocute visual to " + creature.name);
+                        Debug.Log("[BDOT] Started lightning DOT on " + creature.name);
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] Error applying status visual: " + ex.Message);
+                Debug.LogError("[BDOT] Error applying initial status visual: " + ex.Message);
             }
         }
 
