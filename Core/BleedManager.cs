@@ -85,6 +85,13 @@ namespace BDOT.Core
                     foreach (var effect in _effectsToRemove)
                     {
                         effects.Remove(effect);
+                        
+                        // Remove visual status effect if no more fire/lightning DOT
+                        if (effect.DamageType == DamageType.Fire || effect.DamageType == DamageType.Lightning)
+                        {
+                            RemoveStatusEffectVisualIfNeeded(effect.Target, effect.DamageType);
+                        }
+                        
                         if (BDOTModOptions.DebugLogging)
                         {
                             string reason = effect.IsExpired ? "duration ended" : "target invalid/killed";
@@ -104,9 +111,6 @@ namespace BDOT.Core
                 {
                     _activeEffects.Remove(creatureId);
                 }
-
-                // Apply status effect DOT (Burning/Electrocute)
-                ApplyStatusEffectDamage(deltaTime);
 
                 // Periodic status logging
                 if (BDOTModOptions.DebugLogging && _activeEffects.Count > 0)
@@ -230,6 +234,12 @@ namespace BDOT.Core
                 }
             }
 
+            // Apply visual status effect for fire/lightning DOT
+            if (damageType == DamageType.Fire || damageType == DamageType.Lightning)
+            {
+                ApplyStatusEffectVisual(target, damageType);
+            }
+
             BDOTModOptions.IncrementBleedCount();
             return true;
         }
@@ -252,6 +262,12 @@ namespace BDOT.Core
             float damage = effect.GetTickDamage();
             if (damage <= 0f)
                 return;
+
+            // Maintain visual status effect for fire/lightning DOT
+            if (effect.DamageType == DamageType.Fire || effect.DamageType == DamageType.Lightning)
+            {
+                ApplyStatusEffectVisual(target, effect.DamageType);
+            }
 
             // Apply damage by directly modifying currentHealth
             // This avoids triggering EventManager.InvokeCreatureHit which was causing null reference errors
@@ -349,73 +365,90 @@ namespace BDOT.Core
             _instance = null;
         }
 
-        private float _statusEffectDamageCooldown = 0f;
-        private const float STATUS_EFFECT_TICK_INTERVAL = 1.0f; // Apply status damage once per second
-
-        private void ApplyStatusEffectDamage(float deltaTime)
+        /// <summary>
+        /// Checks if a creature has any active fire DOT effects.
+        /// </summary>
+        public bool HasActiveFireDOT(Creature creature)
         {
-            _statusEffectDamageCooldown += deltaTime;
+            if (creature == null) return false;
+            int creatureId = creature.GetInstanceID();
+            if (!_activeEffects.TryGetValue(creatureId, out var effects)) return false;
+            
+            foreach (var effect in effects)
+            {
+                if (effect.DamageType == DamageType.Fire && !effect.IsExpired)
+                    return true;
+            }
+            return false;
+        }
 
-            if (_statusEffectDamageCooldown < STATUS_EFFECT_TICK_INTERVAL)
-                return;
+        /// <summary>
+        /// Checks if a creature has any active lightning DOT effects.
+        /// </summary>
+        public bool HasActiveLightningDOT(Creature creature)
+        {
+            if (creature == null) return false;
+            int creatureId = creature.GetInstanceID();
+            if (!_activeEffects.TryGetValue(creatureId, out var effects)) return false;
+            
+            foreach (var effect in effects)
+            {
+                if (effect.DamageType == DamageType.Lightning && !effect.IsExpired)
+                    return true;
+            }
+            return false;
+        }
 
-            _statusEffectDamageCooldown = 0f;
-
-            // Skip if both multipliers are 0
-            if (BDOTModOptions.BurningStatusMultiplier <= 0f && BDOTModOptions.ElectrocuteStatusMultiplier <= 0f)
-                return;
+        /// <summary>
+        /// Applies visual status effect (Burning/Electrocute) to creature if they have active elemental DOT.
+        /// Call this when applying new fire/lightning DOT.
+        /// </summary>
+        public void ApplyStatusEffectVisual(Creature creature, DamageType damageType)
+        {
+            if (creature == null || creature.isKilled) return;
 
             try
             {
-                foreach (Creature creature in Creature.allActive)
+                if (damageType == DamageType.Fire)
                 {
-                    if (creature == null || creature.isKilled || creature.isPlayer)
-                        continue;
-
-                    // Check for Burning status
-                    if (BDOTModOptions.BurningStatusMultiplier > 0f)
-                    {
-                        var burning = creature.GetStatusOfType<Burning>();
-                        if (burning != null)
-                        {
-                            // Base damage: 1.0 HP/sec * multiplier
-                            float damage = 1.0f * BDOTModOptions.BurningStatusMultiplier;
-                            
-                            if (BDOTModOptions.DebugLogging)
-                                Debug.Log("[BDOT] STATUS TICK: Burning on " + creature.name + " | Damage: " + damage.ToString("F2"));
-
-                            creature.currentHealth -= damage;
-                            if (creature.currentHealth <= 0f && !creature.isKilled)
-                            {
-                                creature.Kill();
-                            }
-                        }
-                    }
-
-                    // Check for Electrocute status
-                    if (BDOTModOptions.ElectrocuteStatusMultiplier > 0f)
-                    {
-                        var electrocute = creature.GetStatusOfType<Electrocute>();
-                        if (electrocute != null)
-                        {
-                            // Base damage: 1.0 HP/sec * multiplier
-                            float damage = 1.0f * BDOTModOptions.ElectrocuteStatusMultiplier;
-                            
-                            if (BDOTModOptions.DebugLogging)
-                                Debug.Log("[BDOT] STATUS TICK: Electrocute on " + creature.name + " | Damage: " + damage.ToString("F2"));
-
-                            creature.currentHealth -= damage;
-                            if (creature.currentHealth <= 0f && !creature.isKilled)
-                            {
-                                creature.Kill();
-                            }
-                        }
-                    }
+                    // Apply Burning visual via Inflict with heat
+                    // Heat of 100f triggers immediate ignite for visual effect
+                    creature.Inflict("Burning", this, float.PositiveInfinity, 100f, true);
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] Applied Burning visual to " + creature.name);
+                }
+                else if (damageType == DamageType.Lightning)
+                {
+                    // Apply Electrocute visual status
+                    creature.Inflict("Electrocute", this, 2f, null, true);
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] Applied Electrocute visual to " + creature.name);
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] Error in ApplyStatusEffectDamage: " + ex.Message);
+                Debug.LogError("[BDOT] Error applying status visual: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Removes visual status effect if no more DOT of that type is active.
+        /// Call this when an elemental DOT expires.
+        /// Note: For burning, the status naturally decays via heat loss.
+        /// For electrocute, it has a short duration and will auto-expire.
+        /// We reapply during DOT ticks to keep the visual active.
+        /// </summary>
+        public void RemoveStatusEffectVisualIfNeeded(Creature creature, DamageType damageType)
+        {
+            // Status effects will naturally expire when we stop reapplying them
+            // Burning decays via heat loss, Electrocute has short duration
+            // No need to actively remove - they'll fade when DOT ends
+            if (BDOTModOptions.DebugLogging && creature != null && !creature.isKilled)
+            {
+                if (damageType == DamageType.Fire && !HasActiveFireDOT(creature))
+                    Debug.Log("[BDOT] Fire DOT ended on " + creature.name + " - Burning will fade");
+                else if (damageType == DamageType.Lightning && !HasActiveLightningDOT(creature))
+                    Debug.Log("[BDOT] Lightning DOT ended on " + creature.name + " - Electrocute will fade");
             }
         }
     }

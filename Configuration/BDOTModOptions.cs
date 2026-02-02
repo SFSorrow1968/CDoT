@@ -35,9 +35,9 @@ namespace BDOT.Configuration
         public const string OptionPierceMultiplier = "Pierce Mult";
         public const string OptionSlashMultiplier = "Slash Mult";
         public const string OptionBluntMultiplier = "Blunt Mult";
-        // Status effect multipliers (elemental DOT is status-only)
-        public const string OptionBurningMultiplier = "Burning Status Mult";
-        public const string OptionElectrocuteMultiplier = "Electrocute Status Mult";
+        // Damage type multipliers - Elemental (zone-based DOT with visual status effect)
+        public const string OptionFireMultiplier = "Fire Mult";
+        public const string OptionLightningMultiplier = "Lightning Mult";
 
         // Zone toggles
         public const string OptionThroatEnabled = "Throat Enabled";
@@ -336,11 +336,11 @@ namespace BDOT.Configuration
         [ModOption(name = OptionBluntMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 30, defaultValueIndex = 5, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for blunt attacks. 0.0x disables DOT from blunt entirely.")]
         public static float BluntMultiplier = 0.5f;
 
-        [ModOption(name = OptionBurningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 70, defaultValueIndex = 5, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Additional DOT damage multiplier when creature has Burning status. Stacks with Fire multiplier. 0.0x = no bonus damage from burning status.")]
-        public static float BurningStatusMultiplier = 0.5f;
+        [ModOption(name = OptionFireMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 40, defaultValueIndex = 12, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely.")]
+        public static float FireMultiplier = 1.2f;
 
-        [ModOption(name = OptionElectrocuteMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 80, defaultValueIndex = 8, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier when creature has Electrocute status. Electrocute normally does no damage. 0.0x = no damage from electrocute.")]
-        public static float ElectrocuteStatusMultiplier = 0.8f;
+        [ModOption(name = OptionLightningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 50, defaultValueIndex = 12, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely.")]
+        public static float LightningMultiplier = 1.2f;
 
         #endregion
 
@@ -683,28 +683,28 @@ namespace BDOT.Configuration
 
         /// <summary>
         /// Checks if a damage type should trigger zone-based DOT.
-        /// Only physical damage types (Pierce/Slash/Blunt) apply zone DOT.
-        /// Elemental damage (Fire/Lightning/Energy) uses status effect DOT instead.
+        /// Physical types (Pierce/Slash/Blunt) and elemental types (Fire/Lightning) are allowed.
+        /// Fire/Lightning DOT also applies visual status effects (Burning/Electrocute).
         /// </summary>
         public static bool IsDamageTypeAllowed(DamageType damageType)
         {
-            // Only physical damage types trigger zone-based DOT
-            // Elemental DOT is handled by Burning/Electrocute status effects
             return damageType == DamageType.Pierce || 
                    damageType == DamageType.Slash || 
-                   damageType == DamageType.Blunt;
+                   damageType == DamageType.Blunt ||
+                   damageType == DamageType.Fire ||
+                   damageType == DamageType.Lightning;
         }
 
         public static float GetDamageTypeMultiplier(DamageType damageType)
         {
-            // Only physical damage types have hit-based DOT multipliers
-            // Elemental damage (Fire/Lightning/Energy) uses status effect DOT instead
             switch (damageType)
             {
                 case DamageType.Pierce: return PierceMultiplier;
                 case DamageType.Slash: return SlashMultiplier;
                 case DamageType.Blunt: return BluntMultiplier;
-                default: return 0f; // Elemental and other types don't apply zone DOT
+                case DamageType.Fire: return FireMultiplier;
+                case DamageType.Lightning: return LightningMultiplier;
+                default: return 0f;
             }
         }
 
@@ -725,18 +725,17 @@ namespace BDOT.Configuration
                         Debug.Log("[BDOT] Profile changed to: " + currentProfile);
 
                     // Auto-adjust multipliers based on profile
-                    // Note: Elemental DOT is now status-only (Burning/Electrocute)
                     if (currentProfile == ProfilePreset.BleedOnly)
                     {
-                        // Bleed Only: disable status effect DOT
+                        // Bleed Only: disable elemental multipliers
                         if (DebugLogging)
-                            Debug.Log("[BDOT] Setting status multipliers to 0x for Bleed Only profile");
-                        BurningStatusMultiplier = 0f;
-                        ElectrocuteStatusMultiplier = 0f;
+                            Debug.Log("[BDOT] Setting elemental multipliers to 0x for Bleed Only profile");
+                        FireMultiplier = 0f;
+                        LightningMultiplier = 0f;
                     }
                     else if (currentProfile == ProfilePreset.ElementalOnly)
                     {
-                        // Elemental Only: disable physical damage DOT
+                        // Elemental Only: disable physical multipliers
                         if (DebugLogging)
                             Debug.Log("[BDOT] Setting physical multipliers to 0x for Elemental Only profile");
                         PierceMultiplier = 0f;
