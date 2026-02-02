@@ -39,6 +39,9 @@ namespace BDOT.Configuration
         public const string OptionFireMultiplier = "Fire Mult";
         public const string OptionLightningMultiplier = "Lightning Mult";
         public const string OptionEnergyMultiplier = "Energy Mult";
+        // Status effect multipliers
+        public const string OptionBurningMultiplier = "Burning Status Mult";
+        public const string OptionElectrocuteMultiplier = "Electrocute Status Mult";
 
         // Zone toggles
         public const string OptionThroatEnabled = "Throat Enabled";
@@ -345,6 +348,12 @@ namespace BDOT.Configuration
 
         [ModOption(name = OptionEnergyMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 60, defaultValueIndex = 10, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for energy attacks. 0.0x disables DOT from energy entirely.")]
         public static float EnergyMultiplier = 1.0f;
+
+        [ModOption(name = OptionBurningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 70, defaultValueIndex = 5, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Additional DOT damage multiplier when creature has Burning status. Stacks with Fire multiplier. 0.0x = no bonus damage from burning status.")]
+        public static float BurningStatusMultiplier = 0.5f;
+
+        [ModOption(name = OptionElectrocuteMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 80, defaultValueIndex = 8, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier when creature has Electrocute status. Electrocute normally does no damage. 0.0x = no damage from electrocute.")]
+        public static float ElectrocuteStatusMultiplier = 0.8f;
 
         #endregion
 

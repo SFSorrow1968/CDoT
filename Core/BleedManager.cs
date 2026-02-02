@@ -105,6 +105,9 @@ namespace BDOT.Core
                     _activeEffects.Remove(creatureId);
                 }
 
+                // Apply status effect DOT (Burning/Electrocute)
+                ApplyStatusEffectDamage(deltaTime);
+
                 // Periodic status logging
                 if (BDOTModOptions.DebugLogging && _activeEffects.Count > 0)
                 {
@@ -344,6 +347,76 @@ namespace BDOT.Core
         {
             ClearAll();
             _instance = null;
+        }
+
+        private float _statusEffectDamageCooldown = 0f;
+        private const float STATUS_EFFECT_TICK_INTERVAL = 1.0f; // Apply status damage once per second
+
+        private void ApplyStatusEffectDamage(float deltaTime)
+        {
+            _statusEffectDamageCooldown += deltaTime;
+
+            if (_statusEffectDamageCooldown < STATUS_EFFECT_TICK_INTERVAL)
+                return;
+
+            _statusEffectDamageCooldown = 0f;
+
+            // Skip if both multipliers are 0
+            if (BDOTModOptions.BurningStatusMultiplier <= 0f && BDOTModOptions.ElectrocuteStatusMultiplier <= 0f)
+                return;
+
+            try
+            {
+                foreach (Creature creature in Creature.allActive)
+                {
+                    if (creature == null || creature.isKilled || creature.isPlayer)
+                        continue;
+
+                    // Check for Burning status
+                    if (BDOTModOptions.BurningStatusMultiplier > 0f)
+                    {
+                        var burning = creature.GetStatusOfType<Burning>();
+                        if (burning != null)
+                        {
+                            // Base damage: 1.0 HP/sec * multiplier
+                            float damage = 1.0f * BDOTModOptions.BurningStatusMultiplier;
+                            
+                            if (BDOTModOptions.DebugLogging)
+                                Debug.Log("[BDOT] STATUS TICK: Burning on " + creature.name + " | Damage: " + damage.ToString("F2"));
+
+                            creature.currentHealth -= damage;
+                            if (creature.currentHealth <= 0f && !creature.isKilled)
+                            {
+                                creature.Kill();
+                            }
+                        }
+                    }
+
+                    // Check for Electrocute status
+                    if (BDOTModOptions.ElectrocuteStatusMultiplier > 0f)
+                    {
+                        var electrocute = creature.GetStatusOfType<Electrocute>();
+                        if (electrocute != null)
+                        {
+                            // Base damage: 1.0 HP/sec * multiplier
+                            float damage = 1.0f * BDOTModOptions.ElectrocuteStatusMultiplier;
+                            
+                            if (BDOTModOptions.DebugLogging)
+                                Debug.Log("[BDOT] STATUS TICK: Electrocute on " + creature.name + " | Damage: " + damage.ToString("F2"));
+
+                            creature.currentHealth -= damage;
+                            if (creature.currentHealth <= 0f && !creature.isKilled)
+                            {
+                                creature.Kill();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("[BDOT] Error in ApplyStatusEffectDamage: " + ex.Message);
+            }
         }
     }
 }
