@@ -104,8 +104,7 @@ namespace BDOT.Core
                 if (!_initialized)
                     return;
 
-                if (ApplyAllPresets(true))
-                    ModManager.RefreshModOptionsUI();
+                ApplyAllPresets(true);
                 return;
             }
 
@@ -115,8 +114,7 @@ namespace BDOT.Core
                 return;
             _lastFullCheckTime = now;
 
-            if (ApplyAllPresets(false))
-                ModManager.RefreshModOptionsUI();
+            ApplyAllPresets(false);
         }
 
         private void TryInitialize()
@@ -535,7 +533,6 @@ namespace BDOT.Core
                 return false;
 
             option.Apply(index);
-            option.RefreshUI();
             if (BDOTModOptions.DebugLogging)
                 Debug.Log("[BDOT] Menu sync updated: " + DescribeOption(option) + " -> " + value);
             return true;
