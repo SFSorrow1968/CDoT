@@ -18,18 +18,18 @@ namespace BDOT.Core
         private float _lastStatusLogTime = 0f;
         private const float STATUS_LOG_INTERVAL = 5f; // Log status every 5 seconds when effects are active
 
-        // Blood effect data - loaded once from catalog
-        private EffectData _bleedEffectData;
-        private bool _bleedEffectLoaded = false;
-        private const string BLEED_EFFECT_ID = "PenetrationDeepBleeding";
+        // Blood effect data - loaded once from catalog as fallback
+        private EffectData _fallbackBleedEffectData;
+        private bool _fallbackBleedEffectLoaded = false;
+        private const string FALLBACK_BLEED_EFFECT_ID = "PenetrationDeepBleeding";
 
         public void Initialize()
         {
             try
             {
                 _activeEffects.Clear();
-                _bleedEffectLoaded = false;
-                _bleedEffectData = null;
+                _fallbackBleedEffectLoaded = false;
+                _fallbackBleedEffectData = null;
                 Debug.Log("[BDOT] BleedManager initialized");
             }
             catch (Exception ex)
@@ -353,21 +353,29 @@ namespace BDOT.Core
 
             try
             {
-                // Load effect data if not already loaded
-                if (!_bleedEffectLoaded)
+                var hitPart = effect.HitPart;
+                
+                // Try to use the hitPart's own penetration effect data first (most appropriate for that body part)
+                // Fall back to generic bleeding effect if not available
+                EffectData effectData = hitPart.data?.penetrationDeepEffectData;
+                
+                if (effectData == null)
                 {
-                    _bleedEffectData = Catalog.GetData<EffectData>(BLEED_EFFECT_ID, true);
-                    _bleedEffectLoaded = true;
-                    if (_bleedEffectData == null)
+                    // Load fallback effect data if not already loaded
+                    if (!_fallbackBleedEffectLoaded)
                     {
-                        Debug.LogWarning("[BDOT] Could not load bleed effect: " + BLEED_EFFECT_ID);
+                        _fallbackBleedEffectData = Catalog.GetData<EffectData>(FALLBACK_BLEED_EFFECT_ID, true);
+                        _fallbackBleedEffectLoaded = true;
+                        if (_fallbackBleedEffectData == null)
+                        {
+                            Debug.LogWarning("[BDOT] Could not load fallback bleed effect: " + FALLBACK_BLEED_EFFECT_ID);
+                        }
                     }
+                    effectData = _fallbackBleedEffectData;
                 }
 
-                if (_bleedEffectData == null)
+                if (effectData == null)
                     return;
-
-                var hitPart = effect.HitPart;
                 
                 // Calculate intensity based on damage (typical damage 1-5, scale to 0.2-1.0)
                 float intensity = Mathf.Clamp(damage * 0.2f, 0.2f, 1.0f);
@@ -403,18 +411,19 @@ namespace BDOT.Core
                         break;
                 }
 
-                // Spawn blood spurt effect(s) at the exact hit part location
-                // Use hitPart transform directly to ensure all spurts spawn at the exact same position
+                // Spawn blood spurt effect(s) at the hit part location
+                // Use position directly and rotation facing outward (like ThunderRoad does)
                 Vector3 position = hitPart.transform.position;
-                Quaternion rotation = hitPart.transform.rotation;
+                // Blood spurts outward from the body - use transform.up as the outward direction
+                Quaternion rotation = Quaternion.LookRotation(hitPart.transform.up, hitPart.transform.forward);
                 
                 for (int i = 0; i < spurtCount; i++)
                 {
-                    var effectInstance = _bleedEffectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f);
+                    var effectInstance = effectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f);
                     if (effectInstance != null)
                     {
                         effectInstance.SetIntensity(intensity);
-                        effectInstance.Play();
+                        effectInstance.Play(0, false, false);
                         
                         // Store reference to the most recent effect so we can end it when bleed expires
                         // (older spurts will naturally despawn on their own)
