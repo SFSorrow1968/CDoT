@@ -22,8 +22,11 @@ namespace BDOT.Core
         public EffectInstance BloodEffectInstance { get; private set; }
         public float CurrentBloodIntensity { get; private set; }
         private float _timeSinceEffectRefresh = 0f;
-        private const float EFFECT_REFRESH_INTERVAL = 0.1f; // Refresh 10x per second
+        private float _timeSinceEffectRespawn = 0f;
+        private const float EFFECT_REFRESH_INTERVAL = 0.1f; // Refresh intensity 10x per second
+        private const float EFFECT_RESPAWN_INTERVAL = 0.8f; // Re-spawn particles every 0.8s
         private bool _effectSpawnAttempted = false; // Track if we've tried to spawn
+        private EffectData _cachedBloodEffectData = null; // Cache for re-spawning
 
         public bool IsExpired => RemainingDuration <= 0f;
         public bool IsValid
@@ -110,12 +113,20 @@ namespace BDOT.Core
             RemainingDuration -= deltaTime;
             TimeSinceLastTick += deltaTime;
             _timeSinceEffectRefresh += deltaTime;
+            _timeSinceEffectRespawn += deltaTime;
 
-            // Periodically refresh blood effect intensity to keep it active
+            // Periodically refresh blood effect intensity
             if (_timeSinceEffectRefresh >= EFFECT_REFRESH_INTERVAL)
             {
                 RefreshBloodEffect();
                 _timeSinceEffectRefresh = 0f;
+            }
+
+            // Periodically re-spawn blood particles to keep the effect going
+            if (_timeSinceEffectRespawn >= EFFECT_RESPAWN_INTERVAL)
+            {
+                RespawnBloodEffect();
+                _timeSinceEffectRespawn = 0f;
             }
         }
 
@@ -192,6 +203,9 @@ namespace BDOT.Core
                         Debug.Log("[BDOT] No blood effect data available for " + HitPart.type + " (checked part data and catalog)");
                     return;
                 }
+
+                // Cache the effect data for re-spawning
+                _cachedBloodEffectData = bloodEffectData;
 
                 // Get spawn position and rotation at the hit part
                 Transform hitTransform = HitPart.transform;
@@ -344,6 +358,66 @@ namespace BDOT.Core
                 if (BDOTModOptions.DebugLogging)
                     Debug.Log("[BDOT] Blood effect refresh failed: " + ex.Message);
                 BloodEffectInstance = null;
+            }
+        }
+
+        /// <summary>
+        /// Re-spawns blood particles periodically to maintain continuous bleeding visuals.
+        /// Particle effects have finite lifetimes, so we need to spawn new ones.
+        /// </summary>
+        private void RespawnBloodEffect()
+        {
+            try
+            {
+                // Need valid hit part and cached effect data
+                if (!HasValidHitPart || _cachedBloodEffectData == null)
+                    return;
+
+                // End any existing effect gracefully
+                if (BloodEffectInstance != null)
+                {
+                    try
+                    {
+                        if (BloodEffectInstance.effects != null && BloodEffectInstance.effects.Count > 0)
+                        {
+                            BloodEffectInstance.End(false, -1f);
+                        }
+                    }
+                    catch { }
+                    BloodEffectInstance = null;
+                }
+
+                // Get spawn position and rotation at the hit part
+                Transform hitTransform = HitPart.transform;
+                Vector3 position = hitTransform.position;
+                Quaternion rotation = Quaternion.LookRotation(hitTransform.forward, hitTransform.up);
+
+                // Update intensity
+                CurrentBloodIntensity = CalculateBloodIntensity();
+
+                // Spawn new effect WITHOUT audio
+                BloodEffectInstance = _cachedBloodEffectData.Spawn(
+                    position,
+                    rotation,
+                    hitTransform,
+                    null,
+                    true,
+                    null,
+                    false,
+                    CurrentBloodIntensity,
+                    1f,
+                    typeof(EffectModuleAudio)
+                );
+
+                if (BloodEffectInstance != null)
+                {
+                    BloodEffectInstance.Play(0, false, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (BDOTModOptions.DebugLogging)
+                    Debug.Log("[BDOT] Blood effect respawn failed: " + ex.Message);
             }
         }
 
