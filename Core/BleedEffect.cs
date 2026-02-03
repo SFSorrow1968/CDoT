@@ -131,7 +131,7 @@ namespace BDOT.Core
 
         /// <summary>
         /// Spawns a silent blood effect (no audio) at the hit location.
-        /// Uses the creature's penetration effect data if available.
+        /// Uses the creature's penetration effect data if available, or falls back to catalog effects.
         /// </summary>
         public void SpawnBloodEffect()
         {
@@ -142,7 +142,7 @@ namespace BDOT.Core
 
             try
             {
-                // Need a valid hit part with effect data
+                // Need a valid hit part for positioning
                 if (!HasValidHitPart)
                 {
                     if (BDOTModOptions.DebugLogging)
@@ -150,18 +150,46 @@ namespace BDOT.Core
                     return;
                 }
 
-                // Get the blood effect data from the ragdoll part
-                EffectData bloodEffectData = HitPart.data?.penetrationDeepEffectData;
+                // Try to get blood effect data from multiple sources
+                EffectData bloodEffectData = null;
+
+                // 1. Try ragdoll part's data (preferred - creature-specific)
+                if (HitPart.data != null)
+                {
+                    bloodEffectData = HitPart.data.penetrationDeepEffectData;
+                    if (bloodEffectData == null)
+                    {
+                        bloodEffectData = HitPart.data.sliceChildEffectData ?? HitPart.data.sliceParentEffectData;
+                    }
+                }
+
+                // 2. Fallback: Load from catalog using known effect IDs
                 if (bloodEffectData == null)
                 {
-                    // Fallback: try slice effect data
-                    bloodEffectData = HitPart.data?.sliceChildEffectData ?? HitPart.data?.sliceParentEffectData;
+                    // Try different blood effect IDs in order of preference
+                    string[] bloodEffectIds = new string[]
+                    {
+                        "PenetrationDeepBleeding",  // Best for bleeding (has particles)
+                        "PenetrationDeepFlesh",     // Standard deep penetration effect
+                        "SliceFleshChild",          // Slice blood spray
+                        "SliceFleshParent"          // Alternate slice effect
+                    };
+
+                    foreach (string effectId in bloodEffectIds)
+                    {
+                        if (Catalog.TryGetData<EffectData>(effectId, out bloodEffectData, false))
+                        {
+                            if (BDOTModOptions.DebugLogging)
+                                Debug.Log("[BDOT] Using catalog fallback effect: " + effectId);
+                            break;
+                        }
+                    }
                 }
 
                 if (bloodEffectData == null)
                 {
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] No blood effect data available for " + HitPart.type);
+                        Debug.Log("[BDOT] No blood effect data available for " + HitPart.type + " (checked part data and catalog)");
                     return;
                 }
 
@@ -197,6 +225,11 @@ namespace BDOT.Core
                                   " | Intensity: " + CurrentBloodIntensity.ToString("F2") + 
                                   " | EffectData: " + bloodEffectData.id);
                     }
+                }
+                else
+                {
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] EffectData.Spawn returned null for " + bloodEffectData.id);
                 }
             }
             catch (Exception ex)
