@@ -373,11 +373,11 @@ namespace BDOT.Core
         /// </summary>
         public void RefreshBloodEffect()
         {
+            if (BloodEffectInstance == null)
+                return;
+
             try
             {
-                if (BloodEffectInstance == null)
-                    return;
-
                 // Check if effect was despawned externally
                 if (BloodEffectInstance.effects == null || BloodEffectInstance.effects.Count == 0)
                 {

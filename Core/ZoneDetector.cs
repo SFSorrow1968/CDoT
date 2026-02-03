@@ -6,6 +6,12 @@ namespace BDOT.Core
 {
     public static class ZoneDetector
     {
+        // Cached part type masks for faster comparison
+        private const RagdollPart.Type ArmMask = RagdollPart.Type.LeftArm | RagdollPart.Type.RightArm |
+                                                  RagdollPart.Type.LeftHand | RagdollPart.Type.RightHand;
+        private const RagdollPart.Type LegMask = RagdollPart.Type.LeftLeg | RagdollPart.Type.RightLeg |
+                                                  RagdollPart.Type.LeftFoot | RagdollPart.Type.RightFoot;
+
         /// <summary>
         /// Determines the body zone from a ragdoll part, with special handling for throat detection.
         /// </summary>
@@ -60,8 +66,7 @@ namespace BDOT.Core
             }
 
             // Arm detection (includes hands)
-            if ((partType & (RagdollPart.Type.LeftArm | RagdollPart.Type.RightArm |
-                            RagdollPart.Type.LeftHand | RagdollPart.Type.RightHand)) != 0)
+            if ((partType & ArmMask) != 0)
             {
                 if (BDOTModOptions.DebugLogging)
                     Debug.Log("[BDOT] ZoneDetector: RagdollPart.Type=" + partType + " -> Arm");
@@ -69,8 +74,7 @@ namespace BDOT.Core
             }
 
             // Leg detection (includes feet)
-            if ((partType & (RagdollPart.Type.LeftLeg | RagdollPart.Type.RightLeg |
-                            RagdollPart.Type.LeftFoot | RagdollPart.Type.RightFoot)) != 0)
+            if ((partType & LegMask) != 0)
             {
                 if (BDOTModOptions.DebugLogging)
                     Debug.Log("[BDOT] ZoneDetector: RagdollPart.Type=" + partType + " -> Leg");
@@ -149,14 +153,12 @@ namespace BDOT.Core
                 return BodyZone.Torso;
             }
 
-            if ((partType & (RagdollPart.Type.LeftArm | RagdollPart.Type.RightArm |
-                            RagdollPart.Type.LeftHand | RagdollPart.Type.RightHand)) != 0)
+            if ((partType & ArmMask) != 0)
             {
                 return BodyZone.Arm;
             }
 
-            if ((partType & (RagdollPart.Type.LeftLeg | RagdollPart.Type.RightLeg |
-                            RagdollPart.Type.LeftFoot | RagdollPart.Type.RightFoot)) != 0)
+            if ((partType & LegMask) != 0)
             {
                 return BodyZone.Leg;
             }

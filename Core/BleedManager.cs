@@ -42,6 +42,7 @@ namespace BDOT.Core
                     return;
 
                 float deltaTime = Time.unscaledDeltaTime;
+                bool debugLogging = BDOTModOptions.DebugLogging; // Cache for this frame
 
                 _creaturesToRemove.Clear();
 
@@ -101,7 +102,7 @@ namespace BDOT.Core
                             RemoveStatusEffectVisualIfNeeded(effect.Target, effect.DamageType);
                         }
                         
-                        if (BDOTModOptions.DebugLogging)
+                        if (debugLogging)
                         {
                             string reason = effect.IsExpired ? "duration ended" : "target invalid/killed";
                             Debug.Log("[BDOT] EXPIRED: " + effect.Zone.GetDisplayName() + " on " + (effect.Target?.name ?? "null") + " (" + reason + ")");
@@ -122,7 +123,7 @@ namespace BDOT.Core
                 }
 
                 // Periodic status logging
-                if (BDOTModOptions.DebugLogging && _activeEffects.Count > 0)
+                if (debugLogging && _activeEffects.Count > 0)
                 {
                     float now = Time.unscaledTime;
                     if (now - _lastStatusLogTime >= STATUS_LOG_INTERVAL)
