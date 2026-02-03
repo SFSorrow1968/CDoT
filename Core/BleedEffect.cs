@@ -25,10 +25,14 @@ namespace BDOT.Core
         private float _timeSinceEffectRespawn = 0f;
         private const float EFFECT_REFRESH_INTERVAL = 0.1f; // Refresh intensity 10x per second
         private const float EFFECT_RESPAWN_INTERVAL = 0.8f; // Re-spawn particles every 0.8s
+        private const float FADE_OUT_DURATION = 1.5f; // Start fading out VFX in last 1.5 seconds
         private bool _effectSpawnAttempted = false; // Track if we've tried to spawn
         private EffectData _cachedBloodEffectData = null; // Cache for re-spawning
         private bool _useRendererBinding = false; // Whether to bind to creature renderer
         private Transform _spawnTransform = null; // Cached spawn transform
+        private Renderer _cachedRenderer = null; // Cached VFX renderer
+        private float _zoneIntensityMultiplier = 1f; // Cached zone multiplier
+        private bool _isFadingOut = false; // Track if we're in fade-out phase
 
         public bool IsExpired => RemainingDuration <= 0f;
         public bool IsValid
@@ -82,6 +86,7 @@ namespace BDOT.Core
             TickInterval = tickInterval;
             StackCount = 1;
             TimeSinceLastTick = 0f;
+            _zoneIntensityMultiplier = GetZoneIntensityMultiplierStatic(zone);
         }
 
         public void AddStack(float damagePerTick, float duration, int maxStacks, RagdollPart newHitPart = null)
@@ -95,6 +100,11 @@ namespace BDOT.Core
             if (duration > RemainingDuration)
             {
                 RemainingDuration = duration;
+                // Reset fade-out state if duration extended past fade threshold
+                if (RemainingDuration > FADE_OUT_DURATION)
+                {
+                    _isFadingOut = false;
+                }
             }
 
             // Update damage if the new hit is stronger
@@ -117,15 +127,21 @@ namespace BDOT.Core
             _timeSinceEffectRefresh += deltaTime;
             _timeSinceEffectRespawn += deltaTime;
 
-            // Periodically refresh blood effect intensity
+            // Check if entering fade-out phase
+            if (!_isFadingOut && RemainingDuration <= FADE_OUT_DURATION)
+            {
+                _isFadingOut = true;
+            }
+
+            // Periodically refresh blood effect intensity (handles fade-out)
             if (_timeSinceEffectRefresh >= EFFECT_REFRESH_INTERVAL)
             {
                 RefreshBloodEffect();
                 _timeSinceEffectRefresh = 0f;
             }
 
-            // Periodically re-spawn blood particles to keep the effect going
-            if (_timeSinceEffectRespawn >= EFFECT_RESPAWN_INTERVAL)
+            // Only respawn particles if NOT fading out - let existing particles die naturally
+            if (!_isFadingOut && _timeSinceEffectRespawn >= EFFECT_RESPAWN_INTERVAL)
             {
                 RespawnBloodEffect();
                 _timeSinceEffectRespawn = 0f;
@@ -141,6 +157,15 @@ namespace BDOT.Core
         }
 
         #region Blood VFX Methods
+
+        // Static effect IDs to avoid allocating new array each spawn
+        private static readonly string[] BloodEffectIds = new string[]
+        {
+            "PenetrationDeepBleeding",  // Best for continuous bleeding
+            "SliceFleshChild",          // Slice blood spray
+            "SliceFleshParent",         // Alternate slice effect  
+            "PenetrationDeepFlesh"      // Single impact effect (last resort)
+        };
 
         /// <summary>
         /// Spawns a silent blood effect (no audio) at the hit location.
@@ -182,21 +207,13 @@ namespace BDOT.Core
                         Debug.Log("[BDOT] Using hitPart transform for " + HitPart.type + " (no meshBone)");
                 }
 
-                // Try blood effect IDs in order - PenetrationDeepBleeding works best for continuous bleeding
-                string[] bloodEffectIds = new string[]
+                // Try blood effect IDs in order (using static array)
+                for (int i = 0; i < BloodEffectIds.Length; i++)
                 {
-                    "PenetrationDeepBleeding",  // Best for continuous bleeding (works on neck)
-                    "SliceFleshChild",          // Slice blood spray
-                    "SliceFleshParent",         // Alternate slice effect  
-                    "PenetrationDeepFlesh"      // Single impact effect (last resort)
-                };
-
-                foreach (string effectId in bloodEffectIds)
-                {
-                    if (Catalog.TryGetData<EffectData>(effectId, out bloodEffectData, false))
+                    if (Catalog.TryGetData<EffectData>(BloodEffectIds[i], out bloodEffectData, false))
                     {
                         if (BDOTModOptions.DebugLogging)
-                            Debug.Log("[BDOT] Found blood effect: " + effectId);
+                            Debug.Log("[BDOT] Found blood effect: " + BloodEffectIds[i]);
                         break;
                     }
                 }
@@ -240,13 +257,13 @@ namespace BDOT.Core
 
                 if (BloodEffectInstance != null)
                 {
-                    // Bind to creature's VFX renderer for better visual attachment (like Burning does)
+                    // Cache and bind to creature's VFX renderer for better visual attachment
                     if (useRendererBinding && Target != null)
                     {
-                        Renderer vfxRenderer = Target.GetRendererForVFX();
-                        if (vfxRenderer != null)
+                        _cachedRenderer = Target.GetRendererForVFX();
+                        if (_cachedRenderer != null)
                         {
-                            BloodEffectInstance.SetRenderer(vfxRenderer, false);
+                            BloodEffectInstance.SetRenderer(_cachedRenderer, false);
                         }
                     }
 
@@ -254,17 +271,15 @@ namespace BDOT.Core
 
                     if (BDOTModOptions.DebugLogging)
                     {
-                        string bindingInfo = useRendererBinding ? " (renderer-bound)" : "";
-                        Debug.Log("[BDOT] Spawned silent blood effect for " + Zone.GetDisplayName() + 
+                        Debug.Log("[BDOT] Spawned blood effect for " + Zone.GetDisplayName() + 
                                   " | Intensity: " + CurrentBloodIntensity.ToString("F2") + 
-                                  " | EffectData: " + bloodEffectData.id + 
-                                  " | DamageType: " + DamageType + bindingInfo);
+                                  " | DamageType: " + DamageType + 
+                                  (useRendererBinding ? " (renderer-bound)" : ""));
                     }
                 }
-                else
+                else if (BDOTModOptions.DebugLogging)
                 {
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] EffectData.Spawn returned null for " + bloodEffectData.id);
+                    Debug.Log("[BDOT] EffectData.Spawn returned null for " + bloodEffectData.id);
                 }
             }
             catch (Exception ex)
@@ -311,28 +326,35 @@ namespace BDOT.Core
 
         /// <summary>
         /// Calculates blood effect intensity based on stacks, damage, zone severity, and user preset.
+        /// During fade-out phase, intensity gradually decreases to zero.
         /// </summary>
         public float CalculateBloodIntensity()
         {
-            // Base intensity from stacks and damage
-            float zoneMultiplier = GetZoneIntensityMultiplier();
-            float baseIntensity = (StackCount * DamagePerTick * zoneMultiplier) / 5f;
+            // Base intensity from stacks and damage (using cached zone multiplier)
+            float baseIntensity = (StackCount * DamagePerTick * _zoneIntensityMultiplier) / 5f;
 
             // Apply Blood Amount preset multiplier
             float presetMultiplier = BDOTModOptions.GetBloodAmountMultiplier();
 
-            // Calculate final intensity, clamped to reasonable range
+            // Calculate final intensity
             float finalIntensity = baseIntensity * presetMultiplier;
-            return Mathf.Clamp(finalIntensity, 0.3f, 5.0f);
+
+            // Apply fade-out if in final phase
+            if (_isFadingOut && RemainingDuration > 0f)
+            {
+                float fadeProgress = RemainingDuration / FADE_OUT_DURATION;
+                finalIntensity *= fadeProgress;
+            }
+
+            return Mathf.Clamp(finalIntensity, 0.05f, 5.0f);
         }
 
         /// <summary>
-        /// Gets intensity multiplier based on zone severity.
-        /// More severe wounds = more blood.
+        /// Gets intensity multiplier based on zone severity (static version for caching).
         /// </summary>
-        private float GetZoneIntensityMultiplier()
+        private static float GetZoneIntensityMultiplierStatic(BodyZone zone)
         {
-            switch (Zone)
+            switch (zone)
             {
                 case BodyZone.Throat: return 1.5f;
                 case BodyZone.Head: return 1.2f;
@@ -446,14 +468,10 @@ namespace BDOT.Core
 
                 if (BloodEffectInstance != null)
                 {
-                    // Re-apply renderer binding if needed
-                    if (_useRendererBinding && Target != null)
+                    // Re-apply cached renderer binding if available
+                    if (_useRendererBinding && _cachedRenderer != null)
                     {
-                        Renderer vfxRenderer = Target.GetRendererForVFX();
-                        if (vfxRenderer != null)
-                        {
-                            BloodEffectInstance.SetRenderer(vfxRenderer, false);
-                        }
+                        BloodEffectInstance.SetRenderer(_cachedRenderer, false);
                     }
 
                     BloodEffectInstance.Play(0, false, false);
@@ -496,6 +514,7 @@ namespace BDOT.Core
             {
                 BloodEffectInstance = null;
                 CurrentBloodIntensity = 0f;
+                _cachedRenderer = null;
             }
         }
 

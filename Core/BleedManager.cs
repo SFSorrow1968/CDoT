@@ -196,11 +196,11 @@ namespace BDOT.Core
 
             // Check for existing effect on same zone
             BleedEffect existingEffect = null;
-            foreach (var effect in effects)
+            for (int i = 0; i < effects.Count; i++)
             {
-                if (effect.Zone == zone)
+                if (effects[i].Zone == zone)
                 {
-                    existingEffect = effect;
+                    existingEffect = effects[i];
                     break;
                 }
             }
@@ -365,9 +365,11 @@ namespace BDOT.Core
         public int GetActiveEffectCount()
         {
             int count = 0;
-            foreach (var effects in _activeEffects.Values)
+            // Use dictionary enumerator directly to avoid KeyValuePair allocation
+            var enumerator = _activeEffects.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                count += effects.Count;
+                count += enumerator.Current.Value.Count;
             }
             return count;
         }
@@ -392,9 +394,9 @@ namespace BDOT.Core
             int creatureId = creature.GetInstanceID();
             if (!_activeEffects.TryGetValue(creatureId, out var effects)) return false;
             
-            foreach (var effect in effects)
+            for (int i = 0; i < effects.Count; i++)
             {
-                if (effect.DamageType == DamageType.Fire && !effect.IsExpired)
+                if (effects[i].DamageType == DamageType.Fire && !effects[i].IsExpired)
                     return true;
             }
             return false;
@@ -409,9 +411,9 @@ namespace BDOT.Core
             int creatureId = creature.GetInstanceID();
             if (!_activeEffects.TryGetValue(creatureId, out var effects)) return false;
             
-            foreach (var effect in effects)
+            for (int i = 0; i < effects.Count; i++)
             {
-                if (effect.DamageType == DamageType.Lightning && !effect.IsExpired)
+                if (effects[i].DamageType == DamageType.Lightning && !effects[i].IsExpired)
                     return true;
             }
             return false;
