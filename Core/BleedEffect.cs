@@ -26,6 +26,11 @@ namespace CDoT.Core
         private const float EFFECT_REFRESH_INTERVAL = 0.1f; // Refresh intensity 10x per second
         private const float EFFECT_RESPAWN_INTERVAL = 0.8f; // Re-spawn particles every 0.8s
         private const float FADE_OUT_DURATION = 1.5f; // Start fading out VFX in last 1.5 seconds
+
+        // Blood intensity calculation constants
+        private const float INTENSITY_BASE_DIVISOR = 5f;  // Normalize damage/stacks to reasonable intensity range
+        private const float MIN_BLOOD_INTENSITY = 0.05f;  // Minimum visible blood effect
+        private const float MAX_BLOOD_INTENSITY = 5.0f;   // Prevent excessive particle spam
         private bool _effectSpawnAttempted = false; // Track if we've tried to spawn
         private EffectData _cachedBloodEffectData = null; // Cache for re-spawning
         private bool _useRendererBinding = false; // Whether to bind to creature renderer
@@ -198,13 +203,13 @@ namespace CDoT.Core
                     spawnTransform = HitPart.meshBone.transform;
                     useRendererBinding = true;
                     if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] Using meshBone transform for " + HitPart.type);
+                        Debug.Log($"[CDoT] Using meshBone transform for {HitPart.type}");
                 }
                 else
                 {
                     spawnTransform = HitPart.transform;
                     if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] Using hitPart transform for " + HitPart.type + " (no meshBone)");
+                        Debug.Log($"[CDoT] Using hitPart transform for {HitPart.type} (no meshBone)");
                 }
 
                 // Try blood effect IDs in order (using static array)
@@ -213,7 +218,7 @@ namespace CDoT.Core
                     if (Catalog.TryGetData<EffectData>(BloodEffectIds[i], out bloodEffectData, false))
                     {
                         if (CDoTModOptions.DebugLogging)
-                            Debug.Log("[CDoT] Found blood effect: " + BloodEffectIds[i]);
+                            Debug.Log($"[CDoT] Found blood effect: {BloodEffectIds[i]}");
                         break;
                     }
                 }
@@ -221,7 +226,7 @@ namespace CDoT.Core
                 if (bloodEffectData == null)
                 {
                     if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] No blood effect data available for " + HitPart.type);
+                        Debug.Log($"[CDoT] No blood effect data available for {HitPart.type}");
                     return;
                 }
 
@@ -271,21 +276,18 @@ namespace CDoT.Core
 
                     if (CDoTModOptions.DebugLogging)
                     {
-                        Debug.Log("[CDoT] Spawned blood effect for " + Zone.GetDisplayName() + 
-                                  " | Intensity: " + CurrentBloodIntensity.ToString("F2") + 
-                                  " | DamageType: " + DamageType + 
-                                  (useRendererBinding ? " (renderer-bound)" : ""));
+                        Debug.Log($"[CDoT] Spawned blood effect for {Zone.GetDisplayName()} | Intensity: {CurrentBloodIntensity:F2} | DamageType: {DamageType}{(useRendererBinding ? " (renderer-bound)" : "")}");
                     }
                 }
                 else if (CDoTModOptions.DebugLogging)
                 {
-                    Debug.Log("[CDoT] EffectData.Spawn returned null for " + bloodEffectData.id);
+                    Debug.Log($"[CDoT] EffectData.Spawn returned null for {bloodEffectData.id}");
                 }
             }
             catch (Exception ex)
             {
                 if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Failed to spawn blood effect: " + ex.Message);
+                    Debug.Log($"[CDoT] Failed to spawn blood effect: {ex.Message}");
                 BloodEffectInstance = null;
             }
         }
@@ -313,13 +315,13 @@ namespace CDoT.Core
 
                 if (CDoTModOptions.DebugLogging)
                 {
-                    Debug.Log("[CDoT] Captured blood effect for " + Zone.GetDisplayName() + " | Intensity: " + CurrentBloodIntensity.ToString("F2"));
+                    Debug.Log($"[CDoT] Captured blood effect for {Zone.GetDisplayName()} | Intensity: {CurrentBloodIntensity:F2}");
                 }
             }
             catch (Exception ex)
             {
                 if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Failed to capture blood effect: " + ex.Message);
+                    Debug.Log($"[CDoT] Failed to capture blood effect: {ex.Message}");
                 BloodEffectInstance = null;
             }
         }
@@ -331,7 +333,7 @@ namespace CDoT.Core
         public float CalculateBloodIntensity()
         {
             // Base intensity from stacks and damage (using cached zone multiplier)
-            float baseIntensity = (StackCount * DamagePerTick * _zoneIntensityMultiplier) / 5f;
+            float baseIntensity = (StackCount * DamagePerTick * _zoneIntensityMultiplier) / INTENSITY_BASE_DIVISOR;
 
             // Apply Blood Amount preset multiplier
             float presetMultiplier = CDoTModOptions.GetBloodAmountMultiplier();
@@ -346,7 +348,7 @@ namespace CDoT.Core
                 finalIntensity *= fadeProgress;
             }
 
-            return Mathf.Clamp(finalIntensity, 0.05f, 5.0f);
+            return Mathf.Clamp(finalIntensity, MIN_BLOOD_INTENSITY, MAX_BLOOD_INTENSITY);
         }
 
         /// <summary>
@@ -399,7 +401,7 @@ namespace CDoT.Core
             {
                 // Effect became invalid, clear reference
                 if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Blood effect refresh failed: " + ex.Message);
+                    Debug.Log($"[CDoT] Blood effect refresh failed: {ex.Message}");
                 BloodEffectInstance = null;
             }
         }
@@ -441,7 +443,10 @@ namespace CDoT.Core
                             BloodEffectInstance.End(false, -1f);
                         }
                     }
-                    catch { }
+                    catch (Exception)
+                    {
+                        // Effect may have been despawned externally - safe to ignore
+                    }
                     BloodEffectInstance = null;
                 }
 
@@ -480,7 +485,7 @@ namespace CDoT.Core
             catch (Exception ex)
             {
                 if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Blood effect respawn failed: " + ex.Message);
+                    Debug.Log($"[CDoT] Blood effect respawn failed: {ex.Message}");
             }
         }
 
@@ -501,14 +506,14 @@ namespace CDoT.Core
                         BloodEffectInstance.End(false, 1.0f);
 
                         if (CDoTModOptions.DebugLogging)
-                            Debug.Log("[CDoT] Released blood effect for " + Zone.GetDisplayName());
+                            Debug.Log($"[CDoT] Released blood effect for {Zone.GetDisplayName()}");
                     }
                 }
             }
             catch (Exception ex)
             {
                 if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Error releasing blood effect: " + ex.Message);
+                    Debug.Log($"[CDoT] Error releasing blood effect: {ex.Message}");
             }
             finally
             {
@@ -530,7 +535,7 @@ namespace CDoT.Core
                 RefreshBloodEffect();
 
                 if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Blood intensity increased on stack: " + CurrentBloodIntensity.ToString("F2"));
+                    Debug.Log($"[CDoT] Blood intensity increased on stack: {CurrentBloodIntensity:F2}");
             }
         }
 
@@ -538,7 +543,7 @@ namespace CDoT.Core
 
         public override string ToString()
         {
-            string effectInfo = BloodEffectInstance != null ? " | VFX:" + CurrentBloodIntensity.ToString("F1") : "";
+            string effectInfo = BloodEffectInstance != null ? $" | VFX:{CurrentBloodIntensity:F1}" : "";
             return $"BleedEffect[{Zone.GetDisplayName()} x{StackCount} | {RemainingDuration:F1}s | {GetTickDamage():F1} dmg/tick | {DamageType}{effectInfo}]";
         }
     }

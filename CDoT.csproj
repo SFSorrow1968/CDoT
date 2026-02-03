@@ -15,7 +15,7 @@
 
   <!-- Only include CDoT source files, exclude SDK and reference projects -->
   <ItemGroup>
-    <Compile Include="**\*.cs" Exclude="BasSDK\**;References\**;obj\**;bin\**;builds\**" />
+    <Compile Include="**\*.cs" Exclude="BasSDK\**;References\**;obj\**;bin\**;builds\**;CDoT.Tests\**" />
   </ItemGroup>
 
   <!-- Exclude Harmony patches from all builds (using EventManager events instead) -->

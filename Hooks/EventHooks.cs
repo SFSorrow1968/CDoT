@@ -19,6 +19,11 @@ namespace CDoT.Hooks
         private const float SLICE_REARM_SECONDS = 30f;
         private const float SLICE_CLEANUP_INTERVAL = 10f;
 
+        // Store delegate references to ensure proper unsubscription (prevents memory leaks)
+        private EventManager.CreatureHitEvent _onCreatureHitHandler;
+        private EventManager.CreatureKillEvent _onCreatureKillHandler;
+        private EventManager.CreatureSpawnedEvent _onCreatureSpawnHandler;
+
         public static void Subscribe()
         {
             if (_instance == null)
@@ -55,15 +60,19 @@ namespace CDoT.Hooks
 
             try
             {
-                EventManager.onCreatureHit += new EventManager.CreatureHitEvent(this.OnCreatureHit);
-                EventManager.onCreatureKill += new EventManager.CreatureKillEvent(this.OnCreatureKill);
+                // Create and store delegate references for proper unsubscription
+                _onCreatureHitHandler = new EventManager.CreatureHitEvent(this.OnCreatureHit);
+                _onCreatureKillHandler = new EventManager.CreatureKillEvent(this.OnCreatureKill);
+
+                EventManager.onCreatureHit += _onCreatureHitHandler;
+                EventManager.onCreatureKill += _onCreatureKillHandler;
                 SubscribeSpawnEvent();
                 _subscribed = true;
                 Debug.Log("[CDoT] Event hooks subscribed successfully");
             }
             catch (Exception ex)
             {
-                Debug.LogError("[CDoT] Failed to subscribe to events: " + ex.Message);
+                Debug.LogError($"[CDoT] Failed to subscribe to events: {ex.Message}");
                 _subscribed = false;
             }
         }
@@ -74,14 +83,15 @@ namespace CDoT.Hooks
 
             try
             {
-                EventManager.onCreatureSpawn += new EventManager.CreatureSpawnedEvent(this.OnCreatureSpawn);
+                _onCreatureSpawnHandler = new EventManager.CreatureSpawnedEvent(this.OnCreatureSpawn);
+                EventManager.onCreatureSpawn += _onCreatureSpawnHandler;
                 _spawnSubscribed = true;
                 if (CDoTModOptions.DebugLogging)
                     Debug.Log("[CDoT] Creature spawn hook subscribed");
             }
             catch (Exception ex)
             {
-                Debug.LogError("[CDoT] Failed to subscribe creature spawn hook: " + ex.Message);
+                Debug.LogError($"[CDoT] Failed to subscribe creature spawn hook: {ex.Message}");
             }
         }
 
@@ -91,14 +101,24 @@ namespace CDoT.Hooks
 
             try
             {
-                EventManager.onCreatureHit -= new EventManager.CreatureHitEvent(this.OnCreatureHit);
-                EventManager.onCreatureKill -= new EventManager.CreatureKillEvent(this.OnCreatureKill);
-                if (_spawnSubscribed)
-                {
-                    EventManager.onCreatureSpawn -= new EventManager.CreatureSpawnedEvent(this.OnCreatureSpawn);
-                }
+                // Use stored delegate references to ensure proper unsubscription
+                if (_onCreatureHitHandler != null)
+                    EventManager.onCreatureHit -= _onCreatureHitHandler;
+                if (_onCreatureKillHandler != null)
+                    EventManager.onCreatureKill -= _onCreatureKillHandler;
+                if (_spawnSubscribed && _onCreatureSpawnHandler != null)
+                    EventManager.onCreatureSpawn -= _onCreatureSpawnHandler;
             }
-            catch { }
+            catch (Exception ex)
+            {
+                if (CDoTModOptions.DebugLogging)
+                    Debug.LogWarning($"[CDoT] Error during event unsubscription: {ex.Message}");
+            }
+
+            // Clear delegate references
+            _onCreatureHitHandler = null;
+            _onCreatureKillHandler = null;
+            _onCreatureSpawnHandler = null;
 
             _subscribed = false;
             _spawnSubscribed = false;
@@ -129,13 +149,13 @@ namespace CDoT.Hooks
                 if (CDoTModOptions.DebugLogging)
                 {
                     Debug.Log("[CDoT] ========== HIT EVENT ==========");
-                    Debug.Log("[CDoT] Target: " + creature.name + " | Part: " + partTypeName + " | DamageType: " + damageType + " | Damage: " + hitDamage.ToString("F1"));
+                    Debug.Log($"[CDoT] Target: {creature.name} | Part: {partTypeName} | DamageType: {damageType} | Damage: {hitDamage:F1}");
                 }
 
                 // Detect effective damage type (may differ from reported type due to imbue/spell)
                 DamageType effectiveDamageType = GetEffectiveDamageType(collisionInstance, damageType);
                 if (effectiveDamageType != damageType && CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Effective damage type: " + effectiveDamageType + " (from imbue/spell)");
+                    Debug.Log($"[CDoT] Effective damage type: {effectiveDamageType} (from imbue/spell)");
 
                 // Blunt damage does not cause bleeding
                 if (effectiveDamageType == DamageType.Blunt)
@@ -149,7 +169,7 @@ namespace CDoT.Hooks
                 if (!CDoTModOptions.IsDamageTypeAllowed(effectiveDamageType))
                 {
                     if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] SKIP: DamageType " + effectiveDamageType + " not allowed by profile " + CDoTModOptions.ProfilePresetSetting);
+                        Debug.Log($"[CDoT] SKIP: DamageType {effectiveDamageType} not allowed by profile {CDoTModOptions.ProfilePresetSetting}");
                     return;
                 }
                 
@@ -182,8 +202,8 @@ namespace CDoT.Hooks
                 var config = CDoTModOptions.GetZoneConfig(zone);
                 if (CDoTModOptions.DebugLogging)
                 {
-                    Debug.Log("[CDoT] Zone: " + zone.GetDisplayName() + " | Enabled: " + config.Enabled);
-                    Debug.Log("[CDoT] Config: Chance=" + config.Chance.ToString("F0") + "%, Duration=" + config.Duration.ToString("F1") + "s, DmgPerTick=" + config.Damage.ToString("F2") + ", MaxStacks=" + config.StackLimit);
+                    Debug.Log($"[CDoT] Zone: {zone.GetDisplayName()} | Enabled: {config.Enabled}");
+                    Debug.Log($"[CDoT] Config: Chance={config.Chance:F0}%, Duration={config.Duration:F1}s, DmgPerTick={config.Damage:F2}, MaxStacks={config.StackLimit}");
                 }
 
                 // Apply bleed effect (chance is checked inside ApplyBleed)
@@ -192,7 +212,7 @@ namespace CDoT.Hooks
                 if (CDoTModOptions.DebugLogging)
                 {
                     if (applied)
-                        Debug.Log("[CDoT] RESULT: Bleed APPLIED to " + creature.name + " (" + zone.GetDisplayName() + ")");
+                        Debug.Log($"[CDoT] RESULT: Bleed APPLIED to {creature.name} ({zone.GetDisplayName()})");
                     else
                         Debug.Log("[CDoT] RESULT: Bleed NOT applied (zone disabled or other reason)");
                     Debug.Log("[CDoT] ================================");
@@ -200,7 +220,7 @@ namespace CDoT.Hooks
             }
             catch (Exception ex)
             {
-                Debug.LogError("[CDoT] OnCreatureHit error: " + ex.Message + "\n" + ex.StackTrace);
+                Debug.LogError($"[CDoT] OnCreatureHit error: {ex.Message}\n{ex.StackTrace}");
             }
         }
 
@@ -215,11 +235,11 @@ namespace CDoT.Hooks
                 BleedManager.Instance.ClearCreature(creature);
 
                 if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Creature killed, effects cleared: " + creature.name);
+                    Debug.Log($"[CDoT] Creature killed, effects cleared: {creature.name}");
             }
             catch (Exception ex)
             {
-                Debug.LogError("[CDoT] OnCreatureKill error: " + ex.Message);
+                Debug.LogError($"[CDoT] OnCreatureKill error: {ex.Message}");
             }
         }
 
@@ -321,7 +341,7 @@ namespace CDoT.Hooks
             catch (Exception ex)
             {
                 if (CDoTModOptions.DebugLogging)
-                    Debug.LogError("[CDoT] Error in GetEffectiveDamageType: " + ex.Message);
+                    Debug.LogError($"[CDoT] Error in GetEffectiveDamageType: {ex.Message}");
                 return reportedType;
             }
         }
@@ -336,7 +356,7 @@ namespace CDoT.Hooks
 
                 if (CDoTModOptions.DebugLogging && sourceItem != null)
                 {
-                    Debug.Log("[CDoT] Checking player source - Item: " + sourceItem.name);
+                    Debug.Log($"[CDoT] Checking player source - Item: {sourceItem.name}");
                 }
 
                 // Check if the source is a player-held item
@@ -403,17 +423,17 @@ namespace CDoT.Hooks
                     var magicProjectile = sourceItem.GetComponent<ItemMagicProjectile>();
                     if (magicProjectile != null && CDoTModOptions.DebugLogging)
                     {
-                        Debug.Log("[CDoT] Found ItemMagicProjectile - imbueSpellCastCharge: " + (magicProjectile.imbueSpellCastCharge != null ? "exists" : "null"));
+                        Debug.Log($"[CDoT] Found ItemMagicProjectile - imbueSpellCastCharge: {(magicProjectile.imbueSpellCastCharge != null ? "exists" : "null")}");
                         if (magicProjectile.imbueSpellCastCharge != null)
                         {
-                            Debug.Log("[CDoT] spellCaster: " + (magicProjectile.imbueSpellCastCharge.spellCaster != null ? "exists" : "null"));
+                            Debug.Log($"[CDoT] spellCaster: {(magicProjectile.imbueSpellCastCharge.spellCaster != null ? "exists" : "null")}");
                             if (magicProjectile.imbueSpellCastCharge.spellCaster != null)
                             {
                                 var hand = magicProjectile.imbueSpellCastCharge.spellCaster.ragdollHand;
-                                Debug.Log("[CDoT] ragdollHand: " + (hand != null ? "exists" : "null"));
+                                Debug.Log($"[CDoT] ragdollHand: {(hand != null ? "exists" : "null")}");
                                 if (hand != null)
                                 {
-                                    Debug.Log("[CDoT] creature: " + (hand.creature != null ? hand.creature.name : "null") + " isPlayer: " + hand.creature?.isPlayer);
+                                    Debug.Log($"[CDoT] creature: {(hand.creature != null ? hand.creature.name : "null")} isPlayer: {hand.creature?.isPlayer}");
                                 }
                             }
                         }
@@ -433,7 +453,7 @@ namespace CDoT.Hooks
             catch (Exception ex)
             {
                 if (CDoTModOptions.DebugLogging)
-                    Debug.LogError("[CDoT] Error in WasCausedByPlayer: " + ex.Message);
+                    Debug.LogError($"[CDoT] Error in WasCausedByPlayer: {ex.Message}");
                 return false;
             }
         }
