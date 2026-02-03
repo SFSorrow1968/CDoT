@@ -4,7 +4,7 @@
 Bleed Damage Over Time adds location-based bleeding effects with configurable damage multipliers for different body zones including throat, head, torso, limbs, and dismemberment.
 
 ## Detailed Description (<=50,000 chars)
-Bleed Damage Over Time (BDOT) brings realistic bleeding mechanics to Blade & Sorcery. When you wound an enemy, they will continue taking damage over time based on where you hit them.
+Bleed Damage Over Time (CDoT) brings realistic bleeding mechanics to Blade & Sorcery. When you wound an enemy, they will continue taking damage over time based on where you hit them.
 
 Key features:
 - Location-based damage: Different body parts have different bleed severity. A slash to the throat causes rapid blood loss while a cut on the arm is much less severe.

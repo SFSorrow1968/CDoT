@@ -9,15 +9,15 @@ This mod was developed with AI assistance (GitHub Copilot / Claude). All code is
 ## Steps
 
 1) Confirm version
-- Update `Configuration/BDOTModOptions.cs` VERSION (and any other version fields if present).
+- Update `Configuration/CDoTModOptions.cs` VERSION (and any other version fields if present).
 - Ensure the Git tag/release name matches the version.
 
 2) Build + artifacts
-- `dotnet build BDOT.csproj -c Release`
-- `dotnet build BDOT.csproj -c Nomad`
+- `dotnet build CDoT.csproj -c Release`
+- `dotnet build CDoT.csproj -c Nomad`
 - Copy artifacts:
-  - `bin/Release/PCVR/BDOT/BDOT.dll` -> `builds/BDOT-PCVR/BDOT/BDOT.dll`
-  - `bin/Release/Nomad/BDOT/BDOT.dll` -> `builds/BDOT-Nomad/BDOT/BDOT.dll`
+  - `bin/Release/PCVR/CDoT/CDoT.dll` -> `builds/CDoT-PCVR/CDoT/CDoT.dll`
+  - `bin/Release/Nomad/CDoT/CDoT.dll` -> `builds/CDoT-Nomad/CDoT/CDoT.dll`
 - Log results in `_agent/verification_results.md`.
 
 3) Documentation updates
@@ -29,5 +29,5 @@ This mod was developed with AI assistance (GitHub Copilot / Claude). All code is
 
 5) GitHub release
 - Create a GitHub release with the version tag.
-- Attach build artifacts (zip `builds/BDOT-PCVR` and `builds/BDOT-Nomad`).
+- Attach build artifacts (zip `builds/CDoT-PCVR` and `builds/CDoT-Nomad`).
 - Release notes: concise summary of changes + any known issues.

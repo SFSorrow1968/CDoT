@@ -1,9 +1,9 @@
 using System;
-using BDOT.Configuration;
+using CDoT.Configuration;
 using ThunderRoad;
 using UnityEngine;
 
-namespace BDOT.Core
+namespace CDoT.Core
 {
     public class BleedEffect
     {
@@ -88,7 +88,7 @@ namespace BDOT.Core
             StackCount = 1;
             TimeSinceLastTick = 0f;
             _zoneIntensityMultiplier = GetZoneIntensityMultiplierStatic(zone);
-            _damageTypeMultiplier = BDOTModOptions.GetDamageTypeMultiplier(damageType);
+            _damageTypeMultiplier = CDoTModOptions.GetDamageTypeMultiplier(damageType);
         }
 
         public void AddStack(float damagePerTick, float duration, int maxStacks, RagdollPart newHitPart = null)
@@ -183,8 +183,8 @@ namespace BDOT.Core
                 // Need a valid hit part for positioning
                 if (!HasValidHitPart)
                 {
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Cannot spawn blood effect: no valid hit part");
+                    if (CDoTModOptions.DebugLogging)
+                        Debug.Log("[CDoT] Cannot spawn blood effect: no valid hit part");
                     return;
                 }
 
@@ -197,14 +197,14 @@ namespace BDOT.Core
                 {
                     spawnTransform = HitPart.meshBone.transform;
                     useRendererBinding = true;
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Using meshBone transform for " + HitPart.type);
+                    if (CDoTModOptions.DebugLogging)
+                        Debug.Log("[CDoT] Using meshBone transform for " + HitPart.type);
                 }
                 else
                 {
                     spawnTransform = HitPart.transform;
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Using hitPart transform for " + HitPart.type + " (no meshBone)");
+                    if (CDoTModOptions.DebugLogging)
+                        Debug.Log("[CDoT] Using hitPart transform for " + HitPart.type + " (no meshBone)");
                 }
 
                 // Try blood effect IDs in order (using static array)
@@ -212,16 +212,16 @@ namespace BDOT.Core
                 {
                     if (Catalog.TryGetData<EffectData>(BloodEffectIds[i], out bloodEffectData, false))
                     {
-                        if (BDOTModOptions.DebugLogging)
-                            Debug.Log("[BDOT] Found blood effect: " + BloodEffectIds[i]);
+                        if (CDoTModOptions.DebugLogging)
+                            Debug.Log("[CDoT] Found blood effect: " + BloodEffectIds[i]);
                         break;
                     }
                 }
 
                 if (bloodEffectData == null)
                 {
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] No blood effect data available for " + HitPart.type);
+                    if (CDoTModOptions.DebugLogging)
+                        Debug.Log("[CDoT] No blood effect data available for " + HitPart.type);
                     return;
                 }
 
@@ -269,23 +269,23 @@ namespace BDOT.Core
 
                     BloodEffectInstance.Play(0, false, false);
 
-                    if (BDOTModOptions.DebugLogging)
+                    if (CDoTModOptions.DebugLogging)
                     {
-                        Debug.Log("[BDOT] Spawned blood effect for " + Zone.GetDisplayName() + 
+                        Debug.Log("[CDoT] Spawned blood effect for " + Zone.GetDisplayName() + 
                                   " | Intensity: " + CurrentBloodIntensity.ToString("F2") + 
                                   " | DamageType: " + DamageType + 
                                   (useRendererBinding ? " (renderer-bound)" : ""));
                     }
                 }
-                else if (BDOTModOptions.DebugLogging)
+                else if (CDoTModOptions.DebugLogging)
                 {
-                    Debug.Log("[BDOT] EffectData.Spawn returned null for " + bloodEffectData.id);
+                    Debug.Log("[CDoT] EffectData.Spawn returned null for " + bloodEffectData.id);
                 }
             }
             catch (Exception ex)
             {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Failed to spawn blood effect: " + ex.Message);
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Failed to spawn blood effect: " + ex.Message);
                 BloodEffectInstance = null;
             }
         }
@@ -311,15 +311,15 @@ namespace BDOT.Core
                 // Immediately refresh to apply our intensity
                 RefreshBloodEffect();
 
-                if (BDOTModOptions.DebugLogging)
+                if (CDoTModOptions.DebugLogging)
                 {
-                    Debug.Log("[BDOT] Captured blood effect for " + Zone.GetDisplayName() + " | Intensity: " + CurrentBloodIntensity.ToString("F2"));
+                    Debug.Log("[CDoT] Captured blood effect for " + Zone.GetDisplayName() + " | Intensity: " + CurrentBloodIntensity.ToString("F2"));
                 }
             }
             catch (Exception ex)
             {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Failed to capture blood effect: " + ex.Message);
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Failed to capture blood effect: " + ex.Message);
                 BloodEffectInstance = null;
             }
         }
@@ -334,7 +334,7 @@ namespace BDOT.Core
             float baseIntensity = (StackCount * DamagePerTick * _zoneIntensityMultiplier) / 5f;
 
             // Apply Blood Amount preset multiplier
-            float presetMultiplier = BDOTModOptions.GetBloodAmountMultiplier();
+            float presetMultiplier = CDoTModOptions.GetBloodAmountMultiplier();
 
             // Calculate final intensity
             float finalIntensity = baseIntensity * presetMultiplier;
@@ -398,8 +398,8 @@ namespace BDOT.Core
             catch (Exception ex)
             {
                 // Effect became invalid, clear reference
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Blood effect refresh failed: " + ex.Message);
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Blood effect refresh failed: " + ex.Message);
                 BloodEffectInstance = null;
             }
         }
@@ -479,8 +479,8 @@ namespace BDOT.Core
             }
             catch (Exception ex)
             {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Blood effect respawn failed: " + ex.Message);
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Blood effect respawn failed: " + ex.Message);
             }
         }
 
@@ -500,15 +500,15 @@ namespace BDOT.Core
                         // End with normal speed for smooth fade-out
                         BloodEffectInstance.End(false, 1.0f);
 
-                        if (BDOTModOptions.DebugLogging)
-                            Debug.Log("[BDOT] Released blood effect for " + Zone.GetDisplayName());
+                        if (CDoTModOptions.DebugLogging)
+                            Debug.Log("[CDoT] Released blood effect for " + Zone.GetDisplayName());
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Error releasing blood effect: " + ex.Message);
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Error releasing blood effect: " + ex.Message);
             }
             finally
             {
@@ -529,8 +529,8 @@ namespace BDOT.Core
                 CurrentBloodIntensity = CalculateBloodIntensity();
                 RefreshBloodEffect();
 
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Blood intensity increased on stack: " + CurrentBloodIntensity.ToString("F2"));
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Blood intensity increased on stack: " + CurrentBloodIntensity.ToString("F2"));
             }
         }
 

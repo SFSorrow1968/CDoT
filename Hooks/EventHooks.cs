@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using BDOT.Configuration;
-using BDOT.Core;
+using CDoT.Configuration;
+using CDoT.Core;
 using ThunderRoad;
 using UnityEngine;
 
-namespace BDOT.Hooks
+namespace CDoT.Hooks
 {
     public class EventHooks
     {
@@ -46,12 +46,12 @@ namespace BDOT.Hooks
         {
             if (_subscribed)
             {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Already subscribed to events");
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Already subscribed to events");
                 return;
             }
 
-            Debug.Log("[BDOT] Subscribing to EventManager events...");
+            Debug.Log("[CDoT] Subscribing to EventManager events...");
 
             try
             {
@@ -59,11 +59,11 @@ namespace BDOT.Hooks
                 EventManager.onCreatureKill += new EventManager.CreatureKillEvent(this.OnCreatureKill);
                 SubscribeSpawnEvent();
                 _subscribed = true;
-                Debug.Log("[BDOT] Event hooks subscribed successfully");
+                Debug.Log("[CDoT] Event hooks subscribed successfully");
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] Failed to subscribe to events: " + ex.Message);
+                Debug.LogError("[CDoT] Failed to subscribe to events: " + ex.Message);
                 _subscribed = false;
             }
         }
@@ -76,18 +76,18 @@ namespace BDOT.Hooks
             {
                 EventManager.onCreatureSpawn += new EventManager.CreatureSpawnedEvent(this.OnCreatureSpawn);
                 _spawnSubscribed = true;
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Creature spawn hook subscribed");
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Creature spawn hook subscribed");
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] Failed to subscribe creature spawn hook: " + ex.Message);
+                Debug.LogError("[CDoT] Failed to subscribe creature spawn hook: " + ex.Message);
             }
         }
 
         private void UnsubscribeEvents()
         {
-            Debug.Log("[BDOT] Unsubscribing from events...");
+            Debug.Log("[CDoT] Unsubscribing from events...");
 
             try
             {
@@ -118,7 +118,7 @@ namespace BDOT.Hooks
                 if (creature.isPlayer) return;
                 if (creature.isKilled) return;
 
-                if (!BDOTModOptions.EnableMod) return;
+                if (!CDoTModOptions.EnableMod) return;
 
                 // Get hit info for logging
                 var damageType = collisionInstance?.damageStruct.damageType ?? DamageType.Unknown;
@@ -126,30 +126,30 @@ namespace BDOT.Hooks
                 var hitDamage = collisionInstance?.damageStruct.damage ?? 0f;
                 string partTypeName = hitPart?.type.ToString() ?? "null";
 
-                if (BDOTModOptions.DebugLogging)
+                if (CDoTModOptions.DebugLogging)
                 {
-                    Debug.Log("[BDOT] ========== HIT EVENT ==========");
-                    Debug.Log("[BDOT] Target: " + creature.name + " | Part: " + partTypeName + " | DamageType: " + damageType + " | Damage: " + hitDamage.ToString("F1"));
+                    Debug.Log("[CDoT] ========== HIT EVENT ==========");
+                    Debug.Log("[CDoT] Target: " + creature.name + " | Part: " + partTypeName + " | DamageType: " + damageType + " | Damage: " + hitDamage.ToString("F1"));
                 }
 
                 // Detect effective damage type (may differ from reported type due to imbue/spell)
                 DamageType effectiveDamageType = GetEffectiveDamageType(collisionInstance, damageType);
-                if (effectiveDamageType != damageType && BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Effective damage type: " + effectiveDamageType + " (from imbue/spell)");
+                if (effectiveDamageType != damageType && CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Effective damage type: " + effectiveDamageType + " (from imbue/spell)");
 
                 // Blunt damage does not cause bleeding
                 if (effectiveDamageType == DamageType.Blunt)
                 {
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] SKIP: Blunt damage does not cause bleeding");
+                    if (CDoTModOptions.DebugLogging)
+                        Debug.Log("[CDoT] SKIP: Blunt damage does not cause bleeding");
                     return;
                 }
 
                 // Check if damage type is allowed by current profile
-                if (!BDOTModOptions.IsDamageTypeAllowed(effectiveDamageType))
+                if (!CDoTModOptions.IsDamageTypeAllowed(effectiveDamageType))
                 {
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] SKIP: DamageType " + effectiveDamageType + " not allowed by profile " + BDOTModOptions.ProfilePresetSetting);
+                    if (CDoTModOptions.DebugLogging)
+                        Debug.Log("[CDoT] SKIP: DamageType " + effectiveDamageType + " not allowed by profile " + CDoTModOptions.ProfilePresetSetting);
                     return;
                 }
                 
@@ -160,8 +160,8 @@ namespace BDOT.Hooks
                 BodyZone zone = ZoneDetector.GetZoneFromCollision(collisionInstance);
                 if (zone == BodyZone.Unknown)
                 {
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] SKIP: Unknown body zone");
+                    if (CDoTModOptions.DebugLogging)
+                        Debug.Log("[CDoT] SKIP: Unknown body zone");
                     return;
                 }
 
@@ -170,37 +170,37 @@ namespace BDOT.Hooks
                 {
                     if (hitPart != null && !IsNewSlice(hitPart))
                     {
-                        if (BDOTModOptions.DebugLogging)
-                            Debug.Log("[BDOT] SKIP: Dismemberment already processed for this part");
+                        if (CDoTModOptions.DebugLogging)
+                            Debug.Log("[CDoT] SKIP: Dismemberment already processed for this part");
                         return;
                     }
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Dismemberment: New slice detected");
+                    if (CDoTModOptions.DebugLogging)
+                        Debug.Log("[CDoT] Dismemberment: New slice detected");
                 }
 
                 // Get zone config for logging
-                var config = BDOTModOptions.GetZoneConfig(zone);
-                if (BDOTModOptions.DebugLogging)
+                var config = CDoTModOptions.GetZoneConfig(zone);
+                if (CDoTModOptions.DebugLogging)
                 {
-                    Debug.Log("[BDOT] Zone: " + zone.GetDisplayName() + " | Enabled: " + config.Enabled);
-                    Debug.Log("[BDOT] Config: Chance=" + config.Chance.ToString("F0") + "%, Duration=" + config.Duration.ToString("F1") + "s, DmgPerTick=" + config.Damage.ToString("F2") + ", MaxStacks=" + config.StackLimit);
+                    Debug.Log("[CDoT] Zone: " + zone.GetDisplayName() + " | Enabled: " + config.Enabled);
+                    Debug.Log("[CDoT] Config: Chance=" + config.Chance.ToString("F0") + "%, Duration=" + config.Duration.ToString("F1") + "s, DmgPerTick=" + config.Damage.ToString("F2") + ", MaxStacks=" + config.StackLimit);
                 }
 
                 // Apply bleed effect (chance is checked inside ApplyBleed)
                 // Blood VFX is now spawned silently (without audio) inside BleedEffect
                 bool applied = BleedManager.Instance.ApplyBleed(creature, zone, damageType, hitPart);
-                if (BDOTModOptions.DebugLogging)
+                if (CDoTModOptions.DebugLogging)
                 {
                     if (applied)
-                        Debug.Log("[BDOT] RESULT: Bleed APPLIED to " + creature.name + " (" + zone.GetDisplayName() + ")");
+                        Debug.Log("[CDoT] RESULT: Bleed APPLIED to " + creature.name + " (" + zone.GetDisplayName() + ")");
                     else
-                        Debug.Log("[BDOT] RESULT: Bleed NOT applied (zone disabled or other reason)");
-                    Debug.Log("[BDOT] ================================");
+                        Debug.Log("[CDoT] RESULT: Bleed NOT applied (zone disabled or other reason)");
+                    Debug.Log("[CDoT] ================================");
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] OnCreatureHit error: " + ex.Message + "\n" + ex.StackTrace);
+                Debug.LogError("[CDoT] OnCreatureHit error: " + ex.Message + "\n" + ex.StackTrace);
             }
         }
 
@@ -214,12 +214,12 @@ namespace BDOT.Hooks
                 // Clear bleed effects when creature dies
                 BleedManager.Instance.ClearCreature(creature);
 
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Creature killed, effects cleared: " + creature.name);
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Creature killed, effects cleared: " + creature.name);
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] OnCreatureKill error: " + ex.Message);
+                Debug.LogError("[CDoT] OnCreatureKill error: " + ex.Message);
             }
         }
 
@@ -320,8 +320,8 @@ namespace BDOT.Hooks
             }
             catch (Exception ex)
             {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.LogError("[BDOT] Error in GetEffectiveDamageType: " + ex.Message);
+                if (CDoTModOptions.DebugLogging)
+                    Debug.LogError("[CDoT] Error in GetEffectiveDamageType: " + ex.Message);
                 return reportedType;
             }
         }
@@ -334,29 +334,29 @@ namespace BDOT.Hooks
 
                 var sourceItem = collision.sourceColliderGroup?.collisionHandler?.item;
 
-                if (BDOTModOptions.DebugLogging && sourceItem != null)
+                if (CDoTModOptions.DebugLogging && sourceItem != null)
                 {
-                    Debug.Log("[BDOT] Checking player source - Item: " + sourceItem.name);
+                    Debug.Log("[CDoT] Checking player source - Item: " + sourceItem.name);
                 }
 
                 // Check if the source is a player-held item
                 if (sourceItem?.mainHandler?.creature?.isPlayer == true)
                 {
-                    if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: mainHandler");
+                    if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: mainHandler");
                     return true;
                 }
 
                 // Check if the source is a previously-held player item (thrown, released)
                 if (sourceItem?.lastHandler?.creature?.isPlayer == true)
                 {
-                    if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: lastHandler");
+                    if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: lastHandler");
                     return true;
                 }
 
                 // Check if the source is the player's body
                 if (collision.sourceColliderGroup?.collisionHandler?.ragdollPart?.ragdoll?.creature?.isPlayer == true)
                 {
-                    if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: ragdollPart");
+                    if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: ragdollPart");
                     return true;
                 }
 
@@ -364,7 +364,7 @@ namespace BDOT.Hooks
                 var imbue = collision.sourceColliderGroup?.imbue;
                 if (imbue?.imbueCreature?.isPlayer == true)
                 {
-                    if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: sourceColliderGroup.imbue");
+                    if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: sourceColliderGroup.imbue");
                     return true;
                 }
 
@@ -376,7 +376,7 @@ namespace BDOT.Hooks
                     {
                         if (imbues[i]?.imbueCreature?.isPlayer == true)
                         {
-                            if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: item.imbues");
+                            if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: item.imbues");
                             return true;
                         }
                     }
@@ -390,7 +390,7 @@ namespace BDOT.Hooks
                     {
                         if (tkHandlers[i]?.ragdollHand?.creature?.isPlayer == true)
                         {
-                            if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: tkHandlers");
+                            if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: tkHandlers");
                             return true;
                         }
                     }
@@ -401,39 +401,39 @@ namespace BDOT.Hooks
                 if (sourceItem != null)
                 {
                     var magicProjectile = sourceItem.GetComponent<ItemMagicProjectile>();
-                    if (magicProjectile != null && BDOTModOptions.DebugLogging)
+                    if (magicProjectile != null && CDoTModOptions.DebugLogging)
                     {
-                        Debug.Log("[BDOT] Found ItemMagicProjectile - imbueSpellCastCharge: " + (magicProjectile.imbueSpellCastCharge != null ? "exists" : "null"));
+                        Debug.Log("[CDoT] Found ItemMagicProjectile - imbueSpellCastCharge: " + (magicProjectile.imbueSpellCastCharge != null ? "exists" : "null"));
                         if (magicProjectile.imbueSpellCastCharge != null)
                         {
-                            Debug.Log("[BDOT] spellCaster: " + (magicProjectile.imbueSpellCastCharge.spellCaster != null ? "exists" : "null"));
+                            Debug.Log("[CDoT] spellCaster: " + (magicProjectile.imbueSpellCastCharge.spellCaster != null ? "exists" : "null"));
                             if (magicProjectile.imbueSpellCastCharge.spellCaster != null)
                             {
                                 var hand = magicProjectile.imbueSpellCastCharge.spellCaster.ragdollHand;
-                                Debug.Log("[BDOT] ragdollHand: " + (hand != null ? "exists" : "null"));
+                                Debug.Log("[CDoT] ragdollHand: " + (hand != null ? "exists" : "null"));
                                 if (hand != null)
                                 {
-                                    Debug.Log("[BDOT] creature: " + (hand.creature != null ? hand.creature.name : "null") + " isPlayer: " + hand.creature?.isPlayer);
+                                    Debug.Log("[CDoT] creature: " + (hand.creature != null ? hand.creature.name : "null") + " isPlayer: " + hand.creature?.isPlayer);
                                 }
                             }
                         }
                     }
                     if (magicProjectile?.imbueSpellCastCharge?.spellCaster?.ragdollHand?.creature?.isPlayer == true)
                     {
-                        if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: ItemMagicProjectile");
+                        if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: ItemMagicProjectile");
                         return true;
                     }
                 }
 
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Player NOT detected - all checks failed");
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Player NOT detected - all checks failed");
 
                 return false;
             }
             catch (Exception ex)
             {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.LogError("[BDOT] Error in WasCausedByPlayer: " + ex.Message);
+                if (CDoTModOptions.DebugLogging)
+                    Debug.LogError("[CDoT] Error in WasCausedByPlayer: " + ex.Message);
                 return false;
             }
         }

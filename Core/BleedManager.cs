@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using BDOT.Configuration;
+using CDoT.Configuration;
 using ThunderRoad;
 using UnityEngine;
 
-namespace BDOT.Core
+namespace CDoT.Core
 {
     public class BleedManager
     {
@@ -23,17 +23,17 @@ namespace BDOT.Core
             try
             {
                 _activeEffects.Clear();
-                Debug.Log("[BDOT] BleedManager initialized");
+                Debug.Log("[CDoT] BleedManager initialized");
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] BleedManager init failed: " + ex.Message);
+                Debug.LogError("[CDoT] BleedManager init failed: " + ex.Message);
             }
         }
 
         public void Update()
         {
-            if (!BDOTModOptions.EnableMod)
+            if (!CDoTModOptions.EnableMod)
                 return;
 
             try
@@ -42,7 +42,7 @@ namespace BDOT.Core
                     return;
 
                 float deltaTime = Time.unscaledDeltaTime;
-                bool debugLogging = BDOTModOptions.DebugLogging; // Cache for this frame
+                bool debugLogging = CDoTModOptions.DebugLogging; // Cache for this frame
 
                 _creaturesToRemove.Clear();
 
@@ -105,7 +105,7 @@ namespace BDOT.Core
                         if (debugLogging)
                         {
                             string reason = effect.IsExpired ? "duration ended" : "target invalid/killed";
-                            Debug.Log("[BDOT] EXPIRED: " + effect.Zone.GetDisplayName() + " on " + (effect.Target?.name ?? "null") + " (" + reason + ")");
+                            Debug.Log("[CDoT] EXPIRED: " + effect.Zone.GetDisplayName() + " on " + (effect.Target?.name ?? "null") + " (" + reason + ")");
                         }
                     }
 
@@ -135,7 +135,7 @@ namespace BDOT.Core
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] BleedManager Update error: " + ex.Message + "\n" + ex.StackTrace);
+                Debug.LogError("[CDoT] BleedManager Update error: " + ex.Message + "\n" + ex.StackTrace);
             }
         }
 
@@ -144,8 +144,8 @@ namespace BDOT.Core
             int totalEffects = GetActiveEffectCount();
             int creatures = _activeEffects.Count;
 
-            Debug.Log("[BDOT] --- Active Bleeds Status ---");
-            Debug.Log("[BDOT] Creatures: " + creatures + " | Effects: " + totalEffects);
+            Debug.Log("[CDoT] --- Active Bleeds Status ---");
+            Debug.Log("[CDoT] Creatures: " + creatures + " | Effects: " + totalEffects);
 
             var enumerator = _activeEffects.GetEnumerator();
             while (enumerator.MoveNext())
@@ -161,10 +161,10 @@ namespace BDOT.Core
                         if (effectList.Length > 0) effectList += ", ";
                         effectList += effect.Zone.GetDisplayName() + " x" + effect.StackCount + " (" + effect.RemainingDuration.ToString("F1") + "s)";
                     }
-                    Debug.Log("[BDOT]   " + creatureName + ": " + effectList);
+                    Debug.Log("[CDoT]   " + creatureName + ": " + effectList);
                 }
             }
-            Debug.Log("[BDOT] --------------------------------");
+            Debug.Log("[CDoT] --------------------------------");
         }
 
         public bool ApplyBleed(Creature target, BodyZone zone, DamageType damageType, RagdollPart hitPart = null)
@@ -172,14 +172,14 @@ namespace BDOT.Core
             if (target == null || target.isKilled || target.isPlayer)
                 return false;
 
-            if (!BDOTModOptions.EnableMod)
+            if (!CDoTModOptions.EnableMod)
                 return false;
 
-            var config = BDOTModOptions.GetZoneConfig(zone);
+            var config = CDoTModOptions.GetZoneConfig(zone);
             if (!config.Enabled)
             {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Zone disabled: " + zone.GetDisplayName());
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Zone disabled: " + zone.GetDisplayName());
                 return false;
             }
 
@@ -187,8 +187,8 @@ namespace BDOT.Core
             float roll = UnityEngine.Random.value * 100f;
             if (roll > config.Chance)
             {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Chance roll failed: " + roll.ToString("F1") + " > " + config.Chance.ToString("F0") + "%");
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Chance roll failed: " + roll.ToString("F1") + " > " + config.Chance.ToString("F0") + "%");
                 return false;
             }
 
@@ -221,12 +221,12 @@ namespace BDOT.Core
                 // Boost blood effect intensity on stack
                 existingEffect.OnStackAdded();
                 
-                if (BDOTModOptions.DebugLogging)
+                if (CDoTModOptions.DebugLogging)
                 {
-                    Debug.Log("[BDOT] STACK: " + zone.GetDisplayName() + " on " + target.name);
-                    Debug.Log("[BDOT]   Stacks: " + oldStacks + " -> " + existingEffect.StackCount + " (max=" + config.StackLimit + ")");
-                    Debug.Log("[BDOT]   Duration: " + oldDuration.ToString("F1") + "s -> " + existingEffect.RemainingDuration.ToString("F1") + "s");
-                    Debug.Log("[BDOT]   New tick damage: " + existingEffect.GetTickDamage().ToString("F2"));
+                    Debug.Log("[CDoT] STACK: " + zone.GetDisplayName() + " on " + target.name);
+                    Debug.Log("[CDoT]   Stacks: " + oldStacks + " -> " + existingEffect.StackCount + " (max=" + config.StackLimit + ")");
+                    Debug.Log("[CDoT]   Duration: " + oldDuration.ToString("F1") + "s -> " + existingEffect.RemainingDuration.ToString("F1") + "s");
+                    Debug.Log("[CDoT]   New tick damage: " + existingEffect.GetTickDamage().ToString("F2"));
                 }
             }
             else
@@ -246,14 +246,14 @@ namespace BDOT.Core
                 // Spawn silent blood effect for visual feedback
                 newEffect.SpawnBloodEffect();
                 
-                if (BDOTModOptions.DebugLogging)
+                if (CDoTModOptions.DebugLogging)
                 {
-                    float damageTypeMult = BDOTModOptions.GetDamageTypeMultiplier(damageType);
-                    Debug.Log("[BDOT] NEW BLEED: " + zone.GetDisplayName() + " on " + target.name);
-                    Debug.Log("[BDOT]   BaseDmg=" + config.Damage.ToString("F2") + " | DamageType=" + damageType + " (" + damageTypeMult.ToString("F1") + "x) | Duration=" + config.Duration.ToString("F1") + "s | TickInterval=" + config.Frequency.ToString("F2") + "s");
-                    Debug.Log("[BDOT]   Tick damage: " + newEffect.GetTickDamage().ToString("F2"));
-                    Debug.Log("[BDOT]   HitPart: " + (hitPart != null ? hitPart.type.ToString() : "null"));
-                    Debug.Log("[BDOT]   BloodVFX: " + (newEffect.BloodEffectInstance != null ? "Active" : "None"));
+                    float damageTypeMult = CDoTModOptions.GetDamageTypeMultiplier(damageType);
+                    Debug.Log("[CDoT] NEW BLEED: " + zone.GetDisplayName() + " on " + target.name);
+                    Debug.Log("[CDoT]   BaseDmg=" + config.Damage.ToString("F2") + " | DamageType=" + damageType + " (" + damageTypeMult.ToString("F1") + "x) | Duration=" + config.Duration.ToString("F1") + "s | TickInterval=" + config.Frequency.ToString("F2") + "s");
+                    Debug.Log("[CDoT]   Tick damage: " + newEffect.GetTickDamage().ToString("F2"));
+                    Debug.Log("[CDoT]   HitPart: " + (hitPart != null ? hitPart.type.ToString() : "null"));
+                    Debug.Log("[CDoT]   BloodVFX: " + (newEffect.BloodEffectInstance != null ? "Active" : "None"));
                 }
             }
 
@@ -314,7 +314,7 @@ namespace BDOT.Core
                     // Use Kill() to properly trigger death events and animations
                     target.Kill();
                     killedByBleed = true;
-                    Debug.Log("[BDOT] *** BLEED KILL! " + effect.Zone.GetDisplayName() + " bleed killed " + target.name + "! ***");
+                    Debug.Log("[CDoT] *** BLEED KILL! " + effect.Zone.GetDisplayName() + " bleed killed " + target.name + "! ***");
                     return;
                 }
                 
@@ -325,22 +325,22 @@ namespace BDOT.Core
             catch (Exception ex)
             {
                 // Damage application failed - creature is likely destroyed or in invalid state
-                if (BDOTModOptions.DebugLogging)
+                if (CDoTModOptions.DebugLogging)
                 {
-                    Debug.Log("[BDOT] Tick failed to apply damage: " + ex.Message);
+                    Debug.Log("[CDoT] Tick failed to apply damage: " + ex.Message);
                 }
                 return;
             }
 
-            if (BDOTModOptions.DebugLogging && !killedByBleed)
+            if (CDoTModOptions.DebugLogging && !killedByBleed)
             {
-                float damageTypeMult = BDOTModOptions.GetDamageTypeMultiplier(effect.DamageType);
+                float damageTypeMult = CDoTModOptions.GetDamageTypeMultiplier(effect.DamageType);
                 string healthInfo = (healthBefore >= 0f && healthAfter >= 0f) 
                     ? healthBefore.ToString("F1") + " -> " + healthAfter.ToString("F1")
                     : "N/A";
-                Debug.Log("[BDOT] TICK: " + effect.Zone.GetDisplayName() + " x" + effect.StackCount + " on " + (target?.name ?? "destroyed"));
-                Debug.Log("[BDOT]   Damage: " + damage.ToString("F2") + " (base=" + effect.DamagePerTick.ToString("F2") + " * stacks=" + effect.StackCount + " * " + effect.DamageType + "=" + damageTypeMult.ToString("F1") + "x)");
-                Debug.Log("[BDOT]   Health: " + healthInfo + " | Remaining: " + effect.RemainingDuration.ToString("F1") + "s");
+                Debug.Log("[CDoT] TICK: " + effect.Zone.GetDisplayName() + " x" + effect.StackCount + " on " + (target?.name ?? "destroyed"));
+                Debug.Log("[CDoT]   Damage: " + damage.ToString("F2") + " (base=" + effect.DamagePerTick.ToString("F2") + " * stacks=" + effect.StackCount + " * " + effect.DamageType + "=" + damageTypeMult.ToString("F1") + "x)");
+                Debug.Log("[CDoT]   Health: " + healthInfo + " | Remaining: " + effect.RemainingDuration.ToString("F1") + "s");
             }
         }
 
@@ -353,16 +353,16 @@ namespace BDOT.Core
             if (_activeEffects.TryGetValue(creatureId, out var effects))
             {
                 _activeEffects.Remove(creatureId);
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Cleared effects for: " + creature.name);
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Cleared effects for: " + creature.name);
             }
         }
 
         public void ClearAll()
         {
             _activeEffects.Clear();
-            if (BDOTModOptions.DebugLogging)
-                Debug.Log("[BDOT] All effects cleared");
+            if (CDoTModOptions.DebugLogging)
+                Debug.Log("[CDoT] All effects cleared");
         }
 
         public int GetActiveEffectCount()
@@ -446,11 +446,11 @@ namespace BDOT.Core
                     
                     creature.Inflict("Burning", this, float.PositiveInfinity, heatToAdd, true);
                     
-                    if (BDOTModOptions.DebugLogging)
+                    if (CDoTModOptions.DebugLogging)
                     {
                         var burning = creature.GetStatusOfType<Burning>();
                         string heatInfo = burning != null ? " | Heat: " + burning.Heat.ToString("F1") + " | Ignited: " + burning.isIgnited : "";
-                        Debug.Log("[BDOT] Fire tick on " + creature.name + " | Damage: " + damage.ToString("F2") + " | Heat added: " + heatToAdd.ToString("F1") + heatInfo);
+                        Debug.Log("[CDoT] Fire tick on " + creature.name + " | Damage: " + damage.ToString("F2") + " | Heat added: " + heatToAdd.ToString("F1") + heatInfo);
                     }
                 }
                 else if (damageType == DamageType.Lightning)
@@ -464,16 +464,16 @@ namespace BDOT.Core
                     
                     creature.TryElectrocute(power, duration, true, false, null);
                     
-                    if (BDOTModOptions.DebugLogging)
+                    if (CDoTModOptions.DebugLogging)
                     {
                         bool isElectrocuted = creature.brain != null && creature.brain.isElectrocuted;
-                        Debug.Log("[BDOT] Lightning tick on " + creature.name + " | Damage: " + damage.ToString("F2") + " | Power: " + power.ToString("F2") + " | Electrocuted: " + isElectrocuted);
+                        Debug.Log("[CDoT] Lightning tick on " + creature.name + " | Damage: " + damage.ToString("F2") + " | Power: " + power.ToString("F2") + " | Electrocuted: " + isElectrocuted);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] Error applying status effect: " + ex.Message);
+                Debug.LogError("[CDoT] Error applying status effect: " + ex.Message);
             }
         }
 
@@ -491,20 +491,20 @@ namespace BDOT.Core
                 {
                     // Initial heat application - small amount to start smoking
                     creature.Inflict("Burning", this, float.PositiveInfinity, 20f, true);
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Started fire DOT on " + creature.name + " | Initial heat: 20");
+                    if (CDoTModOptions.DebugLogging)
+                        Debug.Log("[CDoT] Started fire DOT on " + creature.name + " | Initial heat: 20");
                 }
                 else if (damageType == DamageType.Lightning)
                 {
                     // Initial electrocute with low power - will intensify with each tick
                     creature.TryElectrocute(0.2f, 2f, true, false, null);
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Started lightning DOT on " + creature.name + " | Initial power: 0.2");
+                    if (CDoTModOptions.DebugLogging)
+                        Debug.Log("[CDoT] Started lightning DOT on " + creature.name + " | Initial power: 0.2");
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] Error applying initial status visual: " + ex.Message);
+                Debug.LogError("[CDoT] Error applying initial status visual: " + ex.Message);
             }
         }
 
@@ -520,12 +520,12 @@ namespace BDOT.Core
             // Status effects will naturally expire when we stop reapplying them
             // Burning decays via heat loss, Electrocute has short duration
             // No need to actively remove - they'll fade when DOT ends
-            if (BDOTModOptions.DebugLogging && creature != null && !creature.isKilled)
+            if (CDoTModOptions.DebugLogging && creature != null && !creature.isKilled)
             {
                 if (damageType == DamageType.Fire && !HasActiveFireDOT(creature))
-                    Debug.Log("[BDOT] Fire DOT ended on " + creature.name + " - Burning will fade");
+                    Debug.Log("[CDoT] Fire DOT ended on " + creature.name + " - Burning will fade");
                 else if (damageType == DamageType.Lightning && !HasActiveLightningDOT(creature))
-                    Debug.Log("[BDOT] Lightning DOT ended on " + creature.name + " - Electrocute will fade");
+                    Debug.Log("[CDoT] Lightning DOT ended on " + creature.name + " - Electrocute will fade");
             }
         }
     }

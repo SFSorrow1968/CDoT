@@ -8,9 +8,9 @@ When making changes in this repo:
 - Quick refs: `DEVELOPMENT.md` sections "Platform Differences", "ModOptions System", "EventManager Events".
 - User does not want learning-oriented content; optimize for agent clarity over human prose (except MENU_MOCK, PUBLISH, and build steps).
 - When adding/renaming presets or ModOption labels, follow `PRESET_CHANGE_CHECKLIST.md`.
-- Build artifacts: `bin/Release/PCVR/BDOT/` and `bin/Release/Nomad/BDOT/`.
+- Build artifacts: `bin/Release/PCVR/CDoT/` and `bin/Release/Nomad/CDoT/`.
 - `MENU_MOCK.xlsx` is the current UI reference.
 - Check `References/` for new logs/screenshots before starting; screenshots live in `References/Screenshots/`.
-- Common edit points: UI options in `Configuration/BDOTModOptions.cs`, bleed logic in `Core/BleedManager.cs`, zone config in `Configuration/BodyZone.cs`.
+- Common edit points: UI options in `Configuration/CDoTModOptions.cs`, bleed logic in `Core/BleedManager.cs`, zone config in `Configuration/BodyZone.cs`.
 - Only add new pointers to these agent files if a redundant task cost significant time and the note would materially help onboarding agents avoid it.
 - If the user says "publish", follow `PUBLISH.md`.

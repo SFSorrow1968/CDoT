@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-    <AssemblyName>BDOT</AssemblyName>
-    <RootNamespace>BDOT</RootNamespace>
+    <AssemblyName>CDoT</AssemblyName>
+    <RootNamespace>CDoT</RootNamespace>
     <LangVersion>latest</LangVersion>
     <Nullable>disable</Nullable>
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -13,7 +13,7 @@
     <Configurations>Debug;Release;Nomad</Configurations>
   </PropertyGroup>
 
-  <!-- Only include BDOT source files, exclude SDK and reference projects -->
+  <!-- Only include CDoT source files, exclude SDK and reference projects -->
   <ItemGroup>
     <Compile Include="**\*.cs" Exclude="BasSDK\**;References\**;obj\**;bin\**;builds\**" />
   </ItemGroup>
@@ -29,7 +29,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>bin\Release\PCVR\BDOT\</OutputPath>
+    <OutputPath>bin\Release\PCVR\CDoT\</OutputPath>
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
     <Optimize>true</Optimize>
@@ -37,7 +37,7 @@
 
   <!-- Nomad configuration: IL2CPP compatible, no Harmony -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Nomad|AnyCPU'">
-    <OutputPath>bin\Release\Nomad\BDOT\</OutputPath>
+    <OutputPath>bin\Release\Nomad\CDoT\</OutputPath>
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
     <Optimize>true</Optimize>

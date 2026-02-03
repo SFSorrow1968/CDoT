@@ -1,4 +1,4 @@
-# BDOT - Bleed Damage Over Time
+# CDoT - Bleed Damage Over Time
 
 A Blade & Sorcery mod that adds location-based bleeding damage over time effects.
 
@@ -34,12 +34,12 @@ All zones are fully configurable with individual settings for:
 
 ### PCVR
 1. Download the latest PCVR release
-2. Extract to `[Blade & Sorcery]\BladeAndSorcery_Data\StreamingAssets\Mods\BDOT\`
+2. Extract to `[Blade & Sorcery]\BladeAndSorcery_Data\StreamingAssets\Mods\CDoT\`
 3. Launch the game
 
 ### Nomad (Quest)
 1. Download the latest Nomad release
-2. Extract to `[Device]\Android\data\com.Warpfrog.BladeAndSorcery\files\Mods\BDOT\`
+2. Extract to `[Device]\Android\data\com.Warpfrog.BladeAndSorcery\files\Mods\CDoT\`
 3. Launch the game
 
 ## Configuration
@@ -96,7 +96,7 @@ dotnet build -c Release
 dotnet build -c Nomad
 ```
 
-Output will be in `bin/Release/PCVR/BDOT/` or `bin/Release/Nomad/BDOT/`.
+Output will be in `bin/Release/PCVR/CDoT/` or `bin/Release/Nomad/CDoT/`.
 
 ## Platform Differences
 

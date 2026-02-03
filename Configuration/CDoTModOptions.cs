@@ -2,9 +2,9 @@ using System;
 using ThunderRoad;
 using UnityEngine;
 
-namespace BDOT.Configuration
+namespace CDoT.Configuration
 {
-    public static class BDOTModOptions
+    public static class CDoTModOptions
     {
         public const string VERSION = "1.2.0";
 
@@ -762,14 +762,14 @@ namespace BDOT.Configuration
                     _lastKnownProfile = currentProfile;
                     
                     if (DebugLogging)
-                        Debug.Log("[BDOT] Profile changed to: " + currentProfile);
+                        Debug.Log("[CDoT] Profile changed to: " + currentProfile);
 
                     // Auto-adjust multipliers based on profile
                     if (currentProfile == ProfilePreset.BleedOnly)
                     {
                         // Bleed Only: disable elemental multipliers
                         if (DebugLogging)
-                            Debug.Log("[BDOT] Setting elemental multipliers to 0x for Bleed Only profile");
+                            Debug.Log("[CDoT] Setting elemental multipliers to 0x for Bleed Only profile");
                         FireMultiplier = 0f;
                         LightningMultiplier = 0f;
                     }
@@ -777,7 +777,7 @@ namespace BDOT.Configuration
                     {
                         // Elemental Only: disable physical multipliers
                         if (DebugLogging)
-                            Debug.Log("[BDOT] Setting physical multipliers to 0x for Elemental Only profile");
+                            Debug.Log("[CDoT] Setting physical multipliers to 0x for Elemental Only profile");
                         PierceMultiplier = 0f;
                         SlashMultiplier = 0f;
                     }
@@ -786,7 +786,7 @@ namespace BDOT.Configuration
             }
             catch (Exception ex)
             {
-                Debug.LogError("[BDOT] Error in CheckAndSyncProfileMultipliers: " + ex.Message);
+                Debug.LogError("[CDoT] Error in CheckAndSyncProfileMultipliers: " + ex.Message);
             }
         }
 

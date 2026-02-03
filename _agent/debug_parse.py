@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Debug utility for parsing and validating BDOT configuration files.
+Debug utility for parsing and validating CDoT configuration files.
 """
 
 import os
@@ -77,7 +77,7 @@ def validate_settings():
 
 
 def main():
-    print("BDOT Configuration Validator")
+    print("CDoT Configuration Validator")
     print("=" * 40)
 
     all_valid = True
