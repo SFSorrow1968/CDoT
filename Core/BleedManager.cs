@@ -47,6 +47,9 @@ namespace BDOT.Core
 
             try
             {
+                if (_activeEffects.Count == 0)
+                    return;
+
                 float deltaTime = Time.unscaledDeltaTime;
 
                 _creaturesToRemove.Clear();

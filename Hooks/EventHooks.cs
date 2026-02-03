@@ -265,10 +265,10 @@ namespace BDOT.Hooks
                 var imbue = collision?.sourceColliderGroup?.imbue;
                 if (imbue != null && imbue.spellCastBase != null)
                 {
-                    string spellId = imbue.spellCastBase.id?.ToLower() ?? "";
-                    if (spellId.Contains("fire"))
+                    string spellId = imbue.spellCastBase.id;
+                    if (ContainsIgnoreCase(spellId, "fire"))
                         return DamageType.Fire;
-                    if (spellId.Contains("lightning") || spellId.Contains("electric"))
+                    if (ContainsIgnoreCase(spellId, "lightning") || ContainsIgnoreCase(spellId, "electric"))
                         return DamageType.Lightning;
                 }
 
@@ -280,10 +280,10 @@ namespace BDOT.Hooks
                     {
                         if (itemImbue?.spellCastBase != null)
                         {
-                            string spellId = itemImbue.spellCastBase.id?.ToLower() ?? "";
-                            if (spellId.Contains("fire"))
+                            string spellId = itemImbue.spellCastBase.id;
+                            if (ContainsIgnoreCase(spellId, "fire"))
                                 return DamageType.Fire;
-                            if (spellId.Contains("lightning") || spellId.Contains("electric"))
+                            if (ContainsIgnoreCase(spellId, "lightning") || ContainsIgnoreCase(spellId, "electric"))
                                 return DamageType.Lightning;
                         }
                     }
@@ -292,10 +292,10 @@ namespace BDOT.Hooks
                     var magicProjectile = sourceItem.GetComponent<ItemMagicProjectile>();
                     if (magicProjectile?.imbueSpellCastCharge != null)
                     {
-                        string spellId = magicProjectile.imbueSpellCastCharge.id?.ToLower() ?? "";
-                        if (spellId.Contains("fire"))
+                        string spellId = magicProjectile.imbueSpellCastCharge.id;
+                        if (ContainsIgnoreCase(spellId, "fire"))
                             return DamageType.Fire;
-                        if (spellId.Contains("lightning") || spellId.Contains("electric"))
+                        if (ContainsIgnoreCase(spellId, "lightning") || ContainsIgnoreCase(spellId, "electric"))
                             return DamageType.Lightning;
                         // Gravity/other spells stay as their reported type
                     }
@@ -420,6 +420,12 @@ namespace BDOT.Hooks
                     Debug.LogError("[BDOT] Error in WasCausedByPlayer: " + ex.Message);
                 return false;
             }
+        }
+
+        private static bool ContainsIgnoreCase(string source, string value)
+        {
+            return !string.IsNullOrEmpty(source) &&
+                   source.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0;
         }
     }
 }
