@@ -161,7 +161,7 @@ namespace BDOT.Core
             Debug.Log("[BDOT] --------------------------------");
         }
 
-        public bool ApplyBleed(Creature target, BodyZone zone, DamageType damageType, RagdollPart hitPart = null, EffectInstance collisionEffectInstance = null)
+        public bool ApplyBleed(Creature target, BodyZone zone, DamageType damageType, RagdollPart hitPart = null)
         {
             if (target == null || target.isKilled || target.isPlayer)
                 return false;
@@ -215,12 +215,6 @@ namespace BDOT.Core
                 // Boost blood effect intensity on stack
                 existingEffect.OnStackAdded();
                 
-                // If we don't have an effect yet but got one from this collision, capture it
-                if (existingEffect.BloodEffectInstance == null && collisionEffectInstance != null)
-                {
-                    existingEffect.CaptureBloodEffect(collisionEffectInstance);
-                }
-                
                 if (BDOTModOptions.DebugLogging)
                 {
                     Debug.Log("[BDOT] STACK: " + zone.GetDisplayName() + " on " + target.name);
@@ -242,6 +236,10 @@ namespace BDOT.Core
                     config.Frequency
                 );
                 effects.Add(newEffect);
+                
+                // Spawn silent blood effect for visual feedback
+                newEffect.SpawnBloodEffect();
+                
                 if (BDOTModOptions.DebugLogging)
                 {
                     float damageTypeMult = BDOTModOptions.GetDamageTypeMultiplier(damageType);
@@ -249,12 +247,7 @@ namespace BDOT.Core
                     Debug.Log("[BDOT]   BaseDmg=" + config.Damage.ToString("F2") + " | DamageType=" + damageType + " (" + damageTypeMult.ToString("F1") + "x) | Duration=" + config.Duration.ToString("F1") + "s | TickInterval=" + config.Frequency.ToString("F2") + "s");
                     Debug.Log("[BDOT]   Tick damage: " + newEffect.GetTickDamage().ToString("F2"));
                     Debug.Log("[BDOT]   HitPart: " + (hitPart != null ? hitPart.type.ToString() : "null"));
-                }
-                
-                // Capture blood effect from collision if available
-                if (collisionEffectInstance != null)
-                {
-                    newEffect.CaptureBloodEffect(collisionEffectInstance);
+                    Debug.Log("[BDOT]   BloodVFX: " + (newEffect.BloodEffectInstance != null ? "Active" : "None"));
                 }
             }
 

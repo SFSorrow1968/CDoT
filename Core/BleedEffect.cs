@@ -23,6 +23,7 @@ namespace BDOT.Core
         public float CurrentBloodIntensity { get; private set; }
         private float _timeSinceEffectRefresh = 0f;
         private const float EFFECT_REFRESH_INTERVAL = 0.1f; // Refresh 10x per second
+        private bool _effectSpawnAttempted = false; // Track if we've tried to spawn
 
         public bool IsExpired => RemainingDuration <= 0f;
         public bool IsValid
@@ -127,6 +128,84 @@ namespace BDOT.Core
         }
 
         #region Blood VFX Methods
+
+        /// <summary>
+        /// Spawns a silent blood effect (no audio) at the hit location.
+        /// Uses the creature's penetration effect data if available.
+        /// </summary>
+        public void SpawnBloodEffect()
+        {
+            // Only attempt once per bleed effect
+            if (_effectSpawnAttempted)
+                return;
+            _effectSpawnAttempted = true;
+
+            try
+            {
+                // Need a valid hit part with effect data
+                if (!HasValidHitPart)
+                {
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] Cannot spawn blood effect: no valid hit part");
+                    return;
+                }
+
+                // Get the blood effect data from the ragdoll part
+                EffectData bloodEffectData = HitPart.data?.penetrationDeepEffectData;
+                if (bloodEffectData == null)
+                {
+                    // Fallback: try slice effect data
+                    bloodEffectData = HitPart.data?.sliceChildEffectData ?? HitPart.data?.sliceParentEffectData;
+                }
+
+                if (bloodEffectData == null)
+                {
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] No blood effect data available for " + HitPart.type);
+                    return;
+                }
+
+                // Get spawn position and rotation at the hit part
+                Transform hitTransform = HitPart.transform;
+                Vector3 position = hitTransform.position;
+                Quaternion rotation = Quaternion.LookRotation(hitTransform.forward, hitTransform.up);
+
+                // Calculate initial intensity
+                CurrentBloodIntensity = CalculateBloodIntensity();
+
+                // Spawn the effect WITHOUT audio by ignoring EffectModuleAudio
+                BloodEffectInstance = bloodEffectData.Spawn(
+                    position,
+                    rotation,
+                    hitTransform,           // Parent to hit part so it follows
+                    null,                   // No collision instance
+                    true,                   // Pooled
+                    null,                   // No collider group
+                    false,                  // Not from player
+                    CurrentBloodIntensity,  // Initial intensity
+                    1f,                     // Normal speed
+                    typeof(EffectModuleAudio) // IGNORE AUDIO - this is the key!
+                );
+
+                if (BloodEffectInstance != null)
+                {
+                    BloodEffectInstance.Play(0, false, false);
+
+                    if (BDOTModOptions.DebugLogging)
+                    {
+                        Debug.Log("[BDOT] Spawned silent blood effect for " + Zone.GetDisplayName() + 
+                                  " | Intensity: " + CurrentBloodIntensity.ToString("F2") + 
+                                  " | EffectData: " + bloodEffectData.id);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (BDOTModOptions.DebugLogging)
+                    Debug.Log("[BDOT] Failed to spawn blood effect: " + ex.Message);
+                BloodEffectInstance = null;
+            }
+        }
 
         /// <summary>
         /// Captures an existing blood effect from the game's collision system.
