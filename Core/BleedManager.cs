@@ -16,23 +16,13 @@ namespace BDOT.Core
         private readonly List<BleedEffect> _effectsToRemove = new List<BleedEffect>();
         private readonly List<int> _creatureIds = new List<int>(); // For safe iteration
         private float _lastStatusLogTime = 0f;
-        private const float STATUS_LOG_INTERVAL = 5f; // Log status every 5 seconds when effects are active
-        
-        // Exclude audio from blood VFX - the hit audio is already played by the game's normal damage system
-        private static readonly Type[] SilentEffectModules = { typeof(EffectAudio) };
-
-        // Blood effect data - loaded once from catalog as fallback
-        private EffectData _fallbackBleedEffectData;
-        private bool _fallbackBleedEffectLoaded = false;
-        private const string FALLBACK_BLEED_EFFECT_ID = "PenetrationDeepBleeding";
+        private const float STATUS_LOG_INTERVAL = 5f; // Log status every effects are active
 
         public void Initialize()
         {
             try
             {
                 _activeEffects.Clear();
-                _fallbackBleedEffectLoaded = false;
-                _fallbackBleedEffectData = null;
                 Debug.Log("[BDOT] BleedManager initialized");
             }
             catch (Exception ex)
@@ -86,13 +76,6 @@ namespace BDOT.Core
                             continue;
                         }
 
-                        // Refresh blood VFX intensity when DOT is close to expiring
-                        // This prevents visual discontinuity if a new hit re-applies the DOT
-                        if (effect.RemainingDuration <= effect.TickInterval * 1.5f && effect.HasActiveBloodEffect)
-                        {
-                            RefreshBloodEffectIntensity(effect);
-                        }
-
                         // Apply damage tick using per-effect tick interval
                         if (effect.TimeSinceLastTick >= effect.TickInterval)
                         {
@@ -105,9 +88,6 @@ namespace BDOT.Core
                     foreach (var effect in _effectsToRemove)
                     {
                         effects.Remove(effect);
-                        
-                        // End the blood VFX effect
-                        effect.EndBloodEffect();
                         
                         // Remove visual status effect if no more fire/lightning DOT
                         if (effect.DamageType == DamageType.Fire || effect.DamageType == DamageType.Lightning)
@@ -295,12 +275,6 @@ namespace BDOT.Core
                 ApplyStatusEffectForDamage(target, effect.DamageType, damage);
             }
 
-            // Spawn blood VFX for physical damage types
-            if (effect.DamageType == DamageType.Pierce || effect.DamageType == DamageType.Slash)
-            {
-                SpawnBleedEffect(effect, damage);
-            }
-
             // Apply damage by directly modifying currentHealth
             // This avoids triggering EventManager.InvokeCreatureHit which was causing null reference errors
             // when the game's internal damage processing tried to access null collider groups
@@ -355,120 +329,6 @@ namespace BDOT.Core
             }
         }
 
-        /// <summary>
-        /// Manages blood VFX at the wound location.
-        /// Spawns ONCE on first call, then only updates intensity if effect is still active.
-        /// Never respawns - prevents repeated sound effects from particle system.
-        /// </summary>
-        private void SpawnBleedEffect(BleedEffect effect, float damage)
-        {
-            if (!effect.HasValidHitPart)
-                return;
-
-            // Only ever spawn once per bleed effect - prevents repeated sounds
-            if (effect.HasSpawnedBlood)
-            {
-                // Just update intensity if effect is still active
-                if (effect.HasActiveBloodEffect)
-                {
-                    float intensity = CalculateBloodIntensity(effect, damage);
-                    effect.BloodEffectInstance.SetIntensity(intensity);
-                    effect.RecordBloodIntensity(intensity);
-                }
-                return;
-            }
-
-            try
-            {
-                var hitPart = effect.HitPart;
-                float intensity = CalculateBloodIntensity(effect, damage);
-
-                // Get effect data
-                EffectData effectData = hitPart.data?.penetrationDeepEffectData;
-                
-                if (effectData == null)
-                {
-                    // Load fallback effect data if not already loaded
-                    if (!_fallbackBleedEffectLoaded)
-                    {
-                        _fallbackBleedEffectData = Catalog.GetData<EffectData>(FALLBACK_BLEED_EFFECT_ID, true);
-                        _fallbackBleedEffectLoaded = true;
-                        if (_fallbackBleedEffectData == null)
-                        {
-                            Debug.LogWarning("[BDOT] Could not load fallback bleed effect: " + FALLBACK_BLEED_EFFECT_ID);
-                        }
-                    }
-                    effectData = _fallbackBleedEffectData;
-                }
-
-                if (effectData == null)
-                    return;
-
-                // Spawn blood effect at the hit part location (ONCE only)
-                Vector3 position = hitPart.transform.position;
-                Quaternion rotation = Quaternion.LookRotation(hitPart.transform.up, hitPart.transform.forward);
-                
-                var effectInstance = effectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f, SilentEffectModules);
-                if (effectInstance != null)
-                {
-                    effectInstance.SetIntensity(intensity);
-                    effectInstance.Play(0, false, false);
-                    
-                    effect.BloodEffectInstance = effectInstance;
-                    effect.RecordBloodIntensity(intensity);
-                    effect.MarkBloodSpawned();
-                    
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Blood VFX spawned: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Blood VFX spawn failed: " + ex.Message);
-            }
-        }
-
-        private float CalculateBloodIntensity(BleedEffect effect, float damage)
-        {
-            // Calculate intensity based on damage (typical damage 1-5, scale to 0.2-1.0)
-            float intensity = Mathf.Clamp(damage * 0.2f, 0.2f, 1.0f);
-            
-            // Scale intensity by stack count (more stacks = more bleeding)
-            intensity = Mathf.Clamp(intensity * (1f + (effect.StackCount - 1) * 0.3f), 0.2f, 1.5f);
-            
-            // Apply blood amount preset multiplier
-            float bloodMultiplier = BDOTModOptions.GetBloodAmountMultiplier();
-            intensity *= bloodMultiplier;
-            
-            // Clamp final intensity to reasonable bounds
-            return Mathf.Clamp(intensity, 0.1f, 6.0f);
-        }
-
-        /// <summary>
-        /// Refreshes the blood effect intensity just before DOT expires.
-        /// This prevents visual discontinuity when a new hit re-applies the DOT.
-        /// </summary>
-        private void RefreshBloodEffectIntensity(BleedEffect effect)
-        {
-            if (!effect.HasActiveBloodEffect)
-                return;
-
-            try
-            {
-                // Use the recorded max intensity to keep bleeding consistent
-                float intensity = effect.MaxBloodIntensity;
-                if (intensity > 0f)
-                {
-                    effect.BloodEffectInstance.SetIntensity(intensity);
-                }
-            }
-            catch
-            {
-                // Effect may have been destroyed
-            }
-        }
-
         public void ClearCreature(Creature creature)
         {
             if (creature == null)
@@ -477,11 +337,6 @@ namespace BDOT.Core
             int creatureId = creature.GetInstanceID();
             if (_activeEffects.TryGetValue(creatureId, out var effects))
             {
-                // End all blood VFX effects for this creature
-                foreach (var effect in effects)
-                {
-                    effect.EndBloodEffect();
-                }
                 _activeEffects.Remove(creatureId);
                 if (BDOTModOptions.DebugLogging)
                     Debug.Log("[BDOT] Cleared effects for: " + creature.name);
@@ -490,14 +345,6 @@ namespace BDOT.Core
 
         public void ClearAll()
         {
-            // End all blood VFX effects
-            foreach (var effects in _activeEffects.Values)
-            {
-                foreach (var effect in effects)
-                {
-                    effect.EndBloodEffect();
-                }
-            }
             _activeEffects.Clear();
             if (BDOTModOptions.DebugLogging)
                 Debug.Log("[BDOT] All effects cleared");
