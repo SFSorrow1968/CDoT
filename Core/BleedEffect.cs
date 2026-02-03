@@ -27,6 +27,8 @@ namespace BDOT.Core
         private const float EFFECT_RESPAWN_INTERVAL = 0.8f; // Re-spawn particles every 0.8s
         private bool _effectSpawnAttempted = false; // Track if we've tried to spawn
         private EffectData _cachedBloodEffectData = null; // Cache for re-spawning
+        private bool _useRendererBinding = false; // Whether to bind to creature renderer
+        private Transform _spawnTransform = null; // Cached spawn transform
 
         public bool IsExpired => RemainingDuration <= 0f;
         public bool IsValid
@@ -142,7 +144,8 @@ namespace BDOT.Core
 
         /// <summary>
         /// Spawns a silent blood effect (no audio) at the hit location.
-        /// Uses the creature's penetration effect data if available, or falls back to catalog effects.
+        /// For pierce/slash: Uses penetration effects on hit part
+        /// For blunt/other: Uses meshBone-attached effects like the Burning status
         /// </summary>
         public void SpawnBloodEffect()
         {
@@ -161,30 +164,59 @@ namespace BDOT.Core
                     return;
                 }
 
-                // Try to get blood effect data from multiple sources
                 EffectData bloodEffectData = null;
+                Transform spawnTransform = null;
+                bool useRendererBinding = false;
 
-                // 1. Try ragdoll part's data (preferred - creature-specific)
-                if (HitPart.data != null)
+                // Different strategies based on damage type
+                if (DamageType == DamageType.Pierce || DamageType == DamageType.Slash)
                 {
-                    bloodEffectData = HitPart.data.penetrationDeepEffectData;
-                    if (bloodEffectData == null)
+                    // Pierce/Slash: Use penetration effects (these work well with wound geometry)
+                    if (HitPart.data != null)
                     {
-                        bloodEffectData = HitPart.data.sliceChildEffectData ?? HitPart.data.sliceParentEffectData;
+                        bloodEffectData = HitPart.data.penetrationDeepEffectData;
+                        if (bloodEffectData == null)
+                        {
+                            bloodEffectData = HitPart.data.sliceChildEffectData ?? HitPart.data.sliceParentEffectData;
+                        }
                     }
+                    spawnTransform = HitPart.transform;
+                }
+                
+                // Fallback for all damage types including blunt: use meshBone approach
+                if (bloodEffectData == null && HitPart.meshBone != null)
+                {
+                    // Use meshBone transform (like Burning status does) - this works for any damage type
+                    spawnTransform = HitPart.meshBone.transform;
+                    useRendererBinding = true;
                 }
 
-                // 2. Fallback: Load from catalog using known effect IDs
+                // Final fallback: Load from catalog
                 if (bloodEffectData == null)
                 {
                     // Try different blood effect IDs in order of preference
-                    string[] bloodEffectIds = new string[]
+                    // For blunt damage, prefer bleeding effects over penetration effects
+                    string[] bloodEffectIds;
+                    if (DamageType == DamageType.Blunt || DamageType == DamageType.Unknown)
                     {
-                        "PenetrationDeepBleeding",  // Best for bleeding (has particles)
-                        "PenetrationDeepFlesh",     // Standard deep penetration effect
-                        "SliceFleshChild",          // Slice blood spray
-                        "SliceFleshParent"          // Alternate slice effect
-                    };
+                        bloodEffectIds = new string[]
+                        {
+                            "PenetrationDeepBleeding",  // Bleeding particles (best for blunt)
+                            "SliceFleshChild",          // Slice blood spray
+                            "SliceFleshParent",         // Alternate slice effect
+                            "PenetrationDeepFlesh"      // Last resort
+                        };
+                    }
+                    else
+                    {
+                        bloodEffectIds = new string[]
+                        {
+                            "PenetrationDeepFlesh",     // Standard deep penetration
+                            "PenetrationDeepBleeding",  // Bleeding particles
+                            "SliceFleshChild",          // Slice blood spray
+                            "SliceFleshParent"          // Alternate slice effect
+                        };
+                    }
 
                     foreach (string effectId in bloodEffectIds)
                     {
@@ -204,13 +236,18 @@ namespace BDOT.Core
                     return;
                 }
 
+                // Use hit part transform if spawnTransform still null
+                if (spawnTransform == null)
+                    spawnTransform = HitPart.transform;
+
                 // Cache the effect data for re-spawning
                 _cachedBloodEffectData = bloodEffectData;
+                _useRendererBinding = useRendererBinding;
+                _spawnTransform = spawnTransform;
 
-                // Get spawn position and rotation at the hit part
-                Transform hitTransform = HitPart.transform;
-                Vector3 position = hitTransform.position;
-                Quaternion rotation = Quaternion.LookRotation(hitTransform.forward, hitTransform.up);
+                // Get spawn position and rotation
+                Vector3 position = spawnTransform.position;
+                Quaternion rotation = Quaternion.LookRotation(spawnTransform.forward, spawnTransform.up);
 
                 // Calculate initial intensity
                 CurrentBloodIntensity = CalculateBloodIntensity();
@@ -219,7 +256,7 @@ namespace BDOT.Core
                 BloodEffectInstance = bloodEffectData.Spawn(
                     position,
                     rotation,
-                    hitTransform,           // Parent to hit part so it follows
+                    spawnTransform,         // Parent to transform so it follows
                     null,                   // No collision instance
                     true,                   // Pooled
                     null,                   // No collider group
@@ -231,13 +268,25 @@ namespace BDOT.Core
 
                 if (BloodEffectInstance != null)
                 {
+                    // For blunt damage, bind to creature's VFX renderer (like Burning does)
+                    if (useRendererBinding && Target != null)
+                    {
+                        Renderer vfxRenderer = Target.GetRendererForVFX();
+                        if (vfxRenderer != null)
+                        {
+                            BloodEffectInstance.SetRenderer(vfxRenderer, false);
+                        }
+                    }
+
                     BloodEffectInstance.Play(0, false, false);
 
                     if (BDOTModOptions.DebugLogging)
                     {
+                        string bindingInfo = useRendererBinding ? " (renderer-bound)" : "";
                         Debug.Log("[BDOT] Spawned silent blood effect for " + Zone.GetDisplayName() + 
                                   " | Intensity: " + CurrentBloodIntensity.ToString("F2") + 
-                                  " | EffectData: " + bloodEffectData.id);
+                                  " | EffectData: " + bloodEffectData.id + 
+                                  " | DamageType: " + DamageType + bindingInfo);
                     }
                 }
                 else
@@ -369,9 +418,24 @@ namespace BDOT.Core
         {
             try
             {
-                // Need valid hit part and cached effect data
-                if (!HasValidHitPart || _cachedBloodEffectData == null)
+                // Need valid spawn transform and cached effect data
+                if (_spawnTransform == null || _cachedBloodEffectData == null)
                     return;
+
+                // Verify transform is still valid
+                try
+                {
+                    if (_spawnTransform.gameObject == null || !_spawnTransform.gameObject.activeInHierarchy)
+                    {
+                        _spawnTransform = null;
+                        return;
+                    }
+                }
+                catch
+                {
+                    _spawnTransform = null;
+                    return;
+                }
 
                 // End any existing effect gracefully
                 if (BloodEffectInstance != null)
@@ -387,10 +451,9 @@ namespace BDOT.Core
                     BloodEffectInstance = null;
                 }
 
-                // Get spawn position and rotation at the hit part
-                Transform hitTransform = HitPart.transform;
-                Vector3 position = hitTransform.position;
-                Quaternion rotation = Quaternion.LookRotation(hitTransform.forward, hitTransform.up);
+                // Get spawn position and rotation
+                Vector3 position = _spawnTransform.position;
+                Quaternion rotation = Quaternion.LookRotation(_spawnTransform.forward, _spawnTransform.up);
 
                 // Update intensity
                 CurrentBloodIntensity = CalculateBloodIntensity();
@@ -399,7 +462,7 @@ namespace BDOT.Core
                 BloodEffectInstance = _cachedBloodEffectData.Spawn(
                     position,
                     rotation,
-                    hitTransform,
+                    _spawnTransform,
                     null,
                     true,
                     null,
@@ -411,6 +474,16 @@ namespace BDOT.Core
 
                 if (BloodEffectInstance != null)
                 {
+                    // Re-apply renderer binding if needed
+                    if (_useRendererBinding && Target != null)
+                    {
+                        Renderer vfxRenderer = Target.GetRendererForVFX();
+                        if (vfxRenderer != null)
+                        {
+                            BloodEffectInstance.SetRenderer(vfxRenderer, false);
+                        }
+                    }
+
                     BloodEffectInstance.Play(0, false, false);
                 }
             }
