@@ -156,6 +156,14 @@ namespace BDOT.Hooks
                     return;
                 }
 
+                // Blunt damage only causes bleeding on head hits
+                if (damageType == DamageType.Blunt && zone != BodyZone.Head)
+                {
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] SKIP: Blunt damage only causes bleeding on head hits");
+                    return;
+                }
+
                 // Handle dismemberment separately to avoid double-counting
                 if (zone == BodyZone.Dismemberment)
                 {
