@@ -168,10 +168,25 @@ namespace BDOT.Core
                 Transform spawnTransform = null;
                 bool useRendererBinding = false;
 
-                // Different strategies based on damage type
-                if (DamageType == DamageType.Pierce || DamageType == DamageType.Slash)
+                // Always try to use PenetrationDeepBleeding first - it's designed for continuous bleeding
+                // and works better visually than the single-impact penetration effects
+                if (Catalog.TryGetData<EffectData>("PenetrationDeepBleeding", out bloodEffectData, false))
                 {
-                    // Pierce/Slash: Use penetration effects (these work well with wound geometry)
+                    // Use meshBone transform for bleeding effects (like Burning status does)
+                    if (HitPart.meshBone != null)
+                    {
+                        spawnTransform = HitPart.meshBone.transform;
+                        useRendererBinding = true;
+                    }
+                    else
+                    {
+                        spawnTransform = HitPart.transform;
+                    }
+                }
+                
+                // Fallback: Try part-specific effects for Pierce/Slash
+                if (bloodEffectData == null && (DamageType == DamageType.Pierce || DamageType == DamageType.Slash))
+                {
                     if (HitPart.data != null)
                     {
                         bloodEffectData = HitPart.data.penetrationDeepEffectData;
@@ -183,40 +198,26 @@ namespace BDOT.Core
                     spawnTransform = HitPart.transform;
                 }
                 
-                // Fallback for all damage types including blunt: use meshBone approach
-                if (bloodEffectData == null && HitPart.meshBone != null)
-                {
-                    // Use meshBone transform (like Burning status does) - this works for any damage type
-                    spawnTransform = HitPart.meshBone.transform;
-                    useRendererBinding = true;
-                }
-
-                // Final fallback: Load from catalog
+                // Final fallback: meshBone approach with catalog effects
                 if (bloodEffectData == null)
                 {
-                    // Try different blood effect IDs in order of preference
-                    // For blunt damage, prefer bleeding effects over penetration effects
-                    string[] bloodEffectIds;
-                    if (DamageType == DamageType.Blunt || DamageType == DamageType.Unknown)
+                    if (HitPart.meshBone != null)
                     {
-                        bloodEffectIds = new string[]
-                        {
-                            "PenetrationDeepBleeding",  // Bleeding particles (best for blunt)
-                            "SliceFleshChild",          // Slice blood spray
-                            "SliceFleshParent",         // Alternate slice effect
-                            "PenetrationDeepFlesh"      // Last resort
-                        };
+                        spawnTransform = HitPart.meshBone.transform;
+                        useRendererBinding = true;
                     }
                     else
                     {
-                        bloodEffectIds = new string[]
-                        {
-                            "PenetrationDeepFlesh",     // Standard deep penetration
-                            "PenetrationDeepBleeding",  // Bleeding particles
-                            "SliceFleshChild",          // Slice blood spray
-                            "SliceFleshParent"          // Alternate slice effect
-                        };
+                        spawnTransform = HitPart.transform;
                     }
+
+                    // Try other blood effect IDs
+                    string[] bloodEffectIds = new string[]
+                    {
+                        "SliceFleshChild",          // Slice blood spray
+                        "SliceFleshParent",         // Alternate slice effect
+                        "PenetrationDeepFlesh"      // Last resort
+                    };
 
                     foreach (string effectId in bloodEffectIds)
                     {
