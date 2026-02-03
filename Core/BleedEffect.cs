@@ -144,8 +144,7 @@ namespace BDOT.Core
 
         /// <summary>
         /// Spawns a silent blood effect (no audio) at the hit location.
-        /// For pierce/slash: Uses penetration effects on hit part
-        /// For blunt/other: Uses meshBone-attached effects like the Burning status
+        /// Uses meshBone-attached effects when available for better visual attachment.
         /// </summary>
         public void SpawnBloodEffect()
         {
@@ -241,7 +240,7 @@ namespace BDOT.Core
 
                 if (BloodEffectInstance != null)
                 {
-                    // For blunt damage, bind to creature's VFX renderer (like Burning does)
+                    // Bind to creature's VFX renderer for better visual attachment (like Burning does)
                     if (useRendererBinding && Target != null)
                     {
                         Renderer vfxRenderer = Target.GetRendererForVFX();

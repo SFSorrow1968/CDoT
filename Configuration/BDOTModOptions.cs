@@ -35,7 +35,6 @@ namespace BDOT.Configuration
         // Damage type multipliers - Physical
         public const string OptionPierceMultiplier = "Pierce Mult";
         public const string OptionSlashMultiplier = "Slash Mult";
-        public const string OptionBluntMultiplier = "Blunt Mult";
         // Damage type multipliers - Elemental (zone-based DOT with visual status effect)
         public const string OptionFireMultiplier = "Fire Mult";
         public const string OptionLightningMultiplier = "Lightning Mult";
@@ -155,7 +154,7 @@ namespace BDOT.Configuration
         public enum ProfilePreset
         {
             Default = 0,     // Both physical and elemental damage types
-            BleedOnly = 1,   // Physical damage only (Pierce/Slash/Blunt)
+            BleedOnly = 1,   // Physical damage only (Pierce/Slash)
             ElementalOnly = 2 // Elemental damage only (Fire/Lightning/Energy)
         }
 
@@ -358,13 +357,10 @@ namespace BDOT.Configuration
         [ModOption(name = OptionSlashMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 20, defaultValueIndex = 8, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely.")]
         public static float SlashMultiplier = 0.8f;
 
-        [ModOption(name = OptionBluntMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 30, defaultValueIndex = 5, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for blunt attacks. 0.0x disables DOT from blunt entirely.")]
-        public static float BluntMultiplier = 0.5f;
-
-        [ModOption(name = OptionFireMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 40, defaultValueIndex = 3, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely.")]
+        [ModOption(name = OptionFireMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 30, defaultValueIndex = 3, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely.")]
         public static float FireMultiplier = 0.3f;
 
-        [ModOption(name = OptionLightningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 50, defaultValueIndex = 15, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely.")]
+        [ModOption(name = OptionLightningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 40, defaultValueIndex = 15, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely.")]
         public static float LightningMultiplier = 1.5f;
 
         #endregion
@@ -708,14 +704,14 @@ namespace BDOT.Configuration
 
         /// <summary>
         /// Checks if a damage type should trigger zone-based DOT.
-        /// Physical types (Pierce/Slash/Blunt) and elemental types (Fire/Lightning) are allowed.
+        /// Physical types (Pierce/Slash) and elemental types (Fire/Lightning) are allowed.
+        /// Blunt damage does not cause bleeding.
         /// Fire/Lightning DOT also applies visual status effects (Burning/Electrocute).
         /// </summary>
         public static bool IsDamageTypeAllowed(DamageType damageType)
         {
             return damageType == DamageType.Pierce || 
                    damageType == DamageType.Slash || 
-                   damageType == DamageType.Blunt ||
                    damageType == DamageType.Fire ||
                    damageType == DamageType.Lightning;
         }
@@ -726,7 +722,6 @@ namespace BDOT.Configuration
             {
                 case DamageType.Pierce: return PierceMultiplier;
                 case DamageType.Slash: return SlashMultiplier;
-                case DamageType.Blunt: return BluntMultiplier;
                 case DamageType.Fire: return FireMultiplier;
                 case DamageType.Lightning: return LightningMultiplier;
                 default: return 0f;
@@ -795,7 +790,6 @@ namespace BDOT.Configuration
                             Debug.Log("[BDOT] Setting physical multipliers to 0x for Elemental Only profile");
                         PierceMultiplier = 0f;
                         SlashMultiplier = 0f;
-                        BluntMultiplier = 0f;
                     }
                     // For Default profile, leave multipliers as user-configured
                 }

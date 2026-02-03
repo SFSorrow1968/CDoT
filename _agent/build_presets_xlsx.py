@@ -156,10 +156,12 @@ def create_xlsx(output_path):
     ws.cell(row=19, column=1, value="Chance Presets:").font = Font(bold=True)
     ws.cell(row=20, column=1, value="  Off → Rare → Default → Frequent → Always")
     ws.cell(row=22, column=1, value="Damage Type Multipliers:").font = Font(bold=True)
-    ws.cell(row=23, column=1, value="  Pierce: 1.0x (default)")
-    ws.cell(row=24, column=1, value="  Slash: 1.0x (default)")
-    ws.cell(row=25, column=1, value="  Blunt: 0.5x (default - blunt causes less bleeding)")
-    ws.cell(row=26, column=1, value="  Set to 0.0x to disable bleed from that damage type")
+    ws.cell(row=23, column=1, value="  Pierce: 1.2x (default)")
+    ws.cell(row=24, column=1, value="  Slash: 0.8x (default)")
+    ws.cell(row=25, column=1, value="  Fire: 0.3x (default)")
+    ws.cell(row=26, column=1, value="  Lightning: 1.5x (default)")
+    ws.cell(row=27, column=1, value="  Set to 0.0x to disable DOT from that damage type")
+    ws.cell(row=28, column=1, value="  Note: Blunt damage does not cause bleeding")
     
     ws.column_dimensions['A'].width = 60
     

@@ -56,7 +56,7 @@ namespace BDOT.Core
             Debug.Log("[BDOT] Enabled: " + BDOTModOptions.EnableMod);
             Debug.Log("[BDOT] Debug Logging: " + BDOTModOptions.DebugLogging);
             Debug.Log("[BDOT] Presets: Damage=" + BDOTModOptions.DamagePresetSetting + ", Duration=" + BDOTModOptions.DurationPresetSetting + ", Frequency=" + BDOTModOptions.FrequencyPresetSetting + ", Chance=" + BDOTModOptions.ChancePresetSetting);
-            Debug.Log("[BDOT] DamageType Multipliers: Pierce=" + BDOTModOptions.PierceMultiplier.ToString("F1") + "x, Slash=" + BDOTModOptions.SlashMultiplier.ToString("F1") + "x, Blunt=" + BDOTModOptions.BluntMultiplier.ToString("F1") + "x");
+            Debug.Log("[BDOT] DamageType Multipliers: Pierce=" + BDOTModOptions.PierceMultiplier.ToString("F1") + "x, Slash=" + BDOTModOptions.SlashMultiplier.ToString("F1") + "x, Fire=" + BDOTModOptions.FireMultiplier.ToString("F1") + "x, Lightning=" + BDOTModOptions.LightningMultiplier.ToString("F1") + "x");
             Debug.Log("[BDOT] --- Zone Settings ---");
 
             BodyZone[] zones = { BodyZone.Throat, BodyZone.Head, BodyZone.Neck, BodyZone.Torso, BodyZone.Arm, BodyZone.Leg, BodyZone.Dismemberment };
