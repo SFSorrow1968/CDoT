@@ -17,8 +17,6 @@ namespace BDOT.Core
         private readonly List<int> _creatureIds = new List<int>(); // For safe iteration
         private float _lastStatusLogTime = 0f;
         private const float STATUS_LOG_INTERVAL = 5f; // Log status every 5 seconds when effects are active
-        private const float SpurtIntensityIncreaseEpsilon = 0.01f;
-        private static readonly Type[] SilentEffectModules = { typeof(EffectAudio) };
 
         // Blood effect data - loaded once from catalog as fallback
         private EffectData _fallbackBleedEffectData;
@@ -348,8 +346,9 @@ namespace BDOT.Core
         }
 
         /// <summary>
-        /// Spawns blood spurt VFX at the wound location.
-        /// Intensity scales with damage dealt.
+        /// Manages blood VFX at the wound location.
+        /// Spawns once on first tick, then only updates intensity on subsequent ticks.
+        /// Effect persists until DOT expires.
         /// </summary>
         private void SpawnBleedEffect(BleedEffect effect, float damage)
         {
@@ -360,8 +359,32 @@ namespace BDOT.Core
             {
                 var hitPart = effect.HitPart;
                 
-                // Try to use the hitPart's own penetration effect data first (most appropriate for that body part)
-                // Fall back to generic bleeding effect if not available
+                // Calculate intensity based on damage (typical damage 1-5, scale to 0.2-1.0)
+                float intensity = Mathf.Clamp(damage * 0.2f, 0.2f, 1.0f);
+                
+                // Scale intensity by stack count (more stacks = more bleeding)
+                intensity = Mathf.Clamp(intensity * (1f + (effect.StackCount - 1) * 0.3f), 0.2f, 1.5f);
+                
+                // Apply blood amount preset multiplier
+                float bloodMultiplier = BDOTModOptions.GetBloodAmountMultiplier();
+                intensity *= bloodMultiplier;
+                
+                // Clamp final intensity to reasonable bounds
+                intensity = Mathf.Clamp(intensity, 0.1f, 3.0f);
+
+                // If we already have an active effect, just update intensity (no new spawn, no sound)
+                if (effect.HasActiveBloodEffect)
+                {
+                    // Always update intensity to reflect current damage/stacks
+                    effect.BloodEffectInstance.SetIntensity(intensity);
+                    effect.RecordBloodIntensity(intensity);
+                    
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] Blood VFX refresh: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
+                    return;
+                }
+
+                // Need to spawn a new effect - get effect data
                 EffectData effectData = hitPart.data?.penetrationDeepEffectData;
                 
                 if (effectData == null)
@@ -381,61 +404,30 @@ namespace BDOT.Core
 
                 if (effectData == null)
                     return;
-                
-                // Calculate intensity based on damage (typical damage 1-5, scale to 0.2-1.0)
-                float intensity = Mathf.Clamp(damage * 0.2f, 0.2f, 1.0f);
-                
-                // Scale intensity by stack count (more stacks = more bleeding)
-                intensity = Mathf.Clamp(intensity * (1f + (effect.StackCount - 1) * 0.3f), 0.2f, 1.5f);
-                
-                // Apply blood amount preset multiplier
-                float bloodMultiplier = BDOTModOptions.GetBloodAmountMultiplier();
-                intensity *= bloodMultiplier;
-                
-                // Clamp final intensity to reasonable bounds
-                intensity = Mathf.Clamp(intensity, 0.1f, 3.0f);
 
-                bool intensityIncrease = effect.IsBloodIntensityIncrease(intensity, SpurtIntensityIncreaseEpsilon);
-                bool isFirstSpawn = effect.MaxBloodIntensity <= 0f;
-                bool shouldPlayAudio = intensityIncrease || isFirstSpawn;
-
-                // If we already have an active effect, only update when intensity increases
-                if (effect.HasActiveBloodEffect)
-                {
-                    if (intensityIncrease)
-                    {
-                        effect.BloodEffectInstance.SetIntensity(intensity);
-                        effect.RecordBloodIntensity(intensity);
-                        if (BDOTModOptions.DebugLogging)
-                            Debug.Log("[BDOT] Blood VFX update: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
-                    }
-                    return;
-                }
-
+                // Clear any stale reference
                 if (effect.BloodEffectInstance != null)
                 {
                     effect.BloodEffectInstance = null;
                 }
 
-                // Spawn blood spurt effect at the hit part location
-                // Use position directly and rotation facing outward (like ThunderRoad does)
+                // Spawn blood effect at the hit part location (first tick only)
                 Vector3 position = hitPart.transform.position;
                 // Blood spurts outward from the body - use transform.up as the outward direction
                 Quaternion rotation = Quaternion.LookRotation(hitPart.transform.up, hitPart.transform.forward);
                 
-                var effectInstance = effectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f,
-                    shouldPlayAudio ? null : SilentEffectModules);
+                var effectInstance = effectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f);
                 if (effectInstance != null)
                 {
                     effectInstance.SetIntensity(intensity);
                     effectInstance.Play(0, false, false);
                     
-                    // Store reference so we can end it when bleed expires
+                    // Store reference so we can update intensity and end it when bleed expires
                     effect.BloodEffectInstance = effectInstance;
                     effect.RecordBloodIntensity(intensity);
                     
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] Blood VFX spawned" + (shouldPlayAudio ? "" : " (silent)") + ": " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
+                        Debug.Log("[BDOT] Blood VFX spawned: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
                 }
             }
             catch (Exception ex)
