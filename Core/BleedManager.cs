@@ -325,7 +325,8 @@ namespace CDoT.Core
                     // Use Kill() to properly trigger death events and animations
                     target.Kill();
                     killedByBleed = true;
-                    Debug.Log($"[CDoT] *** BLEED KILL! {effect.Zone.GetDisplayName()} bleed killed {target.name}! ***");
+                    if (CDoTModOptions.DebugLogging)
+                        Debug.Log($"[CDoT] *** BLEED KILL! {effect.Zone.GetDisplayName()} bleed killed {target.name}! ***");
                     return;
                 }
                 
