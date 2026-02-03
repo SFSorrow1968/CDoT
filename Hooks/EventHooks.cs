@@ -177,12 +177,20 @@ namespace BDOT.Hooks
                     Debug.Log("[BDOT] Config: Chance=" + config.Chance.ToString("F0") + "%, Duration=" + config.Duration.ToString("F1") + "s, DmgPerTick=" + config.Damage.ToString("F2") + ", MaxStacks=" + config.StackLimit);
                 }
 
+                // Get the blood effect instance from the collision (if any)
+                // This is the effect the game already spawned - we'll extend it instead of spawning new ones
+                var bloodEffectInstance = collisionInstance?.effectInstance;
+
                 // Apply bleed effect (chance is checked inside ApplyBleed)
-                bool applied = BleedManager.Instance.ApplyBleed(creature, zone, damageType, hitPart);
+                // Pass the blood effect instance so we can capture and extend it
+                bool applied = BleedManager.Instance.ApplyBleed(creature, zone, damageType, hitPart, bloodEffectInstance);
                 if (BDOTModOptions.DebugLogging)
                 {
                     if (applied)
-                        Debug.Log("[BDOT] RESULT: Bleed APPLIED to " + creature.name + " (" + zone.GetDisplayName() + ")");
+                    {
+                        string effectInfo = bloodEffectInstance != null ? " | Blood VFX captured" : " | No VFX to capture";
+                        Debug.Log("[BDOT] RESULT: Bleed APPLIED to " + creature.name + " (" + zone.GetDisplayName() + ")" + effectInfo);
+                    }
                     else
                         Debug.Log("[BDOT] RESULT: Bleed NOT applied (zone disabled or other reason)");
                     Debug.Log("[BDOT] ================================");

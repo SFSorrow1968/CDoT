@@ -89,6 +89,9 @@ namespace BDOT.Core
                     {
                         effects.Remove(effect);
                         
+                        // Release blood VFX effect so it can end naturally
+                        effect.ReleaseBloodEffect();
+                        
                         // Remove visual status effect if no more fire/lightning DOT
                         if (effect.DamageType == DamageType.Fire || effect.DamageType == DamageType.Lightning)
                         {
@@ -158,7 +161,7 @@ namespace BDOT.Core
             Debug.Log("[BDOT] --------------------------------");
         }
 
-        public bool ApplyBleed(Creature target, BodyZone zone, DamageType damageType, RagdollPart hitPart = null)
+        public bool ApplyBleed(Creature target, BodyZone zone, DamageType damageType, RagdollPart hitPart = null, EffectInstance collisionEffectInstance = null)
         {
             if (target == null || target.isKilled || target.isPlayer)
                 return false;
@@ -208,6 +211,16 @@ namespace BDOT.Core
                 int oldStacks = existingEffect.StackCount;
                 float oldDuration = existingEffect.RemainingDuration;
                 existingEffect.AddStack(config.Damage, config.Duration, config.StackLimit, hitPart);
+                
+                // Boost blood effect intensity on stack
+                existingEffect.OnStackAdded();
+                
+                // If we don't have an effect yet but got one from this collision, capture it
+                if (existingEffect.BloodEffectInstance == null && collisionEffectInstance != null)
+                {
+                    existingEffect.CaptureBloodEffect(collisionEffectInstance);
+                }
+                
                 if (BDOTModOptions.DebugLogging)
                 {
                     Debug.Log("[BDOT] STACK: " + zone.GetDisplayName() + " on " + target.name);
@@ -236,6 +249,12 @@ namespace BDOT.Core
                     Debug.Log("[BDOT]   BaseDmg=" + config.Damage.ToString("F2") + " | DamageType=" + damageType + " (" + damageTypeMult.ToString("F1") + "x) | Duration=" + config.Duration.ToString("F1") + "s | TickInterval=" + config.Frequency.ToString("F2") + "s");
                     Debug.Log("[BDOT]   Tick damage: " + newEffect.GetTickDamage().ToString("F2"));
                     Debug.Log("[BDOT]   HitPart: " + (hitPart != null ? hitPart.type.ToString() : "null"));
+                }
+                
+                // Capture blood effect from collision if available
+                if (collisionEffectInstance != null)
+                {
+                    newEffect.CaptureBloodEffect(collisionEffectInstance);
                 }
             }
 
