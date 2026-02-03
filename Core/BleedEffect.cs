@@ -168,72 +168,44 @@ namespace BDOT.Core
                 Transform spawnTransform = null;
                 bool useRendererBinding = false;
 
-                // Always try to use PenetrationDeepBleeding first - it's designed for continuous bleeding
-                // and works better visually than the single-impact penetration effects
-                if (Catalog.TryGetData<EffectData>("PenetrationDeepBleeding", out bloodEffectData, false))
+                // Determine spawn transform - prefer meshBone for better visual attachment
+                if (HitPart.meshBone != null)
                 {
-                    // Use meshBone transform for bleeding effects (like Burning status does)
-                    if (HitPart.meshBone != null)
-                    {
-                        spawnTransform = HitPart.meshBone.transform;
-                        useRendererBinding = true;
-                    }
-                    else
-                    {
-                        spawnTransform = HitPart.transform;
-                    }
+                    spawnTransform = HitPart.meshBone.transform;
+                    useRendererBinding = true;
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] Using meshBone transform for " + HitPart.type);
                 }
-                
-                // Fallback: Try part-specific effects for Pierce/Slash
-                if (bloodEffectData == null && (DamageType == DamageType.Pierce || DamageType == DamageType.Slash))
+                else
                 {
-                    if (HitPart.data != null)
-                    {
-                        bloodEffectData = HitPart.data.penetrationDeepEffectData;
-                        if (bloodEffectData == null)
-                        {
-                            bloodEffectData = HitPart.data.sliceChildEffectData ?? HitPart.data.sliceParentEffectData;
-                        }
-                    }
                     spawnTransform = HitPart.transform;
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] Using hitPart transform for " + HitPart.type + " (no meshBone)");
                 }
-                
-                // Final fallback: meshBone approach with catalog effects
-                if (bloodEffectData == null)
+
+                // Try blood effect IDs in order - PenetrationDeepBleeding works best for continuous bleeding
+                string[] bloodEffectIds = new string[]
                 {
-                    if (HitPart.meshBone != null)
-                    {
-                        spawnTransform = HitPart.meshBone.transform;
-                        useRendererBinding = true;
-                    }
-                    else
-                    {
-                        spawnTransform = HitPart.transform;
-                    }
+                    "PenetrationDeepBleeding",  // Best for continuous bleeding (works on neck)
+                    "SliceFleshChild",          // Slice blood spray
+                    "SliceFleshParent",         // Alternate slice effect  
+                    "PenetrationDeepFlesh"      // Single impact effect (last resort)
+                };
 
-                    // Try other blood effect IDs
-                    string[] bloodEffectIds = new string[]
+                foreach (string effectId in bloodEffectIds)
+                {
+                    if (Catalog.TryGetData<EffectData>(effectId, out bloodEffectData, false))
                     {
-                        "SliceFleshChild",          // Slice blood spray
-                        "SliceFleshParent",         // Alternate slice effect
-                        "PenetrationDeepFlesh"      // Last resort
-                    };
-
-                    foreach (string effectId in bloodEffectIds)
-                    {
-                        if (Catalog.TryGetData<EffectData>(effectId, out bloodEffectData, false))
-                        {
-                            if (BDOTModOptions.DebugLogging)
-                                Debug.Log("[BDOT] Using catalog fallback effect: " + effectId);
-                            break;
-                        }
+                        if (BDOTModOptions.DebugLogging)
+                            Debug.Log("[BDOT] Found blood effect: " + effectId);
+                        break;
                     }
                 }
 
                 if (bloodEffectData == null)
                 {
                     if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] No blood effect data available for " + HitPart.type + " (checked part data and catalog)");
+                        Debug.Log("[BDOT] No blood effect data available for " + HitPart.type);
                     return;
                 }
 

@@ -136,6 +136,14 @@ namespace BDOT.Hooks
                 if (effectiveDamageType != damageType && BDOTModOptions.DebugLogging)
                     Debug.Log("[BDOT] Effective damage type: " + effectiveDamageType + " (from imbue/spell)");
 
+                // Blunt damage does not cause bleeding
+                if (effectiveDamageType == DamageType.Blunt)
+                {
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] SKIP: Blunt damage does not cause bleeding");
+                    return;
+                }
+
                 // Check if damage type is allowed by current profile
                 if (!BDOTModOptions.IsDamageTypeAllowed(effectiveDamageType))
                 {
@@ -153,14 +161,6 @@ namespace BDOT.Hooks
                 {
                     if (BDOTModOptions.DebugLogging)
                         Debug.Log("[BDOT] SKIP: Unknown body zone");
-                    return;
-                }
-
-                // Blunt damage only causes bleeding on head hits
-                if (damageType == DamageType.Blunt && zone != BodyZone.Head)
-                {
-                    if (BDOTModOptions.DebugLogging)
-                        Debug.Log("[BDOT] SKIP: Blunt damage only causes bleeding on head hits");
                     return;
                 }
 
