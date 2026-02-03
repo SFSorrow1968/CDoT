@@ -748,18 +748,18 @@ namespace BDOT.Configuration
 
         /// <summary>
         /// Gets the blood VFX intensity multiplier based on the current preset.
-        /// VeryLow=0.25x, Low=0.5x, Default=1.0x, High=1.5x, Extreme=2.0x
+        /// VeryLow=0.5x, Low=1.0x, Default=2.0x, High=3.0x, Extreme=4.0x
         /// </summary>
         public static float GetBloodAmountMultiplier()
         {
             switch (GetBloodAmountPreset())
             {
-                case BloodAmountPreset.VeryLow: return 0.25f;
-                case BloodAmountPreset.Low: return 0.5f;
-                case BloodAmountPreset.Default: return 1.0f;
-                case BloodAmountPreset.High: return 1.5f;
-                case BloodAmountPreset.Extreme: return 2.0f;
-                default: return 1.0f;
+                case BloodAmountPreset.VeryLow: return 0.5f;
+                case BloodAmountPreset.Low: return 1.0f;
+                case BloodAmountPreset.Default: return 2.0f;
+                case BloodAmountPreset.High: return 3.0f;
+                case BloodAmountPreset.Extreme: return 4.0f;
+                default: return 2.0f;
             }
         }
 
