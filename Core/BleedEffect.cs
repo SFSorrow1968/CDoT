@@ -22,6 +22,12 @@ namespace BDOT.Core
         /// </summary>
         public EffectInstance BloodEffectInstance { get; set; }
 
+        /// <summary>
+        /// Whether blood VFX has ever been spawned for this bleed effect.
+        /// Once true, no more spawns will occur - prevents repeated sound effects.
+        /// </summary>
+        public bool HasSpawnedBlood { get; private set; }
+
         public float MaxBloodIntensity { get; private set; }
 
         public bool IsExpired => RemainingDuration <= 0f;
@@ -104,6 +110,11 @@ namespace BDOT.Core
         {
             if (intensity > MaxBloodIntensity)
                 MaxBloodIntensity = intensity;
+        }
+
+        public void MarkBloodSpawned()
+        {
+            HasSpawnedBlood = true;
         }
 
         public void AddStack(float damagePerTick, float duration, int maxStacks, RagdollPart newHitPart = null)
