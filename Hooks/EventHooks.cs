@@ -23,6 +23,7 @@ namespace CDoT.Hooks
         private EventManager.CreatureHitEvent _onCreatureHitHandler;
         private EventManager.CreatureKillEvent _onCreatureKillHandler;
         private EventManager.CreatureSpawnedEvent _onCreatureSpawnHandler;
+        private EventManager.LevelLoadEvent _onLevelUnloadHandler;
 
         public static void Subscribe()
         {
@@ -67,6 +68,11 @@ namespace CDoT.Hooks
                 EventManager.onCreatureHit += _onCreatureHitHandler;
                 EventManager.onCreatureKill += _onCreatureKillHandler;
                 SubscribeSpawnEvent();
+
+                // Subscribe to level unload for cleanup on scene transitions
+                _onLevelUnloadHandler = new EventManager.LevelLoadEvent(this.OnLevelUnload);
+                EventManager.onLevelUnload += _onLevelUnloadHandler;
+
                 _subscribed = true;
                 Debug.Log("[CDoT] Event hooks subscribed successfully");
             }
@@ -108,6 +114,8 @@ namespace CDoT.Hooks
                     EventManager.onCreatureKill -= _onCreatureKillHandler;
                 if (_spawnSubscribed && _onCreatureSpawnHandler != null)
                     EventManager.onCreatureSpawn -= _onCreatureSpawnHandler;
+                if (_onLevelUnloadHandler != null)
+                    EventManager.onLevelUnload -= _onLevelUnloadHandler;
             }
             catch (Exception ex)
             {
@@ -119,6 +127,7 @@ namespace CDoT.Hooks
             _onCreatureHitHandler = null;
             _onCreatureKillHandler = null;
             _onCreatureSpawnHandler = null;
+            _onLevelUnloadHandler = null;
 
             _subscribed = false;
             _spawnSubscribed = false;
@@ -240,6 +249,34 @@ namespace CDoT.Hooks
             catch (Exception ex)
             {
                 Debug.LogError($"[CDoT] OnCreatureKill error: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Handles level unload events to clean up state and prevent orphaned effects.
+        /// </summary>
+        private void OnLevelUnload(LevelData levelData, LevelData.Mode mode, EventTime eventTime)
+        {
+            // Only handle OnEnd to avoid double-processing
+            if (eventTime != EventTime.OnEnd) return;
+
+            try
+            {
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Level unloading - cleaning up all bleed effects");
+
+                // Clear all active bleed effects
+                BleedManager.Instance.ClearAll();
+
+                // Reset tracking state
+                ResetState();
+
+                if (CDoTModOptions.DebugLogging)
+                    Debug.Log("[CDoT] Level cleanup complete");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[CDoT] Error during level unload cleanup: {ex.Message}");
             }
         }
 

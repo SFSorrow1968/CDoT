@@ -631,6 +631,14 @@ namespace CDoT.Configuration
                     config.StackLimit = 3;
                     break;
             }
+
+            // Validate and clamp all values to safe ranges (defense-in-depth)
+            config.Chance = Mathf.Clamp(config.Chance, 0f, 100f);
+            config.Damage = Mathf.Clamp(config.Damage, 0.01f, 100f);
+            config.Duration = Mathf.Clamp(config.Duration, 0.1f, 120f);
+            config.Frequency = Mathf.Clamp(config.Frequency, 0.1f, 10f);
+            config.StackLimit = Mathf.Clamp(config.StackLimit, 1, 20);
+
             return config;
         }
 

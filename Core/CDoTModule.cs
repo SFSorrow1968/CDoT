@@ -1,6 +1,7 @@
 using System;
 using CDoT.Configuration;
 using CDoT.Hooks;
+using CDoT.Integration;
 using ThunderRoad;
 using UnityEngine;
 
@@ -37,6 +38,9 @@ namespace CDoT.Core
                 Debug.Log("[CDoT] Subscribing event hooks (PCVR mode)...");
 #endif
                 EventHooks.Subscribe();
+
+                // Initialize optional CSM integration (for bleed kill slow motion)
+                CSMIntegration.Initialize();
 
                 // Log configuration summary
                 LogConfigurationSummary();

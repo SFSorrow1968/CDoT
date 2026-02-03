@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CDoT.Configuration;
+using CDoT.Integration;
 using ThunderRoad;
 using UnityEngine;
 
@@ -78,25 +79,35 @@ namespace CDoT.Core
                     for (int i = 0; i < effects.Count; i++)
                     {
                         var effect = effects[i];
-                        if (!effect.IsValid)
+                        try
                         {
-                            _effectsToRemove.Add(effect);
-                            continue;
+                            if (!effect.IsValid)
+                            {
+                                _effectsToRemove.Add(effect);
+                                continue;
+                            }
+
+                            effect.Update(deltaTime);
+
+                            if (effect.IsExpired)
+                            {
+                                _effectsToRemove.Add(effect);
+                                continue;
+                            }
+
+                            // Apply damage tick using per-effect tick interval
+                            if (effect.TimeSinceLastTick >= effect.TickInterval)
+                            {
+                                ApplyBleedDamage(effect);
+                                effect.TimeSinceLastTick = 0f;
+                            }
                         }
-
-                        effect.Update(deltaTime);
-
-                        if (effect.IsExpired)
+                        catch (Exception effectEx)
                         {
+                            // Error processing this effect - mark for removal and continue
+                            if (debugLogging)
+                                Debug.LogWarning($"[CDoT] Error processing effect, marking for removal: {effectEx.Message}");
                             _effectsToRemove.Add(effect);
-                            continue;
-                        }
-
-                        // Apply damage tick using per-effect tick interval
-                        if (effect.TimeSinceLastTick >= effect.TickInterval)
-                        {
-                            ApplyBleedDamage(effect);
-                            effect.TimeSinceLastTick = 0f;
                         }
                     }
 
@@ -327,6 +338,19 @@ namespace CDoT.Core
                     killedByBleed = true;
                     if (CDoTModOptions.DebugLogging)
                         Debug.Log($"[CDoT] *** BLEED KILL! {effect.Zone.GetDisplayName()} bleed killed {target.name}! ***");
+
+                    // Notify CSM of bleed kill for optional slow motion trigger
+                    // Wrapped in try/catch for extra safety - CSM errors should never crash CDoT
+                    try
+                    {
+                        CSMIntegration.NotifyBleedKill(target, effect.DamageType, damage);
+                    }
+                    catch (Exception csmEx)
+                    {
+                        if (CDoTModOptions.DebugLogging)
+                            Debug.LogWarning($"[CDoT] CSM integration error (non-fatal): {csmEx.Message}");
+                    }
+
                     return;
                 }
                 
