@@ -17,6 +17,9 @@ namespace BDOT.Core
         private readonly List<int> _creatureIds = new List<int>(); // For safe iteration
         private float _lastStatusLogTime = 0f;
         private const float STATUS_LOG_INTERVAL = 5f; // Log status every 5 seconds when effects are active
+        
+        // Exclude audio from blood VFX - the hit audio is already played by the game's normal damage system
+        private static readonly Type[] SilentEffectModules = { typeof(EffectAudio) };
 
         // Blood effect data - loaded once from catalog as fallback
         private EffectData _fallbackBleedEffectData;
@@ -418,12 +421,13 @@ namespace BDOT.Core
                     effect.BloodEffectInstance = null;
                 }
 
-                // Spawn blood effect at the hit part location (first tick only)
+                // Spawn blood effect at the hit part location
+                // Always spawn silently - hit audio is already played by the game's normal damage system
                 Vector3 position = hitPart.transform.position;
                 // Blood spurts outward from the body - use transform.up as the outward direction
                 Quaternion rotation = Quaternion.LookRotation(hitPart.transform.up, hitPart.transform.forward);
                 
-                var effectInstance = effectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f);
+                var effectInstance = effectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f, SilentEffectModules);
                 if (effectInstance != null)
                 {
                     effectInstance.SetIntensity(intensity);
