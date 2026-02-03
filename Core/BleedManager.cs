@@ -83,6 +83,13 @@ namespace BDOT.Core
                             continue;
                         }
 
+                        // Refresh blood VFX intensity when DOT is close to expiring
+                        // This prevents visual discontinuity if a new hit re-applies the DOT
+                        if (effect.RemainingDuration <= effect.TickInterval * 1.5f && effect.HasActiveBloodEffect)
+                        {
+                            RefreshBloodEffectIntensity(effect);
+                        }
+
                         // Apply damage tick using per-effect tick interval
                         if (effect.TimeSinceLastTick >= effect.TickInterval)
                         {
@@ -434,6 +441,30 @@ namespace BDOT.Core
             {
                 if (BDOTModOptions.DebugLogging)
                     Debug.Log("[BDOT] Blood VFX spawn failed: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Refreshes the blood effect intensity just before DOT expires.
+        /// This prevents visual discontinuity when a new hit re-applies the DOT.
+        /// </summary>
+        private void RefreshBloodEffectIntensity(BleedEffect effect)
+        {
+            if (!effect.HasActiveBloodEffect)
+                return;
+
+            try
+            {
+                // Use the recorded max intensity to keep bleeding consistent
+                float intensity = effect.MaxBloodIntensity;
+                if (intensity > 0f)
+                {
+                    effect.BloodEffectInstance.SetIntensity(intensity);
+                }
+            }
+            catch
+            {
+                // Effect may have been destroyed
             }
         }
 
