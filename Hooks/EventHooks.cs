@@ -13,7 +13,8 @@ namespace BDOT.Hooks
         private bool _subscribed = false;
         private bool _spawnSubscribed = false;
 
-        private readonly Dictionary<int, float> _recentSlicedParts = new Dictionary<int, float>();
+        private readonly Dictionary<int, float> _recentSlicedParts = new Dictionary<int, float>(16);
+        private readonly List<int> _expiredSliceParts = new List<int>(8); // Reusable list for cleanup
         private float _lastSliceCleanupTime = 0f;
         private const float SLICE_REARM_SECONDS = 30f;
         private const float SLICE_CLEANUP_INTERVAL = 10f;
@@ -242,19 +243,21 @@ namespace BDOT.Hooks
                 return;
 
             _lastSliceCleanupTime = now;
-            List<int> expired = null;
-            foreach (var kvp in _recentSlicedParts)
+            _expiredSliceParts.Clear();
+            
+            var enumerator = _recentSlicedParts.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                if (now - kvp.Value > SLICE_REARM_SECONDS)
+                if (now - enumerator.Current.Value > SLICE_REARM_SECONDS)
                 {
-                    if (expired == null) expired = new List<int>();
-                    expired.Add(kvp.Key);
+                    _expiredSliceParts.Add(enumerator.Current.Key);
                 }
             }
 
-            if (expired == null) return;
-            foreach (var key in expired)
-                _recentSlicedParts.Remove(key);
+            for (int i = 0; i < _expiredSliceParts.Count; i++)
+            {
+                _recentSlicedParts.Remove(_expiredSliceParts[i]);
+            }
         }
 
         /// <summary>
@@ -285,8 +288,10 @@ namespace BDOT.Hooks
                 var sourceItem = collision?.sourceColliderGroup?.collisionHandler?.item;
                 if (sourceItem != null)
                 {
-                    foreach (var itemImbue in sourceItem.imbues)
+                    var imbues = sourceItem.imbues;
+                    for (int i = 0; i < imbues.Count; i++)
                     {
+                        var itemImbue = imbues[i];
                         if (itemImbue?.spellCastBase != null)
                         {
                             string spellId = itemImbue.spellCastBase.id;
@@ -366,9 +371,10 @@ namespace BDOT.Hooks
                 // Check any imbues on the source item
                 if (sourceItem != null)
                 {
-                    foreach (var itemImbue in sourceItem.imbues)
+                    var imbues = sourceItem.imbues;
+                    for (int i = 0; i < imbues.Count; i++)
                     {
-                        if (itemImbue?.imbueCreature?.isPlayer == true)
+                        if (imbues[i]?.imbueCreature?.isPlayer == true)
                         {
                             if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: item.imbues");
                             return true;
@@ -379,9 +385,10 @@ namespace BDOT.Hooks
                 // Check if player is actively holding item via telekinesis
                 if (sourceItem != null)
                 {
-                    foreach (var tkHandler in sourceItem.tkHandlers)
+                    var tkHandlers = sourceItem.tkHandlers;
+                    for (int i = 0; i < tkHandlers.Count; i++)
                     {
-                        if (tkHandler?.ragdollHand?.creature?.isPlayer == true)
+                        if (tkHandlers[i]?.ragdollHand?.creature?.isPlayer == true)
                         {
                             if (BDOTModOptions.DebugLogging) Debug.Log("[BDOT] Player detected: tkHandlers");
                             return true;

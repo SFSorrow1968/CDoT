@@ -32,6 +32,7 @@ namespace BDOT.Core
         private Transform _spawnTransform = null; // Cached spawn transform
         private Renderer _cachedRenderer = null; // Cached VFX renderer
         private float _zoneIntensityMultiplier = 1f; // Cached zone multiplier
+        private float _damageTypeMultiplier = 1f; // Cached damage type multiplier
         private bool _isFadingOut = false; // Track if we're in fade-out phase
 
         public bool IsExpired => RemainingDuration <= 0f;
@@ -87,6 +88,7 @@ namespace BDOT.Core
             StackCount = 1;
             TimeSinceLastTick = 0f;
             _zoneIntensityMultiplier = GetZoneIntensityMultiplierStatic(zone);
+            _damageTypeMultiplier = BDOTModOptions.GetDamageTypeMultiplier(damageType);
         }
 
         public void AddStack(float damagePerTick, float duration, int maxStacks, RagdollPart newHitPart = null)
@@ -150,10 +152,8 @@ namespace BDOT.Core
 
         public float GetTickDamage()
         {
-            // Total damage = base damage * stack count * damage type multiplier
-            float baseDamage = DamagePerTick * StackCount;
-            float damageTypeMult = BDOTModOptions.GetDamageTypeMultiplier(DamageType);
-            return baseDamage * damageTypeMult;
+            // Total damage = base damage * stack count * cached damage type multiplier
+            return DamagePerTick * StackCount * _damageTypeMultiplier;
         }
 
         #region Blood VFX Methods

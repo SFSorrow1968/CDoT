@@ -11,12 +11,12 @@ namespace BDOT.Core
         private static BleedManager _instance;
         public static BleedManager Instance => _instance ??= new BleedManager();
 
-        private readonly Dictionary<int, List<BleedEffect>> _activeEffects = new Dictionary<int, List<BleedEffect>>();
-        private readonly List<int> _creaturesToRemove = new List<int>();
-        private readonly List<BleedEffect> _effectsToRemove = new List<BleedEffect>();
-        private readonly List<int> _creatureIds = new List<int>(); // For safe iteration
+        private readonly Dictionary<int, List<BleedEffect>> _activeEffects = new Dictionary<int, List<BleedEffect>>(32);
+        private readonly List<int> _creaturesToRemove = new List<int>(16);
+        private readonly List<BleedEffect> _effectsToRemove = new List<BleedEffect>(8);
+        private readonly List<int> _creatureIds = new List<int>(32); // For safe iteration
         private float _lastStatusLogTime = 0f;
-        private const float STATUS_LOG_INTERVAL = 5f; // Log status every effects are active
+        private const float STATUS_LOG_INTERVAL = 5f; // Log status every 5s when effects are active
 
         public void Initialize()
         {
@@ -45,15 +45,17 @@ namespace BDOT.Core
 
                 _creaturesToRemove.Clear();
 
-                // Copy keys to avoid collection modification during iteration
+                // Copy keys using struct enumerator to avoid allocation
                 _creatureIds.Clear();
-                foreach (var key in _activeEffects.Keys)
+                var keyEnumerator = _activeEffects.GetEnumerator();
+                while (keyEnumerator.MoveNext())
                 {
-                    _creatureIds.Add(key);
+                    _creatureIds.Add(keyEnumerator.Current.Key);
                 }
 
-                foreach (var creatureId in _creatureIds)
+                for (int ci = 0; ci < _creatureIds.Count; ci++)
                 {
+                    int creatureId = _creatureIds[ci];
                     if (!_activeEffects.TryGetValue(creatureId, out var effects))
                         continue;
 
@@ -85,8 +87,9 @@ namespace BDOT.Core
                     }
 
                     // Remove expired/invalid effects
-                    foreach (var effect in _effectsToRemove)
+                    for (int ri = 0; ri < _effectsToRemove.Count; ri++)
                     {
+                        var effect = _effectsToRemove[ri];
                         effects.Remove(effect);
                         
                         // Release blood VFX effect so it can end naturally
@@ -113,9 +116,9 @@ namespace BDOT.Core
                 }
 
                 // Clean up creatures with no effects
-                foreach (var creatureId in _creaturesToRemove)
+                for (int i = 0; i < _creaturesToRemove.Count; i++)
                 {
-                    _activeEffects.Remove(creatureId);
+                    _activeEffects.Remove(_creaturesToRemove[i]);
                 }
 
                 // Periodic status logging
@@ -143,15 +146,17 @@ namespace BDOT.Core
             Debug.Log("[BDOT] --- Active Bleeds Status ---");
             Debug.Log("[BDOT] Creatures: " + creatures + " | Effects: " + totalEffects);
 
-            foreach (var kvp in _activeEffects)
+            var enumerator = _activeEffects.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                var effects = kvp.Value;
+                var effects = enumerator.Current.Value;
                 if (effects.Count > 0 && effects[0].Target != null)
                 {
                     string creatureName = effects[0].Target.name;
                     string effectList = "";
-                    foreach (var effect in effects)
+                    for (int i = 0; i < effects.Count; i++)
                     {
+                        var effect = effects[i];
                         if (effectList.Length > 0) effectList += ", ";
                         effectList += effect.Zone.GetDisplayName() + " x" + effect.StackCount + " (" + effect.RemainingDuration.ToString("F1") + "s)";
                     }
@@ -190,7 +195,7 @@ namespace BDOT.Core
 
             if (!_activeEffects.TryGetValue(creatureId, out var effects))
             {
-                effects = new List<BleedEffect>();
+                effects = new List<BleedEffect>(4); // Pre-allocate for typical max zones
                 _activeEffects[creatureId] = effects;
             }
 
