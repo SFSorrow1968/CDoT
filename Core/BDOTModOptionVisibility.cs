@@ -18,7 +18,6 @@ namespace BDOT.Core
         private BDOTModOptions.DurationPreset? _lastDurationPreset;
         private BDOTModOptions.FrequencyPreset? _lastFrequencyPreset;
         private BDOTModOptions.ChancePreset? _lastChancePreset;
-        private bool _lastResetStatsToggle;
 
         private readonly Dictionary<string, ModOption> _modOptionsByKey =
             new Dictionary<string, ModOption>(StringComparer.Ordinal);
@@ -142,7 +141,6 @@ namespace BDOT.Core
             ApplyDurationPreset(force);
             ApplyFrequencyPreset(force);
             ApplyChancePreset(force);
-            ApplyStatisticsReset();
         }
 
         private void ApplyDamagePreset(bool force)
@@ -216,17 +214,6 @@ namespace BDOT.Core
             }
 
             _lastChancePreset = preset;
-        }
-
-        private void ApplyStatisticsReset()
-        {
-            if (BDOTModOptions.ResetStatsToggle && !_lastResetStatsToggle)
-            {
-                BDOTModOptions.ResetStatistics();
-                BDOTModOptions.ResetStatsToggle = false;
-                Debug.Log("[BDOT] Statistics reset");
-            }
-            _lastResetStatsToggle = BDOTModOptions.ResetStatsToggle;
         }
 
         #region UI Sync

@@ -263,7 +263,6 @@ namespace BDOT.Core
                 ApplyStatusEffectVisual(target, damageType);
             }
 
-            BDOTModOptions.IncrementBleedCount();
             return true;
         }
 
@@ -315,7 +314,6 @@ namespace BDOT.Core
                     // Use Kill() to properly trigger death events and animations
                     target.Kill();
                     killedByBleed = true;
-                    BDOTModOptions.AddBleedDamage(damage);
                     Debug.Log("[BDOT] *** BLEED KILL! " + effect.Zone.GetDisplayName() + " bleed killed " + target.name + "! ***");
                     return;
                 }
@@ -323,7 +321,6 @@ namespace BDOT.Core
                 // Apply damage directly to health (bypasses InvokeCreatureHit)
                 target.currentHealth = newHealth;
                 healthAfter = newHealth;
-                BDOTModOptions.AddBleedDamage(damage);
             }
             catch (Exception ex)
             {

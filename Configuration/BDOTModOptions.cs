@@ -21,7 +21,6 @@ namespace BDOT.Configuration
         public const string CategoryZoneLeg = "Leg";
         public const string CategoryZoneDismemberment = "Dismemberment";
         public const string CategoryAdvanced = "Advanced";
-        public const string CategoryStatistics = "Statistics";
 
         // Global options
         public const string OptionEnableMod = "Enable Mod";
@@ -99,7 +98,6 @@ namespace BDOT.Configuration
 
         // Advanced
         public const string OptionDebugLogging = "Debug Logging";
-        public const string OptionResetStats = "Reset Statistics";
 
         #endregion
 
@@ -319,8 +317,7 @@ namespace BDOT.Configuration
         private const int CategoryOrderArm = 34;
         private const int CategoryOrderLeg = 35;
         private const int CategoryOrderDismemberment = 40;
-        private const int CategoryOrderAdvanced = 90;
-        private const int CategoryOrderStatistics = 95;
+        private const int CategoryOrderAdvanced = 100;
 
         #endregion
 
@@ -534,13 +531,6 @@ namespace BDOT.Configuration
 
         [ModOption(name = OptionDebugLogging, category = CategoryAdvanced, categoryOrder = CategoryOrderAdvanced, order = 10, defaultValueIndex = 0, tooltip = "Enable verbose debug logging")]
         public static bool DebugLogging = false;
-
-        #endregion
-
-        #region Statistics
-
-        [ModOption(name = OptionResetStats, category = CategoryStatistics, categoryOrder = CategoryOrderStatistics, order = 10, defaultValueIndex = 0, tooltip = "Toggle to reset all statistics")]
-        public static bool ResetStatsToggle = false;
 
         #endregion
 
@@ -870,49 +860,6 @@ namespace BDOT.Configuration
                 case BodyZone.Dismemberment: return DismembermentFrequency;
                 default: return 0.5f;
             }
-        }
-
-        #endregion
-
-        #region Statistics
-
-        private const string StatPrefixTotalDamage = "BDOT_TotalDamage";
-        private const string StatPrefixBleedCount = "BDOT_BleedCount";
-
-        public static float GetTotalBleedDamage()
-        {
-            return PlayerPrefs.GetFloat(StatPrefixTotalDamage, 0f);
-        }
-
-        public static void AddBleedDamage(float damage)
-        {
-            float current = GetTotalBleedDamage();
-            PlayerPrefs.SetFloat(StatPrefixTotalDamage, current + damage);
-        }
-
-        public static int GetTotalBleedCount()
-        {
-            return PlayerPrefs.GetInt(StatPrefixBleedCount, 0);
-        }
-
-        public static void IncrementBleedCount()
-        {
-            int current = GetTotalBleedCount();
-            PlayerPrefs.SetInt(StatPrefixBleedCount, current + 1);
-        }
-
-        public static void ResetStatistics()
-        {
-            PlayerPrefs.SetFloat(StatPrefixTotalDamage, 0f);
-            PlayerPrefs.SetInt(StatPrefixBleedCount, 0);
-            PlayerPrefs.Save();
-        }
-
-        public static string GetStatisticsSummary()
-        {
-            float totalDamage = GetTotalBleedDamage();
-            int bleedCount = GetTotalBleedCount();
-            return "Total Damage: " + totalDamage.ToString("F1") + " | Bleeds: " + bleedCount;
         }
 
         #endregion
