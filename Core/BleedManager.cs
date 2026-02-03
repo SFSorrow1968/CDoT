@@ -17,6 +17,8 @@ namespace BDOT.Core
         private readonly List<int> _creatureIds = new List<int>(); // For safe iteration
         private float _lastStatusLogTime = 0f;
         private const float STATUS_LOG_INTERVAL = 5f; // Log status every 5 seconds when effects are active
+        private const float SpurtIntensityIncreaseEpsilon = 0.01f;
+        private static readonly Type[] SilentEffectModules = { typeof(EffectAudio) };
 
         // Blood effect data - loaded once from catalog as fallback
         private EffectData _fallbackBleedEffectData;
@@ -377,51 +379,61 @@ namespace BDOT.Core
                 if (effectData == null)
                     return;
                 
-                // Get blood preset once and derive both multiplier and spurt count
-                var bloodPreset = BDOTModOptions.GetBloodAmountPreset();
-                
-                // Lookup tables for preset values (VeryLow=0, Low=1, Default=2, High=3, Extreme=4)
-                // Multipliers: 0.25, 0.5, 1.0, 1.5, 2.0
-                // Spurt counts: 1, 1, 2, 3, 4
-                float bloodMultiplier;
-                int spurtCount;
-                switch (bloodPreset)
-                {
-                    case BDOTModOptions.BloodAmountPreset.VeryLow:
-                        bloodMultiplier = 0.25f; spurtCount = 1; break;
-                    case BDOTModOptions.BloodAmountPreset.Low:
-                        bloodMultiplier = 0.5f; spurtCount = 1; break;
-                    case BDOTModOptions.BloodAmountPreset.High:
-                        bloodMultiplier = 1.5f; spurtCount = 3; break;
-                    case BDOTModOptions.BloodAmountPreset.Extreme:
-                        bloodMultiplier = 2.0f; spurtCount = 4; break;
-                    default: // Default
-                        bloodMultiplier = 1.0f; spurtCount = 2; break;
-                }
-                
-                // Calculate intensity: base from damage, scaled by stacks and blood preset
+                // Calculate intensity based on damage (typical damage 1-5, scale to 0.2-1.0)
                 float intensity = Mathf.Clamp(damage * 0.2f, 0.2f, 1.0f);
-                intensity *= (1f + (effect.StackCount - 1) * 0.3f);
-                intensity = Mathf.Clamp(intensity * bloodMultiplier, 0.1f, 3.0f);
+                
+                // Scale intensity by stack count (more stacks = more bleeding)
+                intensity = Mathf.Clamp(intensity * (1f + (effect.StackCount - 1) * 0.3f), 0.2f, 1.5f);
+                
+                // Apply blood amount preset multiplier
+                float bloodMultiplier = BDOTModOptions.GetBloodAmountMultiplier();
+                intensity *= bloodMultiplier;
+                
+                // Clamp final intensity to reasonable bounds
+                intensity = Mathf.Clamp(intensity, 0.1f, 3.0f);
 
-                // Cache transform values to avoid repeated property access
-                Transform hitTransform = hitPart.transform;
-                Vector3 position = hitTransform.position;
-                Quaternion rotation = Quaternion.LookRotation(hitTransform.up, hitTransform.forward);
-                
-                // Spawn blood spurt effect(s)
-                for (int i = 0; i < spurtCount; i++)
+                bool intensityIncrease = effect.IsBloodIntensityIncrease(intensity, SpurtIntensityIncreaseEpsilon);
+                bool isFirstSpawn = effect.MaxBloodIntensity <= 0f;
+                bool shouldPlayAudio = intensityIncrease || isFirstSpawn;
+
+                // If we already have an active effect, only update when intensity increases
+                if (effect.HasActiveBloodEffect)
                 {
-                    var effectInstance = effectData.Spawn(position, rotation, hitTransform, null, true, null, false, intensity, 1f);
-                    if (effectInstance != null)
+                    if (intensityIncrease)
                     {
-                        effectInstance.Play(0, false, false);
-                        effect.BloodEffectInstance = effectInstance;
+                        effect.BloodEffectInstance.SetIntensity(intensity);
+                        effect.RecordBloodIntensity(intensity);
+                        if (BDOTModOptions.DebugLogging)
+                            Debug.Log("[BDOT] Blood VFX update: " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
                     }
+                    return;
                 }
+
+                if (effect.BloodEffectInstance != null)
+                {
+                    effect.BloodEffectInstance = null;
+                }
+
+                // Spawn blood spurt effect at the hit part location
+                // Use position directly and rotation facing outward (like ThunderRoad does)
+                Vector3 position = hitPart.transform.position;
+                // Blood spurts outward from the body - use transform.up as the outward direction
+                Quaternion rotation = Quaternion.LookRotation(hitPart.transform.up, hitPart.transform.forward);
                 
-                if (BDOTModOptions.DebugLogging)
-                    Debug.Log("[BDOT] Blood VFX: " + spurtCount + " spurt(s) | " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
+                var effectInstance = effectData.Spawn(position, rotation, hitPart.transform, null, true, null, false, intensity, 1f,
+                    shouldPlayAudio ? null : SilentEffectModules);
+                if (effectInstance != null)
+                {
+                    effectInstance.SetIntensity(intensity);
+                    effectInstance.Play(0, false, false);
+                    
+                    // Store reference so we can end it when bleed expires
+                    effect.BloodEffectInstance = effectInstance;
+                    effect.RecordBloodIntensity(intensity);
+                    
+                    if (BDOTModOptions.DebugLogging)
+                        Debug.Log("[BDOT] Blood VFX spawned" + (shouldPlayAudio ? "" : " (silent)") + ": " + effect.Zone.GetDisplayName() + " | Intensity: " + intensity.ToString("F2") + " | Stacks: " + effect.StackCount);
+                }
             }
             catch (Exception ex)
             {

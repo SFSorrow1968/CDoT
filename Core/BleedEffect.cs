@@ -22,6 +22,8 @@ namespace BDOT.Core
         /// </summary>
         public EffectInstance BloodEffectInstance { get; set; }
 
+        public float MaxBloodIntensity { get; private set; }
+
         public bool IsExpired => RemainingDuration <= 0f;
         public bool IsValid
         {
@@ -33,6 +35,23 @@ namespace BDOT.Core
                     if (Target == null) return false;
                     if ((UnityEngine.Object)Target == null) return false;
                     return !Target.isKilled;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool HasActiveBloodEffect
+        {
+            get
+            {
+                try
+                {
+                    if (BloodEffectInstance == null) return false;
+                    var effects = BloodEffectInstance.effects;
+                    return effects != null && effects.Count > 0;
                 }
                 catch
                 {
@@ -74,6 +93,17 @@ namespace BDOT.Core
             TickInterval = tickInterval;
             StackCount = 1;
             TimeSinceLastTick = 0f;
+        }
+
+        public bool IsBloodIntensityIncrease(float intensity, float epsilon)
+        {
+            return intensity > MaxBloodIntensity + epsilon;
+        }
+
+        public void RecordBloodIntensity(float intensity)
+        {
+            if (intensity > MaxBloodIntensity)
+                MaxBloodIntensity = intensity;
         }
 
         public void AddStack(float damagePerTick, float duration, int maxStacks, RagdollPart newHitPart = null)
