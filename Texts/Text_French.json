@@ -1,0 +1,761 @@
+{
+    "$type": "ThunderRoad.TextData, ThunderRoad",
+    "id": "French",
+    "sensitiveContent": "None",
+    "sensitiveFilterBehaviour": "Discard",
+    "version": 1,
+    "languageCode": "fr",
+    "textGroups": [
+        {
+            "$type": "ThunderRoad.TextData+TextGroup, ThunderRoad",
+            "id": "CDoT",
+            "texts": [
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "BloodDefault",
+                    "text": "Default"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "BloodExtreme",
+                    "text": "Extreme"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "BloodHigh",
+                    "text": "High"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "BloodLow",
+                    "text": "Low"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "BloodVeryLow",
+                    "text": "Very Low"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "CategoryAdvanced",
+                    "text": "Advanced"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "CategoryDamageTypeMultipliers",
+                    "text": "Damage Type Multipliers"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "CategoryPresetSelection",
+                    "text": "Preset Selection"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "CategoryZoneArm",
+                    "text": "Arm"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "CategoryZoneDismemberment",
+                    "text": "Dismemberment"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "CategoryZoneHead",
+                    "text": "Head"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "CategoryZoneLeg",
+                    "text": "Leg"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "CategoryZoneNeck",
+                    "text": "Neck"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "CategoryZoneThroat",
+                    "text": "Throat"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "CategoryZoneToggles",
+                    "text": "Zone Toggles"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "CategoryZoneTorso",
+                    "text": "Torso"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "ChanceAlways",
+                    "text": "Always"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "ChanceDefault",
+                    "text": "Default"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "ChanceFrequent",
+                    "text": "Frequent"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "ChanceOff",
+                    "text": "Off"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "ChanceRare",
+                    "text": "Rare"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "DamageDefault",
+                    "text": "Default"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "DamageExtreme",
+                    "text": "Extreme"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "DamageHigh",
+                    "text": "High"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "DamageLow",
+                    "text": "Low"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "DamageMinimal",
+                    "text": "Minimal"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "DurationDefault",
+                    "text": "Default"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "DurationExtended",
+                    "text": "Extended"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "DurationLong",
+                    "text": "Long"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "DurationShort",
+                    "text": "Short"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "DurationVeryShort",
+                    "text": "Very Short"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "FrequencyDefault",
+                    "text": "Default"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "FrequencyFast",
+                    "text": "Fast"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "FrequencyRapid",
+                    "text": "Rapid"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "FrequencySlow",
+                    "text": "Slow"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "FrequencyVerySlow",
+                    "text": "Very Slow"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionArmChance",
+                    "text": "Arm Chance"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionArmDamage",
+                    "text": "Arm Damage"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionArmDuration",
+                    "text": "Arm Duration"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionArmEnabled",
+                    "text": "Arm Enabled"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionArmFrequency",
+                    "text": "Arm Frequency"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionArmStackLimit",
+                    "text": "Arm Stack Limit"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionBloodAmountPreset",
+                    "text": "Blood Amount"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionChancePreset",
+                    "text": "Chance Preset"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionDamagePreset",
+                    "text": "Damage Preset"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionDebugLogging",
+                    "text": "Debug Logging"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionDebugOverlay",
+                    "text": "Debug Overlay"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionDismembermentChance",
+                    "text": "Dismemberment Chance"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionDismembermentDamage",
+                    "text": "Dismemberment Damage"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionDismembermentDuration",
+                    "text": "Dismemberment Duration"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionDismembermentEnabled",
+                    "text": "Dismemberment Enabled"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionDismembermentFrequency",
+                    "text": "Dismemberment Frequency"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionDismembermentStackLimit",
+                    "text": "Dismemberment Stack Limit"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionDurationPreset",
+                    "text": "Duration Preset"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionEnableMod",
+                    "text": "Enable Mod"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionFireMultiplier",
+                    "text": "Fire Mult"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionFrequencyPreset",
+                    "text": "Frequency Preset"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionHeadChance",
+                    "text": "Head Chance"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionHeadDamage",
+                    "text": "Head Damage"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionHeadDuration",
+                    "text": "Head Duration"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionHeadEnabled",
+                    "text": "Head Enabled"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionHeadFrequency",
+                    "text": "Head Frequency"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionHeadStackLimit",
+                    "text": "Head Stack Limit"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionLegChance",
+                    "text": "Leg Chance"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionLegDamage",
+                    "text": "Leg Damage"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionLegDuration",
+                    "text": "Leg Duration"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionLegEnabled",
+                    "text": "Leg Enabled"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionLegFrequency",
+                    "text": "Leg Frequency"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionLegStackLimit",
+                    "text": "Leg Stack Limit"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionLightningMultiplier",
+                    "text": "Lightning Mult"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionNeckChance",
+                    "text": "Neck Chance"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionNeckDamage",
+                    "text": "Neck Damage"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionNeckDuration",
+                    "text": "Neck Duration"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionNeckEnabled",
+                    "text": "Neck Enabled"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionNeckFrequency",
+                    "text": "Neck Frequency"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionNeckStackLimit",
+                    "text": "Neck Stack Limit"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionPierceMultiplier",
+                    "text": "Pierce Mult"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionProfilePreset",
+                    "text": "Profile"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionSlashMultiplier",
+                    "text": "Slash Mult"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionThroatChance",
+                    "text": "Throat Chance"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionThroatDamage",
+                    "text": "Throat Damage"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionThroatDuration",
+                    "text": "Throat Duration"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionThroatEnabled",
+                    "text": "Throat Enabled"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionThroatFrequency",
+                    "text": "Throat Frequency"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionThroatStackLimit",
+                    "text": "Throat Stack Limit"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionTorsoChance",
+                    "text": "Torso Chance"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionTorsoDamage",
+                    "text": "Torso Damage"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionTorsoDuration",
+                    "text": "Torso Duration"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionTorsoEnabled",
+                    "text": "Torso Enabled"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionTorsoFrequency",
+                    "text": "Torso Frequency"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "OptionTorsoStackLimit",
+                    "text": "Torso Stack Limit"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "ProfileBleedOnly",
+                    "text": "Bleed Only"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "ProfileDefault",
+                    "text": "Default"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "ProfileElementalOnly",
+                    "text": "Elemental Only"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipArmChance",
+                    "text": "Chance for arm wounds to cause bleeding"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipArmDamage",
+                    "text": "Base damage per tick for arm wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipArmDuration",
+                    "text": "How long arm bleeds last"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipArmEnabled",
+                    "text": "Enable bleeding from arm wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipArmFrequency",
+                    "text": "Time between bleed ticks for arm wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipArmStackLimit",
+                    "text": "Max stacks for arm wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipBloodAmountPreset",
+                    "text": "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood."
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipChancePreset",
+                    "text": "Bleed chance preset. Default is the balanced middle value."
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipDamagePreset",
+                    "text": "Damage per tick preset. Default is the balanced middle value."
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipDebugLogging",
+                    "text": "Enable verbose debug logging"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipDebugOverlay",
+                    "text": "Enable periodic debug overlay logging with performance stats"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipDismembermentChance",
+                    "text": "Chance for dismemberment to cause bleeding"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipDismembermentDamage",
+                    "text": "Base damage per tick for dismemberment"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipDismembermentDuration",
+                    "text": "How long dismemberment bleeds last"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipDismembermentEnabled",
+                    "text": "Enable bleeding from dismemberment"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipDismembermentFrequency",
+                    "text": "Time between bleed ticks for dismemberment"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipDismembermentStackLimit",
+                    "text": "Max stacks for dismemberment (per limb)"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipDurationPreset",
+                    "text": "Bleed duration preset. Default is the balanced middle value."
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipEnableMod",
+                    "text": "Master switch for the entire mod"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipFireMultiplier",
+                    "text": "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely."
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipFrequencyPreset",
+                    "text": "Tick frequency preset. Default is the balanced middle value."
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipHeadChance",
+                    "text": "Chance for head wounds to cause bleeding"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipHeadDamage",
+                    "text": "Base damage per tick for head wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipHeadDuration",
+                    "text": "How long head bleeds last"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipHeadEnabled",
+                    "text": "Enable bleeding from head wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipHeadFrequency",
+                    "text": "Time between bleed ticks for head wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipHeadStackLimit",
+                    "text": "Max stacks for head wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipLegChance",
+                    "text": "Chance for leg wounds to cause bleeding"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipLegDamage",
+                    "text": "Base damage per tick for leg wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipLegDuration",
+                    "text": "How long leg bleeds last"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipLegEnabled",
+                    "text": "Enable bleeding from leg wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipLegFrequency",
+                    "text": "Time between bleed ticks for leg wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipLegStackLimit",
+                    "text": "Max stacks for leg wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipLightningMultiplier",
+                    "text": "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely."
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipNeckChance",
+                    "text": "Chance for neck wounds to cause bleeding"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipNeckDamage",
+                    "text": "Base damage per tick for neck wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipNeckDuration",
+                    "text": "How long neck bleeds last"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipNeckEnabled",
+                    "text": "Enable bleeding from neck wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipNeckFrequency",
+                    "text": "Time between bleed ticks for neck wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipNeckStackLimit",
+                    "text": "Max stacks for neck wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipPierceMultiplier",
+                    "text": "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely."
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipProfilePreset",
+                    "text": "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only."
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipSlashMultiplier",
+                    "text": "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely."
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipThroatChance",
+                    "text": "Chance for throat wounds to cause bleeding"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipThroatDamage",
+                    "text": "Base damage per tick for throat wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipThroatDuration",
+                    "text": "How long throat bleeds last"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipThroatEnabled",
+                    "text": "Enable bleeding from throat wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipThroatFrequency",
+                    "text": "Time between bleed ticks for throat wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipThroatStackLimit",
+                    "text": "Max stacks for throat wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipTorsoChance",
+                    "text": "Chance for torso wounds to cause bleeding"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipTorsoDamage",
+                    "text": "Base damage per tick for torso wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipTorsoDuration",
+                    "text": "How long torso bleeds last"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipTorsoEnabled",
+                    "text": "Enable bleeding from torso wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipTorsoFrequency",
+                    "text": "Time between bleed ticks for torso wounds"
+                },
+                {
+                    "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
+                    "id": "TooltipTorsoStackLimit",
+                    "text": "Max stacks for torso wounds"
+                }
+            ]
+        }
+    ]
+}
