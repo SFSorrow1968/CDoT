@@ -324,66 +324,66 @@ namespace CDoT.Configuration
 
         #region Global Settings (Preset Selection)
 
-        [ModOption(name = OptionEnableMod, order = 0, defaultValueIndex = 1, tooltip = "Master switch for the entire mod")]
+        [ModOption(name = OptionEnableMod, order = 0, defaultValueIndex = 1, tooltip = "Master switch for the entire mod", nameLocalizationId = nameof(OptionEnableMod), tooltipLocalizationId = "TooltipEnableMod")]
         public static bool EnableMod = true;
 
-        [ModOption(name = OptionProfilePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 5, defaultValueIndex = 0, valueSourceName = nameof(ProfilePresetProvider), tooltip = "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only.")]
+        [ModOption(name = OptionProfilePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 5, defaultValueIndex = 0, valueSourceName = nameof(ProfilePresetProvider), tooltip = "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only.", nameLocalizationId = nameof(OptionProfilePreset), categoryLocalizationId = nameof(CategoryPresetSelection), tooltipLocalizationId = "TooltipProfilePreset")]
         public static string ProfilePresetSetting = "Default";
 
-        [ModOption(name = OptionDamagePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 10, defaultValueIndex = 2, valueSourceName = nameof(DamagePresetProvider), tooltip = "Damage per tick preset. Default is the balanced middle value.")]
+        [ModOption(name = OptionDamagePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 10, defaultValueIndex = 2, valueSourceName = nameof(DamagePresetProvider), tooltip = "Damage per tick preset. Default is the balanced middle value.", nameLocalizationId = nameof(OptionDamagePreset), categoryLocalizationId = nameof(CategoryPresetSelection), tooltipLocalizationId = "TooltipDamagePreset")]
         public static string DamagePresetSetting = "Default";
 
-        [ModOption(name = OptionDurationPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 20, defaultValueIndex = 2, valueSourceName = nameof(DurationPresetProvider), tooltip = "Bleed duration preset. Default is the balanced middle value.")]
+        [ModOption(name = OptionDurationPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 20, defaultValueIndex = 2, valueSourceName = nameof(DurationPresetProvider), tooltip = "Bleed duration preset. Default is the balanced middle value.", nameLocalizationId = nameof(OptionDurationPreset), categoryLocalizationId = nameof(CategoryPresetSelection), tooltipLocalizationId = "TooltipDurationPreset")]
         public static string DurationPresetSetting = "Default";
 
-        [ModOption(name = OptionFrequencyPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 30, defaultValueIndex = 2, valueSourceName = nameof(FrequencyPresetProvider), tooltip = "Tick frequency preset. Default is the balanced middle value.")]
+        [ModOption(name = OptionFrequencyPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 30, defaultValueIndex = 2, valueSourceName = nameof(FrequencyPresetProvider), tooltip = "Tick frequency preset. Default is the balanced middle value.", nameLocalizationId = nameof(OptionFrequencyPreset), categoryLocalizationId = nameof(CategoryPresetSelection), tooltipLocalizationId = "TooltipFrequencyPreset")]
         public static string FrequencyPresetSetting = "Default";
 
-        [ModOption(name = OptionChancePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 40, defaultValueIndex = 2, valueSourceName = nameof(ChancePresetProvider), tooltip = "Bleed chance preset. Default is the balanced middle value.")]
+        [ModOption(name = OptionChancePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 40, defaultValueIndex = 2, valueSourceName = nameof(ChancePresetProvider), tooltip = "Bleed chance preset. Default is the balanced middle value.", nameLocalizationId = nameof(OptionChancePreset), categoryLocalizationId = nameof(CategoryPresetSelection), tooltipLocalizationId = "TooltipChancePreset")]
         public static string ChancePresetSetting = "Default";
 
-        [ModOption(name = OptionBloodAmountPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 50, defaultValueIndex = 2, valueSourceName = nameof(BloodAmountPresetProvider), tooltip = "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood.")]
+        [ModOption(name = OptionBloodAmountPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 50, defaultValueIndex = 2, valueSourceName = nameof(BloodAmountPresetProvider), tooltip = "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood.", nameLocalizationId = nameof(OptionBloodAmountPreset), categoryLocalizationId = nameof(CategoryPresetSelection), tooltipLocalizationId = "TooltipBloodAmountPreset")]
         public static string BloodAmountPresetSetting = "Default";
 
         #endregion
 
         #region Damage Type Multipliers
 
-        [ModOption(name = OptionPierceMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 10, defaultValueIndex = 12, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely.")]
+        [ModOption(name = OptionPierceMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 10, defaultValueIndex = 12, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely.", nameLocalizationId = nameof(OptionPierceMultiplier), categoryLocalizationId = nameof(CategoryDamageTypeMultipliers), tooltipLocalizationId = "TooltipPierceMultiplier")]
         public static float PierceMultiplier = 1.2f;
 
-        [ModOption(name = OptionSlashMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 20, defaultValueIndex = 8, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely.")]
+        [ModOption(name = OptionSlashMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 20, defaultValueIndex = 8, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely.", nameLocalizationId = nameof(OptionSlashMultiplier), categoryLocalizationId = nameof(CategoryDamageTypeMultipliers), tooltipLocalizationId = "TooltipSlashMultiplier")]
         public static float SlashMultiplier = 0.8f;
 
-        [ModOption(name = OptionFireMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 30, defaultValueIndex = 3, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely.")]
+        [ModOption(name = OptionFireMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 30, defaultValueIndex = 3, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely.", nameLocalizationId = nameof(OptionFireMultiplier), categoryLocalizationId = nameof(CategoryDamageTypeMultipliers), tooltipLocalizationId = "TooltipFireMultiplier")]
         public static float FireMultiplier = 0.3f;
 
-        [ModOption(name = OptionLightningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 40, defaultValueIndex = 15, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely.")]
+        [ModOption(name = OptionLightningMultiplier, category = CategoryDamageTypeMultipliers, categoryOrder = CategoryOrderDamageTypeMult, order = 40, defaultValueIndex = 15, valueSourceName = nameof(DamageTypeMultiplierProvider), interactionType = (ModOption.InteractionType)2, tooltip = "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely.", nameLocalizationId = nameof(OptionLightningMultiplier), categoryLocalizationId = nameof(CategoryDamageTypeMultipliers), tooltipLocalizationId = "TooltipLightningMultiplier")]
         public static float LightningMultiplier = 1.5f;
 
         #endregion
 
         #region Zone Toggles
 
-        [ModOption(name = OptionThroatEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 10, defaultValueIndex = 1, tooltip = "Enable bleeding from throat wounds")]
+        [ModOption(name = OptionThroatEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 10, defaultValueIndex = 1, tooltip = "Enable bleeding from throat wounds", nameLocalizationId = nameof(OptionThroatEnabled), categoryLocalizationId = nameof(CategoryZoneToggles), tooltipLocalizationId = "TooltipThroatEnabled")]
         public static bool ThroatEnabled = true;
 
-        [ModOption(name = OptionHeadEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 20, defaultValueIndex = 1, tooltip = "Enable bleeding from head wounds")]
+        [ModOption(name = OptionHeadEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 20, defaultValueIndex = 1, tooltip = "Enable bleeding from head wounds", nameLocalizationId = nameof(OptionHeadEnabled), categoryLocalizationId = nameof(CategoryZoneToggles), tooltipLocalizationId = "TooltipHeadEnabled")]
         public static bool HeadEnabled = true;
 
-        [ModOption(name = OptionNeckEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 30, defaultValueIndex = 1, tooltip = "Enable bleeding from neck wounds")]
+        [ModOption(name = OptionNeckEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 30, defaultValueIndex = 1, tooltip = "Enable bleeding from neck wounds", nameLocalizationId = nameof(OptionNeckEnabled), categoryLocalizationId = nameof(CategoryZoneToggles), tooltipLocalizationId = "TooltipNeckEnabled")]
         public static bool NeckEnabled = true;
 
-        [ModOption(name = OptionTorsoEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 40, defaultValueIndex = 1, tooltip = "Enable bleeding from torso wounds")]
+        [ModOption(name = OptionTorsoEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 40, defaultValueIndex = 1, tooltip = "Enable bleeding from torso wounds", nameLocalizationId = nameof(OptionTorsoEnabled), categoryLocalizationId = nameof(CategoryZoneToggles), tooltipLocalizationId = "TooltipTorsoEnabled")]
         public static bool TorsoEnabled = true;
 
-        [ModOption(name = OptionArmEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 50, defaultValueIndex = 1, tooltip = "Enable bleeding from arm wounds")]
+        [ModOption(name = OptionArmEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 50, defaultValueIndex = 1, tooltip = "Enable bleeding from arm wounds", nameLocalizationId = nameof(OptionArmEnabled), categoryLocalizationId = nameof(CategoryZoneToggles), tooltipLocalizationId = "TooltipArmEnabled")]
         public static bool ArmEnabled = true;
 
-        [ModOption(name = OptionLegEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 60, defaultValueIndex = 1, tooltip = "Enable bleeding from leg wounds")]
+        [ModOption(name = OptionLegEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 60, defaultValueIndex = 1, tooltip = "Enable bleeding from leg wounds", nameLocalizationId = nameof(OptionLegEnabled), categoryLocalizationId = nameof(CategoryZoneToggles), tooltipLocalizationId = "TooltipLegEnabled")]
         public static bool LegEnabled = true;
 
-        [ModOption(name = OptionDismembermentEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 70, defaultValueIndex = 1, tooltip = "Enable bleeding from dismemberment")]
+        [ModOption(name = OptionDismembermentEnabled, category = CategoryZoneToggles, categoryOrder = CategoryOrderToggles, order = 70, defaultValueIndex = 1, tooltip = "Enable bleeding from dismemberment", nameLocalizationId = nameof(OptionDismembermentEnabled), categoryLocalizationId = nameof(CategoryZoneToggles), tooltipLocalizationId = "TooltipDismembermentEnabled")]
         public static bool DismembermentEnabled = true;
 
         #endregion
@@ -391,19 +391,19 @@ namespace CDoT.Configuration
         #region Throat Zone
         // Default values (preset index 2): Chance=60%, Damage=2.5, Duration=6.0s, Frequency=0.5s
 
-        [ModOption(name = OptionThroatChance, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 10, defaultValueIndex = 12, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for throat wounds to cause bleeding")]
+        [ModOption(name = OptionThroatChance, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 10, defaultValueIndex = 12, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for throat wounds to cause bleeding", nameLocalizationId = nameof(OptionThroatChance), categoryLocalizationId = nameof(CategoryZoneThroat), tooltipLocalizationId = "TooltipThroatChance")]
         public static float ThroatChance = 60f;
 
-        [ModOption(name = OptionThroatDamage, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 20, defaultValueIndex = 9, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for throat wounds")]
+        [ModOption(name = OptionThroatDamage, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 20, defaultValueIndex = 9, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for throat wounds", nameLocalizationId = nameof(OptionThroatDamage), categoryLocalizationId = nameof(CategoryZoneThroat), tooltipLocalizationId = "TooltipThroatDamage")]
         public static float ThroatDamage = 2.5f;
 
-        [ModOption(name = OptionThroatDuration, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 30, defaultValueIndex = 11, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long throat bleeds last")]
+        [ModOption(name = OptionThroatDuration, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 30, defaultValueIndex = 11, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long throat bleeds last", nameLocalizationId = nameof(OptionThroatDuration), categoryLocalizationId = nameof(CategoryZoneThroat), tooltipLocalizationId = "TooltipThroatDuration")]
         public static float ThroatDuration = 6.0f;
 
-        [ModOption(name = OptionThroatFrequency, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for throat wounds")]
+        [ModOption(name = OptionThroatFrequency, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for throat wounds", nameLocalizationId = nameof(OptionThroatFrequency), categoryLocalizationId = nameof(CategoryZoneThroat), tooltipLocalizationId = "TooltipThroatFrequency")]
         public static float ThroatFrequency = 0.5f;
 
-        [ModOption(name = OptionThroatStackLimit, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for throat wounds")]
+        [ModOption(name = OptionThroatStackLimit, category = CategoryZoneThroat, categoryOrder = CategoryOrderThroat, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for throat wounds", nameLocalizationId = nameof(OptionThroatStackLimit), categoryLocalizationId = nameof(CategoryZoneThroat), tooltipLocalizationId = "TooltipThroatStackLimit")]
         public static int ThroatStackLimit = 3;
 
         #endregion
@@ -411,19 +411,19 @@ namespace CDoT.Configuration
         #region Head Zone
         // Default values (preset index 2): Chance=40%, Damage=1.5, Duration=5.0s, Frequency=0.5s
 
-        [ModOption(name = OptionHeadChance, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 10, defaultValueIndex = 8, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for head wounds to cause bleeding")]
+        [ModOption(name = OptionHeadChance, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 10, defaultValueIndex = 8, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for head wounds to cause bleeding", nameLocalizationId = nameof(OptionHeadChance), categoryLocalizationId = nameof(CategoryZoneHead), tooltipLocalizationId = "TooltipHeadChance")]
         public static float HeadChance = 40f;
 
-        [ModOption(name = OptionHeadDamage, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 20, defaultValueIndex = 5, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for head wounds")]
+        [ModOption(name = OptionHeadDamage, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 20, defaultValueIndex = 5, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for head wounds", nameLocalizationId = nameof(OptionHeadDamage), categoryLocalizationId = nameof(CategoryZoneHead), tooltipLocalizationId = "TooltipHeadDamage")]
         public static float HeadDamage = 1.5f;
 
-        [ModOption(name = OptionHeadDuration, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 30, defaultValueIndex = 9, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long head bleeds last")]
+        [ModOption(name = OptionHeadDuration, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 30, defaultValueIndex = 9, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long head bleeds last", nameLocalizationId = nameof(OptionHeadDuration), categoryLocalizationId = nameof(CategoryZoneHead), tooltipLocalizationId = "TooltipHeadDuration")]
         public static float HeadDuration = 5.0f;
 
-        [ModOption(name = OptionHeadFrequency, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for head wounds")]
+        [ModOption(name = OptionHeadFrequency, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for head wounds", nameLocalizationId = nameof(OptionHeadFrequency), categoryLocalizationId = nameof(CategoryZoneHead), tooltipLocalizationId = "TooltipHeadFrequency")]
         public static float HeadFrequency = 0.5f;
 
-        [ModOption(name = OptionHeadStackLimit, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for head wounds")]
+        [ModOption(name = OptionHeadStackLimit, category = CategoryZoneHead, categoryOrder = CategoryOrderHead, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for head wounds", nameLocalizationId = nameof(OptionHeadStackLimit), categoryLocalizationId = nameof(CategoryZoneHead), tooltipLocalizationId = "TooltipHeadStackLimit")]
         public static int HeadStackLimit = 3;
 
         #endregion
@@ -431,19 +431,19 @@ namespace CDoT.Configuration
         #region Neck Zone
         // Default values (preset index 2): Chance=55%, Damage=2.0, Duration=5.5s, Frequency=0.5s
 
-        [ModOption(name = OptionNeckChance, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 10, defaultValueIndex = 11, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for neck wounds to cause bleeding")]
+        [ModOption(name = OptionNeckChance, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 10, defaultValueIndex = 11, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for neck wounds to cause bleeding", nameLocalizationId = nameof(OptionNeckChance), categoryLocalizationId = nameof(CategoryZoneNeck), tooltipLocalizationId = "TooltipNeckChance")]
         public static float NeckChance = 55f;
 
-        [ModOption(name = OptionNeckDamage, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 20, defaultValueIndex = 7, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for neck wounds")]
+        [ModOption(name = OptionNeckDamage, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 20, defaultValueIndex = 7, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for neck wounds", nameLocalizationId = nameof(OptionNeckDamage), categoryLocalizationId = nameof(CategoryZoneNeck), tooltipLocalizationId = "TooltipNeckDamage")]
         public static float NeckDamage = 2.0f;
 
-        [ModOption(name = OptionNeckDuration, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 30, defaultValueIndex = 10, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long neck bleeds last")]
+        [ModOption(name = OptionNeckDuration, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 30, defaultValueIndex = 10, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long neck bleeds last", nameLocalizationId = nameof(OptionNeckDuration), categoryLocalizationId = nameof(CategoryZoneNeck), tooltipLocalizationId = "TooltipNeckDuration")]
         public static float NeckDuration = 5.5f;
 
-        [ModOption(name = OptionNeckFrequency, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for neck wounds")]
+        [ModOption(name = OptionNeckFrequency, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for neck wounds", nameLocalizationId = nameof(OptionNeckFrequency), categoryLocalizationId = nameof(CategoryZoneNeck), tooltipLocalizationId = "TooltipNeckFrequency")]
         public static float NeckFrequency = 0.5f;
 
-        [ModOption(name = OptionNeckStackLimit, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for neck wounds")]
+        [ModOption(name = OptionNeckStackLimit, category = CategoryZoneNeck, categoryOrder = CategoryOrderNeck, order = 40, defaultValueIndex = 2, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for neck wounds", nameLocalizationId = nameof(OptionNeckStackLimit), categoryLocalizationId = nameof(CategoryZoneNeck), tooltipLocalizationId = "TooltipNeckStackLimit")]
         public static int NeckStackLimit = 3;
 
         #endregion
@@ -451,19 +451,19 @@ namespace CDoT.Configuration
         #region Torso Zone
         // Default values (preset index 2): Chance=35%, Damage=1.0, Duration=4.0s, Frequency=0.5s
 
-        [ModOption(name = OptionTorsoChance, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 10, defaultValueIndex = 7, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for torso wounds to cause bleeding")]
+        [ModOption(name = OptionTorsoChance, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 10, defaultValueIndex = 7, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for torso wounds to cause bleeding", nameLocalizationId = nameof(OptionTorsoChance), categoryLocalizationId = nameof(CategoryZoneTorso), tooltipLocalizationId = "TooltipTorsoChance")]
         public static float TorsoChance = 35f;
 
-        [ModOption(name = OptionTorsoDamage, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 20, defaultValueIndex = 3, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for torso wounds")]
+        [ModOption(name = OptionTorsoDamage, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 20, defaultValueIndex = 3, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for torso wounds", nameLocalizationId = nameof(OptionTorsoDamage), categoryLocalizationId = nameof(CategoryZoneTorso), tooltipLocalizationId = "TooltipTorsoDamage")]
         public static float TorsoDamage = 1.0f;
 
-        [ModOption(name = OptionTorsoDuration, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 30, defaultValueIndex = 7, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long torso bleeds last")]
+        [ModOption(name = OptionTorsoDuration, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 30, defaultValueIndex = 7, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long torso bleeds last", nameLocalizationId = nameof(OptionTorsoDuration), categoryLocalizationId = nameof(CategoryZoneTorso), tooltipLocalizationId = "TooltipTorsoDuration")]
         public static float TorsoDuration = 4.0f;
 
-        [ModOption(name = OptionTorsoFrequency, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for torso wounds")]
+        [ModOption(name = OptionTorsoFrequency, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for torso wounds", nameLocalizationId = nameof(OptionTorsoFrequency), categoryLocalizationId = nameof(CategoryZoneTorso), tooltipLocalizationId = "TooltipTorsoFrequency")]
         public static float TorsoFrequency = 0.5f;
 
-        [ModOption(name = OptionTorsoStackLimit, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 40, defaultValueIndex = 4, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for torso wounds")]
+        [ModOption(name = OptionTorsoStackLimit, category = CategoryZoneTorso, categoryOrder = CategoryOrderTorso, order = 40, defaultValueIndex = 4, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for torso wounds", nameLocalizationId = nameof(OptionTorsoStackLimit), categoryLocalizationId = nameof(CategoryZoneTorso), tooltipLocalizationId = "TooltipTorsoStackLimit")]
         public static int TorsoStackLimit = 5;
 
         #endregion
@@ -471,19 +471,19 @@ namespace CDoT.Configuration
         #region Arm Zone
         // Default values (preset index 2): Chance=25%, Damage=0.5, Duration=3.0s, Frequency=0.5s
 
-        [ModOption(name = OptionArmChance, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 10, defaultValueIndex = 5, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for arm wounds to cause bleeding")]
+        [ModOption(name = OptionArmChance, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 10, defaultValueIndex = 5, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for arm wounds to cause bleeding", nameLocalizationId = nameof(OptionArmChance), categoryLocalizationId = nameof(CategoryZoneArm), tooltipLocalizationId = "TooltipArmChance")]
         public static float ArmChance = 25f;
 
-        [ModOption(name = OptionArmDamage, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 20, defaultValueIndex = 1, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for arm wounds")]
+        [ModOption(name = OptionArmDamage, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 20, defaultValueIndex = 1, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for arm wounds", nameLocalizationId = nameof(OptionArmDamage), categoryLocalizationId = nameof(CategoryZoneArm), tooltipLocalizationId = "TooltipArmDamage")]
         public static float ArmDamage = 0.5f;
 
-        [ModOption(name = OptionArmDuration, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 30, defaultValueIndex = 5, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long arm bleeds last")]
+        [ModOption(name = OptionArmDuration, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 30, defaultValueIndex = 5, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long arm bleeds last", nameLocalizationId = nameof(OptionArmDuration), categoryLocalizationId = nameof(CategoryZoneArm), tooltipLocalizationId = "TooltipArmDuration")]
         public static float ArmDuration = 3.0f;
 
-        [ModOption(name = OptionArmFrequency, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for arm wounds")]
+        [ModOption(name = OptionArmFrequency, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for arm wounds", nameLocalizationId = nameof(OptionArmFrequency), categoryLocalizationId = nameof(CategoryZoneArm), tooltipLocalizationId = "TooltipArmFrequency")]
         public static float ArmFrequency = 0.5f;
 
-        [ModOption(name = OptionArmStackLimit, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 40, defaultValueIndex = 3, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for arm wounds")]
+        [ModOption(name = OptionArmStackLimit, category = CategoryZoneArm, categoryOrder = CategoryOrderArm, order = 40, defaultValueIndex = 3, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for arm wounds", nameLocalizationId = nameof(OptionArmStackLimit), categoryLocalizationId = nameof(CategoryZoneArm), tooltipLocalizationId = "TooltipArmStackLimit")]
         public static int ArmStackLimit = 4;
 
         #endregion
@@ -491,19 +491,19 @@ namespace CDoT.Configuration
         #region Leg Zone
         // Default values (preset index 2): Chance=30%, Damage=0.75, Duration=3.5s, Frequency=0.5s
 
-        [ModOption(name = OptionLegChance, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 10, defaultValueIndex = 6, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for leg wounds to cause bleeding")]
+        [ModOption(name = OptionLegChance, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 10, defaultValueIndex = 6, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for leg wounds to cause bleeding", nameLocalizationId = nameof(OptionLegChance), categoryLocalizationId = nameof(CategoryZoneLeg), tooltipLocalizationId = "TooltipLegChance")]
         public static float LegChance = 30f;
 
-        [ModOption(name = OptionLegDamage, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 20, defaultValueIndex = 2, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for leg wounds")]
+        [ModOption(name = OptionLegDamage, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 20, defaultValueIndex = 2, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for leg wounds", nameLocalizationId = nameof(OptionLegDamage), categoryLocalizationId = nameof(CategoryZoneLeg), tooltipLocalizationId = "TooltipLegDamage")]
         public static float LegDamage = 0.75f;
 
-        [ModOption(name = OptionLegDuration, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 30, defaultValueIndex = 6, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long leg bleeds last")]
+        [ModOption(name = OptionLegDuration, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 30, defaultValueIndex = 6, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long leg bleeds last", nameLocalizationId = nameof(OptionLegDuration), categoryLocalizationId = nameof(CategoryZoneLeg), tooltipLocalizationId = "TooltipLegDuration")]
         public static float LegDuration = 3.5f;
 
-        [ModOption(name = OptionLegFrequency, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for leg wounds")]
+        [ModOption(name = OptionLegFrequency, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for leg wounds", nameLocalizationId = nameof(OptionLegFrequency), categoryLocalizationId = nameof(CategoryZoneLeg), tooltipLocalizationId = "TooltipLegFrequency")]
         public static float LegFrequency = 0.5f;
 
-        [ModOption(name = OptionLegStackLimit, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 40, defaultValueIndex = 3, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for leg wounds")]
+        [ModOption(name = OptionLegStackLimit, category = CategoryZoneLeg, categoryOrder = CategoryOrderLeg, order = 40, defaultValueIndex = 3, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for leg wounds", nameLocalizationId = nameof(OptionLegStackLimit), categoryLocalizationId = nameof(CategoryZoneLeg), tooltipLocalizationId = "TooltipLegStackLimit")]
         public static int LegStackLimit = 4;
 
         #endregion
@@ -511,29 +511,29 @@ namespace CDoT.Configuration
         #region Dismemberment Zone
         // Default values (preset index 2): Chance=80%, Damage=3.0, Duration=8.0s, Frequency=0.5s
 
-        [ModOption(name = OptionDismembermentChance, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 10, defaultValueIndex = 16, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for dismemberment to cause bleeding")]
+        [ModOption(name = OptionDismembermentChance, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 10, defaultValueIndex = 16, valueSourceName = nameof(ChanceProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Chance for dismemberment to cause bleeding", nameLocalizationId = nameof(OptionDismembermentChance), categoryLocalizationId = nameof(CategoryZoneDismemberment), tooltipLocalizationId = "TooltipDismembermentChance")]
         public static float DismembermentChance = 80f;
 
-        [ModOption(name = OptionDismembermentDamage, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 20, defaultValueIndex = 11, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for dismemberment")]
+        [ModOption(name = OptionDismembermentDamage, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 20, defaultValueIndex = 11, valueSourceName = nameof(DamageProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Base damage per tick for dismemberment", nameLocalizationId = nameof(OptionDismembermentDamage), categoryLocalizationId = nameof(CategoryZoneDismemberment), tooltipLocalizationId = "TooltipDismembermentDamage")]
         public static float DismembermentDamage = 3.0f;
 
-        [ModOption(name = OptionDismembermentDuration, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 30, defaultValueIndex = 15, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long dismemberment bleeds last")]
+        [ModOption(name = OptionDismembermentDuration, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 30, defaultValueIndex = 15, valueSourceName = nameof(DurationProvider), interactionType = (ModOption.InteractionType)2, tooltip = "How long dismemberment bleeds last", nameLocalizationId = nameof(OptionDismembermentDuration), categoryLocalizationId = nameof(CategoryZoneDismemberment), tooltipLocalizationId = "TooltipDismembermentDuration")]
         public static float DismembermentDuration = 8.0f;
 
-        [ModOption(name = OptionDismembermentFrequency, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for dismemberment")]
+        [ModOption(name = OptionDismembermentFrequency, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 35, defaultValueIndex = 4, valueSourceName = nameof(FrequencyProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Time between bleed ticks for dismemberment", nameLocalizationId = nameof(OptionDismembermentFrequency), categoryLocalizationId = nameof(CategoryZoneDismemberment), tooltipLocalizationId = "TooltipDismembermentFrequency")]
         public static float DismembermentFrequency = 0.5f;
 
-        [ModOption(name = OptionDismembermentStackLimit, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 40, defaultValueIndex = 0, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for dismemberment (per limb)")]
+        [ModOption(name = OptionDismembermentStackLimit, category = CategoryZoneDismemberment, categoryOrder = CategoryOrderDismemberment, order = 40, defaultValueIndex = 0, valueSourceName = nameof(StackLimitProvider), interactionType = (ModOption.InteractionType)2, tooltip = "Max stacks for dismemberment (per limb)", nameLocalizationId = nameof(OptionDismembermentStackLimit), categoryLocalizationId = nameof(CategoryZoneDismemberment), tooltipLocalizationId = "TooltipDismembermentStackLimit")]
         public static int DismembermentStackLimit = 1;
 
         #endregion
 
         #region Advanced
 
-        [ModOption(name = OptionDebugLogging, category = CategoryAdvanced, categoryOrder = CategoryOrderAdvanced, order = 10, defaultValueIndex = 0, tooltip = "Enable verbose debug logging")]
+        [ModOption(name = OptionDebugLogging, category = CategoryAdvanced, categoryOrder = CategoryOrderAdvanced, order = 10, defaultValueIndex = 0, tooltip = "Enable verbose debug logging", nameLocalizationId = nameof(OptionDebugLogging), categoryLocalizationId = nameof(CategoryAdvanced), tooltipLocalizationId = "TooltipDebugLogging")]
         public static bool DebugLogging = false;
 
-        [ModOption(name = OptionDebugOverlay, category = CategoryAdvanced, categoryOrder = CategoryOrderAdvanced, order = 20, defaultValueIndex = 0, tooltip = "Enable periodic debug overlay logging with performance stats")]
+        [ModOption(name = OptionDebugOverlay, category = CategoryAdvanced, categoryOrder = CategoryOrderAdvanced, order = 20, defaultValueIndex = 0, tooltip = "Enable periodic debug overlay logging with performance stats", nameLocalizationId = nameof(OptionDebugOverlay), categoryLocalizationId = nameof(CategoryAdvanced), tooltipLocalizationId = "TooltipDebugOverlay")]
         public static bool DebugOverlay = false;
 
         #endregion
