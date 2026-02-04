@@ -8,6 +8,9 @@ namespace CDoT.Configuration
     {
         public const string VERSION = "1.2.0";
 
+        // Localization group ID - intentionally different from mod name to avoid UI conflicts
+        private const string LocalizationGroupId = "CDoT_Options";
+
         #region Labels and Categories
 
         public const string CategoryPresetSelection = "Preset Selection";
@@ -165,11 +168,11 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Minimal", "Minimal"),
-                new ModOptionString("Low", "Low"),
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("High", "High"),
-                new ModOptionString("Extreme", "Extreme")
+                new ModOptionString("Minimal", LocalizationGroupId + ".DamageMinimal", "Minimal"),
+                new ModOptionString("Low", LocalizationGroupId + ".DamageLow", "Low"),
+                new ModOptionString("Default", LocalizationGroupId + ".DamageDefault", "Default"),
+                new ModOptionString("High", LocalizationGroupId + ".DamageHigh", "High"),
+                new ModOptionString("Extreme", LocalizationGroupId + ".DamageExtreme", "Extreme")
             };
         }
 
@@ -177,11 +180,11 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Very Short", "Very Short"),
-                new ModOptionString("Short", "Short"),
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("Long", "Long"),
-                new ModOptionString("Extended", "Extended")
+                new ModOptionString("Very Short", LocalizationGroupId + ".DurationVeryShort", "Very Short"),
+                new ModOptionString("Short", LocalizationGroupId + ".DurationShort", "Short"),
+                new ModOptionString("Default", LocalizationGroupId + ".DurationDefault", "Default"),
+                new ModOptionString("Long", LocalizationGroupId + ".DurationLong", "Long"),
+                new ModOptionString("Extended", LocalizationGroupId + ".DurationExtended", "Extended")
             };
         }
 
@@ -189,11 +192,11 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Very Slow", "Very Slow"),
-                new ModOptionString("Slow", "Slow"),
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("Fast", "Fast"),
-                new ModOptionString("Rapid", "Rapid")
+                new ModOptionString("Very Slow", LocalizationGroupId + ".FrequencyVerySlow", "Very Slow"),
+                new ModOptionString("Slow", LocalizationGroupId + ".FrequencySlow", "Slow"),
+                new ModOptionString("Default", LocalizationGroupId + ".FrequencyDefault", "Default"),
+                new ModOptionString("Fast", LocalizationGroupId + ".FrequencyFast", "Fast"),
+                new ModOptionString("Rapid", LocalizationGroupId + ".FrequencyRapid", "Rapid")
             };
         }
 
@@ -201,11 +204,11 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Off", "Off"),
-                new ModOptionString("Rare", "Rare"),
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("Frequent", "Frequent"),
-                new ModOptionString("Always", "Always")
+                new ModOptionString("Off", LocalizationGroupId + ".ChanceOff", "Off"),
+                new ModOptionString("Rare", LocalizationGroupId + ".ChanceRare", "Rare"),
+                new ModOptionString("Default", LocalizationGroupId + ".ChanceDefault", "Default"),
+                new ModOptionString("Frequent", LocalizationGroupId + ".ChanceFrequent", "Frequent"),
+                new ModOptionString("Always", LocalizationGroupId + ".ChanceAlways", "Always")
             };
         }
 
@@ -213,11 +216,11 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Very Low", "Very Low"),
-                new ModOptionString("Low", "Low"),
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("High", "High"),
-                new ModOptionString("Extreme", "Extreme")
+                new ModOptionString("Very Low", LocalizationGroupId + ".BloodVeryLow", "Very Low"),
+                new ModOptionString("Low", LocalizationGroupId + ".BloodLow", "Low"),
+                new ModOptionString("Default", LocalizationGroupId + ".BloodDefault", "Default"),
+                new ModOptionString("High", LocalizationGroupId + ".BloodHigh", "High"),
+                new ModOptionString("Extreme", LocalizationGroupId + ".BloodExtreme", "Extreme")
             };
         }
 
@@ -225,9 +228,9 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("Bleed Only", "Bleed Only"),
-                new ModOptionString("Elemental Only", "Elemental Only")
+                new ModOptionString("Default", LocalizationGroupId + ".ProfileDefault", "Default"),
+                new ModOptionString("Bleed Only", LocalizationGroupId + ".ProfileBleedOnly", "Bleed Only"),
+                new ModOptionString("Elemental Only", LocalizationGroupId + ".ProfileElementalOnly", "Elemental Only")
             };
         }
 
@@ -324,25 +327,25 @@ namespace CDoT.Configuration
 
         #region Global Settings (Preset Selection)
 
-        [ModOption(name = OptionEnableMod, order = 0, defaultValueIndex = 1, tooltip = "Master switch for the entire mod")]
+        [ModOption(name = OptionEnableMod, nameLocalizationId = LocalizationGroupId + ".EnableMod", order = 0, defaultValueIndex = 1, tooltip = "Master switch for the entire mod")]
         public static bool EnableMod = true;
 
-        [ModOption(name = OptionProfilePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 5, defaultValueIndex = 0, valueSourceName = nameof(ProfilePresetProvider), tooltip = "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only.")]
+        [ModOption(name = OptionProfilePreset, nameLocalizationId = LocalizationGroupId + ".ProfilePreset", category = CategoryPresetSelection, categoryLocalizationId = LocalizationGroupId + ".CategoryPresetSelection", categoryOrder = CategoryOrderPreset, order = 5, defaultValueIndex = 0, valueSourceName = nameof(ProfilePresetProvider), tooltip = "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only.")]
         public static string ProfilePresetSetting = "Default";
 
-        [ModOption(name = OptionDamagePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 10, defaultValueIndex = 2, valueSourceName = nameof(DamagePresetProvider), tooltip = "Damage per tick preset. Default is the balanced middle value.")]
+        [ModOption(name = OptionDamagePreset, nameLocalizationId = LocalizationGroupId + ".DamagePreset", category = CategoryPresetSelection, categoryLocalizationId = LocalizationGroupId + ".CategoryPresetSelection", categoryOrder = CategoryOrderPreset, order = 10, defaultValueIndex = 2, valueSourceName = nameof(DamagePresetProvider), tooltip = "Damage per tick preset. Default is the balanced middle value.")]
         public static string DamagePresetSetting = "Default";
 
-        [ModOption(name = OptionDurationPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 20, defaultValueIndex = 2, valueSourceName = nameof(DurationPresetProvider), tooltip = "Bleed duration preset. Default is the balanced middle value.")]
+        [ModOption(name = OptionDurationPreset, nameLocalizationId = LocalizationGroupId + ".DurationPreset", category = CategoryPresetSelection, categoryLocalizationId = LocalizationGroupId + ".CategoryPresetSelection", categoryOrder = CategoryOrderPreset, order = 20, defaultValueIndex = 2, valueSourceName = nameof(DurationPresetProvider), tooltip = "Bleed duration preset. Default is the balanced middle value.")]
         public static string DurationPresetSetting = "Default";
 
-        [ModOption(name = OptionFrequencyPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 30, defaultValueIndex = 2, valueSourceName = nameof(FrequencyPresetProvider), tooltip = "Tick frequency preset. Default is the balanced middle value.")]
+        [ModOption(name = OptionFrequencyPreset, nameLocalizationId = LocalizationGroupId + ".FrequencyPreset", category = CategoryPresetSelection, categoryLocalizationId = LocalizationGroupId + ".CategoryPresetSelection", categoryOrder = CategoryOrderPreset, order = 30, defaultValueIndex = 2, valueSourceName = nameof(FrequencyPresetProvider), tooltip = "Tick frequency preset. Default is the balanced middle value.")]
         public static string FrequencyPresetSetting = "Default";
 
-        [ModOption(name = OptionChancePreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 40, defaultValueIndex = 2, valueSourceName = nameof(ChancePresetProvider), tooltip = "Bleed chance preset. Default is the balanced middle value.")]
+        [ModOption(name = OptionChancePreset, nameLocalizationId = LocalizationGroupId + ".ChancePreset", category = CategoryPresetSelection, categoryLocalizationId = LocalizationGroupId + ".CategoryPresetSelection", categoryOrder = CategoryOrderPreset, order = 40, defaultValueIndex = 2, valueSourceName = nameof(ChancePresetProvider), tooltip = "Bleed chance preset. Default is the balanced middle value.")]
         public static string ChancePresetSetting = "Default";
 
-        [ModOption(name = OptionBloodAmountPreset, category = CategoryPresetSelection, categoryOrder = CategoryOrderPreset, order = 50, defaultValueIndex = 2, valueSourceName = nameof(BloodAmountPresetProvider), tooltip = "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood.")]
+        [ModOption(name = OptionBloodAmountPreset, nameLocalizationId = LocalizationGroupId + ".BloodAmountPreset", category = CategoryPresetSelection, categoryLocalizationId = LocalizationGroupId + ".CategoryPresetSelection", categoryOrder = CategoryOrderPreset, order = 50, defaultValueIndex = 2, valueSourceName = nameof(BloodAmountPresetProvider), tooltip = "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood.")]
         public static string BloodAmountPresetSetting = "Default";
 
         #endregion
@@ -530,10 +533,10 @@ namespace CDoT.Configuration
 
         #region Advanced
 
-        [ModOption(name = OptionDebugLogging, category = CategoryAdvanced, categoryOrder = CategoryOrderAdvanced, order = 10, defaultValueIndex = 0, tooltip = "Enable verbose debug logging")]
+        [ModOption(name = OptionDebugLogging, nameLocalizationId = LocalizationGroupId + ".DebugLogging", category = CategoryAdvanced, categoryLocalizationId = LocalizationGroupId + ".CategoryAdvanced", categoryOrder = CategoryOrderAdvanced, order = 10, defaultValueIndex = 0, tooltip = "Enable verbose debug logging")]
         public static bool DebugLogging = false;
 
-        [ModOption(name = OptionDebugOverlay, category = CategoryAdvanced, categoryOrder = CategoryOrderAdvanced, order = 20, defaultValueIndex = 0, tooltip = "Enable periodic debug overlay logging with performance stats")]
+        [ModOption(name = OptionDebugOverlay, nameLocalizationId = LocalizationGroupId + ".DebugOverlay", category = CategoryAdvanced, categoryLocalizationId = LocalizationGroupId + ".CategoryAdvanced", categoryOrder = CategoryOrderAdvanced, order = 20, defaultValueIndex = 0, tooltip = "Enable periodic debug overlay logging with performance stats")]
         public static bool DebugOverlay = false;
 
         #endregion
