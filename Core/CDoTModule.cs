@@ -31,6 +31,8 @@ namespace CDoT.Core
 
                 BleedManager.Instance.Initialize();
                 CDoTModOptionVisibility.Instance.Initialize();
+                PerformanceMetrics.Instance.Initialize();
+                DebugOverlay.Instance.Initialize();
 
 #if NOMAD
                 Debug.Log("[CDoT] Subscribing event hooks (Nomad mode)...");
@@ -82,6 +84,8 @@ namespace CDoT.Core
                 
                 // Check for profile changes and sync multipliers
                 CDoTModOptions.CheckAndSyncProfileMultipliers();
+                // Debug overlay logging
+                DebugOverlay.Instance?.Draw();
             }
             catch (Exception ex)
             {
@@ -97,6 +101,8 @@ namespace CDoT.Core
 
                 BleedManager.Instance?.ClearAll();
                 CDoTModOptionVisibility.Instance?.Shutdown();
+                PerformanceMetrics.Instance?.Shutdown();
+                DebugOverlay.Instance?.Shutdown();
                 EventHooks.Unsubscribe();
                 EventHooks.ResetState();
 

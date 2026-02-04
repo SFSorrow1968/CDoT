@@ -98,6 +98,7 @@ namespace CDoT.Configuration
 
         // Advanced
         public const string OptionDebugLogging = "Debug Logging";
+        public const string OptionDebugOverlay = "Debug Overlay";
 
         #endregion
 
@@ -531,6 +532,9 @@ namespace CDoT.Configuration
 
         [ModOption(name = OptionDebugLogging, category = CategoryAdvanced, categoryOrder = CategoryOrderAdvanced, order = 10, defaultValueIndex = 0, tooltip = "Enable verbose debug logging")]
         public static bool DebugLogging = false;
+
+        [ModOption(name = OptionDebugOverlay, category = CategoryAdvanced, categoryOrder = CategoryOrderAdvanced, order = 20, defaultValueIndex = 0, tooltip = "Enable periodic debug overlay logging with performance stats")]
+        public static bool DebugOverlay = false;
 
         #endregion
 
