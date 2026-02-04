@@ -31,3 +31,6 @@ Thumbs.db
 
 # Rider
 .idea/
+
+# Release zips
+*.zip
