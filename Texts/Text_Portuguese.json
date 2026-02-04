@@ -7,63 +7,63 @@
   "textList": [
     {
       "id": "CDoT_Options.BloodDefault",
-      "text": "Default"
+      "text": "Padrão"
     },
     {
       "id": "CDoT_Options.BloodExtreme",
-      "text": "Extreme"
+      "text": "Extremo"
     },
     {
       "id": "CDoT_Options.BloodHigh",
-      "text": "High"
+      "text": "Alto"
     },
     {
       "id": "CDoT_Options.BloodLow",
-      "text": "Low"
+      "text": "Baixo"
     },
     {
       "id": "CDoT_Options.BloodVeryLow",
-      "text": "Very Low"
+      "text": "Muito baixo"
     },
     {
       "id": "CDoT_Options.CategoryAdvanced",
-      "text": "Advanced"
+      "text": "Avançado"
     },
     {
       "id": "CDoT_Options.CategoryDamageTypeMultipliers",
-      "text": "Damage Type Multipliers"
+      "text": "Multiplicadores de Tipo de Dano"
     },
     {
       "id": "CDoT_Options.CategoryPresetSelection",
-      "text": "Preset Selection"
+      "text": "Seleção predefinida"
     },
     {
       "id": "CDoT_Options.CategoryZoneArm",
-      "text": "Arm"
+      "text": "Braço"
     },
     {
       "id": "CDoT_Options.CategoryZoneDismemberment",
-      "text": "Dismemberment"
+      "text": "Desmembramento"
     },
     {
       "id": "CDoT_Options.CategoryZoneHead",
-      "text": "Head"
+      "text": "Cabeça"
     },
     {
       "id": "CDoT_Options.CategoryZoneLeg",
-      "text": "Leg"
+      "text": "Perna"
     },
     {
       "id": "CDoT_Options.CategoryZoneNeck",
-      "text": "Neck"
+      "text": "Pescoço"
     },
     {
       "id": "CDoT_Options.CategoryZoneThroat",
-      "text": "Throat"
+      "text": "Garganta"
     },
     {
       "id": "CDoT_Options.CategoryZoneToggles",
-      "text": "Zone Toggles"
+      "text": "Alternâncias de zona"
     },
     {
       "id": "CDoT_Options.CategoryZoneTorso",
@@ -71,243 +71,243 @@
     },
     {
       "id": "CDoT_Options.ChanceAlways",
-      "text": "Always"
+      "text": "Sempre"
     },
     {
       "id": "CDoT_Options.ChanceDefault",
-      "text": "Default"
+      "text": "Padrão"
     },
     {
       "id": "CDoT_Options.ChanceFrequent",
-      "text": "Frequent"
+      "text": "Freqüente"
     },
     {
       "id": "CDoT_Options.ChanceOff",
-      "text": "Off"
+      "text": "Desligado"
     },
     {
       "id": "CDoT_Options.ChanceRare",
-      "text": "Rare"
+      "text": "Cru"
     },
     {
       "id": "CDoT_Options.DamageDefault",
-      "text": "Default"
+      "text": "Padrão"
     },
     {
       "id": "CDoT_Options.DamageExtreme",
-      "text": "Extreme"
+      "text": "Extremo"
     },
     {
       "id": "CDoT_Options.DamageHigh",
-      "text": "High"
+      "text": "Alto"
     },
     {
       "id": "CDoT_Options.DamageLow",
-      "text": "Low"
+      "text": "Baixo"
     },
     {
       "id": "CDoT_Options.DamageMinimal",
-      "text": "Minimal"
+      "text": "Mínimo"
     },
     {
       "id": "CDoT_Options.DurationDefault",
-      "text": "Default"
+      "text": "Padrão"
     },
     {
       "id": "CDoT_Options.DurationExtended",
-      "text": "Extended"
+      "text": "Estendido"
     },
     {
       "id": "CDoT_Options.DurationLong",
-      "text": "Long"
+      "text": "Longo"
     },
     {
       "id": "CDoT_Options.DurationShort",
-      "text": "Short"
+      "text": "Curto"
     },
     {
       "id": "CDoT_Options.DurationVeryShort",
-      "text": "Very Short"
+      "text": "Muito curto"
     },
     {
       "id": "CDoT_Options.FrequencyDefault",
-      "text": "Default"
+      "text": "Padrão"
     },
     {
       "id": "CDoT_Options.FrequencyFast",
-      "text": "Fast"
+      "text": "Rápido"
     },
     {
       "id": "CDoT_Options.FrequencyRapid",
-      "text": "Rapid"
+      "text": "Rápido"
     },
     {
       "id": "CDoT_Options.FrequencySlow",
-      "text": "Slow"
+      "text": "Lento"
     },
     {
       "id": "CDoT_Options.FrequencyVerySlow",
-      "text": "Very Slow"
+      "text": "Muito lento"
     },
     {
       "id": "CDoT_Options.OptionArmChance",
-      "text": "Arm Chance"
+      "text": "Chance de braço"
     },
     {
       "id": "CDoT_Options.OptionArmDamage",
-      "text": "Arm Damage"
+      "text": "Dano no braço"
     },
     {
       "id": "CDoT_Options.OptionArmDuration",
-      "text": "Arm Duration"
+      "text": "Duração do braço"
     },
     {
       "id": "CDoT_Options.OptionArmEnabled",
-      "text": "Arm Enabled"
+      "text": "Braço ativado"
     },
     {
       "id": "CDoT_Options.OptionArmFrequency",
-      "text": "Arm Frequency"
+      "text": "Frequência do braço"
     },
     {
       "id": "CDoT_Options.OptionArmStackLimit",
-      "text": "Arm Stack Limit"
+      "text": "Limite de pilha de braço"
     },
     {
       "id": "CDoT_Options.OptionBloodAmountPreset",
-      "text": "Blood Amount"
+      "text": "Quantidade de sangue"
     },
     {
       "id": "CDoT_Options.OptionChancePreset",
-      "text": "Chance Preset"
+      "text": "Predefinição de chance"
     },
     {
       "id": "CDoT_Options.OptionDamagePreset",
-      "text": "Damage Preset"
+      "text": "Predefinição de danos"
     },
     {
       "id": "CDoT_Options.OptionDebugLogging",
-      "text": "Debug Logging"
+      "text": "Registro de depuração"
     },
     {
       "id": "CDoT_Options.OptionDebugOverlay",
-      "text": "Debug Overlay"
+      "text": "Sobreposição de depuração"
     },
     {
       "id": "CDoT_Options.OptionDismembermentChance",
-      "text": "Dismemberment Chance"
+      "text": "Chance de Desmembramento"
     },
     {
       "id": "CDoT_Options.OptionDismembermentDamage",
-      "text": "Dismemberment Damage"
+      "text": "Danos por desmembramento"
     },
     {
       "id": "CDoT_Options.OptionDismembermentDuration",
-      "text": "Dismemberment Duration"
+      "text": "Duração do desmembramento"
     },
     {
       "id": "CDoT_Options.OptionDismembermentEnabled",
-      "text": "Dismemberment Enabled"
+      "text": "Desmembramento Permitido"
     },
     {
       "id": "CDoT_Options.OptionDismembermentFrequency",
-      "text": "Dismemberment Frequency"
+      "text": "Frequência de desmembramento"
     },
     {
       "id": "CDoT_Options.OptionDismembermentStackLimit",
-      "text": "Dismemberment Stack Limit"
+      "text": "Limite de pilha de desmembramento"
     },
     {
       "id": "CDoT_Options.OptionDurationPreset",
-      "text": "Duration Preset"
+      "text": "Duração predefinida"
     },
     {
       "id": "CDoT_Options.OptionEnableMod",
-      "text": "Enable Mod"
+      "text": "Ativar Mod"
     },
     {
       "id": "CDoT_Options.OptionFireMultiplier",
-      "text": "Fire Mult"
+      "text": "Multiplicador de fogo"
     },
     {
       "id": "CDoT_Options.OptionFrequencyPreset",
-      "text": "Frequency Preset"
+      "text": "Frequência predefinida"
     },
     {
       "id": "CDoT_Options.OptionHeadChance",
-      "text": "Head Chance"
+      "text": "Chance de Cabeça"
     },
     {
       "id": "CDoT_Options.OptionHeadDamage",
-      "text": "Head Damage"
+      "text": "Lesão na cabeça"
     },
     {
       "id": "CDoT_Options.OptionHeadDuration",
-      "text": "Head Duration"
+      "text": "Duração da cabeça"
     },
     {
       "id": "CDoT_Options.OptionHeadEnabled",
-      "text": "Head Enabled"
+      "text": "Cabeça habilitada"
     },
     {
       "id": "CDoT_Options.OptionHeadFrequency",
-      "text": "Head Frequency"
+      "text": "Frequência da cabeça"
     },
     {
       "id": "CDoT_Options.OptionHeadStackLimit",
-      "text": "Head Stack Limit"
+      "text": "Limite de pilha de cabeças"
     },
     {
       "id": "CDoT_Options.OptionLegChance",
-      "text": "Leg Chance"
+      "text": "Chance de perna"
     },
     {
       "id": "CDoT_Options.OptionLegDamage",
-      "text": "Leg Damage"
+      "text": "Lesão na perna"
     },
     {
       "id": "CDoT_Options.OptionLegDuration",
-      "text": "Leg Duration"
+      "text": "Duração da perna"
     },
     {
       "id": "CDoT_Options.OptionLegEnabled",
-      "text": "Leg Enabled"
+      "text": "Habilitado para as pernas"
     },
     {
       "id": "CDoT_Options.OptionLegFrequency",
-      "text": "Leg Frequency"
+      "text": "Frequência de pernas"
     },
     {
       "id": "CDoT_Options.OptionLegStackLimit",
-      "text": "Leg Stack Limit"
+      "text": "Limite de empilhamento de pernas"
     },
     {
       "id": "CDoT_Options.OptionLightningMultiplier",
-      "text": "Lightning Mult"
+      "text": "Relâmpago Mult"
     },
     {
       "id": "CDoT_Options.OptionNeckChance",
-      "text": "Neck Chance"
+      "text": "Chance de pescoço"
     },
     {
       "id": "CDoT_Options.OptionNeckDamage",
-      "text": "Neck Damage"
+      "text": "Lesão no pescoço"
     },
     {
       "id": "CDoT_Options.OptionNeckDuration",
-      "text": "Neck Duration"
+      "text": "Duração do pescoço"
     },
     {
       "id": "CDoT_Options.OptionNeckEnabled",
-      "text": "Neck Enabled"
+      "text": "Pescoço habilitado"
     },
     {
       "id": "CDoT_Options.OptionNeckFrequency",
-      "text": "Neck Frequency"
+      "text": "Frequência do pescoço"
     },
     {
       "id": "CDoT_Options.OptionNeckStackLimit",
-      "text": "Neck Stack Limit"
+      "text": "Limite de empilhamento do pescoço"
     },
     {
       "id": "CDoT_Options.OptionPierceMultiplier",
@@ -315,291 +315,291 @@
     },
     {
       "id": "CDoT_Options.OptionProfilePreset",
-      "text": "Profile"
+      "text": "Perfil"
     },
     {
       "id": "CDoT_Options.OptionSlashMultiplier",
-      "text": "Slash Mult"
+      "text": "Corte Mult"
     },
     {
       "id": "CDoT_Options.OptionThroatChance",
-      "text": "Throat Chance"
+      "text": "Chance de Garganta"
     },
     {
       "id": "CDoT_Options.OptionThroatDamage",
-      "text": "Throat Damage"
+      "text": "Lesões na garganta"
     },
     {
       "id": "CDoT_Options.OptionThroatDuration",
-      "text": "Throat Duration"
+      "text": "Duração da garganta"
     },
     {
       "id": "CDoT_Options.OptionThroatEnabled",
-      "text": "Throat Enabled"
+      "text": "Garganta Ativada"
     },
     {
       "id": "CDoT_Options.OptionThroatFrequency",
-      "text": "Throat Frequency"
+      "text": "Frequência na garganta"
     },
     {
       "id": "CDoT_Options.OptionThroatStackLimit",
-      "text": "Throat Stack Limit"
+      "text": "Limite de empilhamento da garganta"
     },
     {
       "id": "CDoT_Options.OptionTorsoChance",
-      "text": "Torso Chance"
+      "text": "Chance de Torso"
     },
     {
       "id": "CDoT_Options.OptionTorsoDamage",
-      "text": "Torso Damage"
+      "text": "Lesões no tronco"
     },
     {
       "id": "CDoT_Options.OptionTorsoDuration",
-      "text": "Torso Duration"
+      "text": "Duração do tronco"
     },
     {
       "id": "CDoT_Options.OptionTorsoEnabled",
-      "text": "Torso Enabled"
+      "text": "Tronco ativado"
     },
     {
       "id": "CDoT_Options.OptionTorsoFrequency",
-      "text": "Torso Frequency"
+      "text": "Frequência do tronco"
     },
     {
       "id": "CDoT_Options.OptionTorsoStackLimit",
-      "text": "Torso Stack Limit"
+      "text": "Limite de empilhamento do torso"
     },
     {
       "id": "CDoT_Options.ProfileBleedOnly",
-      "text": "Bleed Only"
+      "text": "Sangramento apenas"
     },
     {
       "id": "CDoT_Options.ProfileDefault",
-      "text": "Default"
+      "text": "Padrão"
     },
     {
       "id": "CDoT_Options.ProfileElementalOnly",
-      "text": "Elemental Only"
+      "text": "Elemental apenas"
     },
     {
       "id": "CDoT_Options.TooltipArmChance",
-      "text": "Chance for arm wounds to cause bleeding"
+      "text": "Possibilidade de ferimentos no braço causarem sangramento"
     },
     {
       "id": "CDoT_Options.TooltipArmDamage",
-      "text": "Base damage per tick for arm wounds"
+      "text": "Dano base por pulso para ferimentos no braço"
     },
     {
       "id": "CDoT_Options.TooltipArmDuration",
-      "text": "How long arm bleeds last"
+      "text": "Quanto tempo dura o sangramento no braço?"
     },
     {
       "id": "CDoT_Options.TooltipArmEnabled",
-      "text": "Enable bleeding from arm wounds"
+      "text": "Permitir o sangramento de feridas no braço"
     },
     {
       "id": "CDoT_Options.TooltipArmFrequency",
-      "text": "Time between bleed ticks for arm wounds"
+      "text": "Intervalo entre os sangramentos em feridas no braço"
     },
     {
       "id": "CDoT_Options.TooltipArmStackLimit",
-      "text": "Max stacks for arm wounds"
+      "text": "Acúmulos máximos para ferimentos no braço"
     },
     {
       "id": "CDoT_Options.TooltipBloodAmountPreset",
-      "text": "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood."
+      "text": "Predefinição de intensidade de efeitos visuais de sangue. Controla a quantidade de sangue que jorra dos ferimentos. Muito Baixo = sangue mínimo, Padrão = sangue moderado, Extremo = muito sangue."
     },
     {
       "id": "CDoT_Options.TooltipChancePreset",
-      "text": "Bleed chance preset. Default is the balanced middle value."
+      "text": "Chance de sangramento predefinida. O padrão é o valor intermediário equilibrado."
     },
     {
       "id": "CDoT_Options.TooltipDamagePreset",
-      "text": "Damage per tick preset. Default is the balanced middle value."
+      "text": "Dano por pulso predefinido. O padrão é o valor intermediário equilibrado."
     },
     {
       "id": "CDoT_Options.TooltipDebugLogging",
-      "text": "Enable verbose debug logging"
+      "text": "Ativar registro de depuração detalhado"
     },
     {
       "id": "CDoT_Options.TooltipDebugOverlay",
-      "text": "Enable periodic debug overlay logging with performance stats"
+      "text": "Ative o registro periódico de depuração com estatísticas de desempenho."
     },
     {
       "id": "CDoT_Options.TooltipDismembermentChance",
-      "text": "Chance for dismemberment to cause bleeding"
+      "text": "Possibilidade de desmembramento causar sangramento"
     },
     {
       "id": "CDoT_Options.TooltipDismembermentDamage",
-      "text": "Base damage per tick for dismemberment"
+      "text": "Dano base por pulso para desmembramento"
     },
     {
       "id": "CDoT_Options.TooltipDismembermentDuration",
-      "text": "How long dismemberment bleeds last"
+      "text": "Quanto tempo dura o sangramento após um desmembramento?"
     },
     {
       "id": "CDoT_Options.TooltipDismembermentEnabled",
-      "text": "Enable bleeding from dismemberment"
+      "text": "Permitir sangramento por desmembramento"
     },
     {
       "id": "CDoT_Options.TooltipDismembermentFrequency",
-      "text": "Time between bleed ticks for dismemberment"
+      "text": "Intervalo entre os sangramentos para desmembramento"
     },
     {
       "id": "CDoT_Options.TooltipDismembermentStackLimit",
-      "text": "Max stacks for dismemberment (per limb)"
+      "text": "Acúmulos máximos para desmembramento (por membro)"
     },
     {
       "id": "CDoT_Options.TooltipDurationPreset",
-      "text": "Bleed duration preset. Default is the balanced middle value."
+      "text": "Duração do sangramento predefinida. O padrão é o valor médio equilibrado."
     },
     {
       "id": "CDoT_Options.TooltipEnableMod",
-      "text": "Master switch for the entire mod"
+      "text": "Interruptor principal para todo o mod"
     },
     {
       "id": "CDoT_Options.TooltipFireMultiplier",
-      "text": "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely."
+      "text": "Multiplicador de dano contínuo (DOT) para ataques de fogo. Enquanto ativo, a criatura apresenta o efeito visual de Queimadura. 0,0x desativa completamente o DOT de fogo."
     },
     {
       "id": "CDoT_Options.TooltipFrequencyPreset",
-      "text": "Tick frequency preset. Default is the balanced middle value."
+      "text": "Frequência de pulso predefinida. O padrão é o valor médio equilibrado."
     },
     {
       "id": "CDoT_Options.TooltipHeadChance",
-      "text": "Chance for head wounds to cause bleeding"
+      "text": "Possibilidade de ferimentos na cabeça causarem sangramento."
     },
     {
       "id": "CDoT_Options.TooltipHeadDamage",
-      "text": "Base damage per tick for head wounds"
+      "text": "Dano base por pulso para ferimentos na cabeça"
     },
     {
       "id": "CDoT_Options.TooltipHeadDuration",
-      "text": "How long head bleeds last"
+      "text": "Quanto tempo dura um sangramento na cabeça?"
     },
     {
       "id": "CDoT_Options.TooltipHeadEnabled",
-      "text": "Enable bleeding from head wounds"
+      "text": "Permitir sangramento de ferimentos na cabeça"
     },
     {
       "id": "CDoT_Options.TooltipHeadFrequency",
-      "text": "Time between bleed ticks for head wounds"
+      "text": "Intervalo entre os testes de sangramento para ferimentos na cabeça"
     },
     {
       "id": "CDoT_Options.TooltipHeadStackLimit",
-      "text": "Max stacks for head wounds"
+      "text": "Acúmulos máximos para ferimentos na cabeça"
     },
     {
       "id": "CDoT_Options.TooltipLegChance",
-      "text": "Chance for leg wounds to cause bleeding"
+      "text": "Possibilidade de ferimentos nas pernas causarem sangramento"
     },
     {
       "id": "CDoT_Options.TooltipLegDamage",
-      "text": "Base damage per tick for leg wounds"
+      "text": "Dano base por pulso para ferimentos nas pernas"
     },
     {
       "id": "CDoT_Options.TooltipLegDuration",
-      "text": "How long leg bleeds last"
+      "text": "Quanto tempo dura o sangramento na perna?"
     },
     {
       "id": "CDoT_Options.TooltipLegEnabled",
-      "text": "Enable bleeding from leg wounds"
+      "text": "Permitir o sangramento de feridas nas pernas"
     },
     {
       "id": "CDoT_Options.TooltipLegFrequency",
-      "text": "Time between bleed ticks for leg wounds"
+      "text": "Intervalo entre as aplicações de carrapatos para sangramento em feridas nas pernas"
     },
     {
       "id": "CDoT_Options.TooltipLegStackLimit",
-      "text": "Max stacks for leg wounds"
+      "text": "Acúmulos máximos para ferimentos nas pernas"
     },
     {
       "id": "CDoT_Options.TooltipLightningMultiplier",
-      "text": "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely."
+      "text": "Multiplicador de dano contínuo (DOT) para ataques de relâmpago. Enquanto ativo, a criatura recebe o efeito visual de Eletrocutar. 0,0x desativa completamente o DOT de relâmpagos."
     },
     {
       "id": "CDoT_Options.TooltipNeckChance",
-      "text": "Chance for neck wounds to cause bleeding"
+      "text": "Possibilidade de ferimentos no pescoço causarem sangramento"
     },
     {
       "id": "CDoT_Options.TooltipNeckDamage",
-      "text": "Base damage per tick for neck wounds"
+      "text": "Dano base por pulso para ferimentos no pescoço"
     },
     {
       "id": "CDoT_Options.TooltipNeckDuration",
-      "text": "How long neck bleeds last"
+      "text": "Quanto tempo dura o sangramento no pescoço?"
     },
     {
       "id": "CDoT_Options.TooltipNeckEnabled",
-      "text": "Enable bleeding from neck wounds"
+      "text": "Permitir o sangramento de feridas no pescoço"
     },
     {
       "id": "CDoT_Options.TooltipNeckFrequency",
-      "text": "Time between bleed ticks for neck wounds"
+      "text": "Intervalo entre os sangramentos em feridas no pescoço"
     },
     {
       "id": "CDoT_Options.TooltipNeckStackLimit",
-      "text": "Max stacks for neck wounds"
+      "text": "Acúmulos máximos para ferimentos no pescoço"
     },
     {
       "id": "CDoT_Options.TooltipPierceMultiplier",
-      "text": "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely."
+      "text": "Multiplicador de dano contínuo (DOT) para ataques perfurantes. 0,0x desativa completamente o DOT de ataques perfurantes."
     },
     {
       "id": "CDoT_Options.TooltipProfilePreset",
-      "text": "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only."
+      "text": "O perfil determina quais tipos de dano ativam efeitos de dano contínuo (DOT). Padrão = todos os tipos, Apenas Sangramento = apenas dano físico, Apenas Elemental = apenas dano de fogo/raio/energia."
     },
     {
       "id": "CDoT_Options.TooltipSlashMultiplier",
-      "text": "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely."
+      "text": "Multiplicador de dano contínuo (DOT) para ataques cortantes. 0,0x desativa completamente o DOT de ataques cortantes."
     },
     {
       "id": "CDoT_Options.TooltipThroatChance",
-      "text": "Chance for throat wounds to cause bleeding"
+      "text": "Possibilidade de ferimentos na garganta causarem sangramento"
     },
     {
       "id": "CDoT_Options.TooltipThroatDamage",
-      "text": "Base damage per tick for throat wounds"
+      "text": "Dano base por pulso para ferimentos na garganta"
     },
     {
       "id": "CDoT_Options.TooltipThroatDuration",
-      "text": "How long throat bleeds last"
+      "text": "Quanto tempo dura o sangramento na garganta?"
     },
     {
       "id": "CDoT_Options.TooltipThroatEnabled",
-      "text": "Enable bleeding from throat wounds"
+      "text": "Permitir o sangramento de feridas na garganta"
     },
     {
       "id": "CDoT_Options.TooltipThroatFrequency",
-      "text": "Time between bleed ticks for throat wounds"
+      "text": "Intervalo entre carrapatos para sangramento de feridas na garganta"
     },
     {
       "id": "CDoT_Options.TooltipThroatStackLimit",
-      "text": "Max stacks for throat wounds"
+      "text": "Acúmulos máximos para ferimentos na garganta"
     },
     {
       "id": "CDoT_Options.TooltipTorsoChance",
-      "text": "Chance for torso wounds to cause bleeding"
+      "text": "Possibilidade de ferimentos no tronco causarem sangramento"
     },
     {
       "id": "CDoT_Options.TooltipTorsoDamage",
-      "text": "Base damage per tick for torso wounds"
+      "text": "Dano base por pulso para ferimentos no torso"
     },
     {
       "id": "CDoT_Options.TooltipTorsoDuration",
-      "text": "How long torso bleeds last"
+      "text": "Quanto tempo dura o sangramento no tronco?"
     },
     {
       "id": "CDoT_Options.TooltipTorsoEnabled",
-      "text": "Enable bleeding from torso wounds"
+      "text": "Permitir sangramento de ferimentos no tronco"
     },
     {
       "id": "CDoT_Options.TooltipTorsoFrequency",
-      "text": "Time between bleed ticks for torso wounds"
+      "text": "Intervalo entre os sinais de sangramento em ferimentos no tronco"
     },
     {
       "id": "CDoT_Options.TooltipTorsoStackLimit",
-      "text": "Max stacks for torso wounds"
+      "text": "Acúmulos máximos para ferimentos no torso"
     }
   ]
 }

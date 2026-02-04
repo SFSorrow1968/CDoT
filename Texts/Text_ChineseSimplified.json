@@ -7,599 +7,599 @@
   "textList": [
     {
       "id": "CDoT_Options.BloodDefault",
-      "text": "Default"
+      "text": "默认"
     },
     {
       "id": "CDoT_Options.BloodExtreme",
-      "text": "Extreme"
+      "text": "极端"
     },
     {
       "id": "CDoT_Options.BloodHigh",
-      "text": "High"
+      "text": "高的"
     },
     {
       "id": "CDoT_Options.BloodLow",
-      "text": "Low"
+      "text": "低的"
     },
     {
       "id": "CDoT_Options.BloodVeryLow",
-      "text": "Very Low"
+      "text": "非常低"
     },
     {
       "id": "CDoT_Options.CategoryAdvanced",
-      "text": "Advanced"
+      "text": "先进的"
     },
     {
       "id": "CDoT_Options.CategoryDamageTypeMultipliers",
-      "text": "Damage Type Multipliers"
+      "text": "伤害类型倍率"
     },
     {
       "id": "CDoT_Options.CategoryPresetSelection",
-      "text": "Preset Selection"
+      "text": "预设选择"
     },
     {
       "id": "CDoT_Options.CategoryZoneArm",
-      "text": "Arm"
+      "text": "手臂"
     },
     {
       "id": "CDoT_Options.CategoryZoneDismemberment",
-      "text": "Dismemberment"
+      "text": "肢解"
     },
     {
       "id": "CDoT_Options.CategoryZoneHead",
-      "text": "Head"
+      "text": "头"
     },
     {
       "id": "CDoT_Options.CategoryZoneLeg",
-      "text": "Leg"
+      "text": "腿"
     },
     {
       "id": "CDoT_Options.CategoryZoneNeck",
-      "text": "Neck"
+      "text": "脖子"
     },
     {
       "id": "CDoT_Options.CategoryZoneThroat",
-      "text": "Throat"
+      "text": "喉"
     },
     {
       "id": "CDoT_Options.CategoryZoneToggles",
-      "text": "Zone Toggles"
+      "text": "区域切换"
     },
     {
       "id": "CDoT_Options.CategoryZoneTorso",
-      "text": "Torso"
+      "text": "躯干"
     },
     {
       "id": "CDoT_Options.ChanceAlways",
-      "text": "Always"
+      "text": "总是"
     },
     {
       "id": "CDoT_Options.ChanceDefault",
-      "text": "Default"
+      "text": "默认"
     },
     {
       "id": "CDoT_Options.ChanceFrequent",
-      "text": "Frequent"
+      "text": "频繁"
     },
     {
       "id": "CDoT_Options.ChanceOff",
-      "text": "Off"
+      "text": "离开"
     },
     {
       "id": "CDoT_Options.ChanceRare",
-      "text": "Rare"
+      "text": "稀有的"
     },
     {
       "id": "CDoT_Options.DamageDefault",
-      "text": "Default"
+      "text": "默认"
     },
     {
       "id": "CDoT_Options.DamageExtreme",
-      "text": "Extreme"
+      "text": "极端"
     },
     {
       "id": "CDoT_Options.DamageHigh",
-      "text": "High"
+      "text": "高的"
     },
     {
       "id": "CDoT_Options.DamageLow",
-      "text": "Low"
+      "text": "低的"
     },
     {
       "id": "CDoT_Options.DamageMinimal",
-      "text": "Minimal"
+      "text": "极简主义"
     },
     {
       "id": "CDoT_Options.DurationDefault",
-      "text": "Default"
+      "text": "默认"
     },
     {
       "id": "CDoT_Options.DurationExtended",
-      "text": "Extended"
+      "text": "扩展"
     },
     {
       "id": "CDoT_Options.DurationLong",
-      "text": "Long"
+      "text": "长的"
     },
     {
       "id": "CDoT_Options.DurationShort",
-      "text": "Short"
+      "text": "短的"
     },
     {
       "id": "CDoT_Options.DurationVeryShort",
-      "text": "Very Short"
+      "text": "非常短"
     },
     {
       "id": "CDoT_Options.FrequencyDefault",
-      "text": "Default"
+      "text": "默认"
     },
     {
       "id": "CDoT_Options.FrequencyFast",
-      "text": "Fast"
+      "text": "快速地"
     },
     {
       "id": "CDoT_Options.FrequencyRapid",
-      "text": "Rapid"
+      "text": "迅速的"
     },
     {
       "id": "CDoT_Options.FrequencySlow",
-      "text": "Slow"
+      "text": "慢的"
     },
     {
       "id": "CDoT_Options.FrequencyVerySlow",
-      "text": "Very Slow"
+      "text": "非常慢"
     },
     {
       "id": "CDoT_Options.OptionArmChance",
-      "text": "Arm Chance"
+      "text": "手臂机会"
     },
     {
       "id": "CDoT_Options.OptionArmDamage",
-      "text": "Arm Damage"
+      "text": "手臂损伤"
     },
     {
       "id": "CDoT_Options.OptionArmDuration",
-      "text": "Arm Duration"
+      "text": "臂长"
     },
     {
       "id": "CDoT_Options.OptionArmEnabled",
-      "text": "Arm Enabled"
+      "text": "支持ARM架构"
     },
     {
       "id": "CDoT_Options.OptionArmFrequency",
-      "text": "Arm Frequency"
+      "text": "臂频率"
     },
     {
       "id": "CDoT_Options.OptionArmStackLimit",
-      "text": "Arm Stack Limit"
+      "text": "ARM 堆叠限制"
     },
     {
       "id": "CDoT_Options.OptionBloodAmountPreset",
-      "text": "Blood Amount"
+      "text": "血液量"
     },
     {
       "id": "CDoT_Options.OptionChancePreset",
-      "text": "Chance Preset"
+      "text": "机会预设"
     },
     {
       "id": "CDoT_Options.OptionDamagePreset",
-      "text": "Damage Preset"
+      "text": "损伤预设"
     },
     {
       "id": "CDoT_Options.OptionDebugLogging",
-      "text": "Debug Logging"
+      "text": "调试日志"
     },
     {
       "id": "CDoT_Options.OptionDebugOverlay",
-      "text": "Debug Overlay"
+      "text": "调试叠加层"
     },
     {
       "id": "CDoT_Options.OptionDismembermentChance",
-      "text": "Dismemberment Chance"
+      "text": "肢解几率"
     },
     {
       "id": "CDoT_Options.OptionDismembermentDamage",
-      "text": "Dismemberment Damage"
+      "text": "肢体残缺"
     },
     {
       "id": "CDoT_Options.OptionDismembermentDuration",
-      "text": "Dismemberment Duration"
+      "text": "肢解持续时间"
     },
     {
       "id": "CDoT_Options.OptionDismembermentEnabled",
-      "text": "Dismemberment Enabled"
+      "text": "肢体残害功能已启用"
     },
     {
       "id": "CDoT_Options.OptionDismembermentFrequency",
-      "text": "Dismemberment Frequency"
+      "text": "肢解频率"
     },
     {
       "id": "CDoT_Options.OptionDismembermentStackLimit",
-      "text": "Dismemberment Stack Limit"
+      "text": "肢解堆叠限制"
     },
     {
       "id": "CDoT_Options.OptionDurationPreset",
-      "text": "Duration Preset"
+      "text": "持续时间预设"
     },
     {
       "id": "CDoT_Options.OptionEnableMod",
-      "text": "Enable Mod"
+      "text": "启用模组"
     },
     {
       "id": "CDoT_Options.OptionFireMultiplier",
-      "text": "Fire Mult"
+      "text": "火力多"
     },
     {
       "id": "CDoT_Options.OptionFrequencyPreset",
-      "text": "Frequency Preset"
+      "text": "频率预设"
     },
     {
       "id": "CDoT_Options.OptionHeadChance",
-      "text": "Head Chance"
+      "text": "头部机会"
     },
     {
       "id": "CDoT_Options.OptionHeadDamage",
-      "text": "Head Damage"
+      "text": "头部损伤"
     },
     {
       "id": "CDoT_Options.OptionHeadDuration",
-      "text": "Head Duration"
+      "text": "头部持续时间"
     },
     {
       "id": "CDoT_Options.OptionHeadEnabled",
-      "text": "Head Enabled"
+      "text": "头部已启用"
     },
     {
       "id": "CDoT_Options.OptionHeadFrequency",
-      "text": "Head Frequency"
+      "text": "头部频率"
     },
     {
       "id": "CDoT_Options.OptionHeadStackLimit",
-      "text": "Head Stack Limit"
+      "text": "堆芯限制"
     },
     {
       "id": "CDoT_Options.OptionLegChance",
-      "text": "Leg Chance"
+      "text": "腿部机会"
     },
     {
       "id": "CDoT_Options.OptionLegDamage",
-      "text": "Leg Damage"
+      "text": "腿部损伤"
     },
     {
       "id": "CDoT_Options.OptionLegDuration",
-      "text": "Leg Duration"
+      "text": "腿部持续时间"
     },
     {
       "id": "CDoT_Options.OptionLegEnabled",
-      "text": "Leg Enabled"
+      "text": "腿部已启用"
     },
     {
       "id": "CDoT_Options.OptionLegFrequency",
-      "text": "Leg Frequency"
+      "text": "腿部频率"
     },
     {
       "id": "CDoT_Options.OptionLegStackLimit",
-      "text": "Leg Stack Limit"
+      "text": "腿部堆叠限制"
     },
     {
       "id": "CDoT_Options.OptionLightningMultiplier",
-      "text": "Lightning Mult"
+      "text": "闪电倍增"
     },
     {
       "id": "CDoT_Options.OptionNeckChance",
-      "text": "Neck Chance"
+      "text": "颈部机会"
     },
     {
       "id": "CDoT_Options.OptionNeckDamage",
-      "text": "Neck Damage"
+      "text": "颈部损伤"
     },
     {
       "id": "CDoT_Options.OptionNeckDuration",
-      "text": "Neck Duration"
+      "text": "颈部持续时间"
     },
     {
       "id": "CDoT_Options.OptionNeckEnabled",
-      "text": "Neck Enabled"
+      "text": "颈部启用"
     },
     {
       "id": "CDoT_Options.OptionNeckFrequency",
-      "text": "Neck Frequency"
+      "text": "颈部频率"
     },
     {
       "id": "CDoT_Options.OptionNeckStackLimit",
-      "text": "Neck Stack Limit"
+      "text": "颈部堆叠限制"
     },
     {
       "id": "CDoT_Options.OptionPierceMultiplier",
-      "text": "Pierce Mult"
+      "text": "皮尔斯·穆尔特"
     },
     {
       "id": "CDoT_Options.OptionProfilePreset",
-      "text": "Profile"
+      "text": "轮廓"
     },
     {
       "id": "CDoT_Options.OptionSlashMultiplier",
-      "text": "Slash Mult"
+      "text": "斜杠乘法"
     },
     {
       "id": "CDoT_Options.OptionThroatChance",
-      "text": "Throat Chance"
+      "text": "喉咙机会"
     },
     {
       "id": "CDoT_Options.OptionThroatDamage",
-      "text": "Throat Damage"
+      "text": "喉咙损伤"
     },
     {
       "id": "CDoT_Options.OptionThroatDuration",
-      "text": "Throat Duration"
+      "text": "喉咙持续时间"
     },
     {
       "id": "CDoT_Options.OptionThroatEnabled",
-      "text": "Throat Enabled"
+      "text": "喉咙已启用"
     },
     {
       "id": "CDoT_Options.OptionThroatFrequency",
-      "text": "Throat Frequency"
+      "text": "喉咙频率"
     },
     {
       "id": "CDoT_Options.OptionThroatStackLimit",
-      "text": "Throat Stack Limit"
+      "text": "喉管限制"
     },
     {
       "id": "CDoT_Options.OptionTorsoChance",
-      "text": "Torso Chance"
+      "text": "躯干机会"
     },
     {
       "id": "CDoT_Options.OptionTorsoDamage",
-      "text": "Torso Damage"
+      "text": "躯干损伤"
     },
     {
       "id": "CDoT_Options.OptionTorsoDuration",
-      "text": "Torso Duration"
+      "text": "躯干持续时间"
     },
     {
       "id": "CDoT_Options.OptionTorsoEnabled",
-      "text": "Torso Enabled"
+      "text": "躯干已启用"
     },
     {
       "id": "CDoT_Options.OptionTorsoFrequency",
-      "text": "Torso Frequency"
+      "text": "躯干频率"
     },
     {
       "id": "CDoT_Options.OptionTorsoStackLimit",
-      "text": "Torso Stack Limit"
+      "text": "躯干堆叠限制"
     },
     {
       "id": "CDoT_Options.ProfileBleedOnly",
-      "text": "Bleed Only"
+      "text": "仅出血"
     },
     {
       "id": "CDoT_Options.ProfileDefault",
-      "text": "Default"
+      "text": "默认"
     },
     {
       "id": "CDoT_Options.ProfileElementalOnly",
-      "text": "Elemental Only"
+      "text": "仅限元素"
     },
     {
       "id": "CDoT_Options.TooltipArmChance",
-      "text": "Chance for arm wounds to cause bleeding"
+      "text": "手臂伤口出血的几率"
     },
     {
       "id": "CDoT_Options.TooltipArmDamage",
-      "text": "Base damage per tick for arm wounds"
+      "text": "手臂伤口每跳基础伤害"
     },
     {
       "id": "CDoT_Options.TooltipArmDuration",
-      "text": "How long arm bleeds last"
+      "text": "手臂出血持续多久"
     },
     {
       "id": "CDoT_Options.TooltipArmEnabled",
-      "text": "Enable bleeding from arm wounds"
+      "text": "使手臂伤口出血"
     },
     {
       "id": "CDoT_Options.TooltipArmFrequency",
-      "text": "Time between bleed ticks for arm wounds"
+      "text": "手臂伤口出血两次滴答之间的时间间隔"
     },
     {
       "id": "CDoT_Options.TooltipArmStackLimit",
-      "text": "Max stacks for arm wounds"
+      "text": "手臂伤口最大叠加层数"
     },
     {
       "id": "CDoT_Options.TooltipBloodAmountPreset",
-      "text": "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood."
+      "text": "血液特效强度预设。控制伤口喷出的血液量。极低 = 极少血液，默认 = 中等血液，极高 = 大量血液。"
     },
     {
       "id": "CDoT_Options.TooltipChancePreset",
-      "text": "Bleed chance preset. Default is the balanced middle value."
+      "text": "出血几率预设值。默认值为平衡的中间值。"
     },
     {
       "id": "CDoT_Options.TooltipDamagePreset",
-      "text": "Damage per tick preset. Default is the balanced middle value."
+      "text": "每跳伤害预设值。默认值为平衡的中间值。"
     },
     {
       "id": "CDoT_Options.TooltipDebugLogging",
-      "text": "Enable verbose debug logging"
+      "text": "启用详细调试日志"
     },
     {
       "id": "CDoT_Options.TooltipDebugOverlay",
-      "text": "Enable periodic debug overlay logging with performance stats"
+      "text": "启用包含性能统计信息的定期调试叠加日志记录"
     },
     {
       "id": "CDoT_Options.TooltipDismembermentChance",
-      "text": "Chance for dismemberment to cause bleeding"
+      "text": "肢体残缺可能导致出血"
     },
     {
       "id": "CDoT_Options.TooltipDismembermentDamage",
-      "text": "Base damage per tick for dismemberment"
+      "text": "肢解造成的每跳基础伤害"
     },
     {
       "id": "CDoT_Options.TooltipDismembermentDuration",
-      "text": "How long dismemberment bleeds last"
+      "text": "肢体残缺出血会持续多久"
     },
     {
       "id": "CDoT_Options.TooltipDismembermentEnabled",
-      "text": "Enable bleeding from dismemberment"
+      "text": "使肢体残肢出血"
     },
     {
       "id": "CDoT_Options.TooltipDismembermentFrequency",
-      "text": "Time between bleed ticks for dismemberment"
+      "text": "两次抽血之间的时间间隔（用于肢解）"
     },
     {
       "id": "CDoT_Options.TooltipDismembermentStackLimit",
-      "text": "Max stacks for dismemberment (per limb)"
+      "text": "肢体残害的最大堆叠次数（每条肢体）"
     },
     {
       "id": "CDoT_Options.TooltipDurationPreset",
-      "text": "Bleed duration preset. Default is the balanced middle value."
+      "text": "出血持续时间预设值。默认值为中间平衡值。"
     },
     {
       "id": "CDoT_Options.TooltipEnableMod",
-      "text": "Master switch for the entire mod"
+      "text": "整个模块的总开关"
     },
     {
       "id": "CDoT_Options.TooltipFireMultiplier",
-      "text": "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely."
+      "text": "火焰攻击的持续伤害倍率。激活时，生物会获得燃烧视觉效果。0.0x 表示完全禁用火焰的持续伤害效果。"
     },
     {
       "id": "CDoT_Options.TooltipFrequencyPreset",
-      "text": "Tick frequency preset. Default is the balanced middle value."
+      "text": "滴答频率预设值。默认值为平衡中间值。"
     },
     {
       "id": "CDoT_Options.TooltipHeadChance",
-      "text": "Chance for head wounds to cause bleeding"
+      "text": "头部受伤导致出血的几率"
     },
     {
       "id": "CDoT_Options.TooltipHeadDamage",
-      "text": "Base damage per tick for head wounds"
+      "text": "头部伤口每跳基础伤害"
     },
     {
       "id": "CDoT_Options.TooltipHeadDuration",
-      "text": "How long head bleeds last"
+      "text": "头部出血会持续多久？"
     },
     {
       "id": "CDoT_Options.TooltipHeadEnabled",
-      "text": "Enable bleeding from head wounds"
+      "text": "使头部伤口出血"
     },
     {
       "id": "CDoT_Options.TooltipHeadFrequency",
-      "text": "Time between bleed ticks for head wounds"
+      "text": "头部伤口出血蜱虫叮咬间隔时间"
     },
     {
       "id": "CDoT_Options.TooltipHeadStackLimit",
-      "text": "Max stacks for head wounds"
+      "text": "头部伤口最大叠加层数"
     },
     {
       "id": "CDoT_Options.TooltipLegChance",
-      "text": "Chance for leg wounds to cause bleeding"
+      "text": "腿部伤口出血的几率"
     },
     {
       "id": "CDoT_Options.TooltipLegDamage",
-      "text": "Base damage per tick for leg wounds"
+      "text": "腿部伤口每跳基础伤害"
     },
     {
       "id": "CDoT_Options.TooltipLegDuration",
-      "text": "How long leg bleeds last"
+      "text": "腿部出血持续多久？"
     },
     {
       "id": "CDoT_Options.TooltipLegEnabled",
-      "text": "Enable bleeding from leg wounds"
+      "text": "使腿部伤口出血"
     },
     {
       "id": "CDoT_Options.TooltipLegFrequency",
-      "text": "Time between bleed ticks for leg wounds"
+      "text": "腿部伤口出血蜱虫叮咬的时间间隔"
     },
     {
       "id": "CDoT_Options.TooltipLegStackLimit",
-      "text": "Max stacks for leg wounds"
+      "text": "腿部伤口最大叠加层数"
     },
     {
       "id": "CDoT_Options.TooltipLightningMultiplier",
-      "text": "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely."
+      "text": "闪电攻击的持续伤害倍率。激活时，生物获得电击视觉效果。0.0x 会完全禁用闪电造成的持续伤害。"
     },
     {
       "id": "CDoT_Options.TooltipNeckChance",
-      "text": "Chance for neck wounds to cause bleeding"
+      "text": "颈部伤口出血的几率"
     },
     {
       "id": "CDoT_Options.TooltipNeckDamage",
-      "text": "Base damage per tick for neck wounds"
+      "text": "颈部伤口每跳基础伤害"
     },
     {
       "id": "CDoT_Options.TooltipNeckDuration",
-      "text": "How long neck bleeds last"
+      "text": "颈部出血会持续多久？"
     },
     {
       "id": "CDoT_Options.TooltipNeckEnabled",
-      "text": "Enable bleeding from neck wounds"
+      "text": "使颈部伤口出血"
     },
     {
       "id": "CDoT_Options.TooltipNeckFrequency",
-      "text": "Time between bleed ticks for neck wounds"
+      "text": "颈部伤口出血蜱虫叮咬的时间间隔"
     },
     {
       "id": "CDoT_Options.TooltipNeckStackLimit",
-      "text": "Max stacks for neck wounds"
+      "text": "颈部伤口最大叠加层数"
     },
     {
       "id": "CDoT_Options.TooltipPierceMultiplier",
-      "text": "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely."
+      "text": "穿透攻击的持续伤害倍率。0.0x 表示完全禁用穿透攻击的持续伤害效果。"
     },
     {
       "id": "CDoT_Options.TooltipProfilePreset",
-      "text": "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only."
+      "text": "配置决定哪些伤害类型会触发持续伤害效果。默认值为所有类型，仅流血为物理伤害，仅元素为火焰/闪电/能量伤害。"
     },
     {
       "id": "CDoT_Options.TooltipSlashMultiplier",
-      "text": "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely."
+      "text": "斩击的持续伤害倍率。0.0x 表示完全禁用斩击的持续伤害效果。"
     },
     {
       "id": "CDoT_Options.TooltipThroatChance",
-      "text": "Chance for throat wounds to cause bleeding"
+      "text": "喉咙伤口导致出血的几率"
     },
     {
       "id": "CDoT_Options.TooltipThroatDamage",
-      "text": "Base damage per tick for throat wounds"
+      "text": "喉部伤口每跳基础伤害"
     },
     {
       "id": "CDoT_Options.TooltipThroatDuration",
-      "text": "How long throat bleeds last"
+      "text": "喉咙出血会持续多久？"
     },
     {
       "id": "CDoT_Options.TooltipThroatEnabled",
-      "text": "Enable bleeding from throat wounds"
+      "text": "使喉咙伤口出血"
     },
     {
       "id": "CDoT_Options.TooltipThroatFrequency",
-      "text": "Time between bleed ticks for throat wounds"
+      "text": "两次蜱虫叮咬喉咙伤口的时间间隔"
     },
     {
       "id": "CDoT_Options.TooltipThroatStackLimit",
-      "text": "Max stacks for throat wounds"
+      "text": "喉部伤口最大叠加层数"
     },
     {
       "id": "CDoT_Options.TooltipTorsoChance",
-      "text": "Chance for torso wounds to cause bleeding"
+      "text": "躯干伤口导致出血的几率"
     },
     {
       "id": "CDoT_Options.TooltipTorsoDamage",
-      "text": "Base damage per tick for torso wounds"
+      "text": "躯干伤口每跳基础伤害"
     },
     {
       "id": "CDoT_Options.TooltipTorsoDuration",
-      "text": "How long torso bleeds last"
+      "text": "躯干出血会持续多久？"
     },
     {
       "id": "CDoT_Options.TooltipTorsoEnabled",
-      "text": "Enable bleeding from torso wounds"
+      "text": "使躯干伤口出血"
     },
     {
       "id": "CDoT_Options.TooltipTorsoFrequency",
-      "text": "Time between bleed ticks for torso wounds"
+      "text": "躯干伤口出血两次检查之间的时间间隔"
     },
     {
       "id": "CDoT_Options.TooltipTorsoStackLimit",
-      "text": "Max stacks for torso wounds"
+      "text": "躯干伤口最大叠加层数"
     }
   ]
 }
