@@ -3,7 +3,7 @@
 When making changes in this repo:
 - Always build (Release and Nomad).
 - If any UI/options change, regenerate `MENU_MOCK.xlsx` using `_agent/build_menu_mock_xlsx.py`.
-- If new UI text/labels are added, update translations: run `python _export_translations.py`, translate new rows in Google Sheets using GOOGLETRANSLATE formulas, paste values, save as `_translations.csv`, then run `python _import_translations.py`.
+- If new UI text/labels are added or translations need updating, consult `TRANSLATIONS.md` for the full workflow.
 - Always commit your changes.
 - `DEVELOPMENT.md` contains platform/ModOptions notes; consult it when needed.
 - Quick refs: `DEVELOPMENT.md` sections "Platform Differences", "ModOptions System", "EventManager Events".
