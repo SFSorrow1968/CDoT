@@ -56,6 +56,7 @@ def main():
         data = {
             "$type": "ThunderRoad.TextData, ThunderRoad",
             "id": GROUP_ID,
+            "version": 1,
             "groupId": GROUP_ID,
             "textList": text_list
         }

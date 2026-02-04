@@ -1,6 +1,7 @@
 {
   "$type": "ThunderRoad.TextData, ThunderRoad",
   "id": "CDoT_Options",
+  "version": 1,
   "groupId": "CDoT_Options",
   "textList": [
     {
