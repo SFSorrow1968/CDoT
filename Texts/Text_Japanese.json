@@ -1,8 +1,6 @@
 {
   "$type": "ThunderRoad.TextData, ThunderRoad",
   "id": "CDoT_Options",
-  "sensitiveContent": "None",
-  "sensitiveFilterBehaviour": "None",
   "groupId": "CDoT_Options",
   "textList": [
     {
