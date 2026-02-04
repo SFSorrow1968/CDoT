@@ -8,7 +8,7 @@
     "textGroups": [
         {
             "$type": "ThunderRoad.TextData+TextGroup, ThunderRoad",
-            "id": "CDoT",
+            "id": "CDoTOptions",
             "texts": [
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",

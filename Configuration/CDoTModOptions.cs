@@ -7,7 +7,7 @@ namespace CDoT.Configuration
     public static class CDoTModOptions
     {
         public const string VERSION = "1.2.0";
-        public const string LocalizationGroupId = "CDoT";
+        public const string LocalizationGroupId = "CDoTOptions";
 
         #region Labels and Categories
 
