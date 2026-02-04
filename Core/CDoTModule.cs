@@ -84,12 +84,23 @@ namespace CDoT.Core
                 
                 // Check for profile changes and sync multipliers
                 CDoTModOptions.CheckAndSyncProfileMultipliers();
-                // Debug overlay logging
-                DebugOverlay.Instance?.Draw();
             }
             catch (Exception ex)
             {
                 Debug.LogError("[CDoT] ScriptUpdate error: " + ex.Message);
+            }
+        }
+
+        private void OnGUI()
+        {
+            try
+            {
+                DebugOverlay.Instance?.Draw();
+            }
+            catch (Exception ex)
+            {
+                if (CDoTModOptions.DebugLogging)
+                    Debug.LogError("[CDoT] OnGUI error: " + ex.Message);
             }
         }
 
