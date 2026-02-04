@@ -8,28 +8,31 @@
 
 ## Workflow
 
-### For Users
+### When New Translatable Text is Added
 
-1. Edit `_translations.csv`:
-   - Add new row with `Text_ID` and `English` columns filled in
-   - Add GOOGLETRANSLATE formulas for other languages: `=GOOGLETRANSLATE(B2,"en","fr")`
-2. Open CSV in Google Sheets, wait for translations to complete
-3. Select all translated cells, copy, then Paste Values (Ctrl+Shift+V) to replace formulas with text
+**Agent does:**
+1. Add localization IDs to code (see Code Examples below)
+2. Add new rows to `_translations.csv` with:
+   - `Text_ID` column: the key (without prefix)
+   - `English` column: the English text
+   - Other columns: GOOGLETRANSLATE formulas, e.g. `=GOOGLETRANSLATE(B123,"en","fr")`
+3. Tell user the CSV is ready for translation
+
+**User does:**
+1. Open `_translations.csv` in Google Sheets
+2. Wait for GOOGLETRANSLATE formulas to complete
+3. Select all cells with formulas, Copy, then Paste Values Only (Ctrl+Shift+V)
 4. Save/export as `_translations.csv` back to project directory
-5. Tell the agent to regenerate translations
+5. Tell agent translations are ready
 
-### For Agents
+**Agent does:**
+1. Run `python _generate_all_translations.py`
+2. Build: `dotnet build -c Release && dotnet build -c Nomad`
+3. Commit changes
 
-When user says translations are ready or asks to regenerate:
+## Code Examples
 
-```bash
-python _generate_all_translations.py
-dotnet build -c Release
-dotnet build -c Nomad
-```
-
-When adding new localizable options to code, use:
-
+Adding localization to ModOption attributes:
 ```csharp
 [ModOption(name = "My Option",
            nameLocalizationId = LocalizationGroupId + ".MyOption",
@@ -38,7 +41,7 @@ When adding new localizable options to code, use:
            ...)]
 ```
 
-For ModOptionString arrays:
+Adding localization to ModOptionString arrays:
 ```csharp
 new ModOptionString("Label", LocalizationGroupId + ".LabelId", "Value")
 ```
@@ -46,26 +49,22 @@ new ModOptionString("Label", LocalizationGroupId + ".LabelId", "Value")
 ## File Structure
 
 ```
-_translations.csv              <- Master file (user edits this)
+_translations.csv              <- Master file (agent adds keys/formulas, user resolves translations)
 _generate_all_translations.py  <- Generates JSON from CSV
 Texts/
-  Text_English.json           <- Generated (don't edit directly)
-  Text_French.json
-  Text_German.json
-  Text_Spanish.json
-  Text_Italian.json
-  Text_Portuguese.json
-  Text_Japanese.json
-  Text_Korean.json
-  Text_ChineseSimplified.json
-  Text_ChineseTraditional.json
-  Text_Thai.json
+  Text_*.json                  <- Generated (don't edit directly)
 ```
 
 ## CSV Format
 
 ```csv
 Text_ID,English,French,German,Spanish,Italian,Portuguese,Japanese,Korean,Chinese_Simplified,Chinese_Traditional,Thai
+MyOption,My Option,=GOOGLETRANSLATE(B2,"en","fr"),=GOOGLETRANSLATE(B2,"en","de"),...
+```
+
+After user processes in Google Sheets:
+```csv
+Text_ID,English,French,German,...
 MyOption,My Option,Mon option,Meine Option,...
 ```
 
