@@ -76,8 +76,11 @@
     </Reference>
   </ItemGroup>
 
-  <!-- Copy localization TextData files to output -->
+  <!-- Copy manifest and localization TextData files to output -->
   <ItemGroup>
+    <Content Include="manifest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Texts\**\*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>Texts\%(RecursiveDir)%(Filename)%(Extension)</Link>

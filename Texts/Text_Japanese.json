@@ -13,747 +13,747 @@
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodDefault",
-                    "text": "Default"
+                    "text": "デフォルト"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodExtreme",
-                    "text": "Extreme"
+                    "text": "過激"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodHigh",
-                    "text": "High"
+                    "text": "高い"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodLow",
-                    "text": "Low"
+                    "text": "低い"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodVeryLow",
-                    "text": "Very Low"
+                    "text": "非常に低い"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryAdvanced",
-                    "text": "Advanced"
+                    "text": "高度な"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryDamageTypeMultipliers",
-                    "text": "Damage Type Multipliers"
+                    "text": "ダメージタイプの乗数"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryPresetSelection",
-                    "text": "Preset Selection"
+                    "text": "プリセット選択"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneArm",
-                    "text": "Arm"
+                    "text": "アーム"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneDismemberment",
-                    "text": "Dismemberment"
+                    "text": "切断"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneHead",
-                    "text": "Head"
+                    "text": "頭"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneLeg",
-                    "text": "Leg"
+                    "text": "脚"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneNeck",
-                    "text": "Neck"
+                    "text": "ネック"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneThroat",
-                    "text": "Throat"
+                    "text": "喉"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneToggles",
-                    "text": "Zone Toggles"
+                    "text": "ゾーントグル"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneTorso",
-                    "text": "Torso"
+                    "text": "胴体"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceAlways",
-                    "text": "Always"
+                    "text": "いつも"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceDefault",
-                    "text": "Default"
+                    "text": "デフォルト"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceFrequent",
-                    "text": "Frequent"
+                    "text": "頻繁"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceOff",
-                    "text": "Off"
+                    "text": "オフ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceRare",
-                    "text": "Rare"
+                    "text": "レア"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageDefault",
-                    "text": "Default"
+                    "text": "デフォルト"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageExtreme",
-                    "text": "Extreme"
+                    "text": "過激"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageHigh",
-                    "text": "High"
+                    "text": "高い"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageLow",
-                    "text": "Low"
+                    "text": "低い"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageMinimal",
-                    "text": "Minimal"
+                    "text": "最小限"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationDefault",
-                    "text": "Default"
+                    "text": "デフォルト"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationExtended",
-                    "text": "Extended"
+                    "text": "拡張"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationLong",
-                    "text": "Long"
+                    "text": "長さ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationShort",
-                    "text": "Short"
+                    "text": "短い"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationVeryShort",
-                    "text": "Very Short"
+                    "text": "非常に短い"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyDefault",
-                    "text": "Default"
+                    "text": "デフォルト"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyFast",
-                    "text": "Fast"
+                    "text": "速い"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyRapid",
-                    "text": "Rapid"
+                    "text": "急速な"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencySlow",
-                    "text": "Slow"
+                    "text": "遅い"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyVerySlow",
-                    "text": "Very Slow"
+                    "text": "非常に遅い"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmChance",
-                    "text": "Arm Chance"
+                    "text": "アームチャンス"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmDamage",
-                    "text": "Arm Damage"
+                    "text": "腕の損傷"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmDuration",
-                    "text": "Arm Duration"
+                    "text": "アーム持続時間"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmEnabled",
-                    "text": "Arm Enabled"
+                    "text": "アーム対応"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmFrequency",
-                    "text": "Arm Frequency"
+                    "text": "アーム周波数"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmStackLimit",
-                    "text": "Arm Stack Limit"
+                    "text": "アームスタック制限"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionBloodAmountPreset",
-                    "text": "Blood Amount"
+                    "text": "血液量"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionChancePreset",
-                    "text": "Chance Preset"
+                    "text": "チャンスプリセット"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDamagePreset",
-                    "text": "Damage Preset"
+                    "text": "ダメージプリセット"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDebugLogging",
-                    "text": "Debug Logging"
+                    "text": "デバッグログ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDebugOverlay",
-                    "text": "Debug Overlay"
+                    "text": "デバッグオーバーレイ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentChance",
-                    "text": "Dismemberment Chance"
+                    "text": "切断確率"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentDamage",
-                    "text": "Dismemberment Damage"
+                    "text": "切断損傷"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentDuration",
-                    "text": "Dismemberment Duration"
+                    "text": "切断期間"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentEnabled",
-                    "text": "Dismemberment Enabled"
+                    "text": "切断が有効"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentFrequency",
-                    "text": "Dismemberment Frequency"
+                    "text": "切断頻度"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentStackLimit",
-                    "text": "Dismemberment Stack Limit"
+                    "text": "切断スタック制限"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDurationPreset",
-                    "text": "Duration Preset"
+                    "text": "期間プリセット"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionEnableMod",
-                    "text": "Enable Mod"
+                    "text": "Modを有効にする"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionFireMultiplier",
-                    "text": "Fire Mult"
+                    "text": "ファイアマルチ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionFrequencyPreset",
-                    "text": "Frequency Preset"
+                    "text": "周波数プリセット"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadChance",
-                    "text": "Head Chance"
+                    "text": "ヘッドチャンス"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadDamage",
-                    "text": "Head Damage"
+                    "text": "頭部損傷"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadDuration",
-                    "text": "Head Duration"
+                    "text": "ヘッド持続時間"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadEnabled",
-                    "text": "Head Enabled"
+                    "text": "ヘッド対応"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadFrequency",
-                    "text": "Head Frequency"
+                    "text": "ヘッド周波数"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadStackLimit",
-                    "text": "Head Stack Limit"
+                    "text": "ヘッドスタック制限"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegChance",
-                    "text": "Leg Chance"
+                    "text": "レッグチャンス"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegDamage",
-                    "text": "Leg Damage"
+                    "text": "脚の損傷"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegDuration",
-                    "text": "Leg Duration"
+                    "text": "脚の長さ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegEnabled",
-                    "text": "Leg Enabled"
+                    "text": "レッグ有効"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegFrequency",
-                    "text": "Leg Frequency"
+                    "text": "脚の頻度"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegStackLimit",
-                    "text": "Leg Stack Limit"
+                    "text": "レッグスタック制限"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLightningMultiplier",
-                    "text": "Lightning Mult"
+                    "text": "ライトニングマルチ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckChance",
-                    "text": "Neck Chance"
+                    "text": "ネックチャンス"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckDamage",
-                    "text": "Neck Damage"
+                    "text": "首の損傷"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckDuration",
-                    "text": "Neck Duration"
+                    "text": "首の長さ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckEnabled",
-                    "text": "Neck Enabled"
+                    "text": "ネック対応"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckFrequency",
-                    "text": "Neck Frequency"
+                    "text": "ネック周波数"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckStackLimit",
-                    "text": "Neck Stack Limit"
+                    "text": "ネックスタック制限"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionPierceMultiplier",
-                    "text": "Pierce Mult"
+                    "text": "ピアース・マルト"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionProfilePreset",
-                    "text": "Profile"
+                    "text": "プロフィール"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionSlashMultiplier",
-                    "text": "Slash Mult"
+                    "text": "スラッシュマルチ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatChance",
-                    "text": "Throat Chance"
+                    "text": "喉のチャンス"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatDamage",
-                    "text": "Throat Damage"
+                    "text": "喉の損傷"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatDuration",
-                    "text": "Throat Duration"
+                    "text": "喉の長さ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatEnabled",
-                    "text": "Throat Enabled"
+                    "text": "喉が有効"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatFrequency",
-                    "text": "Throat Frequency"
+                    "text": "喉の周波数"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatStackLimit",
-                    "text": "Throat Stack Limit"
+                    "text": "スロートスタック制限"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoChance",
-                    "text": "Torso Chance"
+                    "text": "胴体チャンス"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoDamage",
-                    "text": "Torso Damage"
+                    "text": "胴体損傷"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoDuration",
-                    "text": "Torso Duration"
+                    "text": "胴体持続時間"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoEnabled",
-                    "text": "Torso Enabled"
+                    "text": "胴体対応"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoFrequency",
-                    "text": "Torso Frequency"
+                    "text": "胴体周波数"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoStackLimit",
-                    "text": "Torso Stack Limit"
+                    "text": "胴体スタック制限"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ProfileBleedOnly",
-                    "text": "Bleed Only"
+                    "text": "裁ち落としのみ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ProfileDefault",
-                    "text": "Default"
+                    "text": "デフォルト"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ProfileElementalOnly",
-                    "text": "Elemental Only"
+                    "text": "エレメンタルのみ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmChance",
-                    "text": "Chance for arm wounds to cause bleeding"
+                    "text": "腕の傷が出血を引き起こす可能性"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmDamage",
-                    "text": "Base damage per tick for arm wounds"
+                    "text": "腕の傷に対する1ティックあたりの基本ダメージ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmDuration",
-                    "text": "How long arm bleeds last"
+                    "text": "腕の出血はどのくらい続くか"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmEnabled",
-                    "text": "Enable bleeding from arm wounds"
+                    "text": "腕の傷からの出血を可能にする"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmFrequency",
-                    "text": "Time between bleed ticks for arm wounds"
+                    "text": "腕の傷の出血間隔"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmStackLimit",
-                    "text": "Max stacks for arm wounds"
+                    "text": "腕の傷の最大スタック"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipBloodAmountPreset",
-                    "text": "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood."
+                    "text": "血のVFX強度プリセット。傷口から噴き出す血の量を調整します。「非常に低い」＝最小限の血、デフォルト＝中程度の血、極端＝大量の血。"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipChancePreset",
-                    "text": "Bleed chance preset. Default is the balanced middle value."
+                    "text": "にじみ確率のプリセット。デフォルトはバランスのとれた中間値です。"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDamagePreset",
-                    "text": "Damage per tick preset. Default is the balanced middle value."
+                    "text": "ティックごとのダメージのプリセット。デフォルトはバランスの取れた中間値です。"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDebugLogging",
-                    "text": "Enable verbose debug logging"
+                    "text": "詳細なデバッグログを有効にする"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDebugOverlay",
-                    "text": "Enable periodic debug overlay logging with performance stats"
+                    "text": "パフォーマンス統計を含む定期的なデバッグオーバーレイログを有効にする"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentChance",
-                    "text": "Chance for dismemberment to cause bleeding"
+                    "text": "切断により出血する可能性がある"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentDamage",
-                    "text": "Base damage per tick for dismemberment"
+                    "text": "切断の1ティックあたりの基本ダメージ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentDuration",
-                    "text": "How long dismemberment bleeds last"
+                    "text": "切断による出血はどのくらい続くか"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentEnabled",
-                    "text": "Enable bleeding from dismemberment"
+                    "text": "切断による出血を可能にする"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentFrequency",
-                    "text": "Time between bleed ticks for dismemberment"
+                    "text": "切断のための出血ティック間の時間"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentStackLimit",
-                    "text": "Max stacks for dismemberment (per limb)"
+                    "text": "切断の最大スタック数（手足あたり）"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDurationPreset",
-                    "text": "Bleed duration preset. Default is the balanced middle value."
+                    "text": "裁ち落とし期間のプリセット。デフォルトはバランスの取れた中間値です。"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipEnableMod",
-                    "text": "Master switch for the entire mod"
+                    "text": "モッド全体のマスタースイッチ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipFireMultiplier",
-                    "text": "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely."
+                    "text": "火炎攻撃のDOTダメージ係数。発動中、クリーチャーは「燃焼」の視覚効果を持つ。0.0xにすると、火炎攻撃によるDOTダメージが完全に無効化される。"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipFrequencyPreset",
-                    "text": "Tick frequency preset. Default is the balanced middle value."
+                    "text": "ティック周波数のプリセット。デフォルトはバランスのとれた中間値です。"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadChance",
-                    "text": "Chance for head wounds to cause bleeding"
+                    "text": "頭部の傷による出血の可能性"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadDamage",
-                    "text": "Base damage per tick for head wounds"
+                    "text": "頭部の傷に対する1ティックあたりの基本ダメージ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadDuration",
-                    "text": "How long head bleeds last"
+                    "text": "頭からの出血はどのくらい続くか"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadEnabled",
-                    "text": "Enable bleeding from head wounds"
+                    "text": "頭部の傷からの出血を可能にする"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadFrequency",
-                    "text": "Time between bleed ticks for head wounds"
+                    "text": "頭部の傷の出血間隔"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadStackLimit",
-                    "text": "Max stacks for head wounds"
+                    "text": "頭部の傷の最大スタック"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegChance",
-                    "text": "Chance for leg wounds to cause bleeding"
+                    "text": "足の傷による出血の可能性"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegDamage",
-                    "text": "Base damage per tick for leg wounds"
+                    "text": "脚の傷に対する1ティックあたりの基本ダメージ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegDuration",
-                    "text": "How long leg bleeds last"
+                    "text": "足の出血はどれくらい続くか"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegEnabled",
-                    "text": "Enable bleeding from leg wounds"
+                    "text": "足の傷からの出血を可能にする"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegFrequency",
-                    "text": "Time between bleed ticks for leg wounds"
+                    "text": "脚の傷の出血間隔"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegStackLimit",
-                    "text": "Max stacks for leg wounds"
+                    "text": "脚の傷の最大スタック"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLightningMultiplier",
-                    "text": "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely."
+                    "text": "雷属性攻撃のDOTダメージ係数。発動中、クリーチャーは感電のビジュアルエフェクトを付与します。0.0x にすると、雷属性攻撃によるDOTダメージは完全に無効化されます。"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckChance",
-                    "text": "Chance for neck wounds to cause bleeding"
+                    "text": "首の傷による出血の可能性"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckDamage",
-                    "text": "Base damage per tick for neck wounds"
+                    "text": "首の傷に対する1回あたりの基本ダメージ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckDuration",
-                    "text": "How long neck bleeds last"
+                    "text": "首の出血はどのくらい続くか"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckEnabled",
-                    "text": "Enable bleeding from neck wounds"
+                    "text": "首の傷からの出血を可能にする"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckFrequency",
-                    "text": "Time between bleed ticks for neck wounds"
+                    "text": "首の傷の出血間隔"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckStackLimit",
-                    "text": "Max stacks for neck wounds"
+                    "text": "首の傷に対する最大スタック"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipPierceMultiplier",
-                    "text": "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely."
+                    "text": "貫通攻撃の DOT ダメージ乗数。0.0x は貫通攻撃からの DOT を完全に無効にします。"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipProfilePreset",
-                    "text": "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only."
+                    "text": "プロファイルは、DOT効果を発動するダメージの種類を決定します。デフォルト = 全種類、出血のみ = 物理のみ、属性のみ = 火炎/雷撃/エネルギーのみ。"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipSlashMultiplier",
-                    "text": "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely."
+                    "text": "スラッシュ攻撃の DOT ダメージ乗数。0.0x はスラッシュからの DOT を完全に無効にします。"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatChance",
-                    "text": "Chance for throat wounds to cause bleeding"
+                    "text": "喉の傷による出血の可能性"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatDamage",
-                    "text": "Base damage per tick for throat wounds"
+                    "text": "喉の傷に対する1回あたりの基本ダメージ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatDuration",
-                    "text": "How long throat bleeds last"
+                    "text": "喉の出血はどれくらい続くか"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatEnabled",
-                    "text": "Enable bleeding from throat wounds"
+                    "text": "喉の傷からの出血を可能にする"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatFrequency",
-                    "text": "Time between bleed ticks for throat wounds"
+                    "text": "喉の傷の出血間隔"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatStackLimit",
-                    "text": "Max stacks for throat wounds"
+                    "text": "喉の傷に最大スタック"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoChance",
-                    "text": "Chance for torso wounds to cause bleeding"
+                    "text": "胴体の傷による出血の可能性"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoDamage",
-                    "text": "Base damage per tick for torso wounds"
+                    "text": "胴体へのダメージに対する1ティックあたりの基本ダメージ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoDuration",
-                    "text": "How long torso bleeds last"
+                    "text": "胴体出血はどのくらい続くか"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoEnabled",
-                    "text": "Enable bleeding from torso wounds"
+                    "text": "胴体の傷からの出血を可能にする"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoFrequency",
-                    "text": "Time between bleed ticks for torso wounds"
+                    "text": "胴体の傷の出血間隔"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoStackLimit",
-                    "text": "Max stacks for torso wounds"
+                    "text": "胴体の傷の最大スタック"
                 }
             ]
         }

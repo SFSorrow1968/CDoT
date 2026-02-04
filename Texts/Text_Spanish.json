@@ -13,77 +13,77 @@
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodDefault",
-                    "text": "Default"
+                    "text": "Por defecto"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodExtreme",
-                    "text": "Extreme"
+                    "text": "Extremo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodHigh",
-                    "text": "High"
+                    "text": "Alto"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodLow",
-                    "text": "Low"
+                    "text": "Bajo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodVeryLow",
-                    "text": "Very Low"
+                    "text": "Muy bajo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryAdvanced",
-                    "text": "Advanced"
+                    "text": "Avanzado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryDamageTypeMultipliers",
-                    "text": "Damage Type Multipliers"
+                    "text": "Multiplicadores de tipo de daño"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryPresetSelection",
-                    "text": "Preset Selection"
+                    "text": "Selección de ajustes preestablecidos"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneArm",
-                    "text": "Arm"
+                    "text": "Brazo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneDismemberment",
-                    "text": "Dismemberment"
+                    "text": "Desmembramiento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneHead",
-                    "text": "Head"
+                    "text": "Cabeza"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneLeg",
-                    "text": "Leg"
+                    "text": "Pierna"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneNeck",
-                    "text": "Neck"
+                    "text": "Cuello"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneThroat",
-                    "text": "Throat"
+                    "text": "Garganta"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneToggles",
-                    "text": "Zone Toggles"
+                    "text": "Alternancias de zona"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
@@ -93,302 +93,302 @@
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceAlways",
-                    "text": "Always"
+                    "text": "Siempre"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceDefault",
-                    "text": "Default"
+                    "text": "Por defecto"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceFrequent",
-                    "text": "Frequent"
+                    "text": "Frecuente"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceOff",
-                    "text": "Off"
+                    "text": "Apagado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceRare",
-                    "text": "Rare"
+                    "text": "Extraño"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageDefault",
-                    "text": "Default"
+                    "text": "Por defecto"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageExtreme",
-                    "text": "Extreme"
+                    "text": "Extremo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageHigh",
-                    "text": "High"
+                    "text": "Alto"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageLow",
-                    "text": "Low"
+                    "text": "Bajo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageMinimal",
-                    "text": "Minimal"
+                    "text": "Mínimo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationDefault",
-                    "text": "Default"
+                    "text": "Por defecto"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationExtended",
-                    "text": "Extended"
+                    "text": "Extendido"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationLong",
-                    "text": "Long"
+                    "text": "Largo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationShort",
-                    "text": "Short"
+                    "text": "Corto"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationVeryShort",
-                    "text": "Very Short"
+                    "text": "Muy corto"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyDefault",
-                    "text": "Default"
+                    "text": "Por defecto"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyFast",
-                    "text": "Fast"
+                    "text": "Rápido"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyRapid",
-                    "text": "Rapid"
+                    "text": "Rápido"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencySlow",
-                    "text": "Slow"
+                    "text": "Lento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyVerySlow",
-                    "text": "Very Slow"
+                    "text": "Muy lento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmChance",
-                    "text": "Arm Chance"
+                    "text": "Posibilidad de brazo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmDamage",
-                    "text": "Arm Damage"
+                    "text": "Daño en el brazo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmDuration",
-                    "text": "Arm Duration"
+                    "text": "Duración del brazo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmEnabled",
-                    "text": "Arm Enabled"
+                    "text": "Brazo habilitado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmFrequency",
-                    "text": "Arm Frequency"
+                    "text": "Frecuencia del brazo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmStackLimit",
-                    "text": "Arm Stack Limit"
+                    "text": "Límite de apilamiento de brazos"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionBloodAmountPreset",
-                    "text": "Blood Amount"
+                    "text": "Cantidad de sangre"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionChancePreset",
-                    "text": "Chance Preset"
+                    "text": "Ajuste preestablecido de oportunidad"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDamagePreset",
-                    "text": "Damage Preset"
+                    "text": "Preajuste de daños"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDebugLogging",
-                    "text": "Debug Logging"
+                    "text": "Registro de depuración"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDebugOverlay",
-                    "text": "Debug Overlay"
+                    "text": "Superposición de depuración"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentChance",
-                    "text": "Dismemberment Chance"
+                    "text": "Posibilidad de desmembramiento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentDamage",
-                    "text": "Dismemberment Damage"
+                    "text": "Daño por desmembramiento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentDuration",
-                    "text": "Dismemberment Duration"
+                    "text": "Duración del desmembramiento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentEnabled",
-                    "text": "Dismemberment Enabled"
+                    "text": "Desmembramiento habilitado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentFrequency",
-                    "text": "Dismemberment Frequency"
+                    "text": "Frecuencia de desmembramiento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentStackLimit",
-                    "text": "Dismemberment Stack Limit"
+                    "text": "Límite de pila de desmembramiento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDurationPreset",
-                    "text": "Duration Preset"
+                    "text": "Preajuste de duración"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionEnableMod",
-                    "text": "Enable Mod"
+                    "text": "Habilitar Mod"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionFireMultiplier",
-                    "text": "Fire Mult"
+                    "text": "Fuego Multi"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionFrequencyPreset",
-                    "text": "Frequency Preset"
+                    "text": "Preajuste de frecuencia"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadChance",
-                    "text": "Head Chance"
+                    "text": "Probabilidad de cabeza"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadDamage",
-                    "text": "Head Damage"
+                    "text": "Daño en la cabeza"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadDuration",
-                    "text": "Head Duration"
+                    "text": "Duración de la cabeza"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadEnabled",
-                    "text": "Head Enabled"
+                    "text": "Cabeza habilitada"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadFrequency",
-                    "text": "Head Frequency"
+                    "text": "Frecuencia de la cabeza"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadStackLimit",
-                    "text": "Head Stack Limit"
+                    "text": "Límite de pila de cabezas"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegChance",
-                    "text": "Leg Chance"
+                    "text": "Posibilidad de pierna"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegDamage",
-                    "text": "Leg Damage"
+                    "text": "Daño en la pierna"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegDuration",
-                    "text": "Leg Duration"
+                    "text": "Duración de la pierna"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegEnabled",
-                    "text": "Leg Enabled"
+                    "text": "Pierna habilitada"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegFrequency",
-                    "text": "Leg Frequency"
+                    "text": "Frecuencia de piernas"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegStackLimit",
-                    "text": "Leg Stack Limit"
+                    "text": "Límite de apilamiento de piernas"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLightningMultiplier",
-                    "text": "Lightning Mult"
+                    "text": "Relámpago Multi"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckChance",
-                    "text": "Neck Chance"
+                    "text": "Posibilidad de cuello"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckDamage",
-                    "text": "Neck Damage"
+                    "text": "Daño en el cuello"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckDuration",
-                    "text": "Neck Duration"
+                    "text": "Duración del cuello"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckEnabled",
-                    "text": "Neck Enabled"
+                    "text": "Cuello habilitado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckFrequency",
-                    "text": "Neck Frequency"
+                    "text": "Frecuencia del cuello"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckStackLimit",
-                    "text": "Neck Stack Limit"
+                    "text": "Límite de apilamiento del cuello"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
@@ -398,42 +398,42 @@
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionProfilePreset",
-                    "text": "Profile"
+                    "text": "Perfil"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionSlashMultiplier",
-                    "text": "Slash Mult"
+                    "text": "Barra oblicua múltiple"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatChance",
-                    "text": "Throat Chance"
+                    "text": "Posibilidad de garganta"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatDamage",
-                    "text": "Throat Damage"
+                    "text": "Daño en la garganta"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatDuration",
-                    "text": "Throat Duration"
+                    "text": "Duración de la garganta"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatEnabled",
-                    "text": "Throat Enabled"
+                    "text": "Garganta habilitada"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatFrequency",
-                    "text": "Throat Frequency"
+                    "text": "Frecuencia de garganta"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatStackLimit",
-                    "text": "Throat Stack Limit"
+                    "text": "Límite de pila de garganta"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
@@ -443,317 +443,317 @@
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoDamage",
-                    "text": "Torso Damage"
+                    "text": "Daño en el torso"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoDuration",
-                    "text": "Torso Duration"
+                    "text": "Duración del torso"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoEnabled",
-                    "text": "Torso Enabled"
+                    "text": "Torso habilitado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoFrequency",
-                    "text": "Torso Frequency"
+                    "text": "Frecuencia del torso"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoStackLimit",
-                    "text": "Torso Stack Limit"
+                    "text": "Límite de apilamiento del torso"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ProfileBleedOnly",
-                    "text": "Bleed Only"
+                    "text": "Solo sangrado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ProfileDefault",
-                    "text": "Default"
+                    "text": "Por defecto"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ProfileElementalOnly",
-                    "text": "Elemental Only"
+                    "text": "Sólo elemental"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmChance",
-                    "text": "Chance for arm wounds to cause bleeding"
+                    "text": "Posibilidad de que las heridas en el brazo provoquen sangrado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmDamage",
-                    "text": "Base damage per tick for arm wounds"
+                    "text": "Daño base por tic para heridas en el brazo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmDuration",
-                    "text": "How long arm bleeds last"
+                    "text": "¿Cuánto dura el sangrado en el brazo?"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmEnabled",
-                    "text": "Enable bleeding from arm wounds"
+                    "text": "Permitir el sangrado de las heridas del brazo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmFrequency",
-                    "text": "Time between bleed ticks for arm wounds"
+                    "text": "Tiempo entre garrapatas de sangrado para heridas en el brazo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmStackLimit",
-                    "text": "Max stacks for arm wounds"
+                    "text": "Máximas acumulaciones para heridas en el brazo"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipBloodAmountPreset",
-                    "text": "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood."
+                    "text": "Preajuste de intensidad de efectos visuales de sangre. Controla la cantidad de sangre que sale de las heridas. Muy bajo = poca sangre, predeterminado = sangre moderada, extremo = mucha sangre."
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipChancePreset",
-                    "text": "Bleed chance preset. Default is the balanced middle value."
+                    "text": "Ajuste preestablecido de probabilidad de sangrado. El valor predeterminado es el valor medio equilibrado."
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDamagePreset",
-                    "text": "Damage per tick preset. Default is the balanced middle value."
+                    "text": "Daño por tick preestablecido. El valor predeterminado es el valor medio equilibrado."
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDebugLogging",
-                    "text": "Enable verbose debug logging"
+                    "text": "Habilitar el registro de depuración detallado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDebugOverlay",
-                    "text": "Enable periodic debug overlay logging with performance stats"
+                    "text": "Habilitar el registro periódico de superposición de depuración con estadísticas de rendimiento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentChance",
-                    "text": "Chance for dismemberment to cause bleeding"
+                    "text": "Posibilidad de que el desmembramiento cause sangrado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentDamage",
-                    "text": "Base damage per tick for dismemberment"
+                    "text": "Daño base por tick por desmembramiento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentDuration",
-                    "text": "How long dismemberment bleeds last"
+                    "text": "¿Cuánto duran las hemorragias por desmembramiento?"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentEnabled",
-                    "text": "Enable bleeding from dismemberment"
+                    "text": "Habilitar el sangrado por desmembramiento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentFrequency",
-                    "text": "Time between bleed ticks for dismemberment"
+                    "text": "Tiempo entre garrapatas de sangrado para desmembramiento"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentStackLimit",
-                    "text": "Max stacks for dismemberment (per limb)"
+                    "text": "Máximo de acumulaciones para desmembramiento (por extremidad)"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDurationPreset",
-                    "text": "Bleed duration preset. Default is the balanced middle value."
+                    "text": "Preajuste de duración de sangrado. El valor predeterminado es el valor medio equilibrado."
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipEnableMod",
-                    "text": "Master switch for the entire mod"
+                    "text": "Interruptor maestro para todo el mod"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipFireMultiplier",
-                    "text": "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely."
+                    "text": "Multiplicador de daño por daño en el tiempo para ataques de fuego. Mientras está activo, la criatura tiene el efecto visual de quemar. 0.0x desactiva por completo el daño en el tiempo del fuego."
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipFrequencyPreset",
-                    "text": "Tick frequency preset. Default is the balanced middle value."
+                    "text": "Frecuencia de tick preestablecida. El valor predeterminado es el valor medio equilibrado."
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadChance",
-                    "text": "Chance for head wounds to cause bleeding"
+                    "text": "Posibilidad de que las heridas en la cabeza provoquen sangrado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadDamage",
-                    "text": "Base damage per tick for head wounds"
+                    "text": "Daño base por tictac para heridas en la cabeza"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadDuration",
-                    "text": "How long head bleeds last"
+                    "text": "¿Cuánto duran las hemorragias en la cabeza?"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadEnabled",
-                    "text": "Enable bleeding from head wounds"
+                    "text": "Permitir el sangrado de las heridas en la cabeza"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadFrequency",
-                    "text": "Time between bleed ticks for head wounds"
+                    "text": "Tiempo entre garrapatas de sangrado para heridas en la cabeza"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadStackLimit",
-                    "text": "Max stacks for head wounds"
+                    "text": "Máximo de acumulaciones para heridas en la cabeza"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegChance",
-                    "text": "Chance for leg wounds to cause bleeding"
+                    "text": "Posibilidad de que las heridas en las piernas provoquen sangrado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegDamage",
-                    "text": "Base damage per tick for leg wounds"
+                    "text": "Daño base por tictac para heridas en las piernas"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegDuration",
-                    "text": "How long leg bleeds last"
+                    "text": "¿Cuánto dura el sangrado en las piernas?"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegEnabled",
-                    "text": "Enable bleeding from leg wounds"
+                    "text": "Permitir el sangrado de las heridas en las piernas"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegFrequency",
-                    "text": "Time between bleed ticks for leg wounds"
+                    "text": "Tiempo entre garrapatas de sangrado para heridas en las piernas"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegStackLimit",
-                    "text": "Max stacks for leg wounds"
+                    "text": "Máximo de acumulaciones para heridas en las piernas"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLightningMultiplier",
-                    "text": "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely."
+                    "text": "Multiplicador de daño por daño en el tiempo (DOT) para ataques de rayo. Mientras está activo, la criatura tiene el efecto visual de Electrocutar. 0.0x desactiva por completo el DOT de los rayos."
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckChance",
-                    "text": "Chance for neck wounds to cause bleeding"
+                    "text": "Posibilidad de que las heridas del cuello provoquen sangrado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckDamage",
-                    "text": "Base damage per tick for neck wounds"
+                    "text": "Daño base por tictac para heridas en el cuello"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckDuration",
-                    "text": "How long neck bleeds last"
+                    "text": "¿Cuánto duran los sangrados del cuello?"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckEnabled",
-                    "text": "Enable bleeding from neck wounds"
+                    "text": "Permitir el sangrado de las heridas del cuello"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckFrequency",
-                    "text": "Time between bleed ticks for neck wounds"
+                    "text": "Tiempo entre garrapatas de sangrado para heridas en el cuello"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckStackLimit",
-                    "text": "Max stacks for neck wounds"
+                    "text": "Máximas acumulaciones para heridas en el cuello"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipPierceMultiplier",
-                    "text": "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely."
+                    "text": "Multiplicador de daño DOT para ataques de perforación. 0.0x deshabilita por completo el DOT de la perforación."
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipProfilePreset",
-                    "text": "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only."
+                    "text": "El perfil determina qué tipos de daño activan efectos de daño en el tiempo. Predeterminado: todos los tipos, Solo sangrado: solo físico, Solo elemental: solo fuego/rayo/energía."
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipSlashMultiplier",
-                    "text": "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely."
+                    "text": "Multiplicador de daño DOT para ataques de corte. 0.0x deshabilita por completo el DOT de los ataques de corte."
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatChance",
-                    "text": "Chance for throat wounds to cause bleeding"
+                    "text": "Posibilidad de que las heridas en la garganta provoquen sangrado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatDamage",
-                    "text": "Base damage per tick for throat wounds"
+                    "text": "Daño base por garrapata para heridas de garganta"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatDuration",
-                    "text": "How long throat bleeds last"
+                    "text": "¿Cuánto dura el sangrado de garganta?"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatEnabled",
-                    "text": "Enable bleeding from throat wounds"
+                    "text": "Facilitar el sangrado de heridas en la garganta"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatFrequency",
-                    "text": "Time between bleed ticks for throat wounds"
+                    "text": "Tiempo entre garrapatas de sangrado para heridas de garganta"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatStackLimit",
-                    "text": "Max stacks for throat wounds"
+                    "text": "Máximas acumulaciones para heridas de garganta"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoChance",
-                    "text": "Chance for torso wounds to cause bleeding"
+                    "text": "Posibilidad de que las heridas en el torso provoquen sangrado"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoDamage",
-                    "text": "Base damage per tick for torso wounds"
+                    "text": "Daño base por tic para heridas en el torso"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoDuration",
-                    "text": "How long torso bleeds last"
+                    "text": "¿Cuánto dura el sangrado en el torso?"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoEnabled",
-                    "text": "Enable bleeding from torso wounds"
+                    "text": "Permitir el sangrado de las heridas del torso"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoFrequency",
-                    "text": "Time between bleed ticks for torso wounds"
+                    "text": "Tiempo entre garrapatas de sangrado para heridas en el torso"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoStackLimit",
-                    "text": "Max stacks for torso wounds"
+                    "text": "Máximo de acumulaciones para heridas en el torso"
                 }
             ]
         }

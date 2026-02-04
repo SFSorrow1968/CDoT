@@ -13,747 +13,747 @@
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodDefault",
-                    "text": "Default"
+                    "text": "ค่าเริ่มต้น"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodExtreme",
-                    "text": "Extreme"
+                    "text": "สุดขีด"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodHigh",
-                    "text": "High"
+                    "text": "สูง"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodLow",
-                    "text": "Low"
+                    "text": "ต่ำ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "BloodVeryLow",
-                    "text": "Very Low"
+                    "text": "ต่ำมาก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryAdvanced",
-                    "text": "Advanced"
+                    "text": "ขั้นสูง"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryDamageTypeMultipliers",
-                    "text": "Damage Type Multipliers"
+                    "text": "ตัวคูณประเภทความเสียหาย"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryPresetSelection",
-                    "text": "Preset Selection"
+                    "text": "การเลือกค่าที่ตั้งไว้ล่วงหน้า"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneArm",
-                    "text": "Arm"
+                    "text": "แขน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneDismemberment",
-                    "text": "Dismemberment"
+                    "text": "การแยกชิ้นส่วน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneHead",
-                    "text": "Head"
+                    "text": "ศีรษะ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneLeg",
-                    "text": "Leg"
+                    "text": "ขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneNeck",
-                    "text": "Neck"
+                    "text": "คอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneThroat",
-                    "text": "Throat"
+                    "text": "คอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneToggles",
-                    "text": "Zone Toggles"
+                    "text": "สลับโซน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "CategoryZoneTorso",
-                    "text": "Torso"
+                    "text": "ลำตัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceAlways",
-                    "text": "Always"
+                    "text": "เสมอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceDefault",
-                    "text": "Default"
+                    "text": "ค่าเริ่มต้น"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceFrequent",
-                    "text": "Frequent"
+                    "text": "บ่อย"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceOff",
-                    "text": "Off"
+                    "text": "ปิด"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ChanceRare",
-                    "text": "Rare"
+                    "text": "หายาก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageDefault",
-                    "text": "Default"
+                    "text": "ค่าเริ่มต้น"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageExtreme",
-                    "text": "Extreme"
+                    "text": "สุดขีด"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageHigh",
-                    "text": "High"
+                    "text": "สูง"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageLow",
-                    "text": "Low"
+                    "text": "ต่ำ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DamageMinimal",
-                    "text": "Minimal"
+                    "text": "น้อยที่สุด"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationDefault",
-                    "text": "Default"
+                    "text": "ค่าเริ่มต้น"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationExtended",
-                    "text": "Extended"
+                    "text": "ขยาย"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationLong",
-                    "text": "Long"
+                    "text": "ยาว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationShort",
-                    "text": "Short"
+                    "text": "สั้น"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "DurationVeryShort",
-                    "text": "Very Short"
+                    "text": "สั้นมาก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyDefault",
-                    "text": "Default"
+                    "text": "ค่าเริ่มต้น"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyFast",
-                    "text": "Fast"
+                    "text": "เร็ว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyRapid",
-                    "text": "Rapid"
+                    "text": "รวดเร็ว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencySlow",
-                    "text": "Slow"
+                    "text": "ช้า"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "FrequencyVerySlow",
-                    "text": "Very Slow"
+                    "text": "ช้ามาก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmChance",
-                    "text": "Arm Chance"
+                    "text": "โอกาสแห่งแขน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmDamage",
-                    "text": "Arm Damage"
+                    "text": "ความเสียหายที่แขน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmDuration",
-                    "text": "Arm Duration"
+                    "text": "ระยะเวลาของแขน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmEnabled",
-                    "text": "Arm Enabled"
+                    "text": "เปิดใช้งานแขน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmFrequency",
-                    "text": "Arm Frequency"
+                    "text": "ความถี่ของแขน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionArmStackLimit",
-                    "text": "Arm Stack Limit"
+                    "text": "ขีดจำกัดการวางซ้อนแขน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionBloodAmountPreset",
-                    "text": "Blood Amount"
+                    "text": "ปริมาณเลือด"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionChancePreset",
-                    "text": "Chance Preset"
+                    "text": "ค่าที่ตั้งไว้ล่วงหน้าของโอกาส"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDamagePreset",
-                    "text": "Damage Preset"
+                    "text": "ความเสียหายที่ตั้งไว้ล่วงหน้า"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDebugLogging",
-                    "text": "Debug Logging"
+                    "text": "การบันทึกข้อมูลการแก้ไขข้อผิดพลาด"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDebugOverlay",
-                    "text": "Debug Overlay"
+                    "text": "โอเวอร์เลย์ดีบัก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentChance",
-                    "text": "Dismemberment Chance"
+                    "text": "โอกาสที่จะเกิดการฉีกขาดของร่างกาย"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentDamage",
-                    "text": "Dismemberment Damage"
+                    "text": "ความเสียหายจากการตัดอวัยวะ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentDuration",
-                    "text": "Dismemberment Duration"
+                    "text": "ระยะเวลาการตัดอวัยวะ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentEnabled",
-                    "text": "Dismemberment Enabled"
+                    "text": "เปิดใช้งานการแยกส่วน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentFrequency",
-                    "text": "Dismemberment Frequency"
+                    "text": "ความถี่ในการแยกชิ้นส่วน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDismembermentStackLimit",
-                    "text": "Dismemberment Stack Limit"
+                    "text": "ขีดจำกัดการเรียงซ้อนของการแยกชิ้นส่วน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionDurationPreset",
-                    "text": "Duration Preset"
+                    "text": "ระยะเวลาที่ตั้งไว้ล่วงหน้า"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionEnableMod",
-                    "text": "Enable Mod"
+                    "text": "เปิดใช้งานม็อด"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionFireMultiplier",
-                    "text": "Fire Mult"
+                    "text": "ไฟร์ มัลท์"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionFrequencyPreset",
-                    "text": "Frequency Preset"
+                    "text": "การตั้งค่าความถี่ล่วงหน้า"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadChance",
-                    "text": "Head Chance"
+                    "text": "โอกาสหัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadDamage",
-                    "text": "Head Damage"
+                    "text": "ความเสียหายที่ศีรษะ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadDuration",
-                    "text": "Head Duration"
+                    "text": "ระยะเวลาหัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadEnabled",
-                    "text": "Head Enabled"
+                    "text": "เปิดใช้งานส่วนหัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadFrequency",
-                    "text": "Head Frequency"
+                    "text": "ความถี่หัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionHeadStackLimit",
-                    "text": "Head Stack Limit"
+                    "text": "ขีดจำกัดหัวซ้อน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegChance",
-                    "text": "Leg Chance"
+                    "text": "โอกาสขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegDamage",
-                    "text": "Leg Damage"
+                    "text": "ความเสียหายที่ขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegDuration",
-                    "text": "Leg Duration"
+                    "text": "ระยะเวลาขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegEnabled",
-                    "text": "Leg Enabled"
+                    "text": "ขาช่วยพยุง"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegFrequency",
-                    "text": "Leg Frequency"
+                    "text": "ความถี่ขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLegStackLimit",
-                    "text": "Leg Stack Limit"
+                    "text": "ขีดจำกัดการซ้อนขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionLightningMultiplier",
-                    "text": "Lightning Mult"
+                    "text": "สายฟ้าแลบ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckChance",
-                    "text": "Neck Chance"
+                    "text": "โอกาสที่คอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckDamage",
-                    "text": "Neck Damage"
+                    "text": "ความเสียหายที่คอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckDuration",
-                    "text": "Neck Duration"
+                    "text": "ระยะเวลาคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckEnabled",
-                    "text": "Neck Enabled"
+                    "text": "เปิดใช้งานคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckFrequency",
-                    "text": "Neck Frequency"
+                    "text": "ความถี่คอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionNeckStackLimit",
-                    "text": "Neck Stack Limit"
+                    "text": "ขีดจำกัดการวางซ้อนคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionPierceMultiplier",
-                    "text": "Pierce Mult"
+                    "text": "เพียร์ซ มัลท์"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionProfilePreset",
-                    "text": "Profile"
+                    "text": "ประวัติโดยย่อ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionSlashMultiplier",
-                    "text": "Slash Mult"
+                    "text": "สแลช มัลท์"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatChance",
-                    "text": "Throat Chance"
+                    "text": "โอกาสคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatDamage",
-                    "text": "Throat Damage"
+                    "text": "ความเสียหายที่ลำคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatDuration",
-                    "text": "Throat Duration"
+                    "text": "ระยะเวลาของลำคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatEnabled",
-                    "text": "Throat Enabled"
+                    "text": "เปิดใช้งานคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatFrequency",
-                    "text": "Throat Frequency"
+                    "text": "ความถี่ลำคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionThroatStackLimit",
-                    "text": "Throat Stack Limit"
+                    "text": "ขีดจำกัดปล่องคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoChance",
-                    "text": "Torso Chance"
+                    "text": "ทอร์โซ แชนซ์"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoDamage",
-                    "text": "Torso Damage"
+                    "text": "ความเสียหายที่ลำตัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoDuration",
-                    "text": "Torso Duration"
+                    "text": "ระยะเวลาลำตัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoEnabled",
-                    "text": "Torso Enabled"
+                    "text": "เปิดใช้งานส่วนลำตัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoFrequency",
-                    "text": "Torso Frequency"
+                    "text": "ความถี่ลำตัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "OptionTorsoStackLimit",
-                    "text": "Torso Stack Limit"
+                    "text": "ขีดจำกัดการซ้อนลำตัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ProfileBleedOnly",
-                    "text": "Bleed Only"
+                    "text": "เลือดออกเท่านั้น"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ProfileDefault",
-                    "text": "Default"
+                    "text": "ค่าเริ่มต้น"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "ProfileElementalOnly",
-                    "text": "Elemental Only"
+                    "text": "ธาตุเท่านั้น"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmChance",
-                    "text": "Chance for arm wounds to cause bleeding"
+                    "text": "โอกาสที่บาดแผลที่แขนจะทำให้เกิดเลือดออก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmDamage",
-                    "text": "Base damage per tick for arm wounds"
+                    "text": "ความเสียหายพื้นฐานต่อครั้งสำหรับบาดแผลที่แขน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmDuration",
-                    "text": "How long arm bleeds last"
+                    "text": "เลือดที่แขนจะออกนานแค่ไหน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmEnabled",
-                    "text": "Enable bleeding from arm wounds"
+                    "text": "จำลองการไหลของเลือดจากบาดแผลที่แขน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmFrequency",
-                    "text": "Time between bleed ticks for arm wounds"
+                    "text": "ระยะเวลาระหว่างการตกเลือดจากเห็บสำหรับบาดแผลที่แขน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipArmStackLimit",
-                    "text": "Max stacks for arm wounds"
+                    "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่แขน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipBloodAmountPreset",
-                    "text": "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood."
+                    "text": "ค่าที่ตั้งไว้ล่วงหน้าสำหรับความเข้มของเอฟเฟ็กต์เลือด ควบคุมปริมาณเลือดที่พุ่งออกมาจากบาดแผล ต่ำมาก = เลือดน้อยมาก, ค่าเริ่มต้น = เลือดปานกลาง, สูงมาก = เลือดเยอะมาก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipChancePreset",
-                    "text": "Bleed chance preset. Default is the balanced middle value."
+                    "text": "ค่ากำหนดล่วงหน้าของโอกาสเลือดออก ค่าเริ่มต้นคือค่ากลางที่สมดุล"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDamagePreset",
-                    "text": "Damage per tick preset. Default is the balanced middle value."
+                    "text": "ค่าความเสียหายต่อรอบการคำนวณ (Damage per tick) เป็นค่าที่ตั้งไว้ล่วงหน้า ค่าเริ่มต้นคือค่ากลางที่สมดุล"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDebugLogging",
-                    "text": "Enable verbose debug logging"
+                    "text": "เปิดใช้งานการบันทึกข้อมูลการแก้ไขข้อผิดพลาดแบบละเอียด"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDebugOverlay",
-                    "text": "Enable periodic debug overlay logging with performance stats"
+                    "text": "เปิดใช้งานการบันทึกข้อมูลการดีบักเป็นระยะพร้อมสถิติประสิทธิภาพ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentChance",
-                    "text": "Chance for dismemberment to cause bleeding"
+                    "text": "โอกาสที่การตัดแขนขาจะทำให้เกิดเลือดออก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentDamage",
-                    "text": "Base damage per tick for dismemberment"
+                    "text": "ความเสียหายพื้นฐานต่อรอบสำหรับการตัดแขนขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentDuration",
-                    "text": "How long dismemberment bleeds last"
+                    "text": "เลือดจากการตัดแขนขาจะไหลนานแค่ไหน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentEnabled",
-                    "text": "Enable bleeding from dismemberment"
+                    "text": "เปิดใช้งานการตกเลือดจากการตัดแขนขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentFrequency",
-                    "text": "Time between bleed ticks for dismemberment"
+                    "text": "ระยะเวลาระหว่างการตกเลือดแต่ละครั้งสำหรับการตัดแขนขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDismembermentStackLimit",
-                    "text": "Max stacks for dismemberment (per limb)"
+                    "text": "จำนวนสแต็คสูงสุดสำหรับการตัดแขนขา (ต่อแขนขา)"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipDurationPreset",
-                    "text": "Bleed duration preset. Default is the balanced middle value."
+                    "text": "ตั้งค่าระยะเวลาการรั่วไหลล่วงหน้า ค่าเริ่มต้นคือค่ากลางที่สมดุล"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipEnableMod",
-                    "text": "Master switch for the entire mod"
+                    "text": "สวิตช์หลักสำหรับโมดิฟายทั้งหมด"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipFireMultiplier",
-                    "text": "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely."
+                    "text": "ตัวคูณความเสียหายแบบต่อเนื่อง (DOT) สำหรับการโจมตีด้วยไฟ ขณะใช้งาน สิ่งมีชีวิตจะมีเอฟเฟกต์ภาพ \"ลุกไหม้\" ค่า 0.0x จะปิดใช้งานความเสียหายแบบต่อเนื่องจากไฟโดยสมบูรณ์"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipFrequencyPreset",
-                    "text": "Tick frequency preset. Default is the balanced middle value."
+                    "text": "ตั้งค่าความถี่ของเข็มนาฬิกาไว้ล่วงหน้า ค่าเริ่มต้นคือค่ากลางที่สมดุล"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadChance",
-                    "text": "Chance for head wounds to cause bleeding"
+                    "text": "โอกาสที่บาดแผลที่ศีรษะจะทำให้เกิดเลือดออก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadDamage",
-                    "text": "Base damage per tick for head wounds"
+                    "text": "ความเสียหายพื้นฐานต่อครั้งสำหรับบาดแผลที่ศีรษะ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadDuration",
-                    "text": "How long head bleeds last"
+                    "text": "เลือดออกที่ศีรษะจะนานแค่ไหน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadEnabled",
-                    "text": "Enable bleeding from head wounds"
+                    "text": "เปิดใช้งานการหลั่งจากบาดแผลที่ศีรษะ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadFrequency",
-                    "text": "Time between bleed ticks for head wounds"
+                    "text": "ระยะเวลาระหว่างการตกเลือดจากเห็บสำหรับบาดแผลที่ศีรษะ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipHeadStackLimit",
-                    "text": "Max stacks for head wounds"
+                    "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่ศีรษะ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegChance",
-                    "text": "Chance for leg wounds to cause bleeding"
+                    "text": "โอกาสที่บาดแผลที่ขาจะทำให้เกิดเลือดออก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegDamage",
-                    "text": "Base damage per tick for leg wounds"
+                    "text": "ความเสียหายพื้นฐานต่อครั้งสำหรับบาดแผลที่ขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegDuration",
-                    "text": "How long leg bleeds last"
+                    "text": "เลือดที่ไหลออกจากขาจะไหลนานแค่ไหน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegEnabled",
-                    "text": "Enable bleeding from leg wounds"
+                    "text": "อนุญาตให้เลือดไหลออกจากบาดแผลที่ขาได้"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegFrequency",
-                    "text": "Time between bleed ticks for leg wounds"
+                    "text": "ระยะเวลาระหว่างการกัดของเห็บสำหรับบาดแผลที่ขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLegStackLimit",
-                    "text": "Max stacks for leg wounds"
+                    "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่ขา"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipLightningMultiplier",
-                    "text": "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely."
+                    "text": "ตัวคูณความเสียหายแบบต่อเนื่อง (DOT) สำหรับการโจมตีด้วยสายฟ้า ขณะใช้งาน สิ่งมีชีวิตจะมีเอฟเฟกต์ภาพ Electrocute ค่า 0.0x จะปิดใช้งานความเสียหายแบบต่อเนื่องจากสายฟ้าโดยสมบูรณ์"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckChance",
-                    "text": "Chance for neck wounds to cause bleeding"
+                    "text": "โอกาสที่บาดแผลบริเวณคอจะทำให้เกิดเลือดออก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckDamage",
-                    "text": "Base damage per tick for neck wounds"
+                    "text": "ความเสียหายพื้นฐานต่อครั้งสำหรับบาดแผลที่คอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckDuration",
-                    "text": "How long neck bleeds last"
+                    "text": "เลือดออกที่คอจะนานแค่ไหน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckEnabled",
-                    "text": "Enable bleeding from neck wounds"
+                    "text": "อนุญาตให้เลือดไหลออกจากบาดแผลที่คอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckFrequency",
-                    "text": "Time between bleed ticks for neck wounds"
+                    "text": "ระยะเวลาระหว่างการกัดของเห็บสำหรับบาดแผลที่คอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipNeckStackLimit",
-                    "text": "Max stacks for neck wounds"
+                    "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่คอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipPierceMultiplier",
-                    "text": "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely."
+                    "text": "ตัวคูณความเสียหายแบบต่อเนื่อง (DOT) สำหรับการโจมตีแบบเจาะทะลุ 0.0x จะปิดใช้งาน DOT สำหรับการโจมตีแบบเจาะทะลุโดยสิ้นเชิง"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipProfilePreset",
-                    "text": "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only."
+                    "text": "โปรไฟล์จะกำหนดประเภทความเสียหายที่จะทำให้เกิดเอฟเฟกต์ DOT (Damage over Time) ค่าเริ่มต้น = ทุกประเภท, เลือดออกเท่านั้น = เฉพาะความเสียหายทางกายภาพ, ธาตุเท่านั้น = เฉพาะความเสียหายจากไฟ/สายฟ้า/พลังงาน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipSlashMultiplier",
-                    "text": "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely."
+                    "text": "ตัวคูณความเสียหายแบบต่อเนื่อง (DOT) สำหรับการโจมตีแบบฟัน 0.0x จะปิดใช้งานความเสียหายแบบต่อเนื่องจากการโจมตีแบบฟันโดยสิ้นเชิง"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatChance",
-                    "text": "Chance for throat wounds to cause bleeding"
+                    "text": "โอกาสที่บาดแผลในลำคอจะทำให้เกิดเลือดออก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatDamage",
-                    "text": "Base damage per tick for throat wounds"
+                    "text": "ความเสียหายพื้นฐานต่อครั้งสำหรับบาดแผลที่ลำคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatDuration",
-                    "text": "How long throat bleeds last"
+                    "text": "เลือดกำเดาไหลนานแค่ไหน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatEnabled",
-                    "text": "Enable bleeding from throat wounds"
+                    "text": "ช่วยให้เลือดไหลออกจากบาดแผลที่ลำคอได้"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatFrequency",
-                    "text": "Time between bleed ticks for throat wounds"
+                    "text": "ระยะเวลาระหว่างการกัดของเห็บต่อบาดแผลที่ลำคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipThroatStackLimit",
-                    "text": "Max stacks for throat wounds"
+                    "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่ลำคอ"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoChance",
-                    "text": "Chance for torso wounds to cause bleeding"
+                    "text": "โอกาสที่บาดแผลบริเวณลำตัวจะทำให้เกิดเลือดออก"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoDamage",
-                    "text": "Base damage per tick for torso wounds"
+                    "text": "ความเสียหายพื้นฐานต่อวินาทีสำหรับบาดแผลที่ลำตัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoDuration",
-                    "text": "How long torso bleeds last"
+                    "text": "เลือดออกบริเวณลำตัวจะนานแค่ไหน"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoEnabled",
-                    "text": "Enable bleeding from torso wounds"
+                    "text": "เปิดใช้งานการแสดงเลือดไหลจากบาดแผลที่ลำตัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoFrequency",
-                    "text": "Time between bleed ticks for torso wounds"
+                    "text": "ระยะเวลาระหว่างการแทงเข็มเพื่อเก็บเลือดสำหรับบาดแผลที่ลำตัว"
                 },
                 {
                     "$type": "ThunderRoad.TextData+TextID, ThunderRoad",
                     "id": "TooltipTorsoStackLimit",
-                    "text": "Max stacks for torso wounds"
+                    "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่ลำตัว"
                 }
             ]
         }
