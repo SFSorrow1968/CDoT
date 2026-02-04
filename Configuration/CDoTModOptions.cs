@@ -165,11 +165,11 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Minimal", "Minimal"),
-                new ModOptionString("Low", "Low"),
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("High", "High"),
-                new ModOptionString("Extreme", "Extreme")
+                new ModOptionString("Minimal", "DamageMinimal", "Minimal"),
+                new ModOptionString("Low", "DamageLow", "Low"),
+                new ModOptionString("Default", "DamageDefault", "Default"),
+                new ModOptionString("High", "DamageHigh", "High"),
+                new ModOptionString("Extreme", "DamageExtreme", "Extreme")
             };
         }
 
@@ -177,11 +177,11 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Very Short", "Very Short"),
-                new ModOptionString("Short", "Short"),
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("Long", "Long"),
-                new ModOptionString("Extended", "Extended")
+                new ModOptionString("Very Short", "DurationVeryShort", "Very Short"),
+                new ModOptionString("Short", "DurationShort", "Short"),
+                new ModOptionString("Default", "DurationDefault", "Default"),
+                new ModOptionString("Long", "DurationLong", "Long"),
+                new ModOptionString("Extended", "DurationExtended", "Extended")
             };
         }
 
@@ -189,11 +189,11 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Very Slow", "Very Slow"),
-                new ModOptionString("Slow", "Slow"),
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("Fast", "Fast"),
-                new ModOptionString("Rapid", "Rapid")
+                new ModOptionString("Very Slow", "FrequencyVerySlow", "Very Slow"),
+                new ModOptionString("Slow", "FrequencySlow", "Slow"),
+                new ModOptionString("Default", "FrequencyDefault", "Default"),
+                new ModOptionString("Fast", "FrequencyFast", "Fast"),
+                new ModOptionString("Rapid", "FrequencyRapid", "Rapid")
             };
         }
 
@@ -201,11 +201,11 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Off", "Off"),
-                new ModOptionString("Rare", "Rare"),
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("Frequent", "Frequent"),
-                new ModOptionString("Always", "Always")
+                new ModOptionString("Off", "ChanceOff", "Off"),
+                new ModOptionString("Rare", "ChanceRare", "Rare"),
+                new ModOptionString("Default", "ChanceDefault", "Default"),
+                new ModOptionString("Frequent", "ChanceFrequent", "Frequent"),
+                new ModOptionString("Always", "ChanceAlways", "Always")
             };
         }
 
@@ -213,11 +213,11 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Very Low", "Very Low"),
-                new ModOptionString("Low", "Low"),
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("High", "High"),
-                new ModOptionString("Extreme", "Extreme")
+                new ModOptionString("Very Low", "BloodVeryLow", "Very Low"),
+                new ModOptionString("Low", "BloodLow", "Low"),
+                new ModOptionString("Default", "BloodDefault", "Default"),
+                new ModOptionString("High", "BloodHigh", "High"),
+                new ModOptionString("Extreme", "BloodExtreme", "Extreme")
             };
         }
 
@@ -225,9 +225,9 @@ namespace CDoT.Configuration
         {
             return new ModOptionString[]
             {
-                new ModOptionString("Default", "Default"),
-                new ModOptionString("Bleed Only", "Bleed Only"),
-                new ModOptionString("Elemental Only", "Elemental Only")
+                new ModOptionString("Default", "ProfileDefault", "Default"),
+                new ModOptionString("Bleed Only", "ProfileBleedOnly", "Bleed Only"),
+                new ModOptionString("Elemental Only", "ProfileElementalOnly", "Elemental Only")
             };
         }
 
