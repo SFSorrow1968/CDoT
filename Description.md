@@ -4,7 +4,7 @@
 Bleed Damage Over Time adds location-based bleeding effects with configurable damage multipliers for different body zones including throat, head, torso, limbs, and dismemberment.
 
 ## Detailed Description (<=50,000 chars)
-⚠️ This mod was 100% vibe coded with AI assistance. All code is original work - no code was stolen or used without consent. Only official, open-source references and publicly available ThunderRoad documentation were used during development. Yes, I used AI. No, I don't care about your opinion on that. The mod works, it's free, and you're welcome to not download it. ⚠️
+⚠️ This mod was 100% vibe coded with AI assistance. All code is original work - no code was stolen or used without consent. Only official, open-source references and publicly available ThunderRoad documentation were used during development. Save your "AI bad" comments - I've heard them all, and yet here you are, reading a mod description written by the same AI you're about to complain about. ⚠️
 
 Bleed Damage Over Time (DOT) brings realistic bleeding mechanics to Blade & Sorcery. When you wound an enemy, they will continue taking damage over time based on where you hit them.
 
