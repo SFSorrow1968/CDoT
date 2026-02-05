@@ -76,15 +76,14 @@
     </Reference>
   </ItemGroup>
 
-  <!-- Copy manifest and localization TextData files to output -->
+  <!-- Copy manifest to output (Texts excluded due to B&S localization bug) -->
   <ItemGroup>
     <Content Include="manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Texts\**\*.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Link>Texts\%(RecursiveDir)%(Filename)%(Extension)</Link>
-    </Content>
+    <!-- Texts excluded: B&S has a bug where multiple mods providing TextData
+         causes "Duplicated text group: Default" warnings and breaks the mod
+         menu UI, making other mods unclickable. See bug report. -->
   </ItemGroup>
 
   <!-- Post-build messages -->
