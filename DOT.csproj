@@ -45,33 +45,33 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Blade & Sorcery DLLs - copied to libs folder -->
+    <!-- Blade & Sorcery DLLs - shared libs folder -->
     <Reference Include="ThunderRoad">
-      <HintPath>libs\ThunderRoad.dll</HintPath>
+      <HintPath>..\libs\ThunderRoad.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>libs\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\libs\Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>libs\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>..\libs\Assembly-CSharp-firstpass.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>libs\UnityEngine.dll</HintPath>
+      <HintPath>..\libs\UnityEngine.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>libs\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\libs\UnityEngine.CoreModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>libs\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>..\libs\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>libs\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>..\libs\UnityEngine.TextRenderingModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
