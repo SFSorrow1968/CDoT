@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Debug utility for parsing and validating CDoT configuration files.
+Debug utility for parsing and validating DOT configuration files.
 """
 
 import os
@@ -77,7 +77,7 @@ def validate_settings():
 
 
 def main():
-    print("CDoT Configuration Validator")
+    print("DOT Configuration Validator")
     print("=" * 40)
 
     all_valid = True

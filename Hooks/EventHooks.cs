@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using CDoT.Configuration;
-using CDoT.Core;
+using DOT.Configuration;
+using DOT.Core;
 using ThunderRoad;
 using UnityEngine;
 
-namespace CDoT.Hooks
+namespace DOT.Hooks
 {
     public class EventHooks
     {
@@ -52,12 +52,12 @@ namespace CDoT.Hooks
         {
             if (_subscribed)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Already subscribed to events");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] Already subscribed to events");
                 return;
             }
 
-            Debug.Log("[CDoT] Subscribing to EventManager events...");
+            Debug.Log("[DOT] Subscribing to EventManager events...");
 
             try
             {
@@ -74,11 +74,11 @@ namespace CDoT.Hooks
                 EventManager.onLevelUnload += _onLevelUnloadHandler;
 
                 _subscribed = true;
-                Debug.Log("[CDoT] Event hooks subscribed successfully");
+                Debug.Log("[DOT] Event hooks subscribed successfully");
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[CDoT] Failed to subscribe to events: {ex.Message}");
+                Debug.LogError($"[DOT] Failed to subscribe to events: {ex.Message}");
                 _subscribed = false;
             }
         }
@@ -92,18 +92,18 @@ namespace CDoT.Hooks
                 _onCreatureSpawnHandler = new EventManager.CreatureSpawnedEvent(this.OnCreatureSpawn);
                 EventManager.onCreatureSpawn += _onCreatureSpawnHandler;
                 _spawnSubscribed = true;
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Creature spawn hook subscribed");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] Creature spawn hook subscribed");
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[CDoT] Failed to subscribe creature spawn hook: {ex.Message}");
+                Debug.LogError($"[DOT] Failed to subscribe creature spawn hook: {ex.Message}");
             }
         }
 
         private void UnsubscribeEvents()
         {
-            Debug.Log("[CDoT] Unsubscribing from events...");
+            Debug.Log("[DOT] Unsubscribing from events...");
 
             try
             {
@@ -119,8 +119,8 @@ namespace CDoT.Hooks
             }
             catch (Exception ex)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.LogWarning($"[CDoT] Error during event unsubscription: {ex.Message}");
+                if (DOTModOptions.DebugLogging)
+                    Debug.LogWarning($"[DOT] Error during event unsubscription: {ex.Message}");
             }
 
             // Clear delegate references
@@ -147,7 +147,7 @@ namespace CDoT.Hooks
                 if (creature.isPlayer) return;
                 if (creature.isKilled) return;
 
-                if (!CDoTModOptions.EnableMod) return;
+                if (!DOTModOptions.EnableMod) return;
 
                 // Get hit info for logging
                 var damageType = collisionInstance?.damageStruct.damageType ?? DamageType.Unknown;
@@ -155,30 +155,30 @@ namespace CDoT.Hooks
                 var hitDamage = collisionInstance?.damageStruct.damage ?? 0f;
                 string partTypeName = hitPart?.type.ToString() ?? "null";
 
-                if (CDoTModOptions.DebugLogging)
+                if (DOTModOptions.DebugLogging)
                 {
-                    Debug.Log("[CDoT] ========== HIT EVENT ==========");
-                    Debug.Log($"[CDoT] Target: {creature.name} | Part: {partTypeName} | DamageType: {damageType} | Damage: {hitDamage:F1}");
+                    Debug.Log("[DOT] ========== HIT EVENT ==========");
+                    Debug.Log($"[DOT] Target: {creature.name} | Part: {partTypeName} | DamageType: {damageType} | Damage: {hitDamage:F1}");
                 }
 
                 // Detect effective damage type (may differ from reported type due to imbue/spell)
                 DamageType effectiveDamageType = GetEffectiveDamageType(collisionInstance, damageType);
-                if (effectiveDamageType != damageType && CDoTModOptions.DebugLogging)
-                    Debug.Log($"[CDoT] Effective damage type: {effectiveDamageType} (from imbue/spell)");
+                if (effectiveDamageType != damageType && DOTModOptions.DebugLogging)
+                    Debug.Log($"[DOT] Effective damage type: {effectiveDamageType} (from imbue/spell)");
 
                 // Blunt damage does not cause bleeding
                 if (effectiveDamageType == DamageType.Blunt)
                 {
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] SKIP: Blunt damage does not cause bleeding");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log("[DOT] SKIP: Blunt damage does not cause bleeding");
                     return;
                 }
 
                 // Check if damage type is allowed by current profile
-                if (!CDoTModOptions.IsDamageTypeAllowed(effectiveDamageType))
+                if (!DOTModOptions.IsDamageTypeAllowed(effectiveDamageType))
                 {
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log($"[CDoT] SKIP: DamageType {effectiveDamageType} not allowed by profile {CDoTModOptions.ProfilePresetSetting}");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log($"[DOT] SKIP: DamageType {effectiveDamageType} not allowed by profile {DOTModOptions.ProfilePresetSetting}");
                     return;
                 }
                 
@@ -189,8 +189,8 @@ namespace CDoT.Hooks
                 BodyZone zone = ZoneDetector.GetZoneFromCollision(collisionInstance);
                 if (zone == BodyZone.Unknown)
                 {
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] SKIP: Unknown body zone");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log("[DOT] SKIP: Unknown body zone");
                     return;
                 }
 
@@ -199,37 +199,37 @@ namespace CDoT.Hooks
                 {
                     if (hitPart != null && !IsNewSlice(hitPart))
                     {
-                        if (CDoTModOptions.DebugLogging)
-                            Debug.Log("[CDoT] SKIP: Dismemberment already processed for this part");
+                        if (DOTModOptions.DebugLogging)
+                            Debug.Log("[DOT] SKIP: Dismemberment already processed for this part");
                         return;
                     }
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] Dismemberment: New slice detected");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log("[DOT] Dismemberment: New slice detected");
                 }
 
                 // Get zone config for logging
-                var config = CDoTModOptions.GetZoneConfig(zone);
-                if (CDoTModOptions.DebugLogging)
+                var config = DOTModOptions.GetZoneConfig(zone);
+                if (DOTModOptions.DebugLogging)
                 {
-                    Debug.Log($"[CDoT] Zone: {zone.GetDisplayName()} | Enabled: {config.Enabled}");
-                    Debug.Log($"[CDoT] Config: Chance={config.Chance:F0}%, Duration={config.Duration:F1}s, DmgPerTick={config.Damage:F2}, MaxStacks={config.StackLimit}");
+                    Debug.Log($"[DOT] Zone: {zone.GetDisplayName()} | Enabled: {config.Enabled}");
+                    Debug.Log($"[DOT] Config: Chance={config.Chance:F0}%, Duration={config.Duration:F1}s, DmgPerTick={config.Damage:F2}, MaxStacks={config.StackLimit}");
                 }
 
                 // Apply bleed effect (chance is checked inside ApplyBleed)
                 // Blood VFX is now spawned silently (without audio) inside BleedEffect
                 bool applied = BleedManager.Instance.ApplyBleed(creature, zone, damageType, hitPart);
-                if (CDoTModOptions.DebugLogging)
+                if (DOTModOptions.DebugLogging)
                 {
                     if (applied)
-                        Debug.Log($"[CDoT] RESULT: Bleed APPLIED to {creature.name} ({zone.GetDisplayName()})");
+                        Debug.Log($"[DOT] RESULT: Bleed APPLIED to {creature.name} ({zone.GetDisplayName()})");
                     else
-                        Debug.Log("[CDoT] RESULT: Bleed NOT applied (zone disabled or other reason)");
-                    Debug.Log("[CDoT] ================================");
+                        Debug.Log("[DOT] RESULT: Bleed NOT applied (zone disabled or other reason)");
+                    Debug.Log("[DOT] ================================");
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[CDoT] OnCreatureHit error: {ex.Message}\n{ex.StackTrace}");
+                Debug.LogError($"[DOT] OnCreatureHit error: {ex.Message}\n{ex.StackTrace}");
             }
         }
 
@@ -243,12 +243,12 @@ namespace CDoT.Hooks
                 // Clear bleed effects when creature dies
                 BleedManager.Instance.ClearCreature(creature);
 
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log($"[CDoT] Creature killed, effects cleared: {creature.name}");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log($"[DOT] Creature killed, effects cleared: {creature.name}");
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[CDoT] OnCreatureKill error: {ex.Message}");
+                Debug.LogError($"[DOT] OnCreatureKill error: {ex.Message}");
             }
         }
 
@@ -262,8 +262,8 @@ namespace CDoT.Hooks
 
             try
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Level unloading - cleaning up all bleed effects");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] Level unloading - cleaning up all bleed effects");
 
                 // Clear all active bleed effects
                 BleedManager.Instance.ClearAll();
@@ -271,12 +271,12 @@ namespace CDoT.Hooks
                 // Reset tracking state
                 ResetState();
 
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Level cleanup complete");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] Level cleanup complete");
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[CDoT] Error during level unload cleanup: {ex.Message}");
+                Debug.LogError($"[DOT] Error during level unload cleanup: {ex.Message}");
             }
         }
 
@@ -377,8 +377,8 @@ namespace CDoT.Hooks
             }
             catch (Exception ex)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.LogError($"[CDoT] Error in GetEffectiveDamageType: {ex.Message}");
+                if (DOTModOptions.DebugLogging)
+                    Debug.LogError($"[DOT] Error in GetEffectiveDamageType: {ex.Message}");
                 return reportedType;
             }
         }
@@ -391,29 +391,29 @@ namespace CDoT.Hooks
 
                 var sourceItem = collision.sourceColliderGroup?.collisionHandler?.item;
 
-                if (CDoTModOptions.DebugLogging && sourceItem != null)
+                if (DOTModOptions.DebugLogging && sourceItem != null)
                 {
-                    Debug.Log($"[CDoT] Checking player source - Item: {sourceItem.name}");
+                    Debug.Log($"[DOT] Checking player source - Item: {sourceItem.name}");
                 }
 
                 // Check if the source is a player-held item
                 if (sourceItem?.mainHandler?.creature?.isPlayer == true)
                 {
-                    if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: mainHandler");
+                    if (DOTModOptions.DebugLogging) Debug.Log("[DOT] Player detected: mainHandler");
                     return true;
                 }
 
                 // Check if the source is a previously-held player item (thrown, released)
                 if (sourceItem?.lastHandler?.creature?.isPlayer == true)
                 {
-                    if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: lastHandler");
+                    if (DOTModOptions.DebugLogging) Debug.Log("[DOT] Player detected: lastHandler");
                     return true;
                 }
 
                 // Check if the source is the player's body
                 if (collision.sourceColliderGroup?.collisionHandler?.ragdollPart?.ragdoll?.creature?.isPlayer == true)
                 {
-                    if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: ragdollPart");
+                    if (DOTModOptions.DebugLogging) Debug.Log("[DOT] Player detected: ragdollPart");
                     return true;
                 }
 
@@ -421,7 +421,7 @@ namespace CDoT.Hooks
                 var imbue = collision.sourceColliderGroup?.imbue;
                 if (imbue?.imbueCreature?.isPlayer == true)
                 {
-                    if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: sourceColliderGroup.imbue");
+                    if (DOTModOptions.DebugLogging) Debug.Log("[DOT] Player detected: sourceColliderGroup.imbue");
                     return true;
                 }
 
@@ -433,7 +433,7 @@ namespace CDoT.Hooks
                     {
                         if (imbues[i]?.imbueCreature?.isPlayer == true)
                         {
-                            if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: item.imbues");
+                            if (DOTModOptions.DebugLogging) Debug.Log("[DOT] Player detected: item.imbues");
                             return true;
                         }
                     }
@@ -447,7 +447,7 @@ namespace CDoT.Hooks
                     {
                         if (tkHandlers[i]?.ragdollHand?.creature?.isPlayer == true)
                         {
-                            if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: tkHandlers");
+                            if (DOTModOptions.DebugLogging) Debug.Log("[DOT] Player detected: tkHandlers");
                             return true;
                         }
                     }
@@ -458,39 +458,39 @@ namespace CDoT.Hooks
                 if (sourceItem != null)
                 {
                     var magicProjectile = sourceItem.GetComponent<ItemMagicProjectile>();
-                    if (magicProjectile != null && CDoTModOptions.DebugLogging)
+                    if (magicProjectile != null && DOTModOptions.DebugLogging)
                     {
-                        Debug.Log($"[CDoT] Found ItemMagicProjectile - imbueSpellCastCharge: {(magicProjectile.imbueSpellCastCharge != null ? "exists" : "null")}");
+                        Debug.Log($"[DOT] Found ItemMagicProjectile - imbueSpellCastCharge: {(magicProjectile.imbueSpellCastCharge != null ? "exists" : "null")}");
                         if (magicProjectile.imbueSpellCastCharge != null)
                         {
-                            Debug.Log($"[CDoT] spellCaster: {(magicProjectile.imbueSpellCastCharge.spellCaster != null ? "exists" : "null")}");
+                            Debug.Log($"[DOT] spellCaster: {(magicProjectile.imbueSpellCastCharge.spellCaster != null ? "exists" : "null")}");
                             if (magicProjectile.imbueSpellCastCharge.spellCaster != null)
                             {
                                 var hand = magicProjectile.imbueSpellCastCharge.spellCaster.ragdollHand;
-                                Debug.Log($"[CDoT] ragdollHand: {(hand != null ? "exists" : "null")}");
+                                Debug.Log($"[DOT] ragdollHand: {(hand != null ? "exists" : "null")}");
                                 if (hand != null)
                                 {
-                                    Debug.Log($"[CDoT] creature: {(hand.creature != null ? hand.creature.name : "null")} isPlayer: {hand.creature?.isPlayer}");
+                                    Debug.Log($"[DOT] creature: {(hand.creature != null ? hand.creature.name : "null")} isPlayer: {hand.creature?.isPlayer}");
                                 }
                             }
                         }
                     }
                     if (magicProjectile?.imbueSpellCastCharge?.spellCaster?.ragdollHand?.creature?.isPlayer == true)
                     {
-                        if (CDoTModOptions.DebugLogging) Debug.Log("[CDoT] Player detected: ItemMagicProjectile");
+                        if (DOTModOptions.DebugLogging) Debug.Log("[DOT] Player detected: ItemMagicProjectile");
                         return true;
                     }
                 }
 
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] Player NOT detected - all checks failed");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] Player NOT detected - all checks failed");
 
                 return false;
             }
             catch (Exception ex)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.LogError($"[CDoT] Error in WasCausedByPlayer: {ex.Message}");
+                if (DOTModOptions.DebugLogging)
+                    Debug.LogError($"[DOT] Error in WasCausedByPlayer: {ex.Message}");
                 return false;
             }
         }

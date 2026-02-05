@@ -1,0 +1,604 @@
+{
+  "$type": "ThunderRoad.TextData, ThunderRoad",
+  "id": "DOT_Options",
+  "version": 1,
+  "groupId": "DOT_Options",
+  "textList": [
+    {
+      "id": "DOT_Options.BloodDefault",
+      "text": "預設"
+    },
+    {
+      "id": "DOT_Options.BloodExtreme",
+      "text": "極端"
+    },
+    {
+      "id": "DOT_Options.BloodHigh",
+      "text": "高的"
+    },
+    {
+      "id": "DOT_Options.BloodLow",
+      "text": "低的"
+    },
+    {
+      "id": "DOT_Options.BloodVeryLow",
+      "text": "非常低"
+    },
+    {
+      "id": "DOT_Options.CategoryAdvanced",
+      "text": "先進的"
+    },
+    {
+      "id": "DOT_Options.CategoryDamageTypeMultipliers",
+      "text": "傷害類型倍率"
+    },
+    {
+      "id": "DOT_Options.CategoryPresetSelection",
+      "text": "預設選擇"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneArm",
+      "text": "手臂"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneDismemberment",
+      "text": "肢解"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneHead",
+      "text": "頭"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneLeg",
+      "text": "腿"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneNeck",
+      "text": "脖子"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneThroat",
+      "text": "喉"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneToggles",
+      "text": "區域切換"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneTorso",
+      "text": "軀幹"
+    },
+    {
+      "id": "DOT_Options.ChanceAlways",
+      "text": "總是"
+    },
+    {
+      "id": "DOT_Options.ChanceDefault",
+      "text": "預設"
+    },
+    {
+      "id": "DOT_Options.ChanceFrequent",
+      "text": "頻繁"
+    },
+    {
+      "id": "DOT_Options.ChanceOff",
+      "text": "離開"
+    },
+    {
+      "id": "DOT_Options.ChanceRare",
+      "text": "稀有的"
+    },
+    {
+      "id": "DOT_Options.DamageDefault",
+      "text": "預設"
+    },
+    {
+      "id": "DOT_Options.DamageExtreme",
+      "text": "極端"
+    },
+    {
+      "id": "DOT_Options.DamageHigh",
+      "text": "高的"
+    },
+    {
+      "id": "DOT_Options.DamageLow",
+      "text": "低的"
+    },
+    {
+      "id": "DOT_Options.DamageMinimal",
+      "text": "極簡主義"
+    },
+    {
+      "id": "DOT_Options.DurationDefault",
+      "text": "預設"
+    },
+    {
+      "id": "DOT_Options.DurationExtended",
+      "text": "擴充"
+    },
+    {
+      "id": "DOT_Options.DurationLong",
+      "text": "長的"
+    },
+    {
+      "id": "DOT_Options.DurationShort",
+      "text": "短的"
+    },
+    {
+      "id": "DOT_Options.DurationVeryShort",
+      "text": "非常短"
+    },
+    {
+      "id": "DOT_Options.FrequencyDefault",
+      "text": "預設"
+    },
+    {
+      "id": "DOT_Options.FrequencyFast",
+      "text": "快速地"
+    },
+    {
+      "id": "DOT_Options.FrequencyRapid",
+      "text": "迅速的"
+    },
+    {
+      "id": "DOT_Options.FrequencySlow",
+      "text": "慢的"
+    },
+    {
+      "id": "DOT_Options.FrequencyVerySlow",
+      "text": "非常慢"
+    },
+    {
+      "id": "DOT_Options.OptionArmChance",
+      "text": "手臂機會"
+    },
+    {
+      "id": "DOT_Options.OptionArmDamage",
+      "text": "手臂損傷"
+    },
+    {
+      "id": "DOT_Options.OptionArmDuration",
+      "text": "臂長"
+    },
+    {
+      "id": "DOT_Options.OptionArmEnabled",
+      "text": "支援ARM架構"
+    },
+    {
+      "id": "DOT_Options.OptionArmFrequency",
+      "text": "臂頻率"
+    },
+    {
+      "id": "DOT_Options.OptionArmStackLimit",
+      "text": "ARM 堆疊限制"
+    },
+    {
+      "id": "DOT_Options.OptionBloodAmountPreset",
+      "text": "血液量"
+    },
+    {
+      "id": "DOT_Options.OptionChancePreset",
+      "text": "機會預設"
+    },
+    {
+      "id": "DOT_Options.OptionDamagePreset",
+      "text": "損傷預設"
+    },
+    {
+      "id": "DOT_Options.OptionDebugLogging",
+      "text": "偵錯日誌"
+    },
+    {
+      "id": "DOT_Options.OptionDebugOverlay",
+      "text": "調試疊加層"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentChance",
+      "text": "肢解幾率"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDamage",
+      "text": "肢體殘缺"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDuration",
+      "text": "肢解持續時間"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentEnabled",
+      "text": "肢體殘害功能已啟用"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentFrequency",
+      "text": "肢解頻率"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentStackLimit",
+      "text": "肢解堆疊限制"
+    },
+    {
+      "id": "DOT_Options.OptionDurationPreset",
+      "text": "持續時間預設"
+    },
+    {
+      "id": "DOT_Options.OptionEnableMod",
+      "text": "啟用模組"
+    },
+    {
+      "id": "DOT_Options.OptionFireMultiplier",
+      "text": "火力多"
+    },
+    {
+      "id": "DOT_Options.OptionFrequencyPreset",
+      "text": "頻率預設"
+    },
+    {
+      "id": "DOT_Options.OptionHeadChance",
+      "text": "頭部機會"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDamage",
+      "text": "頭部損傷"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDuration",
+      "text": "頭部持續時間"
+    },
+    {
+      "id": "DOT_Options.OptionHeadEnabled",
+      "text": "頭部已啟​​用"
+    },
+    {
+      "id": "DOT_Options.OptionHeadFrequency",
+      "text": "頭部頻率"
+    },
+    {
+      "id": "DOT_Options.OptionHeadStackLimit",
+      "text": "核心限制"
+    },
+    {
+      "id": "DOT_Options.OptionLegChance",
+      "text": "腿部機會"
+    },
+    {
+      "id": "DOT_Options.OptionLegDamage",
+      "text": "腿部損傷"
+    },
+    {
+      "id": "DOT_Options.OptionLegDuration",
+      "text": "腿部持續時間"
+    },
+    {
+      "id": "DOT_Options.OptionLegEnabled",
+      "text": "腿部已啟用"
+    },
+    {
+      "id": "DOT_Options.OptionLegFrequency",
+      "text": "腿部頻率"
+    },
+    {
+      "id": "DOT_Options.OptionLegStackLimit",
+      "text": "腿部堆疊限制"
+    },
+    {
+      "id": "DOT_Options.OptionLightningMultiplier",
+      "text": "閃電倍增"
+    },
+    {
+      "id": "DOT_Options.OptionNeckChance",
+      "text": "頸部機會"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDamage",
+      "text": "頸部損傷"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDuration",
+      "text": "頸部持續時間"
+    },
+    {
+      "id": "DOT_Options.OptionNeckEnabled",
+      "text": "頸部啟用"
+    },
+    {
+      "id": "DOT_Options.OptionNeckFrequency",
+      "text": "頸部頻率"
+    },
+    {
+      "id": "DOT_Options.OptionNeckStackLimit",
+      "text": "頸部堆疊限制"
+    },
+    {
+      "id": "DOT_Options.OptionPierceMultiplier",
+      "text": "皮爾斯·穆爾特"
+    },
+    {
+      "id": "DOT_Options.OptionProfilePreset",
+      "text": "輪廓"
+    },
+    {
+      "id": "DOT_Options.OptionSlashMultiplier",
+      "text": "斜線乘法"
+    },
+    {
+      "id": "DOT_Options.OptionThroatChance",
+      "text": "喉嚨機會"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDamage",
+      "text": "喉嚨損傷"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDuration",
+      "text": "喉嚨持續時間"
+    },
+    {
+      "id": "DOT_Options.OptionThroatEnabled",
+      "text": "喉嚨已啟用"
+    },
+    {
+      "id": "DOT_Options.OptionThroatFrequency",
+      "text": "喉嚨頻率"
+    },
+    {
+      "id": "DOT_Options.OptionThroatStackLimit",
+      "text": "喉管限制"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoChance",
+      "text": "軀幹機會"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDamage",
+      "text": "軀幹損傷"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDuration",
+      "text": "軀幹持續時間"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoEnabled",
+      "text": "軀幹已啟用"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoFrequency",
+      "text": "軀幹頻率"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoStackLimit",
+      "text": "軀幹堆疊限制"
+    },
+    {
+      "id": "DOT_Options.ProfileBleedOnly",
+      "text": "僅出血"
+    },
+    {
+      "id": "DOT_Options.ProfileDefault",
+      "text": "預設"
+    },
+    {
+      "id": "DOT_Options.ProfileElementalOnly",
+      "text": "僅限元素"
+    },
+    {
+      "id": "DOT_Options.TooltipArmChance",
+      "text": "手臂傷口出血的幾率"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDamage",
+      "text": "手臂傷口每跳基礎傷害"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDuration",
+      "text": "手臂出血持續多久"
+    },
+    {
+      "id": "DOT_Options.TooltipArmEnabled",
+      "text": "使手臂傷口出血"
+    },
+    {
+      "id": "DOT_Options.TooltipArmFrequency",
+      "text": "手臂傷口出血兩次滴答之間的時間間隔"
+    },
+    {
+      "id": "DOT_Options.TooltipArmStackLimit",
+      "text": "手臂傷口最大疊加數"
+    },
+    {
+      "id": "DOT_Options.TooltipBloodAmountPreset",
+      "text": "血液特效強度預設。控制傷口噴出的血液量。極低 = 極少血液，預設 = 中等血液，極高 = 大量血液。"
+    },
+    {
+      "id": "DOT_Options.TooltipChancePreset",
+      "text": "出血幾率預設值。預設值為平衡的中間值。"
+    },
+    {
+      "id": "DOT_Options.TooltipDamagePreset",
+      "text": "每跳傷害預設值。預設值為平衡的中間值。"
+    },
+    {
+      "id": "DOT_Options.TooltipDebugLogging",
+      "text": "啟用詳細調試日誌"
+    },
+    {
+      "id": "DOT_Options.TooltipDebugOverlay",
+      "text": "啟用包含效能統計資訊的定期偵錯疊加日誌記錄"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentChance",
+      "text": "肢體殘缺可能導致出血"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDamage",
+      "text": "肢解造成的每跳基礎傷害"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDuration",
+      "text": "肢體殘缺出血會持續多久"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentEnabled",
+      "text": "使肢體殘肢出血"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentFrequency",
+      "text": "兩次抽血之間的時間間隔（用於肢解）"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentStackLimit",
+      "text": "肢體殘害的最大堆疊次數（每條肢體）"
+    },
+    {
+      "id": "DOT_Options.TooltipDurationPreset",
+      "text": "出血持續時間預設值。預設值為中間平衡值。"
+    },
+    {
+      "id": "DOT_Options.TooltipEnableMod",
+      "text": "整個模組的總開關"
+    },
+    {
+      "id": "DOT_Options.TooltipFireMultiplier",
+      "text": "火焰攻擊的持續傷害倍率。啟動時，生物會獲得燃燒視覺效果。 0.0x 表示完全禁用火焰的持續傷害效果。"
+    },
+    {
+      "id": "DOT_Options.TooltipFrequencyPreset",
+      "text": "滴答頻率預設值。預設值為平衡中間值。"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadChance",
+      "text": "頭部受傷導致出血的幾率"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDamage",
+      "text": "頭部傷口每跳基礎傷害"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDuration",
+      "text": "頭部出血會持續多久？"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadEnabled",
+      "text": "使頭部傷口出血"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadFrequency",
+      "text": "頭部傷口出血蜱蟲叮咬間隔時間"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadStackLimit",
+      "text": "頭部傷口最大疊加數"
+    },
+    {
+      "id": "DOT_Options.TooltipLegChance",
+      "text": "腿部傷口出血的幾率"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDamage",
+      "text": "腿部傷口每跳基礎傷害"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDuration",
+      "text": "腿部出血持續多久？"
+    },
+    {
+      "id": "DOT_Options.TooltipLegEnabled",
+      "text": "使腿部傷口出血"
+    },
+    {
+      "id": "DOT_Options.TooltipLegFrequency",
+      "text": "腿部傷口出血蜱蟲叮咬的時間間隔"
+    },
+    {
+      "id": "DOT_Options.TooltipLegStackLimit",
+      "text": "腿部傷口最大疊加數"
+    },
+    {
+      "id": "DOT_Options.TooltipLightningMultiplier",
+      "text": "閃電攻擊的持續傷害倍率。啟動時，生物獲得電擊視覺效果。 0.0x 會完全停用閃電造成的持續傷害。"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckChance",
+      "text": "頸部傷口出血的幾率"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDamage",
+      "text": "頸部傷口每跳基礎傷害"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDuration",
+      "text": "頸部出血會持續多久？"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckEnabled",
+      "text": "使頸部傷口出血"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckFrequency",
+      "text": "頸部傷口出血蜱蟲叮咬的時間間隔"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckStackLimit",
+      "text": "頸部傷口最大疊加數"
+    },
+    {
+      "id": "DOT_Options.TooltipPierceMultiplier",
+      "text": "穿透攻擊的持續傷害倍率。 0.0x 表示完全禁用穿透攻擊的持續傷害效果。"
+    },
+    {
+      "id": "DOT_Options.TooltipProfilePreset",
+      "text": "配置決定哪些傷害類型會觸發持續傷害效果。預設值為所有類型，僅流血為物理傷害，僅元素為火焰/閃電/能量傷害。"
+    },
+    {
+      "id": "DOT_Options.TooltipSlashMultiplier",
+      "text": "斬擊的持續傷害倍率。 0.0x 表示完全停用斬擊的持續傷害效果。"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatChance",
+      "text": "喉嚨傷口導致出血的幾率"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDamage",
+      "text": "喉部傷口每跳基礎傷害"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDuration",
+      "text": "喉嚨出血會持續多久？"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatEnabled",
+      "text": "使喉嚨傷口出血"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatFrequency",
+      "text": "兩次蜱蟲叮咬喉嚨傷口的時間間隔"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatStackLimit",
+      "text": "喉部傷口最大疊加層數"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoChance",
+      "text": "軀幹傷口導致出血的幾率"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDamage",
+      "text": "軀幹傷口每跳基礎傷害"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDuration",
+      "text": "軀幹出血會持續多久？"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoEnabled",
+      "text": "使軀幹傷口出血"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoFrequency",
+      "text": "軀幹傷口出血兩次檢查之間的時間間隔"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoStackLimit",
+      "text": "軀幹傷口最大疊加數"
+    }
+  ]
+}

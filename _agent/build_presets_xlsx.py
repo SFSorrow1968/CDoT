@@ -140,7 +140,7 @@ def create_xlsx(output_path):
     
     # Create summary sheet
     ws = wb.create_sheet(title="Summary", index=0)
-    ws.cell(row=1, column=1, value="CDoT Preset System").font = Font(bold=True, size=14)
+    ws.cell(row=1, column=1, value="DOT Preset System").font = Font(bold=True, size=14)
     ws.cell(row=3, column=1, value="Each preset category has 5 levels with per-zone values:")
     ws.cell(row=4, column=1, value="  • Default (middle) is always index 2")
     ws.cell(row=5, column=1, value="  • 2 presets to the left (lower/slower values)")

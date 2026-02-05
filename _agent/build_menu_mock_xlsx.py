@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generates MENU_MOCK.xlsx from CDoTModOptions.cs
+Generates MENU_MOCK.xlsx from DOTModOptions.cs
 Parses ModOption attributes to build a spreadsheet of all menu options.
 """
 
@@ -17,7 +17,7 @@ except ImportError:
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
-MOD_OPTIONS_PATH = os.path.join(PROJECT_ROOT, "Configuration", "CDoTModOptions.cs")
+MOD_OPTIONS_PATH = os.path.join(PROJECT_ROOT, "Configuration", "DOTModOptions.cs")
 OUTPUT_PATH = os.path.join(PROJECT_ROOT, "MENU_MOCK.xlsx")
 
 
@@ -32,7 +32,7 @@ def parse_constants(content):
 
 
 def parse_mod_options(filepath):
-    """Parse CDoTModOptions.cs and extract ModOption attributes."""
+    """Parse DOTModOptions.cs and extract ModOption attributes."""
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 

@@ -1,0 +1,604 @@
+{
+  "$type": "ThunderRoad.TextData, ThunderRoad",
+  "id": "DOT_Options",
+  "version": 1,
+  "groupId": "DOT_Options",
+  "textList": [
+    {
+      "id": "DOT_Options.BloodDefault",
+      "text": "Por defecto"
+    },
+    {
+      "id": "DOT_Options.BloodExtreme",
+      "text": "Extremo"
+    },
+    {
+      "id": "DOT_Options.BloodHigh",
+      "text": "Alto"
+    },
+    {
+      "id": "DOT_Options.BloodLow",
+      "text": "Bajo"
+    },
+    {
+      "id": "DOT_Options.BloodVeryLow",
+      "text": "Muy bajo"
+    },
+    {
+      "id": "DOT_Options.CategoryAdvanced",
+      "text": "Avanzado"
+    },
+    {
+      "id": "DOT_Options.CategoryDamageTypeMultipliers",
+      "text": "Multiplicadores de tipo de daño"
+    },
+    {
+      "id": "DOT_Options.CategoryPresetSelection",
+      "text": "Selección de ajustes preestablecidos"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneArm",
+      "text": "Brazo"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneDismemberment",
+      "text": "Desmembramiento"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneHead",
+      "text": "Cabeza"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneLeg",
+      "text": "Pierna"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneNeck",
+      "text": "Cuello"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneThroat",
+      "text": "Garganta"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneToggles",
+      "text": "Alternancias de zona"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneTorso",
+      "text": "Torso"
+    },
+    {
+      "id": "DOT_Options.ChanceAlways",
+      "text": "Siempre"
+    },
+    {
+      "id": "DOT_Options.ChanceDefault",
+      "text": "Por defecto"
+    },
+    {
+      "id": "DOT_Options.ChanceFrequent",
+      "text": "Frecuente"
+    },
+    {
+      "id": "DOT_Options.ChanceOff",
+      "text": "Apagado"
+    },
+    {
+      "id": "DOT_Options.ChanceRare",
+      "text": "Extraño"
+    },
+    {
+      "id": "DOT_Options.DamageDefault",
+      "text": "Por defecto"
+    },
+    {
+      "id": "DOT_Options.DamageExtreme",
+      "text": "Extremo"
+    },
+    {
+      "id": "DOT_Options.DamageHigh",
+      "text": "Alto"
+    },
+    {
+      "id": "DOT_Options.DamageLow",
+      "text": "Bajo"
+    },
+    {
+      "id": "DOT_Options.DamageMinimal",
+      "text": "Mínimo"
+    },
+    {
+      "id": "DOT_Options.DurationDefault",
+      "text": "Por defecto"
+    },
+    {
+      "id": "DOT_Options.DurationExtended",
+      "text": "Extendido"
+    },
+    {
+      "id": "DOT_Options.DurationLong",
+      "text": "Largo"
+    },
+    {
+      "id": "DOT_Options.DurationShort",
+      "text": "Corto"
+    },
+    {
+      "id": "DOT_Options.DurationVeryShort",
+      "text": "Muy corto"
+    },
+    {
+      "id": "DOT_Options.FrequencyDefault",
+      "text": "Por defecto"
+    },
+    {
+      "id": "DOT_Options.FrequencyFast",
+      "text": "Rápido"
+    },
+    {
+      "id": "DOT_Options.FrequencyRapid",
+      "text": "Rápido"
+    },
+    {
+      "id": "DOT_Options.FrequencySlow",
+      "text": "Lento"
+    },
+    {
+      "id": "DOT_Options.FrequencyVerySlow",
+      "text": "Muy lento"
+    },
+    {
+      "id": "DOT_Options.OptionArmChance",
+      "text": "Posibilidad de brazo"
+    },
+    {
+      "id": "DOT_Options.OptionArmDamage",
+      "text": "Daño en el brazo"
+    },
+    {
+      "id": "DOT_Options.OptionArmDuration",
+      "text": "Duración del brazo"
+    },
+    {
+      "id": "DOT_Options.OptionArmEnabled",
+      "text": "Brazo habilitado"
+    },
+    {
+      "id": "DOT_Options.OptionArmFrequency",
+      "text": "Frecuencia del brazo"
+    },
+    {
+      "id": "DOT_Options.OptionArmStackLimit",
+      "text": "Límite de apilamiento de brazos"
+    },
+    {
+      "id": "DOT_Options.OptionBloodAmountPreset",
+      "text": "Cantidad de sangre"
+    },
+    {
+      "id": "DOT_Options.OptionChancePreset",
+      "text": "Ajuste preestablecido de oportunidad"
+    },
+    {
+      "id": "DOT_Options.OptionDamagePreset",
+      "text": "Preajuste de daños"
+    },
+    {
+      "id": "DOT_Options.OptionDebugLogging",
+      "text": "Registro de depuración"
+    },
+    {
+      "id": "DOT_Options.OptionDebugOverlay",
+      "text": "Superposición de depuración"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentChance",
+      "text": "Posibilidad de desmembramiento"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDamage",
+      "text": "Daño por desmembramiento"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDuration",
+      "text": "Duración del desmembramiento"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentEnabled",
+      "text": "Desmembramiento habilitado"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentFrequency",
+      "text": "Frecuencia de desmembramiento"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentStackLimit",
+      "text": "Límite de pila de desmembramiento"
+    },
+    {
+      "id": "DOT_Options.OptionDurationPreset",
+      "text": "Preajuste de duración"
+    },
+    {
+      "id": "DOT_Options.OptionEnableMod",
+      "text": "Habilitar Mod"
+    },
+    {
+      "id": "DOT_Options.OptionFireMultiplier",
+      "text": "Fuego Multi"
+    },
+    {
+      "id": "DOT_Options.OptionFrequencyPreset",
+      "text": "Preajuste de frecuencia"
+    },
+    {
+      "id": "DOT_Options.OptionHeadChance",
+      "text": "Probabilidad de cabeza"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDamage",
+      "text": "Daño en la cabeza"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDuration",
+      "text": "Duración de la cabeza"
+    },
+    {
+      "id": "DOT_Options.OptionHeadEnabled",
+      "text": "Cabeza habilitada"
+    },
+    {
+      "id": "DOT_Options.OptionHeadFrequency",
+      "text": "Frecuencia de la cabeza"
+    },
+    {
+      "id": "DOT_Options.OptionHeadStackLimit",
+      "text": "Límite de pila de cabezas"
+    },
+    {
+      "id": "DOT_Options.OptionLegChance",
+      "text": "Posibilidad de pierna"
+    },
+    {
+      "id": "DOT_Options.OptionLegDamage",
+      "text": "Daño en la pierna"
+    },
+    {
+      "id": "DOT_Options.OptionLegDuration",
+      "text": "Duración de la pierna"
+    },
+    {
+      "id": "DOT_Options.OptionLegEnabled",
+      "text": "Pierna habilitada"
+    },
+    {
+      "id": "DOT_Options.OptionLegFrequency",
+      "text": "Frecuencia de piernas"
+    },
+    {
+      "id": "DOT_Options.OptionLegStackLimit",
+      "text": "Límite de apilamiento de piernas"
+    },
+    {
+      "id": "DOT_Options.OptionLightningMultiplier",
+      "text": "Relámpago Multi"
+    },
+    {
+      "id": "DOT_Options.OptionNeckChance",
+      "text": "Posibilidad de cuello"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDamage",
+      "text": "Daño en el cuello"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDuration",
+      "text": "Duración del cuello"
+    },
+    {
+      "id": "DOT_Options.OptionNeckEnabled",
+      "text": "Cuello habilitado"
+    },
+    {
+      "id": "DOT_Options.OptionNeckFrequency",
+      "text": "Frecuencia del cuello"
+    },
+    {
+      "id": "DOT_Options.OptionNeckStackLimit",
+      "text": "Límite de apilamiento del cuello"
+    },
+    {
+      "id": "DOT_Options.OptionPierceMultiplier",
+      "text": "Pierce Mult"
+    },
+    {
+      "id": "DOT_Options.OptionProfilePreset",
+      "text": "Perfil"
+    },
+    {
+      "id": "DOT_Options.OptionSlashMultiplier",
+      "text": "Barra oblicua múltiple"
+    },
+    {
+      "id": "DOT_Options.OptionThroatChance",
+      "text": "Posibilidad de garganta"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDamage",
+      "text": "Daño en la garganta"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDuration",
+      "text": "Duración de la garganta"
+    },
+    {
+      "id": "DOT_Options.OptionThroatEnabled",
+      "text": "Garganta habilitada"
+    },
+    {
+      "id": "DOT_Options.OptionThroatFrequency",
+      "text": "Frecuencia de garganta"
+    },
+    {
+      "id": "DOT_Options.OptionThroatStackLimit",
+      "text": "Límite de pila de garganta"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoChance",
+      "text": "Torso Chance"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDamage",
+      "text": "Daño en el torso"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDuration",
+      "text": "Duración del torso"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoEnabled",
+      "text": "Torso habilitado"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoFrequency",
+      "text": "Frecuencia del torso"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoStackLimit",
+      "text": "Límite de apilamiento del torso"
+    },
+    {
+      "id": "DOT_Options.ProfileBleedOnly",
+      "text": "Solo sangrado"
+    },
+    {
+      "id": "DOT_Options.ProfileDefault",
+      "text": "Por defecto"
+    },
+    {
+      "id": "DOT_Options.ProfileElementalOnly",
+      "text": "Sólo elemental"
+    },
+    {
+      "id": "DOT_Options.TooltipArmChance",
+      "text": "Posibilidad de que las heridas en el brazo provoquen sangrado"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDamage",
+      "text": "Daño base por tic para heridas en el brazo"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDuration",
+      "text": "¿Cuánto dura el sangrado en el brazo?"
+    },
+    {
+      "id": "DOT_Options.TooltipArmEnabled",
+      "text": "Permitir el sangrado de las heridas del brazo"
+    },
+    {
+      "id": "DOT_Options.TooltipArmFrequency",
+      "text": "Tiempo entre garrapatas de sangrado para heridas en el brazo"
+    },
+    {
+      "id": "DOT_Options.TooltipArmStackLimit",
+      "text": "Máximas acumulaciones para heridas en el brazo"
+    },
+    {
+      "id": "DOT_Options.TooltipBloodAmountPreset",
+      "text": "Preajuste de intensidad de efectos visuales de sangre. Controla la cantidad de sangre que sale de las heridas. Muy bajo = poca sangre, predeterminado = sangre moderada, extremo = mucha sangre."
+    },
+    {
+      "id": "DOT_Options.TooltipChancePreset",
+      "text": "Ajuste preestablecido de probabilidad de sangrado. El valor predeterminado es el valor medio equilibrado."
+    },
+    {
+      "id": "DOT_Options.TooltipDamagePreset",
+      "text": "Daño por tick preestablecido. El valor predeterminado es el valor medio equilibrado."
+    },
+    {
+      "id": "DOT_Options.TooltipDebugLogging",
+      "text": "Habilitar el registro de depuración detallado"
+    },
+    {
+      "id": "DOT_Options.TooltipDebugOverlay",
+      "text": "Habilitar el registro periódico de superposición de depuración con estadísticas de rendimiento"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentChance",
+      "text": "Posibilidad de que el desmembramiento cause sangrado"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDamage",
+      "text": "Daño base por tick por desmembramiento"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDuration",
+      "text": "¿Cuánto duran las hemorragias por desmembramiento?"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentEnabled",
+      "text": "Habilitar el sangrado por desmembramiento"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentFrequency",
+      "text": "Tiempo entre garrapatas de sangrado para desmembramiento"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentStackLimit",
+      "text": "Máximo de acumulaciones para desmembramiento (por extremidad)"
+    },
+    {
+      "id": "DOT_Options.TooltipDurationPreset",
+      "text": "Preajuste de duración de sangrado. El valor predeterminado es el valor medio equilibrado."
+    },
+    {
+      "id": "DOT_Options.TooltipEnableMod",
+      "text": "Interruptor maestro para todo el mod"
+    },
+    {
+      "id": "DOT_Options.TooltipFireMultiplier",
+      "text": "Multiplicador de daño por daño en el tiempo para ataques de fuego. Mientras está activo, la criatura tiene el efecto visual de quemar. 0.0x desactiva por completo el daño en el tiempo del fuego."
+    },
+    {
+      "id": "DOT_Options.TooltipFrequencyPreset",
+      "text": "Frecuencia de tick preestablecida. El valor predeterminado es el valor medio equilibrado."
+    },
+    {
+      "id": "DOT_Options.TooltipHeadChance",
+      "text": "Posibilidad de que las heridas en la cabeza provoquen sangrado"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDamage",
+      "text": "Daño base por tictac para heridas en la cabeza"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDuration",
+      "text": "¿Cuánto duran las hemorragias en la cabeza?"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadEnabled",
+      "text": "Permitir el sangrado de las heridas en la cabeza"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadFrequency",
+      "text": "Tiempo entre garrapatas de sangrado para heridas en la cabeza"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadStackLimit",
+      "text": "Máximo de acumulaciones para heridas en la cabeza"
+    },
+    {
+      "id": "DOT_Options.TooltipLegChance",
+      "text": "Posibilidad de que las heridas en las piernas provoquen sangrado"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDamage",
+      "text": "Daño base por tictac para heridas en las piernas"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDuration",
+      "text": "¿Cuánto dura el sangrado en las piernas?"
+    },
+    {
+      "id": "DOT_Options.TooltipLegEnabled",
+      "text": "Permitir el sangrado de las heridas en las piernas"
+    },
+    {
+      "id": "DOT_Options.TooltipLegFrequency",
+      "text": "Tiempo entre garrapatas de sangrado para heridas en las piernas"
+    },
+    {
+      "id": "DOT_Options.TooltipLegStackLimit",
+      "text": "Máximo de acumulaciones para heridas en las piernas"
+    },
+    {
+      "id": "DOT_Options.TooltipLightningMultiplier",
+      "text": "Multiplicador de daño por daño en el tiempo (DOT) para ataques de rayo. Mientras está activo, la criatura tiene el efecto visual de Electrocutar. 0.0x desactiva por completo el DOT de los rayos."
+    },
+    {
+      "id": "DOT_Options.TooltipNeckChance",
+      "text": "Posibilidad de que las heridas del cuello provoquen sangrado"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDamage",
+      "text": "Daño base por tictac para heridas en el cuello"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDuration",
+      "text": "¿Cuánto duran los sangrados del cuello?"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckEnabled",
+      "text": "Permitir el sangrado de las heridas del cuello"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckFrequency",
+      "text": "Tiempo entre garrapatas de sangrado para heridas en el cuello"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckStackLimit",
+      "text": "Máximas acumulaciones para heridas en el cuello"
+    },
+    {
+      "id": "DOT_Options.TooltipPierceMultiplier",
+      "text": "Multiplicador de daño DOT para ataques de perforación. 0.0x deshabilita por completo el DOT de la perforación."
+    },
+    {
+      "id": "DOT_Options.TooltipProfilePreset",
+      "text": "El perfil determina qué tipos de daño activan efectos de daño en el tiempo. Predeterminado: todos los tipos, Solo sangrado: solo físico, Solo elemental: solo fuego/rayo/energía."
+    },
+    {
+      "id": "DOT_Options.TooltipSlashMultiplier",
+      "text": "Multiplicador de daño DOT para ataques de corte. 0.0x deshabilita por completo el DOT de los ataques de corte."
+    },
+    {
+      "id": "DOT_Options.TooltipThroatChance",
+      "text": "Posibilidad de que las heridas en la garganta provoquen sangrado"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDamage",
+      "text": "Daño base por garrapata para heridas de garganta"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDuration",
+      "text": "¿Cuánto dura el sangrado de garganta?"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatEnabled",
+      "text": "Facilitar el sangrado de heridas en la garganta"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatFrequency",
+      "text": "Tiempo entre garrapatas de sangrado para heridas de garganta"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatStackLimit",
+      "text": "Máximas acumulaciones para heridas de garganta"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoChance",
+      "text": "Posibilidad de que las heridas en el torso provoquen sangrado"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDamage",
+      "text": "Daño base por tic para heridas en el torso"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDuration",
+      "text": "¿Cuánto dura el sangrado en el torso?"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoEnabled",
+      "text": "Permitir el sangrado de las heridas del torso"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoFrequency",
+      "text": "Tiempo entre garrapatas de sangrado para heridas en el torso"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoStackLimit",
+      "text": "Máximo de acumulaciones para heridas en el torso"
+    }
+  ]
+}

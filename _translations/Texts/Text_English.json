@@ -1,0 +1,604 @@
+{
+  "$type": "ThunderRoad.TextData, ThunderRoad",
+  "id": "DOT_Options",
+  "version": 1,
+  "groupId": "DOT_Options",
+  "textList": [
+    {
+      "id": "DOT_Options.BloodDefault",
+      "text": "Default"
+    },
+    {
+      "id": "DOT_Options.BloodExtreme",
+      "text": "Extreme"
+    },
+    {
+      "id": "DOT_Options.BloodHigh",
+      "text": "High"
+    },
+    {
+      "id": "DOT_Options.BloodLow",
+      "text": "Low"
+    },
+    {
+      "id": "DOT_Options.BloodVeryLow",
+      "text": "Very Low"
+    },
+    {
+      "id": "DOT_Options.CategoryAdvanced",
+      "text": "Advanced"
+    },
+    {
+      "id": "DOT_Options.CategoryDamageTypeMultipliers",
+      "text": "Damage Type Multipliers"
+    },
+    {
+      "id": "DOT_Options.CategoryPresetSelection",
+      "text": "Preset Selection"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneArm",
+      "text": "Arm"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneDismemberment",
+      "text": "Dismemberment"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneHead",
+      "text": "Head"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneLeg",
+      "text": "Leg"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneNeck",
+      "text": "Neck"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneThroat",
+      "text": "Throat"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneToggles",
+      "text": "Zone Toggles"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneTorso",
+      "text": "Torso"
+    },
+    {
+      "id": "DOT_Options.ChanceAlways",
+      "text": "Always"
+    },
+    {
+      "id": "DOT_Options.ChanceDefault",
+      "text": "Default"
+    },
+    {
+      "id": "DOT_Options.ChanceFrequent",
+      "text": "Frequent"
+    },
+    {
+      "id": "DOT_Options.ChanceOff",
+      "text": "Off"
+    },
+    {
+      "id": "DOT_Options.ChanceRare",
+      "text": "Rare"
+    },
+    {
+      "id": "DOT_Options.DamageDefault",
+      "text": "Default"
+    },
+    {
+      "id": "DOT_Options.DamageExtreme",
+      "text": "Extreme"
+    },
+    {
+      "id": "DOT_Options.DamageHigh",
+      "text": "High"
+    },
+    {
+      "id": "DOT_Options.DamageLow",
+      "text": "Low"
+    },
+    {
+      "id": "DOT_Options.DamageMinimal",
+      "text": "Minimal"
+    },
+    {
+      "id": "DOT_Options.DurationDefault",
+      "text": "Default"
+    },
+    {
+      "id": "DOT_Options.DurationExtended",
+      "text": "Extended"
+    },
+    {
+      "id": "DOT_Options.DurationLong",
+      "text": "Long"
+    },
+    {
+      "id": "DOT_Options.DurationShort",
+      "text": "Short"
+    },
+    {
+      "id": "DOT_Options.DurationVeryShort",
+      "text": "Very Short"
+    },
+    {
+      "id": "DOT_Options.FrequencyDefault",
+      "text": "Default"
+    },
+    {
+      "id": "DOT_Options.FrequencyFast",
+      "text": "Fast"
+    },
+    {
+      "id": "DOT_Options.FrequencyRapid",
+      "text": "Rapid"
+    },
+    {
+      "id": "DOT_Options.FrequencySlow",
+      "text": "Slow"
+    },
+    {
+      "id": "DOT_Options.FrequencyVerySlow",
+      "text": "Very Slow"
+    },
+    {
+      "id": "DOT_Options.OptionArmChance",
+      "text": "Arm Chance"
+    },
+    {
+      "id": "DOT_Options.OptionArmDamage",
+      "text": "Arm Damage"
+    },
+    {
+      "id": "DOT_Options.OptionArmDuration",
+      "text": "Arm Duration"
+    },
+    {
+      "id": "DOT_Options.OptionArmEnabled",
+      "text": "Arm Enabled"
+    },
+    {
+      "id": "DOT_Options.OptionArmFrequency",
+      "text": "Arm Frequency"
+    },
+    {
+      "id": "DOT_Options.OptionArmStackLimit",
+      "text": "Arm Stack Limit"
+    },
+    {
+      "id": "DOT_Options.OptionBloodAmountPreset",
+      "text": "Blood Amount"
+    },
+    {
+      "id": "DOT_Options.OptionChancePreset",
+      "text": "Chance Preset"
+    },
+    {
+      "id": "DOT_Options.OptionDamagePreset",
+      "text": "Damage Preset"
+    },
+    {
+      "id": "DOT_Options.OptionDebugLogging",
+      "text": "Debug Logging"
+    },
+    {
+      "id": "DOT_Options.OptionDebugOverlay",
+      "text": "Debug Overlay"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentChance",
+      "text": "Dismemberment Chance"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDamage",
+      "text": "Dismemberment Damage"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDuration",
+      "text": "Dismemberment Duration"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentEnabled",
+      "text": "Dismemberment Enabled"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentFrequency",
+      "text": "Dismemberment Frequency"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentStackLimit",
+      "text": "Dismemberment Stack Limit"
+    },
+    {
+      "id": "DOT_Options.OptionDurationPreset",
+      "text": "Duration Preset"
+    },
+    {
+      "id": "DOT_Options.OptionEnableMod",
+      "text": "Enable Mod"
+    },
+    {
+      "id": "DOT_Options.OptionFireMultiplier",
+      "text": "Fire Mult"
+    },
+    {
+      "id": "DOT_Options.OptionFrequencyPreset",
+      "text": "Frequency Preset"
+    },
+    {
+      "id": "DOT_Options.OptionHeadChance",
+      "text": "Head Chance"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDamage",
+      "text": "Head Damage"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDuration",
+      "text": "Head Duration"
+    },
+    {
+      "id": "DOT_Options.OptionHeadEnabled",
+      "text": "Head Enabled"
+    },
+    {
+      "id": "DOT_Options.OptionHeadFrequency",
+      "text": "Head Frequency"
+    },
+    {
+      "id": "DOT_Options.OptionHeadStackLimit",
+      "text": "Head Stack Limit"
+    },
+    {
+      "id": "DOT_Options.OptionLegChance",
+      "text": "Leg Chance"
+    },
+    {
+      "id": "DOT_Options.OptionLegDamage",
+      "text": "Leg Damage"
+    },
+    {
+      "id": "DOT_Options.OptionLegDuration",
+      "text": "Leg Duration"
+    },
+    {
+      "id": "DOT_Options.OptionLegEnabled",
+      "text": "Leg Enabled"
+    },
+    {
+      "id": "DOT_Options.OptionLegFrequency",
+      "text": "Leg Frequency"
+    },
+    {
+      "id": "DOT_Options.OptionLegStackLimit",
+      "text": "Leg Stack Limit"
+    },
+    {
+      "id": "DOT_Options.OptionLightningMultiplier",
+      "text": "Lightning Mult"
+    },
+    {
+      "id": "DOT_Options.OptionNeckChance",
+      "text": "Neck Chance"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDamage",
+      "text": "Neck Damage"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDuration",
+      "text": "Neck Duration"
+    },
+    {
+      "id": "DOT_Options.OptionNeckEnabled",
+      "text": "Neck Enabled"
+    },
+    {
+      "id": "DOT_Options.OptionNeckFrequency",
+      "text": "Neck Frequency"
+    },
+    {
+      "id": "DOT_Options.OptionNeckStackLimit",
+      "text": "Neck Stack Limit"
+    },
+    {
+      "id": "DOT_Options.OptionPierceMultiplier",
+      "text": "Pierce Mult"
+    },
+    {
+      "id": "DOT_Options.OptionProfilePreset",
+      "text": "Profile"
+    },
+    {
+      "id": "DOT_Options.OptionSlashMultiplier",
+      "text": "Slash Mult"
+    },
+    {
+      "id": "DOT_Options.OptionThroatChance",
+      "text": "Throat Chance"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDamage",
+      "text": "Throat Damage"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDuration",
+      "text": "Throat Duration"
+    },
+    {
+      "id": "DOT_Options.OptionThroatEnabled",
+      "text": "Throat Enabled"
+    },
+    {
+      "id": "DOT_Options.OptionThroatFrequency",
+      "text": "Throat Frequency"
+    },
+    {
+      "id": "DOT_Options.OptionThroatStackLimit",
+      "text": "Throat Stack Limit"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoChance",
+      "text": "Torso Chance"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDamage",
+      "text": "Torso Damage"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDuration",
+      "text": "Torso Duration"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoEnabled",
+      "text": "Torso Enabled"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoFrequency",
+      "text": "Torso Frequency"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoStackLimit",
+      "text": "Torso Stack Limit"
+    },
+    {
+      "id": "DOT_Options.ProfileBleedOnly",
+      "text": "Bleed Only"
+    },
+    {
+      "id": "DOT_Options.ProfileDefault",
+      "text": "Default"
+    },
+    {
+      "id": "DOT_Options.ProfileElementalOnly",
+      "text": "Elemental Only"
+    },
+    {
+      "id": "DOT_Options.TooltipArmChance",
+      "text": "Chance for arm wounds to cause bleeding"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDamage",
+      "text": "Base damage per tick for arm wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDuration",
+      "text": "How long arm bleeds last"
+    },
+    {
+      "id": "DOT_Options.TooltipArmEnabled",
+      "text": "Enable bleeding from arm wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipArmFrequency",
+      "text": "Time between bleed ticks for arm wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipArmStackLimit",
+      "text": "Max stacks for arm wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipBloodAmountPreset",
+      "text": "Blood VFX intensity preset. Controls how much blood spurts from wounds. Very Low = minimal blood, Default = moderate blood, Extreme = lots of blood."
+    },
+    {
+      "id": "DOT_Options.TooltipChancePreset",
+      "text": "Bleed chance preset. Default is the balanced middle value."
+    },
+    {
+      "id": "DOT_Options.TooltipDamagePreset",
+      "text": "Damage per tick preset. Default is the balanced middle value."
+    },
+    {
+      "id": "DOT_Options.TooltipDebugLogging",
+      "text": "Enable verbose debug logging"
+    },
+    {
+      "id": "DOT_Options.TooltipDebugOverlay",
+      "text": "Enable periodic debug overlay logging with performance stats"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentChance",
+      "text": "Chance for dismemberment to cause bleeding"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDamage",
+      "text": "Base damage per tick for dismemberment"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDuration",
+      "text": "How long dismemberment bleeds last"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentEnabled",
+      "text": "Enable bleeding from dismemberment"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentFrequency",
+      "text": "Time between bleed ticks for dismemberment"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentStackLimit",
+      "text": "Max stacks for dismemberment (per limb)"
+    },
+    {
+      "id": "DOT_Options.TooltipDurationPreset",
+      "text": "Bleed duration preset. Default is the balanced middle value."
+    },
+    {
+      "id": "DOT_Options.TooltipEnableMod",
+      "text": "Master switch for the entire mod"
+    },
+    {
+      "id": "DOT_Options.TooltipFireMultiplier",
+      "text": "DOT damage multiplier for fire attacks. While active, creature has Burning visual effect. 0.0x disables DOT from fire entirely."
+    },
+    {
+      "id": "DOT_Options.TooltipFrequencyPreset",
+      "text": "Tick frequency preset. Default is the balanced middle value."
+    },
+    {
+      "id": "DOT_Options.TooltipHeadChance",
+      "text": "Chance for head wounds to cause bleeding"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDamage",
+      "text": "Base damage per tick for head wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDuration",
+      "text": "How long head bleeds last"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadEnabled",
+      "text": "Enable bleeding from head wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadFrequency",
+      "text": "Time between bleed ticks for head wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadStackLimit",
+      "text": "Max stacks for head wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipLegChance",
+      "text": "Chance for leg wounds to cause bleeding"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDamage",
+      "text": "Base damage per tick for leg wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDuration",
+      "text": "How long leg bleeds last"
+    },
+    {
+      "id": "DOT_Options.TooltipLegEnabled",
+      "text": "Enable bleeding from leg wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipLegFrequency",
+      "text": "Time between bleed ticks for leg wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipLegStackLimit",
+      "text": "Max stacks for leg wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipLightningMultiplier",
+      "text": "DOT damage multiplier for lightning attacks. While active, creature has Electrocute visual effect. 0.0x disables DOT from lightning entirely."
+    },
+    {
+      "id": "DOT_Options.TooltipNeckChance",
+      "text": "Chance for neck wounds to cause bleeding"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDamage",
+      "text": "Base damage per tick for neck wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDuration",
+      "text": "How long neck bleeds last"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckEnabled",
+      "text": "Enable bleeding from neck wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckFrequency",
+      "text": "Time between bleed ticks for neck wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckStackLimit",
+      "text": "Max stacks for neck wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipPierceMultiplier",
+      "text": "DOT damage multiplier for pierce attacks. 0.0x disables DOT from pierce entirely."
+    },
+    {
+      "id": "DOT_Options.TooltipProfilePreset",
+      "text": "Profile determines which damage types trigger DOT effects. Default = all types, Bleed Only = physical only, Elemental Only = fire/lightning/energy only."
+    },
+    {
+      "id": "DOT_Options.TooltipSlashMultiplier",
+      "text": "DOT damage multiplier for slash attacks. 0.0x disables DOT from slash entirely."
+    },
+    {
+      "id": "DOT_Options.TooltipThroatChance",
+      "text": "Chance for throat wounds to cause bleeding"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDamage",
+      "text": "Base damage per tick for throat wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDuration",
+      "text": "How long throat bleeds last"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatEnabled",
+      "text": "Enable bleeding from throat wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatFrequency",
+      "text": "Time between bleed ticks for throat wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatStackLimit",
+      "text": "Max stacks for throat wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoChance",
+      "text": "Chance for torso wounds to cause bleeding"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDamage",
+      "text": "Base damage per tick for torso wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDuration",
+      "text": "How long torso bleeds last"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoEnabled",
+      "text": "Enable bleeding from torso wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoFrequency",
+      "text": "Time between bleed ticks for torso wounds"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoStackLimit",
+      "text": "Max stacks for torso wounds"
+    }
+  ]
+}

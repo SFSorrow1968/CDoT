@@ -1,4 +1,4 @@
-# CDoT Development Reference (Agent-Only)
+# DOT Development Reference (Agent-Only)
 
 ## Platform Differences
 - PCVR: Mono runtime; Harmony patches OK; file I/O OK.
@@ -6,7 +6,7 @@
 - Use `#if NOMAD` to route Nomad to `Hooks/EventHooks.cs` and PCVR to Harmony patches.
 
 ## ModOptions System
-- Options live in `Configuration/CDoTModOptions.cs` as a **public static** class.
+- Options live in `Configuration/DOTModOptions.cs` as a **public static** class.
 - Sliders require `valueSourceName` + `interactionType = (ModOption.InteractionType)2`.
 - `defaultValueIndex` is the index into the provider array.
 - Arrow lists are InteractionType `0` (default); buttons are `1`.
@@ -34,9 +34,9 @@
 - Use `Time.unscaledTime` / `Time.unscaledDeltaTime` for consistency during slow motion.
 
 ## Project Structure (Key Files)
-- `Configuration/CDoTModOptions.cs`: UI options + zone accessors.
+- `Configuration/DOTModOptions.cs`: UI options + zone accessors.
 - `Configuration/BodyZone.cs`: Zone enum and constants.
-- `Core/CDoTModule.cs`: ThunderScript entry.
+- `Core/DOTModule.cs`: ThunderScript entry.
 - `Core/BleedManager.cs`: Main bleed logic, effect tracking, damage application.
 - `Core/BleedEffect.cs`: Individual bleed effect data structure.
 - `Hooks/EventHooks.cs`: Event subscriptions.

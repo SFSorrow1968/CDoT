@@ -1,0 +1,604 @@
+{
+  "$type": "ThunderRoad.TextData, ThunderRoad",
+  "id": "DOT_Options",
+  "version": 1,
+  "groupId": "DOT_Options",
+  "textList": [
+    {
+      "id": "DOT_Options.BloodDefault",
+      "text": "ค่าเริ่มต้น"
+    },
+    {
+      "id": "DOT_Options.BloodExtreme",
+      "text": "สุดขีด"
+    },
+    {
+      "id": "DOT_Options.BloodHigh",
+      "text": "สูง"
+    },
+    {
+      "id": "DOT_Options.BloodLow",
+      "text": "ต่ำ"
+    },
+    {
+      "id": "DOT_Options.BloodVeryLow",
+      "text": "ต่ำมาก"
+    },
+    {
+      "id": "DOT_Options.CategoryAdvanced",
+      "text": "ขั้นสูง"
+    },
+    {
+      "id": "DOT_Options.CategoryDamageTypeMultipliers",
+      "text": "ตัวคูณประเภทความเสียหาย"
+    },
+    {
+      "id": "DOT_Options.CategoryPresetSelection",
+      "text": "การเลือกค่าที่ตั้งไว้ล่วงหน้า"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneArm",
+      "text": "แขน"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneDismemberment",
+      "text": "การแยกชิ้นส่วน"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneHead",
+      "text": "ศีรษะ"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneLeg",
+      "text": "ขา"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneNeck",
+      "text": "คอ"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneThroat",
+      "text": "คอ"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneToggles",
+      "text": "สลับโซน"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneTorso",
+      "text": "ลำตัว"
+    },
+    {
+      "id": "DOT_Options.ChanceAlways",
+      "text": "เสมอ"
+    },
+    {
+      "id": "DOT_Options.ChanceDefault",
+      "text": "ค่าเริ่มต้น"
+    },
+    {
+      "id": "DOT_Options.ChanceFrequent",
+      "text": "บ่อย"
+    },
+    {
+      "id": "DOT_Options.ChanceOff",
+      "text": "ปิด"
+    },
+    {
+      "id": "DOT_Options.ChanceRare",
+      "text": "หายาก"
+    },
+    {
+      "id": "DOT_Options.DamageDefault",
+      "text": "ค่าเริ่มต้น"
+    },
+    {
+      "id": "DOT_Options.DamageExtreme",
+      "text": "สุดขีด"
+    },
+    {
+      "id": "DOT_Options.DamageHigh",
+      "text": "สูง"
+    },
+    {
+      "id": "DOT_Options.DamageLow",
+      "text": "ต่ำ"
+    },
+    {
+      "id": "DOT_Options.DamageMinimal",
+      "text": "น้อยที่สุด"
+    },
+    {
+      "id": "DOT_Options.DurationDefault",
+      "text": "ค่าเริ่มต้น"
+    },
+    {
+      "id": "DOT_Options.DurationExtended",
+      "text": "ขยาย"
+    },
+    {
+      "id": "DOT_Options.DurationLong",
+      "text": "ยาว"
+    },
+    {
+      "id": "DOT_Options.DurationShort",
+      "text": "สั้น"
+    },
+    {
+      "id": "DOT_Options.DurationVeryShort",
+      "text": "สั้นมาก"
+    },
+    {
+      "id": "DOT_Options.FrequencyDefault",
+      "text": "ค่าเริ่มต้น"
+    },
+    {
+      "id": "DOT_Options.FrequencyFast",
+      "text": "เร็ว"
+    },
+    {
+      "id": "DOT_Options.FrequencyRapid",
+      "text": "รวดเร็ว"
+    },
+    {
+      "id": "DOT_Options.FrequencySlow",
+      "text": "ช้า"
+    },
+    {
+      "id": "DOT_Options.FrequencyVerySlow",
+      "text": "ช้ามาก"
+    },
+    {
+      "id": "DOT_Options.OptionArmChance",
+      "text": "โอกาสแห่งแขน"
+    },
+    {
+      "id": "DOT_Options.OptionArmDamage",
+      "text": "ความเสียหายที่แขน"
+    },
+    {
+      "id": "DOT_Options.OptionArmDuration",
+      "text": "ระยะเวลาของแขน"
+    },
+    {
+      "id": "DOT_Options.OptionArmEnabled",
+      "text": "เปิดใช้งานแขน"
+    },
+    {
+      "id": "DOT_Options.OptionArmFrequency",
+      "text": "ความถี่ของแขน"
+    },
+    {
+      "id": "DOT_Options.OptionArmStackLimit",
+      "text": "ขีดจำกัดการวางซ้อนแขน"
+    },
+    {
+      "id": "DOT_Options.OptionBloodAmountPreset",
+      "text": "ปริมาณเลือด"
+    },
+    {
+      "id": "DOT_Options.OptionChancePreset",
+      "text": "ค่าที่ตั้งไว้ล่วงหน้าของโอกาส"
+    },
+    {
+      "id": "DOT_Options.OptionDamagePreset",
+      "text": "ความเสียหายที่ตั้งไว้ล่วงหน้า"
+    },
+    {
+      "id": "DOT_Options.OptionDebugLogging",
+      "text": "การบันทึกข้อมูลการแก้ไขข้อผิดพลาด"
+    },
+    {
+      "id": "DOT_Options.OptionDebugOverlay",
+      "text": "โอเวอร์เลย์ดีบัก"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentChance",
+      "text": "โอกาสที่จะเกิดการฉีกขาดของร่างกาย"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDamage",
+      "text": "ความเสียหายจากการตัดอวัยวะ"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDuration",
+      "text": "ระยะเวลาการตัดอวัยวะ"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentEnabled",
+      "text": "เปิดใช้งานการแยกส่วน"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentFrequency",
+      "text": "ความถี่ในการแยกชิ้นส่วน"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentStackLimit",
+      "text": "ขีดจำกัดการเรียงซ้อนของการแยกชิ้นส่วน"
+    },
+    {
+      "id": "DOT_Options.OptionDurationPreset",
+      "text": "ระยะเวลาที่ตั้งไว้ล่วงหน้า"
+    },
+    {
+      "id": "DOT_Options.OptionEnableMod",
+      "text": "เปิดใช้งานม็อด"
+    },
+    {
+      "id": "DOT_Options.OptionFireMultiplier",
+      "text": "ไฟร์ มัลท์"
+    },
+    {
+      "id": "DOT_Options.OptionFrequencyPreset",
+      "text": "การตั้งค่าความถี่ล่วงหน้า"
+    },
+    {
+      "id": "DOT_Options.OptionHeadChance",
+      "text": "โอกาสหัว"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDamage",
+      "text": "ความเสียหายที่ศีรษะ"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDuration",
+      "text": "ระยะเวลาหัว"
+    },
+    {
+      "id": "DOT_Options.OptionHeadEnabled",
+      "text": "เปิดใช้งานส่วนหัว"
+    },
+    {
+      "id": "DOT_Options.OptionHeadFrequency",
+      "text": "ความถี่หัว"
+    },
+    {
+      "id": "DOT_Options.OptionHeadStackLimit",
+      "text": "ขีดจำกัดหัวซ้อน"
+    },
+    {
+      "id": "DOT_Options.OptionLegChance",
+      "text": "โอกาสขา"
+    },
+    {
+      "id": "DOT_Options.OptionLegDamage",
+      "text": "ความเสียหายที่ขา"
+    },
+    {
+      "id": "DOT_Options.OptionLegDuration",
+      "text": "ระยะเวลาขา"
+    },
+    {
+      "id": "DOT_Options.OptionLegEnabled",
+      "text": "ขาช่วยพยุง"
+    },
+    {
+      "id": "DOT_Options.OptionLegFrequency",
+      "text": "ความถี่ขา"
+    },
+    {
+      "id": "DOT_Options.OptionLegStackLimit",
+      "text": "ขีดจำกัดการซ้อนขา"
+    },
+    {
+      "id": "DOT_Options.OptionLightningMultiplier",
+      "text": "สายฟ้าแลบ"
+    },
+    {
+      "id": "DOT_Options.OptionNeckChance",
+      "text": "โอกาสที่คอ"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDamage",
+      "text": "ความเสียหายที่คอ"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDuration",
+      "text": "ระยะเวลาคอ"
+    },
+    {
+      "id": "DOT_Options.OptionNeckEnabled",
+      "text": "เปิดใช้งานคอ"
+    },
+    {
+      "id": "DOT_Options.OptionNeckFrequency",
+      "text": "ความถี่คอ"
+    },
+    {
+      "id": "DOT_Options.OptionNeckStackLimit",
+      "text": "ขีดจำกัดการวางซ้อนคอ"
+    },
+    {
+      "id": "DOT_Options.OptionPierceMultiplier",
+      "text": "เพียร์ซ มัลท์"
+    },
+    {
+      "id": "DOT_Options.OptionProfilePreset",
+      "text": "ประวัติโดยย่อ"
+    },
+    {
+      "id": "DOT_Options.OptionSlashMultiplier",
+      "text": "สแลช มัลท์"
+    },
+    {
+      "id": "DOT_Options.OptionThroatChance",
+      "text": "โอกาสคอ"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDamage",
+      "text": "ความเสียหายที่ลำคอ"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDuration",
+      "text": "ระยะเวลาของลำคอ"
+    },
+    {
+      "id": "DOT_Options.OptionThroatEnabled",
+      "text": "เปิดใช้งานคอ"
+    },
+    {
+      "id": "DOT_Options.OptionThroatFrequency",
+      "text": "ความถี่ลำคอ"
+    },
+    {
+      "id": "DOT_Options.OptionThroatStackLimit",
+      "text": "ขีดจำกัดปล่องคอ"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoChance",
+      "text": "ทอร์โซ แชนซ์"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDamage",
+      "text": "ความเสียหายที่ลำตัว"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDuration",
+      "text": "ระยะเวลาลำตัว"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoEnabled",
+      "text": "เปิดใช้งานส่วนลำตัว"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoFrequency",
+      "text": "ความถี่ลำตัว"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoStackLimit",
+      "text": "ขีดจำกัดการซ้อนลำตัว"
+    },
+    {
+      "id": "DOT_Options.ProfileBleedOnly",
+      "text": "เลือดออกเท่านั้น"
+    },
+    {
+      "id": "DOT_Options.ProfileDefault",
+      "text": "ค่าเริ่มต้น"
+    },
+    {
+      "id": "DOT_Options.ProfileElementalOnly",
+      "text": "ธาตุเท่านั้น"
+    },
+    {
+      "id": "DOT_Options.TooltipArmChance",
+      "text": "โอกาสที่บาดแผลที่แขนจะทำให้เกิดเลือดออก"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDamage",
+      "text": "ความเสียหายพื้นฐานต่อครั้งสำหรับบาดแผลที่แขน"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDuration",
+      "text": "เลือดที่แขนจะออกนานแค่ไหน"
+    },
+    {
+      "id": "DOT_Options.TooltipArmEnabled",
+      "text": "จำลองการไหลของเลือดจากบาดแผลที่แขน"
+    },
+    {
+      "id": "DOT_Options.TooltipArmFrequency",
+      "text": "ระยะเวลาระหว่างการตกเลือดจากเห็บสำหรับบาดแผลที่แขน"
+    },
+    {
+      "id": "DOT_Options.TooltipArmStackLimit",
+      "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่แขน"
+    },
+    {
+      "id": "DOT_Options.TooltipBloodAmountPreset",
+      "text": "ค่าที่ตั้งไว้ล่วงหน้าสำหรับความเข้มของเอฟเฟ็กต์เลือด ควบคุมปริมาณเลือดที่พุ่งออกมาจากบาดแผล ต่ำมาก = เลือดน้อยมาก, ค่าเริ่มต้น = เลือดปานกลาง, สูงมาก = เลือดเยอะมาก"
+    },
+    {
+      "id": "DOT_Options.TooltipChancePreset",
+      "text": "ค่ากำหนดล่วงหน้าของโอกาสเลือดออก ค่าเริ่มต้นคือค่ากลางที่สมดุล"
+    },
+    {
+      "id": "DOT_Options.TooltipDamagePreset",
+      "text": "ค่าความเสียหายต่อรอบการคำนวณ (Damage per tick) เป็นค่าที่ตั้งไว้ล่วงหน้า ค่าเริ่มต้นคือค่ากลางที่สมดุล"
+    },
+    {
+      "id": "DOT_Options.TooltipDebugLogging",
+      "text": "เปิดใช้งานการบันทึกข้อมูลการแก้ไขข้อผิดพลาดแบบละเอียด"
+    },
+    {
+      "id": "DOT_Options.TooltipDebugOverlay",
+      "text": "เปิดใช้งานการบันทึกข้อมูลการดีบักเป็นระยะพร้อมสถิติประสิทธิภาพ"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentChance",
+      "text": "โอกาสที่การตัดแขนขาจะทำให้เกิดเลือดออก"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDamage",
+      "text": "ความเสียหายพื้นฐานต่อรอบสำหรับการตัดแขนขา"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDuration",
+      "text": "เลือดจากการตัดแขนขาจะไหลนานแค่ไหน"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentEnabled",
+      "text": "เปิดใช้งานการตกเลือดจากการตัดแขนขา"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentFrequency",
+      "text": "ระยะเวลาระหว่างการตกเลือดแต่ละครั้งสำหรับการตัดแขนขา"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentStackLimit",
+      "text": "จำนวนสแต็คสูงสุดสำหรับการตัดแขนขา (ต่อแขนขา)"
+    },
+    {
+      "id": "DOT_Options.TooltipDurationPreset",
+      "text": "ตั้งค่าระยะเวลาการรั่วไหลล่วงหน้า ค่าเริ่มต้นคือค่ากลางที่สมดุล"
+    },
+    {
+      "id": "DOT_Options.TooltipEnableMod",
+      "text": "สวิตช์หลักสำหรับโมดิฟายทั้งหมด"
+    },
+    {
+      "id": "DOT_Options.TooltipFireMultiplier",
+      "text": "ตัวคูณความเสียหายแบบต่อเนื่อง (DOT) สำหรับการโจมตีด้วยไฟ ขณะใช้งาน สิ่งมีชีวิตจะมีเอฟเฟกต์ภาพ \"ลุกไหม้\" ค่า 0.0x จะปิดใช้งานความเสียหายแบบต่อเนื่องจากไฟโดยสมบูรณ์"
+    },
+    {
+      "id": "DOT_Options.TooltipFrequencyPreset",
+      "text": "ตั้งค่าความถี่ของเข็มนาฬิกาไว้ล่วงหน้า ค่าเริ่มต้นคือค่ากลางที่สมดุล"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadChance",
+      "text": "โอกาสที่บาดแผลที่ศีรษะจะทำให้เกิดเลือดออก"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDamage",
+      "text": "ความเสียหายพื้นฐานต่อครั้งสำหรับบาดแผลที่ศีรษะ"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDuration",
+      "text": "เลือดออกที่ศีรษะจะนานแค่ไหน"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadEnabled",
+      "text": "เปิดใช้งานการหลั่งจากบาดแผลที่ศีรษะ"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadFrequency",
+      "text": "ระยะเวลาระหว่างการตกเลือดจากเห็บสำหรับบาดแผลที่ศีรษะ"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadStackLimit",
+      "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่ศีรษะ"
+    },
+    {
+      "id": "DOT_Options.TooltipLegChance",
+      "text": "โอกาสที่บาดแผลที่ขาจะทำให้เกิดเลือดออก"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDamage",
+      "text": "ความเสียหายพื้นฐานต่อครั้งสำหรับบาดแผลที่ขา"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDuration",
+      "text": "เลือดที่ไหลออกจากขาจะไหลนานแค่ไหน"
+    },
+    {
+      "id": "DOT_Options.TooltipLegEnabled",
+      "text": "อนุญาตให้เลือดไหลออกจากบาดแผลที่ขาได้"
+    },
+    {
+      "id": "DOT_Options.TooltipLegFrequency",
+      "text": "ระยะเวลาระหว่างการกัดของเห็บสำหรับบาดแผลที่ขา"
+    },
+    {
+      "id": "DOT_Options.TooltipLegStackLimit",
+      "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่ขา"
+    },
+    {
+      "id": "DOT_Options.TooltipLightningMultiplier",
+      "text": "ตัวคูณความเสียหายแบบต่อเนื่อง (DOT) สำหรับการโจมตีด้วยสายฟ้า ขณะใช้งาน สิ่งมีชีวิตจะมีเอฟเฟกต์ภาพ Electrocute ค่า 0.0x จะปิดใช้งานความเสียหายแบบต่อเนื่องจากสายฟ้าโดยสมบูรณ์"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckChance",
+      "text": "โอกาสที่บาดแผลบริเวณคอจะทำให้เกิดเลือดออก"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDamage",
+      "text": "ความเสียหายพื้นฐานต่อครั้งสำหรับบาดแผลที่คอ"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDuration",
+      "text": "เลือดออกที่คอจะนานแค่ไหน"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckEnabled",
+      "text": "อนุญาตให้เลือดไหลออกจากบาดแผลที่คอ"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckFrequency",
+      "text": "ระยะเวลาระหว่างการกัดของเห็บสำหรับบาดแผลที่คอ"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckStackLimit",
+      "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่คอ"
+    },
+    {
+      "id": "DOT_Options.TooltipPierceMultiplier",
+      "text": "ตัวคูณความเสียหายแบบต่อเนื่อง (DOT) สำหรับการโจมตีแบบเจาะทะลุ 0.0x จะปิดใช้งาน DOT สำหรับการโจมตีแบบเจาะทะลุโดยสิ้นเชิง"
+    },
+    {
+      "id": "DOT_Options.TooltipProfilePreset",
+      "text": "โปรไฟล์จะกำหนดประเภทความเสียหายที่จะทำให้เกิดเอฟเฟกต์ DOT (Damage over Time) ค่าเริ่มต้น = ทุกประเภท, เลือดออกเท่านั้น = เฉพาะความเสียหายทางกายภาพ, ธาตุเท่านั้น = เฉพาะความเสียหายจากไฟ/สายฟ้า/พลังงาน"
+    },
+    {
+      "id": "DOT_Options.TooltipSlashMultiplier",
+      "text": "ตัวคูณความเสียหายแบบต่อเนื่อง (DOT) สำหรับการโจมตีแบบฟัน 0.0x จะปิดใช้งานความเสียหายแบบต่อเนื่องจากการโจมตีแบบฟันโดยสิ้นเชิง"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatChance",
+      "text": "โอกาสที่บาดแผลในลำคอจะทำให้เกิดเลือดออก"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDamage",
+      "text": "ความเสียหายพื้นฐานต่อครั้งสำหรับบาดแผลที่ลำคอ"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDuration",
+      "text": "เลือดกำเดาไหลนานแค่ไหน"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatEnabled",
+      "text": "ช่วยให้เลือดไหลออกจากบาดแผลที่ลำคอได้"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatFrequency",
+      "text": "ระยะเวลาระหว่างการกัดของเห็บต่อบาดแผลที่ลำคอ"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatStackLimit",
+      "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่ลำคอ"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoChance",
+      "text": "โอกาสที่บาดแผลบริเวณลำตัวจะทำให้เกิดเลือดออก"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDamage",
+      "text": "ความเสียหายพื้นฐานต่อวินาทีสำหรับบาดแผลที่ลำตัว"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDuration",
+      "text": "เลือดออกบริเวณลำตัวจะนานแค่ไหน"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoEnabled",
+      "text": "เปิดใช้งานการแสดงเลือดไหลจากบาดแผลที่ลำตัว"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoFrequency",
+      "text": "ระยะเวลาระหว่างการแทงเข็มเพื่อเก็บเลือดสำหรับบาดแผลที่ลำตัว"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoStackLimit",
+      "text": "จำนวนสแต็คสูงสุดสำหรับบาดแผลที่ลำตัว"
+    }
+  ]
+}

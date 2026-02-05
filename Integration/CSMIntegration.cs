@@ -1,10 +1,10 @@
 using System;
 using System.Reflection;
-using CDoT.Configuration;
+using DOT.Configuration;
 using ThunderRoad;
 using UnityEngine;
 
-namespace CDoT.Integration
+namespace DOT.Integration
 {
     /// <summary>
     /// Optional integration with CSM (Conditional Slow Motion) mod.
@@ -46,8 +46,8 @@ namespace CDoT.Integration
 
                 if (csmAssembly == null)
                 {
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] CSM integration: CSM assembly not found (mod not installed)");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log("[DOT] CSM integration: CSM assembly not found (mod not installed)");
                     return;
                 }
 
@@ -55,8 +55,8 @@ namespace CDoT.Integration
                 _csmManagerType = csmAssembly.GetType("CSM.Core.CSMManager");
                 if (_csmManagerType == null)
                 {
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] CSM integration: CSMManager type not found");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log("[DOT] CSM integration: CSMManager type not found");
                     return;
                 }
 
@@ -64,8 +64,8 @@ namespace CDoT.Integration
                 _instanceProperty = _csmManagerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static);
                 if (_instanceProperty == null)
                 {
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] CSM integration: Instance property not found");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log("[DOT] CSM integration: Instance property not found");
                     return;
                 }
 
@@ -92,18 +92,18 @@ namespace CDoT.Integration
 
                 if (_triggerSlowMethod == null)
                 {
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] CSM integration: TriggerSlow method not found");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log("[DOT] CSM integration: TriggerSlow method not found");
                     return;
                 }
 
                 _csmAvailable = true;
-                Debug.Log("[CDoT] CSM integration: Successfully connected to CSM");
+                Debug.Log("[DOT] CSM integration: Successfully connected to CSM");
             }
             catch (Exception ex)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log($"[CDoT] CSM integration: Failed to initialize - {ex.Message}");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log($"[DOT] CSM integration: Failed to initialize - {ex.Message}");
                 _csmAvailable = false;
             }
         }
@@ -150,15 +150,15 @@ namespace CDoT.Integration
                 object result = _triggerSlowMethod.Invoke(csmManager, parameters);
                 bool triggered = result is bool b && b;
 
-                if (CDoTModOptions.DebugLogging && triggered)
-                    Debug.Log($"[CDoT] CSM integration: Bleed kill triggered slow motion for {creature.name}");
+                if (DOTModOptions.DebugLogging && triggered)
+                    Debug.Log($"[DOT] CSM integration: Bleed kill triggered slow motion for {creature.name}");
 
                 return triggered;
             }
             catch (Exception ex)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log($"[CDoT] CSM integration: Error notifying bleed kill - {ex.Message}");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log($"[DOT] CSM integration: Error notifying bleed kill - {ex.Message}");
                 return false;
             }
         }

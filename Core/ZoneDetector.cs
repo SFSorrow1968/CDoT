@@ -1,8 +1,8 @@
-using CDoT.Configuration;
+using DOT.Configuration;
 using ThunderRoad;
 using UnityEngine;
 
-namespace CDoT.Core
+namespace DOT.Core
 {
     public static class ZoneDetector
     {
@@ -19,16 +19,16 @@ namespace CDoT.Core
         {
             if (part == null)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] ZoneDetector: part is null");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] ZoneDetector: part is null");
                 return BodyZone.Unknown;
             }
 
             // Check for dismemberment first
             if (isSliced || part.isSliced)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] ZoneDetector: Part is sliced -> Dismemberment (partType=" + part.type + ")");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] ZoneDetector: Part is sliced -> Dismemberment (partType=" + part.type + ")");
                 return BodyZone.Dismemberment;
             }
 
@@ -37,8 +37,8 @@ namespace CDoT.Core
             // Head detection
             if ((partType & RagdollPart.Type.Head) != 0)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] ZoneDetector: RagdollPart.Type=" + partType + " -> Head");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] ZoneDetector: RagdollPart.Type=" + partType + " -> Head");
                 return BodyZone.Head;
             }
 
@@ -48,41 +48,41 @@ namespace CDoT.Core
                 // Try to determine if this is a throat hit (front of neck)
                 if (IsThroatHit(part))
                 {
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log("[CDoT] ZoneDetector: RagdollPart.Type=" + partType + " -> Throat (neck front hit)");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log("[DOT] ZoneDetector: RagdollPart.Type=" + partType + " -> Throat (neck front hit)");
                     return BodyZone.Throat;
                 }
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] ZoneDetector: RagdollPart.Type=" + partType + " -> Neck (not throat)");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] ZoneDetector: RagdollPart.Type=" + partType + " -> Neck (not throat)");
                 return BodyZone.Neck;
             }
 
             // Torso detection
             if ((partType & RagdollPart.Type.Torso) != 0)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] ZoneDetector: RagdollPart.Type=" + partType + " -> Torso");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] ZoneDetector: RagdollPart.Type=" + partType + " -> Torso");
                 return BodyZone.Torso;
             }
 
             // Arm detection (includes hands)
             if ((partType & ArmMask) != 0)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] ZoneDetector: RagdollPart.Type=" + partType + " -> Arm");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] ZoneDetector: RagdollPart.Type=" + partType + " -> Arm");
                 return BodyZone.Arm;
             }
 
             // Leg detection (includes feet)
             if ((partType & LegMask) != 0)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log("[CDoT] ZoneDetector: RagdollPart.Type=" + partType + " -> Leg");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log("[DOT] ZoneDetector: RagdollPart.Type=" + partType + " -> Leg");
                 return BodyZone.Leg;
             }
 
-            if (CDoTModOptions.DebugLogging)
-                Debug.Log("[CDoT] ZoneDetector: RagdollPart.Type=" + partType + " -> Unknown (no match)");
+            if (DOTModOptions.DebugLogging)
+                Debug.Log("[DOT] ZoneDetector: RagdollPart.Type=" + partType + " -> Unknown (no match)");
             return BodyZone.Unknown;
         }
 
@@ -122,8 +122,8 @@ namespace CDoT.Core
             // This provides gameplay variety while still making throat strikes special
             float roll = Random.value;
             bool isThroat = roll > 0.5f;
-            if (CDoTModOptions.DebugLogging)
-                Debug.Log("[CDoT] ZoneDetector: Throat roll=" + roll.ToString("F2") + " -> " + (isThroat ? "THROAT" : "neck"));
+            if (DOTModOptions.DebugLogging)
+                Debug.Log("[DOT] ZoneDetector: Throat roll=" + roll.ToString("F2") + " -> " + (isThroat ? "THROAT" : "neck"));
             return isThroat;
         }
 

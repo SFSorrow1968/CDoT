@@ -1,4 +1,4 @@
-namespace CDoT.Configuration
+namespace DOT.Configuration
 {
     public enum BodyZone
     {

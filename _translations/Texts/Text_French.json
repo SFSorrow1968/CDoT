@@ -1,0 +1,604 @@
+{
+  "$type": "ThunderRoad.TextData, ThunderRoad",
+  "id": "DOT_Options",
+  "version": 1,
+  "groupId": "DOT_Options",
+  "textList": [
+    {
+      "id": "DOT_Options.BloodDefault",
+      "text": "Défaut"
+    },
+    {
+      "id": "DOT_Options.BloodExtreme",
+      "text": "Extrême"
+    },
+    {
+      "id": "DOT_Options.BloodHigh",
+      "text": "Haut"
+    },
+    {
+      "id": "DOT_Options.BloodLow",
+      "text": "Faible"
+    },
+    {
+      "id": "DOT_Options.BloodVeryLow",
+      "text": "Très faible"
+    },
+    {
+      "id": "DOT_Options.CategoryAdvanced",
+      "text": "Avancé"
+    },
+    {
+      "id": "DOT_Options.CategoryDamageTypeMultipliers",
+      "text": "Multiplicateurs de type de dégâts"
+    },
+    {
+      "id": "DOT_Options.CategoryPresetSelection",
+      "text": "Sélection prédéfinie"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneArm",
+      "text": "Bras"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneDismemberment",
+      "text": "Démembrement"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneHead",
+      "text": "Tête"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneLeg",
+      "text": "Jambe"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneNeck",
+      "text": "Cou"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneThroat",
+      "text": "Gorge"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneToggles",
+      "text": "Bascules de zone"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneTorso",
+      "text": "Torse"
+    },
+    {
+      "id": "DOT_Options.ChanceAlways",
+      "text": "Toujours"
+    },
+    {
+      "id": "DOT_Options.ChanceDefault",
+      "text": "Défaut"
+    },
+    {
+      "id": "DOT_Options.ChanceFrequent",
+      "text": "Fréquent"
+    },
+    {
+      "id": "DOT_Options.ChanceOff",
+      "text": "Désactivé"
+    },
+    {
+      "id": "DOT_Options.ChanceRare",
+      "text": "Rare"
+    },
+    {
+      "id": "DOT_Options.DamageDefault",
+      "text": "Défaut"
+    },
+    {
+      "id": "DOT_Options.DamageExtreme",
+      "text": "Extrême"
+    },
+    {
+      "id": "DOT_Options.DamageHigh",
+      "text": "Haut"
+    },
+    {
+      "id": "DOT_Options.DamageLow",
+      "text": "Faible"
+    },
+    {
+      "id": "DOT_Options.DamageMinimal",
+      "text": "Minimal"
+    },
+    {
+      "id": "DOT_Options.DurationDefault",
+      "text": "Défaut"
+    },
+    {
+      "id": "DOT_Options.DurationExtended",
+      "text": "Étendu"
+    },
+    {
+      "id": "DOT_Options.DurationLong",
+      "text": "Long"
+    },
+    {
+      "id": "DOT_Options.DurationShort",
+      "text": "Court"
+    },
+    {
+      "id": "DOT_Options.DurationVeryShort",
+      "text": "Très court"
+    },
+    {
+      "id": "DOT_Options.FrequencyDefault",
+      "text": "Défaut"
+    },
+    {
+      "id": "DOT_Options.FrequencyFast",
+      "text": "Rapide"
+    },
+    {
+      "id": "DOT_Options.FrequencyRapid",
+      "text": "Rapide"
+    },
+    {
+      "id": "DOT_Options.FrequencySlow",
+      "text": "Lent"
+    },
+    {
+      "id": "DOT_Options.FrequencyVerySlow",
+      "text": "Très lent"
+    },
+    {
+      "id": "DOT_Options.OptionArmChance",
+      "text": "Arm Chance"
+    },
+    {
+      "id": "DOT_Options.OptionArmDamage",
+      "text": "Lésion du bras"
+    },
+    {
+      "id": "DOT_Options.OptionArmDuration",
+      "text": "Durée du bras"
+    },
+    {
+      "id": "DOT_Options.OptionArmEnabled",
+      "text": "Arm activé"
+    },
+    {
+      "id": "DOT_Options.OptionArmFrequency",
+      "text": "Fréquence des bras"
+    },
+    {
+      "id": "DOT_Options.OptionArmStackLimit",
+      "text": "Limite d'empilement des bras"
+    },
+    {
+      "id": "DOT_Options.OptionBloodAmountPreset",
+      "text": "Quantité de sang"
+    },
+    {
+      "id": "DOT_Options.OptionChancePreset",
+      "text": "Préréglage Chance"
+    },
+    {
+      "id": "DOT_Options.OptionDamagePreset",
+      "text": "Préréglage des dommages"
+    },
+    {
+      "id": "DOT_Options.OptionDebugLogging",
+      "text": "Journalisation de débogage"
+    },
+    {
+      "id": "DOT_Options.OptionDebugOverlay",
+      "text": "Superposition de débogage"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentChance",
+      "text": "Chance de démembrement"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDamage",
+      "text": "Dommages par démembrement"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDuration",
+      "text": "Durée du démembrement"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentEnabled",
+      "text": "Démembrement activé"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentFrequency",
+      "text": "Fréquence de démembrement"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentStackLimit",
+      "text": "Limite de pile de démembrement"
+    },
+    {
+      "id": "DOT_Options.OptionDurationPreset",
+      "text": "Durée prédéfinie"
+    },
+    {
+      "id": "DOT_Options.OptionEnableMod",
+      "text": "Activer le mod"
+    },
+    {
+      "id": "DOT_Options.OptionFireMultiplier",
+      "text": "Feu Multi"
+    },
+    {
+      "id": "DOT_Options.OptionFrequencyPreset",
+      "text": "Préréglage de fréquence"
+    },
+    {
+      "id": "DOT_Options.OptionHeadChance",
+      "text": "Chance de tête"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDamage",
+      "text": "Dommages à la tête"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDuration",
+      "text": "Durée de la tête"
+    },
+    {
+      "id": "DOT_Options.OptionHeadEnabled",
+      "text": "Tête activée"
+    },
+    {
+      "id": "DOT_Options.OptionHeadFrequency",
+      "text": "Fréquence de la tête"
+    },
+    {
+      "id": "DOT_Options.OptionHeadStackLimit",
+      "text": "Limite de pile de tête"
+    },
+    {
+      "id": "DOT_Options.OptionLegChance",
+      "text": "Chance de jambe"
+    },
+    {
+      "id": "DOT_Options.OptionLegDamage",
+      "text": "Lésion aux jambes"
+    },
+    {
+      "id": "DOT_Options.OptionLegDuration",
+      "text": "Durée de la jambe"
+    },
+    {
+      "id": "DOT_Options.OptionLegEnabled",
+      "text": "Jambe activée"
+    },
+    {
+      "id": "DOT_Options.OptionLegFrequency",
+      "text": "Fréquence des jambes"
+    },
+    {
+      "id": "DOT_Options.OptionLegStackLimit",
+      "text": "Limite d'empilement des jambes"
+    },
+    {
+      "id": "DOT_Options.OptionLightningMultiplier",
+      "text": "Éclair Multi"
+    },
+    {
+      "id": "DOT_Options.OptionNeckChance",
+      "text": "Chance au cou"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDamage",
+      "text": "Lésions cervicales"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDuration",
+      "text": "Durée du cou"
+    },
+    {
+      "id": "DOT_Options.OptionNeckEnabled",
+      "text": "Activation par le cou"
+    },
+    {
+      "id": "DOT_Options.OptionNeckFrequency",
+      "text": "Fréquence du cou"
+    },
+    {
+      "id": "DOT_Options.OptionNeckStackLimit",
+      "text": "Limite d'empilement du cou"
+    },
+    {
+      "id": "DOT_Options.OptionPierceMultiplier",
+      "text": "Pierce Mult"
+    },
+    {
+      "id": "DOT_Options.OptionProfilePreset",
+      "text": "Profil"
+    },
+    {
+      "id": "DOT_Options.OptionSlashMultiplier",
+      "text": "Slash Mult"
+    },
+    {
+      "id": "DOT_Options.OptionThroatChance",
+      "text": "Chance de la gorge"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDamage",
+      "text": "Lésions à la gorge"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDuration",
+      "text": "Durée de la gorge"
+    },
+    {
+      "id": "DOT_Options.OptionThroatEnabled",
+      "text": "Activation de la gorge"
+    },
+    {
+      "id": "DOT_Options.OptionThroatFrequency",
+      "text": "Fréquence de la gorge"
+    },
+    {
+      "id": "DOT_Options.OptionThroatStackLimit",
+      "text": "Limite de pile de gorge"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoChance",
+      "text": "Chance du torse"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDamage",
+      "text": "Dommages au torse"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDuration",
+      "text": "Durée du torse"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoEnabled",
+      "text": "Torse activé"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoFrequency",
+      "text": "Fréquence du torse"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoStackLimit",
+      "text": "Limite d'empilement du torse"
+    },
+    {
+      "id": "DOT_Options.ProfileBleedOnly",
+      "text": "Saignement uniquement"
+    },
+    {
+      "id": "DOT_Options.ProfileDefault",
+      "text": "Défaut"
+    },
+    {
+      "id": "DOT_Options.ProfileElementalOnly",
+      "text": "Élémentaire uniquement"
+    },
+    {
+      "id": "DOT_Options.TooltipArmChance",
+      "text": "Risque d'hémorragie suite à des blessures au bras"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDamage",
+      "text": "Dégâts de base par tick pour les blessures au bras"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDuration",
+      "text": "Combien de temps durent les saignements du bras ?"
+    },
+    {
+      "id": "DOT_Options.TooltipArmEnabled",
+      "text": "Autoriser le saignement des plaies au bras"
+    },
+    {
+      "id": "DOT_Options.TooltipArmFrequency",
+      "text": "Délai entre les saignements pour les plaies au bras"
+    },
+    {
+      "id": "DOT_Options.TooltipArmStackLimit",
+      "text": "Nombre maximal de cumuls pour les blessures au bras"
+    },
+    {
+      "id": "DOT_Options.TooltipBloodAmountPreset",
+      "text": "Préréglage de l'intensité des effets visuels de sang. Contrôle la quantité de sang qui gicle des blessures. Très faible = sang minimal, Par défaut = sang modéré, Extrême = sang abondant."
+    },
+    {
+      "id": "DOT_Options.TooltipChancePreset",
+      "text": "Paramètre prédéfini pour le risque de saignement. La valeur par défaut est la valeur moyenne équilibrée."
+    },
+    {
+      "id": "DOT_Options.TooltipDamagePreset",
+      "text": "Préréglage des dégâts par tick. La valeur par défaut correspond à un équilibre intermédiaire."
+    },
+    {
+      "id": "DOT_Options.TooltipDebugLogging",
+      "text": "Activer la journalisation détaillée du débogage"
+    },
+    {
+      "id": "DOT_Options.TooltipDebugOverlay",
+      "text": "Activer la journalisation périodique des informations de débogage avec les statistiques de performance"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentChance",
+      "text": "Risque de démembrement pouvant provoquer une hémorragie"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDamage",
+      "text": "Dégâts de base par tick pour le démembrement"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDuration",
+      "text": "Combien de temps durent les saignements après un démembrement ?"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentEnabled",
+      "text": "Activer le saignement dû au démembrement"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentFrequency",
+      "text": "Délai entre les saignements pour le démembrement"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentStackLimit",
+      "text": "Nombre maximal de charges pour le démembrement (par membre)"
+    },
+    {
+      "id": "DOT_Options.TooltipDurationPreset",
+      "text": "Durée de saignement prédéfinie. La valeur par défaut est la valeur moyenne équilibrée."
+    },
+    {
+      "id": "DOT_Options.TooltipEnableMod",
+      "text": "Interrupteur principal pour l'ensemble du mod"
+    },
+    {
+      "id": "DOT_Options.TooltipFireMultiplier",
+      "text": "Multiplicateur de dégâts sur la durée pour les attaques de feu. Tant que cet effet est actif, la créature subit un effet visuel de brûlure. La valeur 0,0x désactive complètement les dégâts sur la durée de feu."
+    },
+    {
+      "id": "DOT_Options.TooltipFrequencyPreset",
+      "text": "Préréglage de la fréquence de tic. La valeur par défaut est la valeur moyenne équilibrée."
+    },
+    {
+      "id": "DOT_Options.TooltipHeadChance",
+      "text": "Risque d'hémorragie suite à une blessure à la tête"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDamage",
+      "text": "Dégâts de base par tic pour les blessures à la tête"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDuration",
+      "text": "Combien de temps durent les saignements de tête ?"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadEnabled",
+      "text": "Provoquer un saignement des plaies à la tête"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadFrequency",
+      "text": "Délai entre les saignements pour les plaies à la tête"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadStackLimit",
+      "text": "Nombre maximal de cumuls pour les blessures à la tête"
+    },
+    {
+      "id": "DOT_Options.TooltipLegChance",
+      "text": "Risque d'hémorragie suite à des blessures aux jambes"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDamage",
+      "text": "Dégâts de base par tick pour les blessures aux jambes"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDuration",
+      "text": "Combien de temps durent les saignements de jambe ?"
+    },
+    {
+      "id": "DOT_Options.TooltipLegEnabled",
+      "text": "Autoriser le saignement des plaies aux jambes"
+    },
+    {
+      "id": "DOT_Options.TooltipLegFrequency",
+      "text": "Délai entre les saignements pour les plaies aux jambes"
+    },
+    {
+      "id": "DOT_Options.TooltipLegStackLimit",
+      "text": "Nombre maximal de piles pour les blessures aux jambes"
+    },
+    {
+      "id": "DOT_Options.TooltipLightningMultiplier",
+      "text": "Multiplicateur de dégâts sur la durée pour les attaques de foudre. Tant que cet effet est actif, la créature subit l'effet visuel d'électrocution. La valeur 0,0x désactive complètement les dégâts sur la durée de la foudre."
+    },
+    {
+      "id": "DOT_Options.TooltipNeckChance",
+      "text": "Risque d'hémorragie suite à une blessure au cou"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDamage",
+      "text": "Dégâts de base par tic pour les blessures au cou"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDuration",
+      "text": "Combien de temps durent les saignements de cou ?"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckEnabled",
+      "text": "Autoriser le saignement des plaies au cou"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckFrequency",
+      "text": "Délai entre les saignements pour les plaies au cou"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckStackLimit",
+      "text": "Nombre maximal de piles pour les blessures au cou"
+    },
+    {
+      "id": "DOT_Options.TooltipPierceMultiplier",
+      "text": "Multiplicateur de dégâts sur la durée pour les attaques perforantes. 0,0x désactive complètement les dégâts sur la durée des attaques perforantes."
+    },
+    {
+      "id": "DOT_Options.TooltipProfilePreset",
+      "text": "Le profil détermine quels types de dégâts déclenchent les effets de dégâts sur la durée. Par défaut : tous les types ; Saignement uniquement : dégâts physiques uniquement ; Élémentaire uniquement : dégâts de feu, de foudre ou d’énergie uniquement."
+    },
+    {
+      "id": "DOT_Options.TooltipSlashMultiplier",
+      "text": "Multiplicateur de dégâts sur la durée pour les attaques tranchantes. 0,0x désactive complètement les dégâts sur la durée des attaques tranchantes."
+    },
+    {
+      "id": "DOT_Options.TooltipThroatChance",
+      "text": "Risque de saignement suite à une blessure à la gorge"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDamage",
+      "text": "Dégâts de base par tic pour les blessures à la gorge"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDuration",
+      "text": "Combien de temps durent les saignements de gorge ?"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatEnabled",
+      "text": "Provoquer un saignement au niveau des plaies à la gorge"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatFrequency",
+      "text": "Délai entre les saignements pour les plaies à la gorge"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatStackLimit",
+      "text": "Nombre maximal de piles pour les blessures à la gorge"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoChance",
+      "text": "Risque d'hémorragie liée aux blessures au torse"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDamage",
+      "text": "Dégâts de base par itération pour les blessures au torse"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDuration",
+      "text": "Combien de temps durent les saignements au niveau du torse ?"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoEnabled",
+      "text": "Autoriser le saignement des blessures au torse"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoFrequency",
+      "text": "Délai entre les saignements pour les plaies au torse"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoStackLimit",
+      "text": "Nombre maximal de cumuls pour les blessures au torse"
+    }
+  ]
+}

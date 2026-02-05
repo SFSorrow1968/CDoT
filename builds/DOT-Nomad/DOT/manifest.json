@@ -1,0 +1,7 @@
+{
+  "Name": "DOT",
+  "Description": "Bleed Damage Over Time - Location-based bleeding effects that cause damage over time based on wound location.",
+  "Author": "dkatz",
+  "ModVersion": "1.2.0",
+  "GameVersion": "1.0.0.0"
+}

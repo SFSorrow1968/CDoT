@@ -1,12 +1,12 @@
 using System;
-using CDoT.Configuration;
+using DOT.Configuration;
 using UnityEngine;
 
-namespace CDoT.Core
+namespace DOT.Core
 {
     /// <summary>
     /// Visual in-game debug overlay using Unity IMGUI.
-    /// Displays CDoT bleed effect status and performance metrics.
+    /// Displays DOT bleed effect status and performance metrics.
     /// </summary>
     public class DebugOverlay
     {
@@ -21,13 +21,13 @@ namespace CDoT.Core
 
         // Display state
         private Rect _windowRect = new Rect(10, 170, 280, 130);
-        private const int WINDOW_ID = 91828; // Unique ID for CDoT overlay
+        private const int WINDOW_ID = 91828; // Unique ID for DOT overlay
 
         public void Initialize()
         {
             _stylesInitialized = false;
-            if (CDoTModOptions.DebugLogging)
-                Debug.Log("[CDoT] DebugOverlay initialized (IMGUI mode)");
+            if (DOTModOptions.DebugLogging)
+                Debug.Log("[DOT] DebugOverlay initialized (IMGUI mode)");
         }
 
         private void InitializeStyles()
@@ -56,7 +56,7 @@ namespace CDoT.Core
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[CDoT] DebugOverlay style init failed: {ex.Message}");
+                Debug.LogError($"[DOT] DebugOverlay style init failed: {ex.Message}");
             }
         }
 
@@ -65,7 +65,7 @@ namespace CDoT.Core
         /// </summary>
         public void Draw()
         {
-            if (!CDoTModOptions.DebugOverlay) return;
+            if (!DOTModOptions.DebugOverlay) return;
 
             try
             {
@@ -76,8 +76,8 @@ namespace CDoT.Core
             }
             catch (Exception ex)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.LogError($"[CDoT] DebugOverlay Draw error: {ex.Message}");
+                if (DOTModOptions.DebugLogging)
+                    Debug.LogError($"[DOT] DebugOverlay Draw error: {ex.Message}");
             }
         }
 
@@ -90,7 +90,7 @@ namespace CDoT.Core
                 int affectedCreatures = manager?.GetAffectedCreatureCount() ?? 0;
 
                 // Header
-                GUILayout.Label("<color=#ff6666><b>CDoT Debug</b></color>", _labelStyle);
+                GUILayout.Label("<color=#ff6666><b>DOT Debug</b></color>", _labelStyle);
                 GUILayout.Space(4);
 
                 // Active effects
@@ -102,7 +102,7 @@ namespace CDoT.Core
                 GUILayout.Label($"Creatures: {affectedCreatures}", _labelStyle);
 
                 // Profile
-                GUILayout.Label($"Profile: {CDoTModOptions.ProfilePresetSetting}", _labelStyle);
+                GUILayout.Label($"Profile: {DOTModOptions.ProfilePresetSetting}", _labelStyle);
 
                 GUILayout.Space(4);
 

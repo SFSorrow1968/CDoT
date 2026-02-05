@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using CDoT.Configuration;
+using DOT.Configuration;
 using UnityEngine;
 
-namespace CDoT.Core
+namespace DOT.Core
 {
     /// <summary>
     /// Tracks performance metrics for bleed effect processing.
@@ -34,8 +34,8 @@ namespace CDoT.Core
         {
             Reset();
             _isInitialized = true;
-            if (CDoTModOptions.DebugLogging)
-                Debug.Log("[CDoT] PerformanceMetrics initialized");
+            if (DOTModOptions.DebugLogging)
+                Debug.Log("[DOT] PerformanceMetrics initialized");
         }
 
         public void Reset()
@@ -79,13 +79,13 @@ namespace CDoT.Core
                 _peakActiveEffects = activeEffects;
 
             // Warn on slow ticks
-            if (tickDuration > TICK_WARN_THRESHOLD_MS && CDoTModOptions.DebugLogging)
+            if (tickDuration > TICK_WARN_THRESHOLD_MS && DOTModOptions.DebugLogging)
             {
-                Debug.LogWarning($"[CDoT] Slow tick: {tickDuration:F2}ms ({activeEffects} effects)");
+                Debug.LogWarning($"[DOT] Slow tick: {tickDuration:F2}ms ({activeEffects} effects)");
             }
 
             // Periodic logging
-            if (CDoTModOptions.DebugLogging && Time.unscaledTime - _lastLogTime >= TICK_LOG_INTERVAL)
+            if (DOTModOptions.DebugLogging && Time.unscaledTime - _lastLogTime >= TICK_LOG_INTERVAL)
             {
                 LogSummary();
                 _lastLogTime = Time.unscaledTime;
@@ -113,7 +113,7 @@ namespace CDoT.Core
             if (_tickCount == 0) return;
 
             float avgTick = _totalTickTime / _tickCount;
-            Debug.Log($"[CDoT] Performance: {_tickCount} ticks, avg={avgTick:F2}ms, worst={_worstTickTime:F2}ms, peak={_peakActiveEffects} effects, total dmg={_totalDamageApplied}");
+            Debug.Log($"[DOT] Performance: {_tickCount} ticks, avg={avgTick:F2}ms, worst={_worstTickTime:F2}ms, peak={_peakActiveEffects} effects, total dmg={_totalDamageApplied}");
         }
 
         public string GetOverlaySummary()
@@ -127,7 +127,7 @@ namespace CDoT.Core
 
         public void Shutdown()
         {
-            if (CDoTModOptions.DebugLogging)
+            if (DOTModOptions.DebugLogging)
                 LogSummary();
             _isInitialized = false;
             _instance = null;

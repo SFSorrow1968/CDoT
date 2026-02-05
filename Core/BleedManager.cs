@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using CDoT.Configuration;
-using CDoT.Integration;
+using DOT.Configuration;
+using DOT.Integration;
 using ThunderRoad;
 using UnityEngine;
 
-namespace CDoT.Core
+namespace DOT.Core
 {
     public class BleedManager
     {
@@ -37,17 +37,17 @@ namespace CDoT.Core
             {
                 _activeEffects.Clear();
                 _effectsByZone.Clear();
-                Debug.Log("[CDoT] BleedManager initialized");
+                Debug.Log("[DOT] BleedManager initialized");
             }
             catch (Exception ex)
             {
-                Debug.LogError("[CDoT] BleedManager init failed: " + ex.Message);
+                Debug.LogError("[DOT] BleedManager init failed: " + ex.Message);
             }
         }
 
         public void Update()
         {
-            if (!CDoTModOptions.EnableMod)
+            if (!DOTModOptions.EnableMod)
                 return;
 
             try
@@ -56,7 +56,7 @@ namespace CDoT.Core
                     return;
 
                 float deltaTime = Time.unscaledDeltaTime;
-                bool debugLogging = CDoTModOptions.DebugLogging; // Cache for this frame
+                bool debugLogging = DOTModOptions.DebugLogging; // Cache for this frame
 
                 _creaturesToRemove.Clear();
 
@@ -106,7 +106,7 @@ namespace CDoT.Core
                         {
                             // Error processing this effect - mark for removal and continue
                             if (debugLogging)
-                                Debug.LogWarning($"[CDoT] Error processing effect, marking for removal: {effectEx.Message}");
+                                Debug.LogWarning($"[DOT] Error processing effect, marking for removal: {effectEx.Message}");
                             _effectsToRemove.Add(effect);
                         }
                     }
@@ -130,7 +130,7 @@ namespace CDoT.Core
                         if (debugLogging)
                         {
                             string reason = effect.IsExpired ? "duration ended" : "target invalid/killed";
-                            Debug.Log($"[CDoT] EXPIRED: {effect.Zone.GetDisplayName()} on {effect.Target?.name ?? "null"} ({reason})");
+                            Debug.Log($"[DOT] EXPIRED: {effect.Zone.GetDisplayName()} on {effect.Target?.name ?? "null"} ({reason})");
                         }
                     }
 
@@ -160,7 +160,7 @@ namespace CDoT.Core
             }
             catch (Exception ex)
             {
-                Debug.LogError("[CDoT] BleedManager Update error: " + ex.Message + "\n" + ex.StackTrace);
+                Debug.LogError("[DOT] BleedManager Update error: " + ex.Message + "\n" + ex.StackTrace);
             }
         }
 
@@ -169,8 +169,8 @@ namespace CDoT.Core
             int totalEffects = GetActiveEffectCount();
             int creatures = _activeEffects.Count;
 
-            Debug.Log("[CDoT] --- Active Bleeds Status ---");
-            Debug.Log($"[CDoT] Creatures: {creatures} | Effects: {totalEffects}");
+            Debug.Log("[DOT] --- Active Bleeds Status ---");
+            Debug.Log($"[DOT] Creatures: {creatures} | Effects: {totalEffects}");
 
             var enumerator = _activeEffects.GetEnumerator();
             var sb = new System.Text.StringBuilder(128);
@@ -189,10 +189,10 @@ namespace CDoT.Core
                           .Append(" x").Append(effect.StackCount)
                           .Append(" (").Append(effect.RemainingDuration.ToString("F1")).Append("s)");
                     }
-                    Debug.Log($"[CDoT]   {creatureName}: {sb}");
+                    Debug.Log($"[DOT]   {creatureName}: {sb}");
                 }
             }
-            Debug.Log("[CDoT] --------------------------------");
+            Debug.Log("[DOT] --------------------------------");
         }
 
         public bool ApplyBleed(Creature target, BodyZone zone, DamageType damageType, RagdollPart hitPart = null)
@@ -200,14 +200,14 @@ namespace CDoT.Core
             if (target == null || target.isKilled || target.isPlayer)
                 return false;
 
-            if (!CDoTModOptions.EnableMod)
+            if (!DOTModOptions.EnableMod)
                 return false;
 
-            var config = CDoTModOptions.GetZoneConfig(zone);
+            var config = DOTModOptions.GetZoneConfig(zone);
             if (!config.Enabled)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log($"[CDoT] Zone disabled: {zone.GetDisplayName()}");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log($"[DOT] Zone disabled: {zone.GetDisplayName()}");
                 return false;
             }
 
@@ -215,8 +215,8 @@ namespace CDoT.Core
             float roll = UnityEngine.Random.value * 100f;
             if (roll > config.Chance)
             {
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log($"[CDoT] Chance roll failed: {roll:F1} > {config.Chance:F0}%");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log($"[DOT] Chance roll failed: {roll:F1} > {config.Chance:F0}%");
                 return false;
             }
 
@@ -242,12 +242,12 @@ namespace CDoT.Core
                 // Boost blood effect intensity on stack
                 existingEffect.OnStackAdded();
                 
-                if (CDoTModOptions.DebugLogging)
+                if (DOTModOptions.DebugLogging)
                 {
-                    Debug.Log($"[CDoT] STACK: {zone.GetDisplayName()} on {target.name}");
-                    Debug.Log($"[CDoT]   Stacks: {oldStacks} -> {existingEffect.StackCount} (max={config.StackLimit})");
-                    Debug.Log($"[CDoT]   Duration: {oldDuration:F1}s -> {existingEffect.RemainingDuration:F1}s");
-                    Debug.Log($"[CDoT]   New tick damage: {existingEffect.GetTickDamage():F2}");
+                    Debug.Log($"[DOT] STACK: {zone.GetDisplayName()} on {target.name}");
+                    Debug.Log($"[DOT]   Stacks: {oldStacks} -> {existingEffect.StackCount} (max={config.StackLimit})");
+                    Debug.Log($"[DOT]   Duration: {oldDuration:F1}s -> {existingEffect.RemainingDuration:F1}s");
+                    Debug.Log($"[DOT]   New tick damage: {existingEffect.GetTickDamage():F2}");
                 }
             }
             else
@@ -268,14 +268,14 @@ namespace CDoT.Core
                 // Spawn silent blood effect for visual feedback
                 newEffect.SpawnBloodEffect();
                 
-                if (CDoTModOptions.DebugLogging)
+                if (DOTModOptions.DebugLogging)
                 {
-                    float damageTypeMult = CDoTModOptions.GetDamageTypeMultiplier(damageType);
-                    Debug.Log($"[CDoT] NEW BLEED: {zone.GetDisplayName()} on {target.name}");
-                    Debug.Log($"[CDoT]   BaseDmg={config.Damage:F2} | DamageType={damageType} ({damageTypeMult:F1}x) | Duration={config.Duration:F1}s | TickInterval={config.Frequency:F2}s");
-                    Debug.Log($"[CDoT]   Tick damage: {newEffect.GetTickDamage():F2}");
-                    Debug.Log($"[CDoT]   HitPart: {(hitPart != null ? hitPart.type.ToString() : "null")}");
-                    Debug.Log($"[CDoT]   BloodVFX: {(newEffect.BloodEffectInstance != null ? "Active" : "None")}");
+                    float damageTypeMult = DOTModOptions.GetDamageTypeMultiplier(damageType);
+                    Debug.Log($"[DOT] NEW BLEED: {zone.GetDisplayName()} on {target.name}");
+                    Debug.Log($"[DOT]   BaseDmg={config.Damage:F2} | DamageType={damageType} ({damageTypeMult:F1}x) | Duration={config.Duration:F1}s | TickInterval={config.Frequency:F2}s");
+                    Debug.Log($"[DOT]   Tick damage: {newEffect.GetTickDamage():F2}");
+                    Debug.Log($"[DOT]   HitPart: {(hitPart != null ? hitPart.type.ToString() : "null")}");
+                    Debug.Log($"[DOT]   BloodVFX: {(newEffect.BloodEffectInstance != null ? "Active" : "None")}");
                 }
             }
 
@@ -336,19 +336,19 @@ namespace CDoT.Core
                     // Use Kill() to properly trigger death events and animations
                     target.Kill();
                     killedByBleed = true;
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log($"[CDoT] *** BLEED KILL! {effect.Zone.GetDisplayName()} bleed killed {target.name}! ***");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log($"[DOT] *** BLEED KILL! {effect.Zone.GetDisplayName()} bleed killed {target.name}! ***");
 
                     // Notify CSM of bleed kill for optional slow motion trigger
-                    // Wrapped in try/catch for extra safety - CSM errors should never crash CDoT
+                    // Wrapped in try/catch for extra safety - CSM errors should never crash DOT
                     try
                     {
                         CSMIntegration.NotifyBleedKill(target, effect.DamageType, damage);
                     }
                     catch (Exception csmEx)
                     {
-                        if (CDoTModOptions.DebugLogging)
-                            Debug.LogWarning($"[CDoT] CSM integration error (non-fatal): {csmEx.Message}");
+                        if (DOTModOptions.DebugLogging)
+                            Debug.LogWarning($"[DOT] CSM integration error (non-fatal): {csmEx.Message}");
                     }
 
                     return;
@@ -361,22 +361,22 @@ namespace CDoT.Core
             catch (Exception ex)
             {
                 // Damage application failed - creature is likely destroyed or in invalid state
-                if (CDoTModOptions.DebugLogging)
+                if (DOTModOptions.DebugLogging)
                 {
-                    Debug.Log($"[CDoT] Tick failed to apply damage: {ex.Message}");
+                    Debug.Log($"[DOT] Tick failed to apply damage: {ex.Message}");
                 }
                 return;
             }
 
-            if (CDoTModOptions.DebugLogging && !killedByBleed)
+            if (DOTModOptions.DebugLogging && !killedByBleed)
             {
-                float damageTypeMult = CDoTModOptions.GetDamageTypeMultiplier(effect.DamageType);
+                float damageTypeMult = DOTModOptions.GetDamageTypeMultiplier(effect.DamageType);
                 string healthInfo = (healthBefore >= 0f && healthAfter >= 0f)
                     ? $"{healthBefore:F1} -> {healthAfter:F1}"
                     : "N/A";
-                Debug.Log($"[CDoT] TICK: {effect.Zone.GetDisplayName()} x{effect.StackCount} on {target?.name ?? "destroyed"}");
-                Debug.Log($"[CDoT]   Damage: {damage:F2} (base={effect.DamagePerTick:F2} * stacks={effect.StackCount} * {effect.DamageType}={damageTypeMult:F1}x)");
-                Debug.Log($"[CDoT]   Health: {healthInfo} | Remaining: {effect.RemainingDuration:F1}s");
+                Debug.Log($"[DOT] TICK: {effect.Zone.GetDisplayName()} x{effect.StackCount} on {target?.name ?? "destroyed"}");
+                Debug.Log($"[DOT]   Damage: {damage:F2} (base={effect.DamagePerTick:F2} * stacks={effect.StackCount} * {effect.DamageType}={damageTypeMult:F1}x)");
+                Debug.Log($"[DOT]   Health: {healthInfo} | Remaining: {effect.RemainingDuration:F1}s");
             }
         }
 
@@ -397,8 +397,8 @@ namespace CDoT.Core
                 }
                 effects.Clear();
                 _activeEffects.Remove(creatureId);
-                if (CDoTModOptions.DebugLogging)
-                    Debug.Log($"[CDoT] Cleared effects for: {creature.name}");
+                if (DOTModOptions.DebugLogging)
+                    Debug.Log($"[DOT] Cleared effects for: {creature.name}");
             }
         }
 
@@ -417,8 +417,8 @@ namespace CDoT.Core
             }
             _activeEffects.Clear();
             _effectsByZone.Clear();
-            if (CDoTModOptions.DebugLogging)
-                Debug.Log("[CDoT] All effects cleared");
+            if (DOTModOptions.DebugLogging)
+                Debug.Log("[DOT] All effects cleared");
         }
 
         public int GetActiveEffectCount()
@@ -502,11 +502,11 @@ namespace CDoT.Core
 
                     creature.Inflict("Burning", this, float.PositiveInfinity, heatToAdd, true);
                     
-                    if (CDoTModOptions.DebugLogging)
+                    if (DOTModOptions.DebugLogging)
                     {
                         var burning = creature.GetStatusOfType<Burning>();
                         string heatInfo = burning != null ? $" | Heat: {burning.Heat:F1} | Ignited: {burning.isIgnited}" : "";
-                        Debug.Log($"[CDoT] Fire tick on {creature.name} | Damage: {damage:F2} | Heat added: {heatToAdd:F1}{heatInfo}");
+                        Debug.Log($"[DOT] Fire tick on {creature.name} | Damage: {damage:F2} | Heat added: {heatToAdd:F1}{heatInfo}");
                     }
                 }
                 else if (damageType == DamageType.Lightning)
@@ -518,16 +518,16 @@ namespace CDoT.Core
 
                     creature.TryElectrocute(power, LIGHTNING_DURATION, true, false, null);
                     
-                    if (CDoTModOptions.DebugLogging)
+                    if (DOTModOptions.DebugLogging)
                     {
                         bool isElectrocuted = creature.brain != null && creature.brain.isElectrocuted;
-                        Debug.Log($"[CDoT] Lightning tick on {creature.name} | Damage: {damage:F2} | Power: {power:F2} | Electrocuted: {isElectrocuted}");
+                        Debug.Log($"[DOT] Lightning tick on {creature.name} | Damage: {damage:F2} | Power: {power:F2} | Electrocuted: {isElectrocuted}");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[CDoT] Error applying status effect: {ex.Message}");
+                Debug.LogError($"[DOT] Error applying status effect: {ex.Message}");
             }
         }
 
@@ -545,20 +545,20 @@ namespace CDoT.Core
                 {
                     // Initial heat application - small amount to start smoking
                     creature.Inflict("Burning", this, float.PositiveInfinity, FIRE_INITIAL_HEAT, true);
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log($"[CDoT] Started fire DOT on {creature.name} | Initial heat: {FIRE_INITIAL_HEAT}");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log($"[DOT] Started fire DOT on {creature.name} | Initial heat: {FIRE_INITIAL_HEAT}");
                 }
                 else if (damageType == DamageType.Lightning)
                 {
                     // Initial electrocute with low power - will intensify with each tick
                     creature.TryElectrocute(LIGHTNING_INITIAL_POWER, LIGHTNING_DURATION, true, false, null);
-                    if (CDoTModOptions.DebugLogging)
-                        Debug.Log($"[CDoT] Started lightning DOT on {creature.name} | Initial power: {LIGHTNING_INITIAL_POWER}");
+                    if (DOTModOptions.DebugLogging)
+                        Debug.Log($"[DOT] Started lightning DOT on {creature.name} | Initial power: {LIGHTNING_INITIAL_POWER}");
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[CDoT] Error applying initial status visual: {ex.Message}");
+                Debug.LogError($"[DOT] Error applying initial status visual: {ex.Message}");
             }
         }
 
@@ -574,12 +574,12 @@ namespace CDoT.Core
             // Status effects will naturally expire when we stop reapplying them
             // Burning decays via heat loss, Electrocute has short duration
             // No need to actively remove - they'll fade when DOT ends
-            if (CDoTModOptions.DebugLogging && creature != null && !creature.isKilled)
+            if (DOTModOptions.DebugLogging && creature != null && !creature.isKilled)
             {
                 if (damageType == DamageType.Fire && !HasActiveFireDOT(creature))
-                    Debug.Log($"[CDoT] Fire DOT ended on {creature.name} - Burning will fade");
+                    Debug.Log($"[DOT] Fire DOT ended on {creature.name} - Burning will fade");
                 else if (damageType == DamageType.Lightning && !HasActiveLightningDOT(creature))
-                    Debug.Log($"[CDoT] Lightning DOT ended on {creature.name} - Electrocute will fade");
+                    Debug.Log($"[DOT] Lightning DOT ended on {creature.name} - Electrocute will fade");
             }
         }
     }

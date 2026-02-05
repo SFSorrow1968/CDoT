@@ -1,0 +1,604 @@
+{
+  "$type": "ThunderRoad.TextData, ThunderRoad",
+  "id": "DOT_Options",
+  "version": 1,
+  "groupId": "DOT_Options",
+  "textList": [
+    {
+      "id": "DOT_Options.BloodDefault",
+      "text": "기본"
+    },
+    {
+      "id": "DOT_Options.BloodExtreme",
+      "text": "극심한"
+    },
+    {
+      "id": "DOT_Options.BloodHigh",
+      "text": "높은"
+    },
+    {
+      "id": "DOT_Options.BloodLow",
+      "text": "낮은"
+    },
+    {
+      "id": "DOT_Options.BloodVeryLow",
+      "text": "매우 낮음"
+    },
+    {
+      "id": "DOT_Options.CategoryAdvanced",
+      "text": "고급의"
+    },
+    {
+      "id": "DOT_Options.CategoryDamageTypeMultipliers",
+      "text": "피해 유형 배율"
+    },
+    {
+      "id": "DOT_Options.CategoryPresetSelection",
+      "text": "사전 설정 선택"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneArm",
+      "text": "팔"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneDismemberment",
+      "text": "절단"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneHead",
+      "text": "머리"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneLeg",
+      "text": "다리"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneNeck",
+      "text": "목"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneThroat",
+      "text": "목"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneToggles",
+      "text": "구역 토글"
+    },
+    {
+      "id": "DOT_Options.CategoryZoneTorso",
+      "text": "몸통"
+    },
+    {
+      "id": "DOT_Options.ChanceAlways",
+      "text": "언제나"
+    },
+    {
+      "id": "DOT_Options.ChanceDefault",
+      "text": "기본"
+    },
+    {
+      "id": "DOT_Options.ChanceFrequent",
+      "text": "잦은"
+    },
+    {
+      "id": "DOT_Options.ChanceOff",
+      "text": "끄다"
+    },
+    {
+      "id": "DOT_Options.ChanceRare",
+      "text": "희귀한"
+    },
+    {
+      "id": "DOT_Options.DamageDefault",
+      "text": "기본"
+    },
+    {
+      "id": "DOT_Options.DamageExtreme",
+      "text": "극심한"
+    },
+    {
+      "id": "DOT_Options.DamageHigh",
+      "text": "높은"
+    },
+    {
+      "id": "DOT_Options.DamageLow",
+      "text": "낮은"
+    },
+    {
+      "id": "DOT_Options.DamageMinimal",
+      "text": "최소"
+    },
+    {
+      "id": "DOT_Options.DurationDefault",
+      "text": "기본"
+    },
+    {
+      "id": "DOT_Options.DurationExtended",
+      "text": "펼친"
+    },
+    {
+      "id": "DOT_Options.DurationLong",
+      "text": "긴"
+    },
+    {
+      "id": "DOT_Options.DurationShort",
+      "text": "짧은"
+    },
+    {
+      "id": "DOT_Options.DurationVeryShort",
+      "text": "아주 짧은"
+    },
+    {
+      "id": "DOT_Options.FrequencyDefault",
+      "text": "기본"
+    },
+    {
+      "id": "DOT_Options.FrequencyFast",
+      "text": "빠른"
+    },
+    {
+      "id": "DOT_Options.FrequencyRapid",
+      "text": "빠른"
+    },
+    {
+      "id": "DOT_Options.FrequencySlow",
+      "text": "느린"
+    },
+    {
+      "id": "DOT_Options.FrequencyVerySlow",
+      "text": "매우 느림"
+    },
+    {
+      "id": "DOT_Options.OptionArmChance",
+      "text": "암 찬스"
+    },
+    {
+      "id": "DOT_Options.OptionArmDamage",
+      "text": "팔 부상"
+    },
+    {
+      "id": "DOT_Options.OptionArmDuration",
+      "text": "팔 지속 시간"
+    },
+    {
+      "id": "DOT_Options.OptionArmEnabled",
+      "text": "ARM 지원"
+    },
+    {
+      "id": "DOT_Options.OptionArmFrequency",
+      "text": "팔 빈도"
+    },
+    {
+      "id": "DOT_Options.OptionArmStackLimit",
+      "text": "암 스택 제한"
+    },
+    {
+      "id": "DOT_Options.OptionBloodAmountPreset",
+      "text": "혈액량"
+    },
+    {
+      "id": "DOT_Options.OptionChancePreset",
+      "text": "확률 사전 설정"
+    },
+    {
+      "id": "DOT_Options.OptionDamagePreset",
+      "text": "피해 사전 설정"
+    },
+    {
+      "id": "DOT_Options.OptionDebugLogging",
+      "text": "디버그 로깅"
+    },
+    {
+      "id": "DOT_Options.OptionDebugOverlay",
+      "text": "디버그 오버레이"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentChance",
+      "text": "사지 절단 확률"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDamage",
+      "text": "사지 절단 손상"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentDuration",
+      "text": "사지 절단 시간"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentEnabled",
+      "text": "사지 절단 가능"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentFrequency",
+      "text": "신체 절단 빈도"
+    },
+    {
+      "id": "DOT_Options.OptionDismembermentStackLimit",
+      "text": "분할 스택 제한"
+    },
+    {
+      "id": "DOT_Options.OptionDurationPreset",
+      "text": "지속 시간 사전 설정"
+    },
+    {
+      "id": "DOT_Options.OptionEnableMod",
+      "text": "모드 활성화"
+    },
+    {
+      "id": "DOT_Options.OptionFireMultiplier",
+      "text": "화재 멀티"
+    },
+    {
+      "id": "DOT_Options.OptionFrequencyPreset",
+      "text": "주파수 사전 설정"
+    },
+    {
+      "id": "DOT_Options.OptionHeadChance",
+      "text": "헤드 찬스"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDamage",
+      "text": "머리 부상"
+    },
+    {
+      "id": "DOT_Options.OptionHeadDuration",
+      "text": "헤드 지속 시간"
+    },
+    {
+      "id": "DOT_Options.OptionHeadEnabled",
+      "text": "헤드 활성화"
+    },
+    {
+      "id": "DOT_Options.OptionHeadFrequency",
+      "text": "헤드 주파수"
+    },
+    {
+      "id": "DOT_Options.OptionHeadStackLimit",
+      "text": "헤드 스택 제한"
+    },
+    {
+      "id": "DOT_Options.OptionLegChance",
+      "text": "레그 찬스"
+    },
+    {
+      "id": "DOT_Options.OptionLegDamage",
+      "text": "다리 부상"
+    },
+    {
+      "id": "DOT_Options.OptionLegDuration",
+      "text": "다리 길이"
+    },
+    {
+      "id": "DOT_Options.OptionLegEnabled",
+      "text": "다리 활성화"
+    },
+    {
+      "id": "DOT_Options.OptionLegFrequency",
+      "text": "다리 빈도"
+    },
+    {
+      "id": "DOT_Options.OptionLegStackLimit",
+      "text": "다리 스택 제한"
+    },
+    {
+      "id": "DOT_Options.OptionLightningMultiplier",
+      "text": "번개 멀티"
+    },
+    {
+      "id": "DOT_Options.OptionNeckChance",
+      "text": "넥 찬스"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDamage",
+      "text": "목 부상"
+    },
+    {
+      "id": "DOT_Options.OptionNeckDuration",
+      "text": "목 길이"
+    },
+    {
+      "id": "DOT_Options.OptionNeckEnabled",
+      "text": "넥 활성화"
+    },
+    {
+      "id": "DOT_Options.OptionNeckFrequency",
+      "text": "목 주파수"
+    },
+    {
+      "id": "DOT_Options.OptionNeckStackLimit",
+      "text": "넥 스택 리밋"
+    },
+    {
+      "id": "DOT_Options.OptionPierceMultiplier",
+      "text": "피어스 멀트"
+    },
+    {
+      "id": "DOT_Options.OptionProfilePreset",
+      "text": "윤곽"
+    },
+    {
+      "id": "DOT_Options.OptionSlashMultiplier",
+      "text": "슬래시 멀티"
+    },
+    {
+      "id": "DOT_Options.OptionThroatChance",
+      "text": "목구멍 기회"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDamage",
+      "text": "목 손상"
+    },
+    {
+      "id": "DOT_Options.OptionThroatDuration",
+      "text": "목구멍 지속 시간"
+    },
+    {
+      "id": "DOT_Options.OptionThroatEnabled",
+      "text": "목구멍 활성화됨"
+    },
+    {
+      "id": "DOT_Options.OptionThroatFrequency",
+      "text": "목 빈도"
+    },
+    {
+      "id": "DOT_Options.OptionThroatStackLimit",
+      "text": "목구멍 스택 제한"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoChance",
+      "text": "토르소 찬스"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDamage",
+      "text": "몸통 손상"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoDuration",
+      "text": "몸통 지속 시간"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoEnabled",
+      "text": "몸통 활성화"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoFrequency",
+      "text": "몸통 주파수"
+    },
+    {
+      "id": "DOT_Options.OptionTorsoStackLimit",
+      "text": "몸통 스택 제한"
+    },
+    {
+      "id": "DOT_Options.ProfileBleedOnly",
+      "text": "출혈만"
+    },
+    {
+      "id": "DOT_Options.ProfileDefault",
+      "text": "기본"
+    },
+    {
+      "id": "DOT_Options.ProfileElementalOnly",
+      "text": "원소 전용"
+    },
+    {
+      "id": "DOT_Options.TooltipArmChance",
+      "text": "팔에 입은 상처로 출혈이 발생할 가능성"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDamage",
+      "text": "팔 부상에 대한 틱당 기본 피해량"
+    },
+    {
+      "id": "DOT_Options.TooltipArmDuration",
+      "text": "팔에서 피가 나는 기간은 얼마나 되나요?"
+    },
+    {
+      "id": "DOT_Options.TooltipArmEnabled",
+      "text": "팔의 상처에서 출혈이 발생하도록 설정"
+    },
+    {
+      "id": "DOT_Options.TooltipArmFrequency",
+      "text": "팔 상처의 출혈 간격"
+    },
+    {
+      "id": "DOT_Options.TooltipArmStackLimit",
+      "text": "팔 부상에 대한 최대 스택"
+    },
+    {
+      "id": "DOT_Options.TooltipBloodAmountPreset",
+      "text": "혈흔 효과 강도 사전 설정입니다. 상처에서 뿜어져 나오는 피의 양을 조절합니다. 매우 낮음 = 최소량, 기본 = 중간량, 최대 = 다량."
+    },
+    {
+      "id": "DOT_Options.TooltipChancePreset",
+      "text": "출혈 확률 사전 설정. 기본값은 균형 잡힌 중간 값입니다."
+    },
+    {
+      "id": "DOT_Options.TooltipDamagePreset",
+      "text": "초당 피해량 사전 설정. 기본값은 균형 잡힌 중간 값입니다."
+    },
+    {
+      "id": "DOT_Options.TooltipDebugLogging",
+      "text": "자세한 디버그 로깅을 활성화합니다."
+    },
+    {
+      "id": "DOT_Options.TooltipDebugOverlay",
+      "text": "성능 통계와 함께 주기적인 디버그 오버레이 로깅을 활성화합니다."
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentChance",
+      "text": "사지 절단으로 인한 출혈 가능성"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDamage",
+      "text": "사지 절단 시 초당 기본 피해량"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentDuration",
+      "text": "사지 절단으로 인한 출혈은 얼마나 오래 지속되나요?"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentEnabled",
+      "text": "사지 절단으로 인한 출혈을 활성화하세요"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentFrequency",
+      "text": "사지 절단 시 출혈 간격"
+    },
+    {
+      "id": "DOT_Options.TooltipDismembermentStackLimit",
+      "text": "사지 절단 최대 스택 수 (사지별)"
+    },
+    {
+      "id": "DOT_Options.TooltipDurationPreset",
+      "text": "출혈 지속 시간 사전 설정. 기본값은 균형 잡힌 중간 값입니다."
+    },
+    {
+      "id": "DOT_Options.TooltipEnableMod",
+      "text": "전체 모드의 마스터 스위치"
+    },
+    {
+      "id": "DOT_Options.TooltipFireMultiplier",
+      "text": "화염 공격에 대한 지속 피해 배율입니다. 활성화되면 생명체에게 불타는 듯한 시각 효과가 나타납니다. 0.0x로 설정하면 화염 공격으로 인한 지속 피해 효과가 완전히 사라집니다."
+    },
+    {
+      "id": "DOT_Options.TooltipFrequencyPreset",
+      "text": "틱 빈도 사전 설정입니다. 기본값은 균형 잡힌 중간 값입니다."
+    },
+    {
+      "id": "DOT_Options.TooltipHeadChance",
+      "text": "머리 부상으로 출혈이 발생할 가능성"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDamage",
+      "text": "머리 부상에 대한 틱당 기본 피해량"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadDuration",
+      "text": "두피 출혈은 얼마나 오래 지속되나요?"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadEnabled",
+      "text": "머리 부상으로 인한 출혈을 활성화합니다."
+    },
+    {
+      "id": "DOT_Options.TooltipHeadFrequency",
+      "text": "두부 손상 시 출혈 간격"
+    },
+    {
+      "id": "DOT_Options.TooltipHeadStackLimit",
+      "text": "머리 부상에 대한 최대 스택"
+    },
+    {
+      "id": "DOT_Options.TooltipLegChance",
+      "text": "다리 부상으로 출혈이 발생할 가능성"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDamage",
+      "text": "다리 부상에 대한 틱당 기본 피해량"
+    },
+    {
+      "id": "DOT_Options.TooltipLegDuration",
+      "text": "다리 출혈은 얼마나 오래 지속되나요?"
+    },
+    {
+      "id": "DOT_Options.TooltipLegEnabled",
+      "text": "다리 상처에서 출혈이 발생하도록 합니다."
+    },
+    {
+      "id": "DOT_Options.TooltipLegFrequency",
+      "text": "다리 상처의 출혈 간격"
+    },
+    {
+      "id": "DOT_Options.TooltipLegStackLimit",
+      "text": "다리 부상에 대한 최대 스택"
+    },
+    {
+      "id": "DOT_Options.TooltipLightningMultiplier",
+      "text": "번개 공격에 대한 지속 피해 배율입니다. 활성화되면 생명체에게 감전 시각 효과가 적용됩니다. 0.0x로 설정하면 번개 공격으로 인한 지속 피해 효과가 완전히 사라집니다."
+    },
+    {
+      "id": "DOT_Options.TooltipNeckChance",
+      "text": "목 부위 상처로 출혈이 발생할 가능성이 있습니다."
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDamage",
+      "text": "목 부상에 대한 틱당 기본 피해량"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckDuration",
+      "text": "목에서 나는 출혈은 얼마나 오래 지속되나요?"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckEnabled",
+      "text": "목 부위 상처에서 출혈이 발생하도록 합니다."
+    },
+    {
+      "id": "DOT_Options.TooltipNeckFrequency",
+      "text": "목 부위 상처의 출혈 간격"
+    },
+    {
+      "id": "DOT_Options.TooltipNeckStackLimit",
+      "text": "목 부상에 대한 최대 스택"
+    },
+    {
+      "id": "DOT_Options.TooltipPierceMultiplier",
+      "text": "관통 공격에 대한 지속 피해 배율입니다. 0.0x로 설정하면 관통 공격으로 인한 지속 피해가 완전히 사라집니다."
+    },
+    {
+      "id": "DOT_Options.TooltipProfilePreset",
+      "text": "프로필은 지속 피해 효과를 유발하는 피해 유형을 결정합니다. 기본값 = 모든 유형, 출혈 전용 = 물리 피해만, 원소 전용 = 화염/번개/에너지 피해만."
+    },
+    {
+      "id": "DOT_Options.TooltipSlashMultiplier",
+      "text": "베기 공격에 대한 지속 피해 배율입니다. 0.0x로 설정하면 베기 공격으로 인한 지속 피해가 완전히 사라집니다."
+    },
+    {
+      "id": "DOT_Options.TooltipThroatChance",
+      "text": "목에 입은 상처로 출혈이 발생할 가능성"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDamage",
+      "text": "목 부상에 대한 틱당 기본 피해량"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatDuration",
+      "text": "목에서 나는 출혈은 얼마나 오래 지속되나요?"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatEnabled",
+      "text": "목 부위 상처에서 출혈이 발생하도록 합니다."
+    },
+    {
+      "id": "DOT_Options.TooltipThroatFrequency",
+      "text": "목 부위 상처의 출혈 간격"
+    },
+    {
+      "id": "DOT_Options.TooltipThroatStackLimit",
+      "text": "목 부상에 대한 최대 스택"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoChance",
+      "text": "몸통 부위 부상으로 출혈이 발생할 가능성"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDamage",
+      "text": "몸통 부상에 대한 틱당 기본 피해량"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoDuration",
+      "text": "몸통 출혈은 얼마나 오래 지속되나요?"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoEnabled",
+      "text": "몸통 부위 상처에서 출혈이 발생하도록 설정"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoFrequency",
+      "text": "몸통 상처의 출혈 간격"
+    },
+    {
+      "id": "DOT_Options.TooltipTorsoStackLimit",
+      "text": "몸통 부상에 대한 최대 스택"
+    }
+  ]
+}
