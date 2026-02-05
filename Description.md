@@ -26,3 +26,6 @@ Zone damage multipliers (default):
 The system is designed to add tactical depth to combat - targeting vital areas rewards precision while allowing enemies to survive minor wounds. All settings are fully configurable through the in-game mod options menu.
 
 Supports both PCVR and Nomad builds.
+
+Discord: s.f.sorrow
+Discord Server: https://discord.gg/NTDvQ5VQzY
