@@ -7,7 +7,8 @@ When making changes in this repo:
 - Always create a new branch before making any changes; never commit directly to `main`/`master`.
 - Ensure the working tree is clean before making changes; if not, ask the user how to proceed.
 - Always commit your changes.
-- After changes, run `_agent/snapshot.ps1 -Message "<short>"` to create a snapshot commit and a tag `snapshot-YYYYMMDD-HHMMSS`. Add `-Zip` when an archive is desired.
+- Every update must end with a snapshot commit that has a clear message.
+- After changes, run `_agent/snapshot.ps1 -Message "<short>"` to create a snapshot commit and a tag `snapshot-YYYYMMDD-HHMMSS`. Do not create archives unless the user explicitly asks.
 - After the snapshot commit, push the branch and tags (`git push -u origin HEAD` and `git push origin --tags`).
 - `DEVELOPMENT.md` contains platform/ModOptions notes; consult it when needed.
 - Quick refs: `DEVELOPMENT.md` sections "Platform Differences", "ModOptions System", "EventManager Events".
